@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-site-codekoalas-dev
+  namespace: default
+data:
+  VIRTUAL_HOST: dev-site.codekoalas.com
+  LETSENCRYPT_HOST: dev-site.codekoalas.com
+  DRUPAL_BASE_URL: "https://dev-site.codekoalas.com"
+  APACHE_DOCROOT: "/var/www/html/docroot"
+  DATABASE_NAME: dev_codekoalas_com
+  DATABASE_USERNAME: dev_codekoalas
+  DATABASE_PASSWORD: jN4er6rtxRRPqTFy
+  DATABASE_HOST: ck-db-production-8.ceyq1mgp86tm.us-west-2.rds.amazonaws.com
+  SITE_ENV: stage

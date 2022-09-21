@@ -1,0 +1,41 @@
+apiVersion: {{ .Values | get "apiVersion" "apps/v1" }}
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.container.image }}
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: {{ .Values | get "persistence.mountPath" "/var/www/html/docroot/sites/default/files" }}
+          subPath: {{ .Values | get "persistence.subPath" "" }}
+        resources:
+          limits:
+            cpu: {{ .Values | get "persistence.limits.cpu" 900m }}
+            memory: {{ .Values | get "persistence.limits.memory" 950Mi }}
+          requests:
+            cpu: {{ .Values | get "persistence.requests.cpu" 600m }}
+            memory: {{ .Values | get "persistence.requests.memory" 550Mi }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.deployment.configName }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: efs-claim

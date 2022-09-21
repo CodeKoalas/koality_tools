@@ -1,0 +1,17 @@
+apiVersion: {{ .Values | get "apiVersion" "v1" }}
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.deployment.name }}
+  name: service-{{ .Values.deployment.name }}
+spec:
+  selector:
+    app: {{ .Values.deployment.name }}
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      protocol: TCP
+  type: ClusterIP
