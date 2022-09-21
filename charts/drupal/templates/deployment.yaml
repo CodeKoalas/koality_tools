@@ -21,8 +21,8 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: persistent-storage
-          mountPath: {{ .Values | get "persistence.mountPath" "/var/www/html/docroot/sites/default/files" }}
-          subPath: {{ .Values | get "persistence.subPath" "" }}
+          mountPath: {{ .Values | get "persistence.mountPath" /var/www/html/docroot/sites/default/files }}
+          subPath: {{ .Values.persistence.subPath }}
         resources:
           limits:
             cpu: {{ .Values | get "persistence.limits.cpu" 900m }}
@@ -32,7 +32,13 @@ spec:
             memory: {{ .Values | get "persistence.requests.memory" 550Mi }}
         envFrom:
         - configMapRef:
-            name: {{ .Values.deployment.configName }}
+            name: {{ .Values.deployment.name }}
+        env:
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "{{ .Values.deployment.name }}-secret"
+              key: password
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       volumes:

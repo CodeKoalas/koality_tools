@@ -1,8 +1,7 @@
-{{- if not .Values.hscale }}
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ .Values.deployment.name }}-hscale
+  name: "{{ .Values.deployment.name }}-hscale"
   namespace: gitlab-managed-apps
 spec:
   scaleTargetRef:
@@ -18,4 +17,3 @@ spec:
       target:
         type: Utilization
         averageUtilization: 85
-{{ - end}}

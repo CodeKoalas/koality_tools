@@ -1,0 +1,11 @@
+apiVersion: {{ .Values | get "apiVersion" "v1" }}
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ .Values.deployment.name }}-efs-claim"
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .Values.global.storageClass }}
+  resources:
+    requests:
+      storage: 500Gi

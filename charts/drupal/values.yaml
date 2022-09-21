@@ -1,3 +1,33 @@
 global:
-  imagePullSecrets: []
-  storageClass: ""
+  imagePullSecret: regcred
+  storageClass: "efs-sc"
+
+container:
+  name: dev-gitlab-devops-drupal
+  image: registry.codekoalas.com/sites/codekoalas:master
+
+deployment:
+  name: dev-gitlab-devops-drupal
+  siteEnv: dev
+  virtualHost: gitlab-devops.werewolfga.me
+  letsEncryptHost: gitlab-devops.werewolfga.me
+  drupalBaseUrl: "https://gitlab-devops.werewolfga.me"
+
+hscale:
+  minReplicas: 1
+  maxReplicas: 4
+
+persistence:
+  enabled: true
+  name: dev-gitlab-devops-drupal
+  databaseName: drupal
+  databaseHost: mysql
+  databaseUser: dev-drupal
+  mountPath: "/var/www/html/docroot/sites/default/files"
+  subPath: dev-gitlab-devops
+  limits:
+    cpu: 900m
+    memory: 950Mi
+  requests:
+    cpu: 600m
+    memory: 550Mi

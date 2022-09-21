@@ -1,15 +1,19 @@
-apiVersion: v1
+apiVersion: {{ .Values | get "apiVersion" "apps/v1" }}
 kind: ConfigMap
 metadata:
-  name: dev-site-codekoalas-dev
-  namespace: default
+  name: {{ .Values.deployment.name }}
+  labels:
+    app: {{ .Values.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
 data:
-  VIRTUAL_HOST: dev-site.codekoalas.com
-  LETSENCRYPT_HOST: dev-site.codekoalas.com
-  DRUPAL_BASE_URL: "https://dev-site.codekoalas.com"
-  APACHE_DOCROOT: "/var/www/html/docroot"
-  DATABASE_NAME: dev_codekoalas_com
-  DATABASE_USERNAME: dev_codekoalas
-  DATABASE_PASSWORD: jN4er6rtxRRPqTFy
-  DATABASE_HOST: ck-db-production-8.ceyq1mgp86tm.us-west-2.rds.amazonaws.com
-  SITE_ENV: stage
+  VIRTUAL_HOST: {{ .Values.deployment.virtualHost" }}
+  LETSENCRYPT_HOST: {{ .Values.deployment.letsEncryptHost }}
+  DRUPAL_BASE_URL: {{ .Values.deployment.drupalBaseUrl }}
+  APACHE_DOCROOT: {{ .Values | get "deployment.apacheDocroot" "/var/www/html/docroot" }}
+  DATABASE_NAME: {{ .Values.persistence.databaseName}}
+  DATABASE_USERNAME: {{ .Values.persistence.databaseUser }}
+  DATABASE_HOST: {{ .Values.persistence.databaseHost }}
+  SITE_ENV: {{ .Values.deployment.siteEnv }}

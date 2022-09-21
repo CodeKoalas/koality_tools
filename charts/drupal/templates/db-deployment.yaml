@@ -1,0 +1,29 @@
+{{- if not .Values.persistence.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.persistence.name }}
+  name: "{{ .Values.persistence.name }}-deployment"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.persistence.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.persistence.name }}
+    spec:
+      containers:
+        - name: {{ .Values.persistence.name }}
+          image: {{ .Values | get "persistence.image" "docker.io/mariadb:10.4" }}
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: "{{ .Values.persistence.name }}-volume"
+      volumes:
+        - emptyDir: {}
+          name: "{{ .Values.persistence.name }}-volume"
