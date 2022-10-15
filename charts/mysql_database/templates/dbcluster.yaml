@@ -1,0 +1,15 @@
+apiVersion: rds.services.k8s.aws/v1alpha1
+kind: DBInstance
+metadata:
+  name: "{{ .Values.dbcluster.name }}"
+spec:
+  allocatedStorage: 20
+  dbInstanceClass: {{ .Values.dbcluster.instanceClass }}
+  dbInstanceIdentifier: "{{ .Values.dbcluster.name }}"
+  engine: mysql
+  engineVersion: "{{ default "8.0" .Values.dbcluster.engineVersion }}"
+  masterUsername: "{{ .Values.dbcluster.username }}"
+  masterUserPassword:
+    namespace: default
+    name: "{{ .Values.dbcluster.password.secretKeyRef.name }}"
+    key: {{ .Values.dbcluster.password.secretKeyRef.key }}

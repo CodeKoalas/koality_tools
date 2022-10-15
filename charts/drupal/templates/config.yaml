@@ -1,18 +1,14 @@
-apiVersion: {{ .Values | get "apiVersion" "apps/v1" }}
+apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.deployment.name }}
+  name: {{ template "appname" . }}
   labels:
-    app: {{ .Values.deployment.name }}
-spec:
-  selector:
-    matchLabels:
-      app: {{ .Values.deployment.name }}
+    app: {{ template "appname" . }}
 data:
-  VIRTUAL_HOST: {{ .Values.deployment.virtualHost" }}
+  VIRTUAL_HOST: {{ .Values.deployment.virtualHost }}
   LETSENCRYPT_HOST: {{ .Values.deployment.letsEncryptHost }}
   DRUPAL_BASE_URL: {{ .Values.deployment.drupalBaseUrl }}
-  APACHE_DOCROOT: {{ .Values | get "deployment.apacheDocroot" "/var/www/html/docroot" }}
+  APACHE_DOCROOT: {{ .Values.deployment.apacheDocroot }}
   DATABASE_NAME: {{ .Values.persistence.databaseName}}
   DATABASE_USERNAME: {{ .Values.persistence.databaseUser }}
   DATABASE_HOST: {{ .Values.persistence.databaseHost }}

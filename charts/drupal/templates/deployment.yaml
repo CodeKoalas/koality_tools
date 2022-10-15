@@ -1,47 +1,75 @@
-apiVersion: {{ .Values | get "apiVersion" "apps/v1" }}
+apiVersion: {{ .Values.deployment.apiVersion }}
 kind: Deployment
 metadata:
-  name: {{ .Values.deployment.name }}
+  name: {{ template "trackableappname" . }}
+  annotations:
+    {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+    {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
   labels:
-    app: {{ .Values.deployment.name }}
+    app: {{ template "appname" . }}
+    track: "{{ .Values.application.track }}"
+    tier: "{{ .Values.application.tier }}"
+{{ include "sharedlabels" . | indent 4 }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.deployment.name }}
+      app: {{ template "appname" . }}
+      track: "{{ .Values.application.track }}"
+      tier: "{{ .Values.application.tier }}"
+      release: {{ .Release.Name }}
   template:
     metadata:
+      annotations:
+        checksum/application-secrets: "{{ .Values.application.secretChecksum }}"
+        {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+        {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
       labels:
-        app: {{ .Values.deployment.name }}
+        track: "{{ .Values.application.track }}"
+        tier: "{{ .Values.application.tier }}"
+{{ include "sharedlabels" . | indent 8 }}
     spec:
+      serviceAccountName: {{ template "serviceAccountName" . }}
       containers:
       - name: {{ .Values.container.name }}
         image: {{ .Values.container.image }}
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
+{{- if .Values.persistence.enabled }}
         volumeMounts:
-        - name: persistent-storage
-          mountPath: {{ .Values | get "persistence.mountPath" /var/www/html/docroot/sites/default/files }}
-          subPath: {{ .Values.persistence.subPath }}
+{{- range $volume := .Values.persistence.volumes }}
+          - name: {{ $volume.name | quote }}
+            mountPath: {{ $volume.mount.mountPath | quote }}
+            {{- if $volume.mount.subPath }}
+            subPath: {{ $volume.mount.subPath | quote }}
+            {{- end }}
+{{- end }}
+{{- end }}
         resources:
           limits:
-            cpu: {{ .Values | get "persistence.limits.cpu" 900m }}
-            memory: {{ .Values | get "persistence.limits.memory" 950Mi }}
+            cpu: {{ .Values.persistence.limits.cpu }}
+            memory: {{ .Values.persistence.limits.memory }}
           requests:
-            cpu: {{ .Values | get "persistence.requests.cpu" 600m }}
-            memory: {{ .Values | get "persistence.requests.memory" 550Mi }}
+            cpu: {{ .Values.persistence.requests.cpu }}
+            memory: {{ .Values.persistence.requests.memory }}
         envFrom:
         - configMapRef:
-            name: {{ .Values.deployment.name }}
+            name: {{ template "appname" . }}
         env:
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: "{{ .Values.deployment.name }}-secret"
-              key: password
-      imagePullSecrets:
-      - name: {{ .Values.imagePullSecret }}
+              name: "production-secret"
+              key: DATABASE_PASSWORD
+{{- if .Values.persistence.enabled }}
+{{- $context := . }}
       volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: efs-claim
+{{- range $volume := .Values.persistence.volumes }}
+        - name: {{ $volume.name | quote }}
+          persistentVolumeClaim:
+            {{ $args := dict "context" $context "name" $volume.name }}
+            claimName: {{ template "pvcName" $args }}
+{{- end }}
+{{- end }}
+

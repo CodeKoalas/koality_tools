@@ -1,11 +1,24 @@
-apiVersion: {{ .Values | get "apiVersion" "v1" }}
+{{- if .Values.persistence.enabled -}}
+{{- $context := . }}
+{{- range $volume := .Values.persistence.volumes }}
+---
 kind: PersistentVolumeClaim
+apiVersion: v1
 metadata:
-  name: "{{ .Values.deployment.name }}-efs-claim"
+  {{ $args := dict "context" $context "name" $volume.name }}
+  name: {{ template "pvcName" $args }}
+  labels:
+    track: "{{ $.Values.application.track }}"
+    tier: "{{ $.Values.application.tier }}"
+{{ include "sharedlabels" $context | indent 4 }}
 spec:
   accessModes:
-    - ReadWriteMany
-  storageClassName: {{ .Values.global.storageClass }}
+    - {{ $volume.claim.accessMode | quote }}
   resources:
     requests:
-      storage: 500Gi
+      storage: {{ $volume.claim.size | quote }}
+  {{- if $volume.claim.storageClass }}
+  storageClassName: {{ $volume.claim.storageClass | quote }}
+  {{- end }}
+{{- end }}
+{{- end -}}

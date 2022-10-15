@@ -1,15 +1,17 @@
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: "{{ .Values.deployment.name }}-hscale"
+  name: {{ template "appname" . }}
   namespace: gitlab-managed-apps
+  labels:
+{{ include "sharedlabels" . | indent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ .Values.deployment.name }}
-  minReplicas: {{ .Values | get "hscale.minReplicas" 1 }}
-  maxReplicas: {{ .Values | get "hscale.maxReplicas" 4 }}
+    name: {{ template "appname" . }}
+  minReplicas: {{ .Values.hpa.minReplicas }}
+  maxReplicas: {{ .Values.hpa.maxReplicas }}
   metrics:
   - type: Resource
     resource:

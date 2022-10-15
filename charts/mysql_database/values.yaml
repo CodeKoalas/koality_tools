@@ -1,0 +1,14 @@
+# The MYSQL dbcluster config.
+dbcluster:
+  name: ck-database-instance
+  instanceClass: db.t2.medium
+  engineVersion: "8.0"
+  username: "admin"
+  password:
+    secretKeyRef:
+      name: ck-database-instance-password
+      key: password
+
+# The MYSQL dbcluster config set as field exports.
+config:
+  name: ck-database-instance-config
