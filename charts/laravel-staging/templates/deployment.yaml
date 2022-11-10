@@ -1,0 +1,125 @@
+apiVersion: {{ .Values.deployment.apiVersion }}
+kind: Deployment
+metadata:
+  name: {{ template "trackableappname" . }}
+  annotations:
+    {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+    {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
+  labels:
+    app: {{ template "appname" . }}
+    track: "{{ .Values.application.track }}"
+    tier: "{{ .Values.application.tier }}"
+{{ include "sharedlabels" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "appname" . }}
+      track: "{{ .Values.application.track }}"
+      tier: "{{ .Values.application.tier }}"
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        checksum/application-secrets: "{{ .Values.application.secretChecksum }}"
+        {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+        {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
+      labels:
+        track: "{{ .Values.application.track }}"
+        tier: "{{ .Values.application.tier }}"
+{{ include "sharedlabels" . | indent 8 }}
+    spec:
+      serviceAccountName: {{ template "serviceAccountName" . }}
+      containers:
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.container.image }}
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+{{- if .Values.persistence.enabled }}
+        volumeMounts:
+{{- range $volume := .Values.persistence.volumes }}
+          - name: {{ $volume.name | quote }}
+            mountPath: {{ $volume.mount.mountPath | quote }}
+            {{- if $volume.mount.subPath }}
+            subPath: {{ $volume.mount.subPath | quote }}
+            {{- end }}
+{{- end }}
+{{- end }}
+        resources:
+          limits:
+            cpu: {{ .Values.persistence.limits.cpu }}
+            memory: {{ .Values.persistence.limits.memory }}
+          requests:
+            cpu: {{ .Values.persistence.requests.cpu }}
+            memory: {{ .Values.persistence.requests.memory }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-port"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-db-secret
+              key: DB_PASSWORD
+      # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
+      initContainers:
+      - name: wait-for-db
+        image: busybox:1.35
+        command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql $DB_PORT; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-port"
+      # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
+      - name: create-db
+        image: busybox:1.35
+        command: ['sh', '-c', 'echo -e "Checking for the existence of the $DB_DATABASE database"; while ! mysql -h $DB_HOST -P $DB_PORT -u $DB_USERNAME -p$DB_PASSWORD -e "use $DB_DATABASE"; do sleep 1; printf "-"; done; echo -e "  >> $DB_DATABASE database exists";']
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyFrom:
+              name: ck-database-instance-config
+              key: "mysql-instance-config-port"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-db-secret
+              key: DB_PASSWORD
+
+{{- if .Values.persistence.enabled }}
+{{- $context := . }}
+      volumes:
+{{- range $volume := .Values.persistence.volumes }}
+        - name: {{ $volume.name | quote }}
+          persistentVolumeClaim:
+            {{ $args := dict "context" $context "name" $volume.name }}
+            claimName: {{ template "pvcName" $args }}
+{{- end }}
+{{- end }}
+
