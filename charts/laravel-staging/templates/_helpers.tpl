@@ -21,6 +21,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- printf "%s" $releaseName | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "imagename" -}}
+{{- if eq .Values.container.tag "" -}}
+{{- .Values.container.repository -}}
+{{- else -}}
+{{- printf "%s:%s" .Values.container.repository .Values.container.tag -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "trackableappname" -}}
 {{- $trackableName := printf "%s-%s" (include "appname" .) .Values.application.track -}}
 {{- $trackableName | trimSuffix "-stable" | trunc 63 | trimSuffix "-" -}}

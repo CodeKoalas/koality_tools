@@ -127,7 +127,7 @@ service:
   name: service-gitlab-autodevops-laravel
   url: "https://gitlab-autodevops-laravel.ckstage.site"
   additionalHosts:
-    - "test.gitlab-autodevops-laravel.werewolfga.me"
+    - "test.gitlab-autodevops-laravel.ckstage.site"
   externalPort: 80
   internalPort: 80
   annotations:
