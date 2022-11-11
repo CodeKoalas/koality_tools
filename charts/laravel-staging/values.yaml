@@ -92,7 +92,7 @@ aws:
   region: us-west-2
   s3:
     bucket: example-bucket
-    usePathStyleEndpoint: true
+    usePathStyleEndpoint: "true"
 
 # The HorizontalPodAutosacler
 hpa:

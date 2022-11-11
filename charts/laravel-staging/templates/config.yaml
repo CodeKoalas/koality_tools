@@ -5,27 +5,27 @@ metadata:
   labels:
     app: {{ template "appname" . }}
 data:
-  LETSENCRYPT_HOST: {{ .Values.deployment.letsEncryptHost }}
-  APP_NAME: {{ template "appname" . }}
-  APP_ENV: {{ .Values.deployment.appEnv }}
-  APP_URL: {{ .Values.deployment.virtualHost }}
-  APP_DEBUG: false
-  APP_URL: {{ .Values.deployment.appUrl }}
-  LOG_CHANNEL: stack
-  LOG_LEVEL: debug
-  DB_CONNECTION: mysql
-  DB_DATABASE: {{ .Values.persistence.databaseName }}
-  DB_USERNAME: {{ .Values.persistence.databaseUser }}
-  BROADCAST_DRIVER: log
-  CACHE_DRIVER: file
-  FILESYSTEM_DRIVER: local
-  QUEUE_CONNECTION: sync
-  SESSION_DRIVER: file
-  SESSION_LIFETIME: 120
-  MEMCACHED_HOST: memcached
-  REDIS_HOST: {{ template "appname" . }}-redis
-  REDIS_PASSWORD: {{ .Values.redis.password }}
-  REDIS_PORT: {{ .Values.redis.port }}
+  LETSENCRYPT_HOST: "{{ .Values.deployment.letsEncryptHost }}"
+  APP_NAME: "{{ template "appname" . }}"
+  APP_ENV: "{{ .Values.deployment.appEnv }}"
+  APP_URL: "{{ .Values.deployment.virtualHost }}"
+  APP_DEBUG: "false"
+  APP_URL: "{{ .Values.deployment.appUrl }}"
+  LOG_CHANNEL: "stack"
+  LOG_LEVEL: "debug"
+  DB_CONNECTION: "mysql"
+  DB_DATABASE: "{{ .Values.persistence.databaseName }}"
+  DB_USERNAME: "{{ .Values.persistence.databaseUser }}"
+  BROADCAST_DRIVER: "log"
+  CACHE_DRIVER: "file"
+  FILESYSTEM_DRIVER: "local"
+  QUEUE_CONNECTION: "sync"
+  SESSION_DRIVER: "file"
+  SESSION_LIFETIME: "120"
+  MEMCACHED_HOST: "memcached"
+  REDIS_HOST: "{{ template "appname" . }}-redis"
+  REDIS_PASSWORD: "{{ .Values.redis.password }}"
+  REDIS_PORT: "{{ .Values.redis.port }}"
   MAIL_MAILER: "{{ .Values.mail.mailer }}"
   MAIL_HOST: "{{ .Values.mail.host }}"
   MAIL_PORT: "{{ .Values.mail.port }}"
@@ -35,29 +35,29 @@ data:
   MAIL_FROM_ADDRESS: "{{ .Values.mail.from.address }}"
   MAIL_FROM_NAME: "{{ .Values.mail.from.name }}"
 {{- if .Values.aws.region }}
-  AWS_DEFAULT_REGION: {{ .Values.aws.region }}
+  AWS_DEFAULT_REGION: "{{ .Values.aws.region }}"
 {{- end }}
 {{- if .Values.aws.s3.bucket }}
-  AWS_BUCKET: {{ .Values.aws.s3.bucket }}
+  AWS_BUCKET: "{{ .Values.aws.s3.bucket }}"
 {{- end }}
 {{- if .Values.aws.s3.usePathStyleEndpoint }}
-  AWS_USE_PATH_STYLE_ENDPOINT: {{ .Values.aws.s3.usePathStyleEndpoint }}
+  AWS_USE_PATH_STYLE_ENDPOINT: "{{ .Values.aws.s3.usePathStyleEndpoint }}"
 {{- end}}
 {{- if .Values.pusher.appID }}
-  PUSHER_APP_ID: {{ .Values.pusher.appId }}
+  PUSHER_APP_ID: "{{ .Values.pusher.appId }}"
 {{- end }}
 {{- if .Values.pusher.appKey }}
-  PUSHER_APP_KEY: {{ .Values.pusher.appKey }}
+  PUSHER_APP_KEY: "{{ .Values.pusher.appKey }}"
 {{- end }}
 {{- if .Values.pusher.appSecret }}
-  PUSHER_APP_SECRET: {{ .Values.pusher.appSecret }}
+  PUSHER_APP_SECRET: "{{ .Values.pusher.appSecret }}"
 {{- end }}
 {{- if .Values.pusher.appCluster }}
-  PUSHER_APP_CLUSTER: {{ .Values.pusher.appCluster }}
+  PUSHER_APP_CLUSTER: "{{ .Values.pusher.appCluster }}"
 {{- end }}
 {{- if .Values.pusher.appKey }}
-  MIX_PUSHER_APP_KEY: {{ .Values.mixpusher.appKey }}
+  MIX_PUSHER_APP_KEY: "{{ .Values.mixpusher.appKey }}"
 {{- end }}
 {{- if .Values.pusher.appCluster }}
-  MIX_PUSHER_APP_CLUSTER: {{ .Values.mixpusher.appCluster}}
+  MIX_PUSHER_APP_CLUSTER: "{{ .Values.mixpusher.appCluster }}"
 {{- end }}
