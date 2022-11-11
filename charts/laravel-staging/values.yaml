@@ -85,14 +85,14 @@ mixpusher:
   appCluster: null
 
 redis:
-  password:
+  password: password
   port: 6379
 
 aws:
-  region:
+  region: us-west-2
   s3:
-    bucket:
-    usePathStyleEndpoint:
+    bucket: example-bucket
+    usePathStyleEndpoint: true
 
 # The HorizontalPodAutosacler
 hpa:
