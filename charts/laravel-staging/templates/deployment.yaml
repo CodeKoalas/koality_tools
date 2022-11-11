@@ -74,12 +74,12 @@ spec:
               key: AWS_SECRET_ACCESS_KEY
         - name: DB_HOST
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-port"
         - name: DB_PASSWORD
@@ -95,12 +95,12 @@ spec:
         env:
         - name: DB_HOST
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-port"
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
@@ -113,12 +113,12 @@ spec:
         env:
         - name: DB_HOST
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
-            configMapKeyFrom:
+            configMapKeyRef:
               name: ck-database-instance-config
               key: "mysql-instance-config-port"
         - name: DB_PASSWORD
