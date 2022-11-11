@@ -89,7 +89,7 @@ redis:
   port: 6379
 
 aws:
-  bucketPath:
+  bucket:
   defaultRegion:
   usePathStyleEndpoint:
 
