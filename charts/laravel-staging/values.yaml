@@ -89,9 +89,10 @@ redis:
   port: 6379
 
 aws:
-  bucket:
-  defaultRegion:
-  usePathStyleEndpoint:
+  region:
+  s3:
+    bucket:
+    usePathStyleEndpoint:
 
 # The HorizontalPodAutosacler
 hpa:
