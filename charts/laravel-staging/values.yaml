@@ -74,7 +74,6 @@ mail:
     address: null
     name: null
 
-
 pusher:
   appId: null
   appKey: null
@@ -84,6 +83,10 @@ pusher:
 mixpusher:
   appKey: null
   appCluster: null
+
+redis:
+  password:
+  port: 6379
 
 # The HorizontalPodAutosacler
 hpa:
