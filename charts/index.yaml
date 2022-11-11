@@ -1,0 +1,20 @@
+apiVersion: v1
+entries:
+  ck-laravel-deploy:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2022-11-10T21:04:05.85196-06:00"
+    description: A Helm chart for CodeKoalas Laravel deployments
+    digest: f699d588e3bc171d65d14b7055d973ed3bd530a4fefd177e474f0befad3489b6
+    keywords:
+    - laravel
+    - eks
+    - codekoalas
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - name: justinlangley
+    name: ck-laravel-deploy
+    urls:
+    - ck-laravel-deploy-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-11-10T21:04:05.850357-06:00"
