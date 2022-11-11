@@ -18,6 +18,7 @@ build charts:
   artifacts:
     paths:
       - "**/*.tgz"
+    expire_in: "1 week"
 
 
 upload charts:
