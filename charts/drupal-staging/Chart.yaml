@@ -1,5 +1,5 @@
 apiVersion: v2
-name: ck-drupal-deploy
+name: drupal-staging
 version: 0.1.0
 appVersion: 1.0.0
 kubeVersion: ">=1.17.0-0"
