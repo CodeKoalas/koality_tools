@@ -40,7 +40,7 @@ data:
 {{- if .Values.aws.s3.bucket }}
   AWS_BUCKET: {{ .Values.aws.s3.bucket }}
 {{- end }}
-{{- if Values.aws.s3.usePathStyleEndpoint }}
+{{- if .Values.aws.s3.usePathStyleEndpoint }}
   AWS_USE_PATH_STYLE_ENDPOINT: {{ .Values.aws.s3.usePathStyleEndpoint }}
 {{- end}}
 {{- if .Values.pusher.appID }}
