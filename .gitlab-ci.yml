@@ -14,7 +14,7 @@ build-charts:
     - tags
   artifacts:
     paths:
-      - *.tgz
+      - "*.tgz"
 
 
 upload-charts:
