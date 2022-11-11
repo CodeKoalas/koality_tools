@@ -57,6 +57,21 @@ spec:
         - configMapRef:
             name: {{ template "appname" . }}
         env:
+        - name: APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.gitlab.env }}-secret
+              key: APP_KEY
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.gitlab.env }}-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.gitlab.env }}-secret
+              key: AWS_SECRET_ACCESS_KEY
         - name: DB_HOST
           valueFrom:
             configMapKeyFrom:

@@ -88,6 +88,11 @@ redis:
   password:
   port: 6379
 
+aws:
+  bucketPath:
+  defaultRegion:
+  usePathStyleEndpoint:
+
 # The HorizontalPodAutosacler
 hpa:
   minReplicas: 1
