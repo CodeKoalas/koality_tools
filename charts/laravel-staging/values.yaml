@@ -61,9 +61,7 @@ deployment:
   letsEncryptHost: gitlab-autodevops-laravel.ckstage.site
   appUrl: "https://gitlab-autodevops-laravel.ckstage.site"
   apacheDocroot: /var/www/html/public
-  initContainer:
-    image: registry.codekoalas.com/devops/helm/koality-charts
-    ref: init-mysql
+  initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
 # Mail ConfigMap values.
 mail:

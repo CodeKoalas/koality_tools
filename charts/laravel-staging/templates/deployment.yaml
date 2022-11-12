@@ -91,7 +91,7 @@ spec:
       initContainers:
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
-        image: "{{ .Values.deployment.initContainer.image }}:{{ .Values.deployment.initContainer.tag }}"
+        image: {{ .Values.deployment.initContainerImage }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
