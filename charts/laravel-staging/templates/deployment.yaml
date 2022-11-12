@@ -75,12 +75,12 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-port"
         - name: DB_PASSWORD
           valueFrom:
@@ -96,12 +96,12 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-port"
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
@@ -114,12 +114,12 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
-              name: ck-database-instance-config
+              name: mysql-instance-config
               key: "mysql-instance-config-port"
         - name: DB_PASSWORD
           valueFrom:
