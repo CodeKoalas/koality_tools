@@ -2,6 +2,19 @@ stages:
   - build
   - upload
 
+build init mysql image:
+  stage: build
+  script:
+    - cd docker/init-mysql
+    - docker build -t $CI_REGISTRY_IMAGE:init-mysql ./
+    - docker push $CI_REGISTRY_IMAGE:init-mysql
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/init-mysql/*
+        
+
 # Start by using a pipeline that uses the `helm packages` command to package
 # up the laravel-staging chart. Only trigger if the tag contains "laravel-staging"
 build laravel staging chart:
