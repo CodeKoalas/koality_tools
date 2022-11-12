@@ -89,20 +89,6 @@ spec:
               key: DB_PASSWORD
       # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
       initContainers:
-      - name: wait-for-db
-        image: busybox:1.35
-        command: ['sh', '-c', 'echo -e "Checking for the availability of MySQL Server deployment"; while ! nc -z mysql $DB_PORT; do sleep 1; printf "-"; done; echo -e "  >> MySQL DB Server has started";']
-        env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: "gitlab-managed-apps.mysql-instance-config-host"
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: "gitlab-managed-apps.mysql-instance-config-port"
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
         image: busybox:1.35
