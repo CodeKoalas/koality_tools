@@ -11,11 +11,14 @@ stages:
   - upload
 
 build init mysql image:
+  image: docker:latest
   stage: build
   script:
     - cd docker/init-mysql
     - docker build -t $CI_REGISTRY_IMAGE:init-mysql ./
     - docker push $CI_REGISTRY_IMAGE:init-mysql
+  services:
+    - docker:dind
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
