@@ -1,12 +1,9 @@
-#! /bin/bash
-pass="$(openssl rand -base64 12)"
-
 # check to see if the database exists
-table=`mysql -B --disable-column-names --host ck-db-staging.ceyq1mgp86tm.us-west-2.rds.amazonaws.com --execute="select count(*) from information_schema.tables where table_type = 'BASE TABLE' and table_schema = '$site'"`
+table=`mysql -B --disable-column-names --host $DB_HOST --execute="select count(*) from information_schema.tables where table_type = 'BASE TABLE' and table_schema = '$DB_DATABASE'"`
 
 #create mysql database and user information
 if [ $table == 0 ]; then
-        mysql --host ck-db-staging.ceyq1mgp86tm.us-west-2.rds.amazonaws.com --execute="CREATE DATABASE $site;"
-        mysql --host ck-db-staging.ceyq1mgp86tm.us-west-2.rds.amazonaws.com --execute="CREATE USER '$user'@'%' IDENTIFIED BY '$pass';"
-        mysql --host ck-db-staging.ceyq1mgp86tm.us-west-2.rds.amazonaws.com --execute="GRANT ALL on $site.* TO '$user'@'%';"
+        mysql --host $DB_HOST --execute="CREATE DATABASE $DB_DATABASE;"
+        mysql --host $DB_HOST --execute="CREATE USER '$DB_USERNAME'@'%' IDENTIFIED BY '$DB_PASSWORD';"
+        mysql --host $DB_HOST --execute="GRANT ALL on $DB_DATABASE.* TO '$DB_USERNAME'@'%';"
 fi
