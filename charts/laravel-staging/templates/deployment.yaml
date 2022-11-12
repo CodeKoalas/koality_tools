@@ -115,6 +115,8 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-db-secret
               key: DB_PASSWORD
+      imagePullSecrets:
+      - name: regcred
 
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
