@@ -91,12 +91,13 @@ spec:
       initContainers:
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
-        image: busybox:1.35
-        command: ['sh', '-c', 'echo -e "Checking for the existence of the $DB_DATABASE database"; while ! mysql -h $DB_HOST -P $DB_PORT -u $DB_USERNAME -p$DB_PASSWORD -e "use $DB_DATABASE"; do sleep 1; printf "-"; done; echo -e "  >> $DB_DATABASE database exists";']
+        image: "{{ .Values.deployment.initContainer.image }}:{{ .Values.deployment.initContainer.tag }}"
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
         env:
+        - name: DB_DATABASE
+          value: {{ .Values.persistence.databaseName }}
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
@@ -107,6 +108,8 @@ spec:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-port"
+        - name: DB_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
