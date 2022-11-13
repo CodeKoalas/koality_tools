@@ -65,12 +65,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
-              key: mysql-instance-config-host
+              key: "default.mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
-              key: mysql-instance-config-port
+              key: "default.mysql-instance-config-port"
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -92,12 +92,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
-              key: mysql-instance-config-host
+              key: "default.mysql-instance-config-host"
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
-              key: mysql-instance-config-port
+              key: "default.mysql-instance-config-port"
         - name: DB_USERNAME
           value: {{ .Values.persistence.databaseUser }}
         - name: DB_PASSWORD
