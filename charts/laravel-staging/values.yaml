@@ -42,6 +42,7 @@ serviceAccount:
 application:
   track: stable
   tier: web
+  secretName: gitlab-secret
   # Passed by Gitlab so we know when the deployment has changed.
   secretChecksum:
 
