@@ -32,7 +32,7 @@ spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
       containers:
       - name: {{ .Values.deployment.name }}
-        image: {{ template "imagename" }}
+        image: {{ template "imagename" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 80

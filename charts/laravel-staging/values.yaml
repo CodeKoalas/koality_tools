@@ -53,7 +53,6 @@ image:
   secrets:
     - name: gitlab-registry
 
-
 # The deployment object with environment variables to use.
 deployment:
   apiVersion: apps/v1
