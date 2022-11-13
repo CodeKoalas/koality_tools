@@ -22,10 +22,10 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{- define "imagename" -}}
-{{- if eq .Values.container.tag "" -}}
-{{- .Values.container.repository -}}
+{{- if eq .Values.image.tag "" -}}
+{{- .Values.image.repository -}}
 {{- else -}}
-{{- printf "%s:%s" .Values.container.repository .Values.container.tag -}}
+{{- printf "%s:%s" .Values.image.repository .Values.image.tag -}}
 {{- end -}}
 {{- end -}}
 
