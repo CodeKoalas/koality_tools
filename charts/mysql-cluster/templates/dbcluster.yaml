@@ -8,8 +8,9 @@ spec:
   dbInstanceIdentifier: "{{ .Values.dbcluster.name }}"
   engine: mysql
   engineVersion: "{{ default "8.0" .Values.dbcluster.engineVersion }}"
+  dbSubnetGroupName: {{ .Values.dbcluster.subnetGroupName }}
   masterUsername: "{{ .Values.dbcluster.username }}"
   masterUserPassword:
-    namespace: default
+    namespace: {{ .Values.dbcluster.password.namespace }}
     name: "{{ .Values.dbcluster.password.secretKeyRef.name }}"
     key: {{ .Values.dbcluster.password.secretKeyRef.key }}

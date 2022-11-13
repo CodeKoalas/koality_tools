@@ -4,10 +4,13 @@ dbcluster:
   instanceClass: db.t2.medium
   engineVersion: "8.0"
   username: "admin"
+  subnetGroupName: autodevops-staging
   password:
+    namespace: default
+    value: example-password
     secretKeyRef:
       name: ck-database-instance-password
-      key: password
+      key: MYSQL_MASTER_PASSWORD
 
 # The MYSQL dbcluster config set as field exports.
 config:
