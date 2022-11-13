@@ -11,5 +11,4 @@ data:
   APACHE_DOCROOT: {{ .Values.deployment.apacheDocroot }}
   DATABASE_NAME: {{ .Values.persistence.databaseName}}
   DATABASE_USERNAME: {{ .Values.persistence.databaseUser }}
-  DATABASE_HOST: {{ .Values.persistence.databaseHost }}
   SITE_ENV: {{ .Values.deployment.siteEnv }}

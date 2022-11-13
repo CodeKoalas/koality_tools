@@ -42,13 +42,17 @@ serviceAccount:
 application:
   track: stable
   tier: web
+  secretName: gitlab-secret
   # Passed by Gitlab so we know when the deployment has changed.
   secretChecksum:
 
 # The deployment application image.
-container:
-  name: gitlab-autodevops-drupal
-  image: justinlangley/gitlab-autodevops:latest
+image:
+  repository: gitlab.example.com/group/project
+  tag: stable
+  pullPolicy: Always
+  secrets:
+    - name: gitlab-registry
 
 # The deployment object with environment variables to use.
 deployment:
@@ -61,6 +65,7 @@ deployment:
   letsEncryptHost: gitlab-autodevops.werewolfga.me
   drupalBaseUrl: "https://gitlab-autodevops.werewolfga.me"
   apacheDocroot: /var/www/html/docroot
+  initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
 # The HorizontalPodAutosacler
 hpa:
@@ -77,6 +82,7 @@ persistence:
   databaseName: drupal
   databaseHost: mysql
   databaseUser: drupal
+  databasePassword: root
   replicaCount: 1
   limits:
     cpu: 900m
