@@ -46,9 +46,13 @@ application:
   secretChecksum:
 
 # The deployment application image.
-container:
-  name: laravel
-  image: bitnami/laravel:latest
+image:
+  repository: gitlab.example.com/group/project
+  tag: stable
+  pullPolicy: Always
+  secrets:
+    - name: gitlab-registry
+
 
 # The deployment object with environment variables to use.
 deployment:

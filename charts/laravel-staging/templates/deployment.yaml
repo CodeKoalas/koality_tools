@@ -31,9 +31,9 @@ spec:
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
       containers:
-      - name: {{ .Values.container.name }}
-        image: {{ .Values.container.image }}
-        imagePullPolicy: "Always"
+      - name: {{ .Values.deployment.name }}
+        image: {{ template "imagename" }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 80
 {{- if .Values.persistence.enabled }}
