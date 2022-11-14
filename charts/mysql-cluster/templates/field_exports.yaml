@@ -13,6 +13,7 @@ spec:
   to:
     name: {{ .Values.config.name }}
     kind: configmap
+    namespace: gitlab-managed-apps
   from:
     path: ".status.endpoint.address"
     resource:
@@ -28,6 +29,7 @@ spec:
   to:
     name: {{ .Values.config.name }}
     kind: configmap
+    namespace: gitlab-managed-apps
   from:
     path: ".status.endpoint.port"
     resource:
@@ -43,6 +45,7 @@ spec:
   to:
     name: {{ .Values.config.name }}
     kind: configmap
+    namespace: gitlab-managed-apps
   from:
     path: ".spec.masterUsername"
     resource:
