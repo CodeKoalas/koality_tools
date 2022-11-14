@@ -64,6 +64,7 @@ deployment:
   virtualHost: gitlab-autodevops-laravel.ckstage.site
   letsEncryptHost: gitlab-autodevops-laravel.ckstage.site
   appUrl: "https://gitlab-autodevops-laravel.ckstage.site"
+  appKey: exampleappkeygoeshere
   apacheDocroot: /var/www/html/public
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
