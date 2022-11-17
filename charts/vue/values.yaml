@@ -1,0 +1,162 @@
+global:
+  storageClass: "efs-sc"
+
+commonLabels:
+
+# Gitlab values for app tracking.
+gitlab:
+  app:
+  env:
+  envName:
+  envURL:
+  projectID:
+
+replicaCount: 1
+
+## Host aliases
+hostAliases:
+  ## Point CK registry to a private IP.
+  - ip: 10.170.3.234
+    hostnames:
+      - "registry.codekoalas.com"
+      - "gitlab.codekoalas.com"
+
+## Service account.
+serviceAccount:
+  ## @param serviceAccount.create Specifies whether a service account should be created
+  ##
+  create: true
+  ## @param serviceAccount.name The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  ##
+  name: "deploy-service-sa"
+  ## @param serviceAccount.annotations Add annotations
+  ##
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::069344082335:role/EKSManageEFS
+
+  ## @param serviceAccount.automountServiceAccountToken Automount API credentials for a service account.
+  ##
+  automountServiceAccountToken: true
+
+# Gitlab Application values.
+application:
+  track: stable
+  tier: web
+  secretName: gitlab-secret
+  # Passed by Gitlab so we know when the deployment has changed.
+  secretChecksum:
+
+# The deployment application image.
+image:
+  repository: gitlab.example.com/group/project
+  tag: stable
+  pullPolicy: Always
+  secrets:
+    - name: gitlab-registry
+
+# The deployment object with environment variables to use.
+deployment:
+  apiVersion: apps/v1
+  name: gitlab-autodevops-laravel
+  track: stable
+  tier: web
+  appEnv: staging
+  virtualHost: example-vue.ckstage.site
+  letsEncryptHost: example-vue.ckstage.site
+  config:
+    VUE_APP_TITLE: App Title
+    VUE_APP_URL: http://example-vue.ckstage.site
+    VUE_APP_API_URL: https://example-vue.ckstage.site
+
+# The HorizontalPodAutosacler
+hpa:
+  minReplicas: 1
+  maxReplicas: 4
+
+# The persistence image; for review apps this allows a DB to be created
+# for use with this review.
+# persistence:
+#   enabled: true
+#   name: gitlab-autodevops-laravel
+#   databaseName: laravel
+#   databaseUser: laravel
+#   databasePassword: password
+#   replicaCount: 1
+#   limits:
+#     cpu: 900m
+#     memory: 950Mi
+#   requests:
+#     cpu: 600m
+#     memory: 550Mi
+#   volumes:
+#     - name: data
+#       mount:
+#         mountPath: /var/www/html/storage
+#         subPath: storage
+#         # subPath: "/pvc-mount/config.txt"
+#       claim:
+#         accessMode: ReadWriteMany
+#         size: 100Gi
+#         # If you want to use a custom storage class, you can specify `storageClass`. In this case, you need to create a storage class at first.
+#         # If `storageClass` is not specified, the behavior will vary per Kubernetes provider.
+#         # For example, GKE automatically chooses a default storage class and allocate a physical storage.
+#         # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
+
+# The service that is used with the Ingress.
+service:
+  enabled: true
+  type: ClusterIP
+  name: example-vue-service
+  url: "https://example-vue.ckstage.site"
+  additionalHosts:
+    - "example-vue.ckstage.site"
+  externalPort: 80
+  internalPort: 80
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+
+# If we want to deploy an ingress class and what class name to use.
+ingress:
+  enabled: true
+  className: nginx
+  path: /
+  tls:
+    enabled: true
+    acme: true
+  modSecurity:
+    enabled: false
+    secRuleEngine: "DetectionOnly"
+    # secRules:
+    #   - variable: ""
+    #     operator: ""
+    #     action: ""
+  canary:
+    weight:
+
+# Prometheus stuff
+prometheus:
+  metrics: false
+livenessProbe:
+  path: "/"
+  initialDelaySeconds: 15
+  timeoutSeconds: 15
+  scheme: "HTTP"
+  probeType: "httpGet"
+  httpHeaders: []
+readinessProbe:
+  path: "/"
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  scheme: "HTTP"
+  probeType: "httpGet"
+  httpHeaders: []
+startupProbe:
+  enabled: false
+  path: "/"
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 30
+  periodSeconds: 10
+  scheme: "HTTP"
+  probeType: "httpGet"
+  httpHeaders: []

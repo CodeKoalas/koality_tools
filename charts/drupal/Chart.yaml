@@ -1,11 +1,11 @@
 apiVersion: v2
-name: laravel-staging
-version: 0.2.2
+name: drupal
+version: 0.1.0
 appVersion: 1.0.0
 kubeVersion: ">=1.17.0-0"
-description: "A Helm chart for CodeKoalas Laravel deployments"
+description: "A Helm chart for CodeKoalas production ready Drupal deployments"
 keywords:
-  - laravel
+  - drupal
   - eks
   - codekoalas
 maintainers:
