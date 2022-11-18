@@ -9,7 +9,7 @@ spec:
   engine: mysql
   engineVersion: "{{ default "8.0" .Values.dbcluster.engineVersion }}"
   dbSubnetGroupName: {{ .Values.dbcluster.subnetGroupName }}
-  multiAZ: false
+  multiAZ: {{ .Values.dbcluster.multiAZ }}
   masterUsername: "{{ .Values.dbcluster.username }}"
   masterUserPassword:
     namespace: {{ .Values.dbcluster.password.namespace }}

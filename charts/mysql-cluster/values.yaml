@@ -5,6 +5,7 @@ dbcluster:
   engineVersion: "8.0"
   username: "admin"
   subnetGroupName: autodevops-staging
+  multiAZ: true
   password:
     namespace: default
     value: example-password
