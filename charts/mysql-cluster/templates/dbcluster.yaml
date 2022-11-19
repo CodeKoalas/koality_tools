@@ -16,6 +16,4 @@ spec:
     name: "{{ .Values.dbcluster.password.secretKeyRef.name }}"
     key: {{ .Values.dbcluster.password.secretKeyRef.key }}
   performanceInsightsEnabled: false
-  vpcSecurityGroupIDs:
-    # rds-db-access-sg
-    - "sg-32f79c57"
+  {{ .Values.dbcluster.vpcSecurityGroupIds | toYaml | indent 2 }}
