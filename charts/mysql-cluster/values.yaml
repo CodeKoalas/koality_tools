@@ -13,6 +13,7 @@ dbcluster:
       name: ck-database-instance-password
       key: MYSQL_MASTER_PASSWORD
   # Security group IDs to be associated with the database instance.
+  performanceInsightsEnabled: false
   vpcSecurityGroupIds:
 
 # The MYSQL dbcluster config set as field exports.

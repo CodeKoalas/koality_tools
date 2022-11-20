@@ -16,4 +16,4 @@ spec:
     name: "{{ .Values.dbcluster.password.secretKeyRef.name }}"
     key: {{ .Values.dbcluster.password.secretKeyRef.key }}
   performanceInsightsEnabled: false
-  {{ .Values.dbcluster.vpcSecurityGroupIds | toYaml | indent 2 }}
+{{ toYaml .Values.dbcluster.vpcSecurityGroupIds | indent 2 }}
