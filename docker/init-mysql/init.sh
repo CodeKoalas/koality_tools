@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # check to see if the database exists
 table=`mysql -B --disable-column-names --host $DB_HOST --execute="select count(*) from information_schema.tables where table_type = 'BASE TABLE' and table_schema = '$DB_DATABASE'"`
 
