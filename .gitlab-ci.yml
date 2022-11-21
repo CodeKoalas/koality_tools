@@ -6,23 +6,38 @@ stages:
   - build
   - upload
 
-build init mysql image:
+.build-base:
   image: docker:latest
   stage: build
-  script:
-    - cd docker/init-mysql
-    - docker build -t $CI_REGISTRY_IMAGE:init-mysql ./
-    - docker push $CI_REGISTRY_IMAGE:init-mysql
   services:
     - docker:dind
   before_script:
     - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+build init mysql image:
+  extends: .build-base
+  script:
+    - cd docker/init-mysql
+    - docker build -t $CI_REGISTRY_IMAGE:init-mysql ./
+    - docker push $CI_REGISTRY_IMAGE:init-mysql
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
           - docker/init-mysql/*
+
+build init laravel image:
+  extends: .build-base
+  script:
+    - cd docker/init-laravel
+    - docker build -t $CI_REGISTRY_IMAGE:init-laravel ./
+    - docker push $CI_REGISTRY_IMAGE:init-laravel
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/init-laravel/*
 
 # @TODO: Clean this up into a utility script that gets fired on a tag and
 # that script decides what it should build and upload to the Helm Repo. Hopefully
