@@ -77,13 +77,11 @@ hpa:
 persistence:
   enabled: true
   apiVersion: apps/v1
-  image: docker.io/mariadb:10.4
   name: gitlab-autodevops-drupal
   databaseName: drupal
   databaseHost: mysql
   databaseUser: drupal
   databasePassword: root
-  replicaCount: 1
   limits:
     cpu: 900m
     memory: 950Mi
@@ -94,7 +92,7 @@ persistence:
     - name: data
       mount:
         mountPath: /var/www/html/docroot/sites/default/files
-        subPath: gitlab-devops
+        subPath: gitlab-autodevops
         # subPath: "/pvc-mount/config.txt"
       claim:
         accessMode: ReadWriteMany
@@ -110,9 +108,9 @@ service:
   enabled: true
   type: ClusterIP
   name: service-gitlab-autodevops-drupal
-  url: "https://gitlab-autodevops.werewolfga.me"
+  url: "https://gitlab-autodevops.ckstage.site"
   additionalHosts:
-    - "test.gitlab-autodevops.werewolfga.me"
+    - "test.gitlab-autodevops.ckstage.site"
   externalPort: 80
   internalPort: 80
   annotations:
