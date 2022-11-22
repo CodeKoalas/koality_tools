@@ -74,7 +74,7 @@ spec:
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "appname" . }}-db-secret
+              name: {{ template "appname" . }}-secrets
               key: MYSQL_PASSWORD
       # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
       initContainers:
