@@ -9,7 +9,7 @@ data:
   APP_NAME: "{{ template "appname" . }}"
   APP_ENV: "{{ .Values.deployment.appEnv }}"
   APP_URL: "{{ .Values.deployment.virtualHost }}"
-  APP_DEBUG: "false"
+  APP_DEBUG: "{{ .Values.deployment.appDebug }}"
   APP_URL: "{{ .Values.deployment.appUrl }}"
   LOG_CHANNEL: "stack"
   LOG_LEVEL: "debug"
