@@ -98,6 +98,7 @@ redis:
 aws:
   region: us-west-2
   s3:
+    enabled: false
     bucket: example-bucket
     usePathStyleEndpoint: true
 

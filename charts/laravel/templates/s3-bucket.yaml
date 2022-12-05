@@ -1,0 +1,13 @@
+{{- if .Values.aws.s3.enabled -}}
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
+metadata:
+  name: {{ .Values.aws.s3.bucket }}
+spec:
+  name: {{ .Values.aws.s3.bucket }}
+  tagging:
+    tagSet:
+{{- range $tag := .Values.aws.s3.tagSets }}
+    - key: {{ $tag.key }}
+      value: {{ $tag.value }}
+{{- end }}
