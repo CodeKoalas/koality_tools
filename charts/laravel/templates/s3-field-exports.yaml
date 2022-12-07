@@ -1,4 +1,4 @@
-{{- if .Values.aws.s3.enabled -}}
+{{- if and .Values.aws.s3.enabled .Values.aws.s3.createNew -}}
 ---
 apiVersion: services.k8s.aws/v1alpha1
 kind: FieldExport
