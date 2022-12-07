@@ -132,6 +132,11 @@ aws:
     ## @param aws.s3.bucketName The name of the S3 bucket to use.
     ##
     bucket: example-bucket
+    tagSets:
+      - key: "kubernetes.io/cluster/example-cluster"
+        value: "owned"
+      - key: "kubernetes.io/cluster-service"
+        value: "true"
     ## @param aws.s3.url The url of the S3 bucket to use.
     ##
     url: "https://s3.us-west-2.amazonaws.com/example-bucket"
