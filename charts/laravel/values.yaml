@@ -3,7 +3,7 @@ global:
 
 commonLabels:
 
-# Gitlab values for app tracking.
+## Gitlab values for app tracking.
 gitlab:
   app:
   env:
@@ -38,7 +38,7 @@ serviceAccount:
   ##
   automountServiceAccountToken: true
 
-# Gitlab Application values.
+## Gitlab Application values.
 application:
   track: stable
   tier: web
@@ -46,7 +46,7 @@ application:
   # Passed by Gitlab so we know when the deployment has changed.
   secretChecksum:
 
-# The deployment application image.
+## The deployment application image.
 image:
   repository: gitlab.example.com/group/project
   tag: stable
@@ -54,7 +54,7 @@ image:
   secrets:
     - name: gitlab-registry
 
-# The deployment object with environment variables to use.
+## The deployment object with environment variables to use.
 deployment:
   apiVersion: apps/v1
   name: gitlab-autodevops-laravel
@@ -69,18 +69,40 @@ deployment:
   apacheDocroot: /var/www/html/public
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
-# Mail ConfigMap values.
+## Mail ConfigMap values.
 mail:
+  ## @param mail.mailer Specifies the mailer to use.
+  ##  - values: smtp, sendmail, mailgun, mandrill, ses, sparkpost, log, array, mailtrap
+  ##
   mailer: smtp
+
+  ## @param mail.host The host to use for SMTP.
+  ##
   host: mailhog.codekoalas.com
+
+  ## @param mail.port The port to use for SMTP.
+  ##
   port: 1025
+
+  ## @param mail.username The username for use with the mailer.
+  ##
   username: null
+
+  ## @param mail.password The password for use with the mailer.
+  ##
   password: null
+
+  ## @param mail.encryption The encryption to use for SMTP.
+  ##
   encryption: null
+
+  ## @param mail.from The from address and name to use for SMTP.
+  ##
   from:
     address: null
     name: null
 
+## Laravel Pusher service.
 pusher:
   appId: null
   appKey: null
@@ -95,11 +117,26 @@ redis:
   password: password
   port: 6379
 
+## AWS/Laravel configuration
 aws:
+  ## @param aws.region The AWS region to use.
+  ##
   region: us-west-2
   s3:
+    ## @param aws.s3.enabled If set to true, this will enable S3.
+    ##
     enabled: false
+    ## @param aws.s3.createNew If set to true, this will create an S3 bucket resource through a CRD.
+    ##
+    createNew: true
+    ## @param aws.s3.bucketName The name of the S3 bucket to use.
+    ##
     bucket: example-bucket
+    ## @param aws.s3.url The url of the S3 bucket to use.
+    ##
+    url: "https://s3.us-west-2.amazonaws.com/example-bucket"
+    ## @param aws.s3.usePathStyleEndpoint If set to true, this will use the path style endpoint for S3.
+    ##
     usePathStyleEndpoint: true
 
 # The HorizontalPodAutosacler
