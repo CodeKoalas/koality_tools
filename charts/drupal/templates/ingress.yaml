@@ -47,4 +47,11 @@ spec:
       <<: *httpRule
 {{- end -}}
 {{- end -}}
+{{- if .Values.service.extraHosts }}
+{{- range $host := .Values.service.extraHosts }}
+  - host: {{ template "hostname" $host }}
+    http:
+      <<: *httpRule
+{{- end -}}
+{{- end -}}
 {{- end -}}

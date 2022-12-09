@@ -109,7 +109,7 @@ service:
   type: ClusterIP
   name: service-gitlab-autodevops-drupal
   url: "https://gitlab-autodevops.ckstage.site"
-  additionalHosts:
+  extraHosts:
     - "test.gitlab-autodevops.ckstage.site"
   externalPort: 80
   internalPort: 80

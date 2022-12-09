@@ -104,7 +104,7 @@ service:
   type: ClusterIP
   name: example-flutter-web-service
   url: "https://example-flutter-web.ckstage.site"
-  additionalHosts:
+  extraHosts:
     - "example-flutter-web.ckstage.site"
   externalPort: 80
   internalPort: 80

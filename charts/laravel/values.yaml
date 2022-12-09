@@ -185,7 +185,7 @@ service:
   type: ClusterIP
   name: service-gitlab-autodevops-laravel
   url: "https://gitlab-autodevops-laravel.ckstage.site"
-  additionalHosts:
+  extraHosts:
     - "test.gitlab-autodevops-laravel.ckstage.site"
   externalPort: 80
   internalPort: 80
