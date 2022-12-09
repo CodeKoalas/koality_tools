@@ -1,0 +1,13 @@
+apiVersion: v2
+name: flutter-web
+version: 0.1.0
+appVersion: 1.0.0
+kubeVersion: ">=1.17.0-0"
+description: "A Helm chart for CodeKoalas production ready Flutter Web deployments"
+keywords:
+  - flutter
+  - web
+  - eks
+  - codekoalas
+maintainers:
+  - name: justinlangley
