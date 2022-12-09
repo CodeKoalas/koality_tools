@@ -11,3 +11,4 @@ spec:
     - key: {{ $tag.key }}
       value: {{ $tag.value }}
 {{- end }}
+{{- end }}
