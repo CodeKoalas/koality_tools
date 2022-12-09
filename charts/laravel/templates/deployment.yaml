@@ -71,7 +71,7 @@ spec:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-port"
-        {{- if .Values.aws.s3.enabled }}
+        {{- if and (.Values.aws.s3.enabled) (.Values.aws.s3.createNew) }}
         - name: AWS_URL
           valueFrom:
             configMapKeyRef:

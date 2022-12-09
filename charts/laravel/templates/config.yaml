@@ -40,6 +40,9 @@ data:
 {{- if .Values.aws.s3.bucket }}
   AWS_BUCKET: "{{ .Values.aws.s3.bucket }}"
 {{- end }}
+{{- if and (.Values.aws.s3.bucket) (not .Values.aws.s3.createNew) }}
+  AWS_URL: "{{ .Values.aws.s3.url }}"
+{{- end }}
 {{- if .Values.aws.s3.usePathStyleEndpoint }}
   AWS_USE_PATH_STYLE_ENDPOINT: "{{ .Values.aws.s3.usePathStyleEndpoint }}"
 {{- end}}
