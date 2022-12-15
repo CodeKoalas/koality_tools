@@ -196,6 +196,7 @@ service:
 ingress:
   enabled: true
   className: nginx
+  hostname: gitlab-autodevops-laravel.ckstage.site
   path: /
   tls:
     enabled: true

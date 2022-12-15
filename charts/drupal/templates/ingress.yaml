@@ -21,7 +21,12 @@ spec:
     - {{ template "hostname" $host }}
 {{- end -}}
 {{- end }}
-    secretName: {{ template "clusterIssuerSecretName" }}
+{{- if .Values.service.extraHosts }}
+{{- range $extraHost := .Values.service.extraHosts }}
+    - {{ template "hostname" $extraHost }}
+{{- end -}}
+{{- end }}
+    secretName: {{ .Values.ingress.existingSecretName | default (printf "%s-tls" .Values.ingress.hostname) }}
 {{- end }}
   rules:
   - host: {{ template "hostname" .Values.service.url }}
