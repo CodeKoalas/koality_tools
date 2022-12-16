@@ -7,7 +7,7 @@ import 'package:pub_updater/pub_updater.dart';
 import 'package:koality_tools/src/commands/commands.dart';
 import 'package:koality_tools/src/version.dart';
 
-const executableName = 'koality_tools';
+const executableName = 'koality';
 const packageName = 'koality_tools';
 const description = 'A collection of useful tools created by Code Koalas.';
 
@@ -15,7 +15,7 @@ const description = 'A collection of useful tools created by Code Koalas.';
 /// A [CommandRunner] for the CLI.
 ///
 /// ```
-/// $ koality_tools --version
+/// $ koality --version
 /// ```
 /// {@endtemplate}
 class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {

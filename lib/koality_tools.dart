@@ -5,6 +5,6 @@
 /// dart pub global activate koality_tools
 ///
 /// # see usage
-/// koality_tools --help
+/// koality --help
 /// ```
 library koality_tools;
