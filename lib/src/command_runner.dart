@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
+import 'package:koality_tools/src/commands/coverage_helper_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 
@@ -41,6 +42,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
 
     // Add sub commands
     addCommand(SetupCommand(logger: _logger));
+    addCommand(CoverageHelperCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, pubUpdater: _pubUpdater));
   }
 
