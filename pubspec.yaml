@@ -1,6 +1,7 @@
 name: koality_tools
 description: A collection of useful scripts for various projects.
 version: 0.1.0
+repository: https://dart.cloudsmith.io/code-koalas/koality/
 publish_to: https://dart.cloudsmith.io/code-koalas/koality/
 
 environment:
