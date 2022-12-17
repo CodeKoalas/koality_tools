@@ -2,6 +2,8 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
 import 'package:koality_tools/src/commands/coverage_helper_command.dart';
+import 'package:koality_tools/src/commands/poeditor/poeditor_command.dart';
+import 'package:koality_tools/src/commands/test_runner_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 
@@ -43,6 +45,8 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
     // Add sub commands
     addCommand(SetupCommand(logger: _logger));
     addCommand(CoverageHelperCommand(logger: _logger));
+    addCommand(POEditorCommand(logger: _logger));
+    addCommand(TestRunnerCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, pubUpdater: _pubUpdater));
   }
 
@@ -56,6 +60,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   Future<int> run(Iterable<String> args) async {
     try {
       final topLevelResults = parse(args);
+      _logger.info(topLevelResults.toString());
       if (topLevelResults['verbose'] == true) {
         _logger.level = Level.verbose;
       }

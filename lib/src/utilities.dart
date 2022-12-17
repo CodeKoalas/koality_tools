@@ -9,6 +9,11 @@ Future<bool> gumInstalled() async {
   return process.stdout.toString().isNotEmpty;
 }
 
+Future<bool> jqInstalled() async {
+  final process = await Process.run('command', ['-v', 'jq']);
+  return process.stdout.toString().isNotEmpty;
+}
+
 Future<ProcessResult> installGum(Logger logger) async {
   final installGumProcess = await Process.run('brew', ['install', 'gum']);
   if (installGumProcess.exitCode > 0) {
@@ -18,14 +23,8 @@ Future<ProcessResult> installGum(Logger logger) async {
   return installGumProcess;
 }
 
-Future<ProcessResult> installJq(Logger logger, {bool useGum = true}) async {
-  late final ProcessResult installJqProcess;
-  if (useGum) {
-    // gum confirm --default "Do you want to install 'jq'?" && brew install jq
-    installJqProcess = await Process.run('gum', ['confirm', '--default', 'Do you want to install jq?', '&&', 'brew', 'install', 'jq']);
-  } else {
-    installJqProcess = await Process.run('brew', ['install', 'jq']);
-  }
+Future<ProcessResult> installJq(Logger logger) async {
+  final installJqProcess = await Process.run('brew', ['install', 'jq']);
 
   if (installJqProcess.exitCode > 0) {
     logger.info('Failed to install jq.');
@@ -35,14 +34,8 @@ Future<ProcessResult> installJq(Logger logger, {bool useGum = true}) async {
   return installJqProcess;
 }
 
-Future<ProcessResult> installCurl(Logger logger, {bool useGum = true}) async {
-  late final ProcessResult installCurlProcess;
-  if (useGum) {
-    // gum confirm --default "Do you want to install 'curl'?" && brew install curl
-    installCurlProcess = await Process.run('gum', ['confirm', '--default', 'Do you want to install curl?', '&&', 'brew', 'install', 'curl']);
-  } else {
-    installCurlProcess = await Process.run('brew', ['install', 'curl']);
-  }
+Future<ProcessResult> installCurl(Logger logger) async {
+  final installCurlProcess = await Process.run('brew', ['install', 'curl']);
 
   if (installCurlProcess.exitCode > 0) {
     logger.info('Failed to install curl.');
@@ -50,4 +43,35 @@ Future<ProcessResult> installCurl(Logger logger, {bool useGum = true}) async {
   logger.info('Installed curl successfully!');
 
   return installCurlProcess;
+}
+
+Future<ProcessResult> installVeryGoodCli(Logger logger) async {
+  final installVeryGoodCliProcess = await Process.run('dart', ['pub', 'global', 'activate', 'very_good_cli']);
+
+  if (installVeryGoodCliProcess.exitCode > 0) {
+    logger.info('Failed to install very_good_cli.');
+  }
+  logger.info('Installed very_good_cli successfully!');
+
+  return installVeryGoodCliProcess;
+}
+
+Future<ProcessResult> installRps(Logger logger) async {
+  final installVeryGoodCliProcess = await Process.run('dart', ['pub', 'global', 'activate', 'rps']);
+
+  if (installVeryGoodCliProcess.exitCode > 0) {
+    logger.info('Failed to install rps.');
+  }
+  logger.info('Installed rps successfully!');
+
+  return installVeryGoodCliProcess;
+}
+
+bool confirmUserChoice({required String confirmMessage, required Logger logger}) {
+  final choice = logger.prompt(confirmMessage);
+  if (choice == 'y' || choice == 'yes') {
+    return true;
+  } else {
+    return false;
+  }
 }
