@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-
 /// {@template test_command}
 ///
 /// `koality test`
@@ -14,7 +13,9 @@ class TestRunnerCommand extends Command<int> {
   TestRunnerCommand({
     required Logger logger,
   }) : _logger = logger {
-    argParser.addFlag('coverage', abbr: 'c', help: 'If you want a coverage report generated.');
+    argParser
+      ..addFlag('coverage', abbr: 'c', help: 'If you want a coverage report generated.')
+      ..addFlag('generate', abbr: 'g', help: 'If you want to generate an HTLM page using lcov');
   }
 
   @override
@@ -28,6 +29,7 @@ class TestRunnerCommand extends Command<int> {
   @override
   Future<int> run() async {
     final useCoverage = argResults?['coverage'] as bool;
+    final generateHtml = argResults?['generate'] as bool;
     _logger.info('Running test command');
 
     /// Run tests with coverage
@@ -43,6 +45,10 @@ class TestRunnerCommand extends Command<int> {
           '-o',
           'coverage/lcov.info'
         ]);
+
+        if (generateHtml) {
+          await Process.run('genhtml', ['coverage/lcov.info', '-o', 'coverage/']);
+        }
       } else {
         await Process.run('very_good', ['test']);
       }

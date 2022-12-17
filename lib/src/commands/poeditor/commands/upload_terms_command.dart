@@ -16,7 +16,13 @@ class POEditorUploadTermsCommand extends Command<int> {
   }) : _logger = logger {
     argParser
       ..addOption('project', abbr: 'p', mandatory: true, help: 'The POEditor project ID')
-      ..addOption('writekey', abbr: 'w', mandatory: true, help: 'The POEditor API write key');
+      ..addOption('writekey', abbr: 'w', mandatory: true, help: 'The POEditor API write key')
+      ..addOption(
+        'file',
+        abbr: 'f',
+        help: 'The file to upload, defaults to "strings.json" at the current directory.',
+        defaultsTo: 'strings.json',
+      );
   }
 
   @override
@@ -31,7 +37,7 @@ class POEditorUploadTermsCommand extends Command<int> {
     BaseOptions(
       baseUrl: 'https://api.poeditor.com',
       headers: {
-        "Accept": "application/json",
+        'Accept': 'application/json',
       },
     ),
   );
@@ -40,28 +46,30 @@ class POEditorUploadTermsCommand extends Command<int> {
   Future<int> run() async {
     final projectId = argResults?['project'] as String;
     final writeKey = argResults?['writekey'] as String;
+    final pathToFile = argResults?['file'] as String;
 
-    _logger.info('Generating strings.json file...');
+    _logger.info('Generating $pathToFile file...');
 
-    // gum spin -s line --title 'Exporting terms to strings.json...' -- rps getstrings -f strings.json
-    // First let's generate the strings.json file with a gum command.
-    // Then we'll upload it to poeditor.com
+    // First let's generate the strings.json file.
+    // flutter pub run i18n_extension:getstrings -f strings.json
     final stringsResults = await Process.run(
-      'rps',
+      'flutter',
       [
-        'getstrings',
+        'pub',
+        'run',
+        'i18n_extension:getstrings',
         '-f',
-        'strings.json',
+        pathToFile,
       ],
     );
 
     if (stringsResults.exitCode > 0) {
-      _logger.err('Failed to generate strings.json file.');
+      _logger.err('Failed to generate $pathToFile file.');
       return ExitCode.usage.code;
     }
 
     // Confirm the user wants to upload the strings.
-    final uploadTerms = _logger.prompt('Upload strings.json to POEditor? y/n');
+    final uploadTerms = _logger.prompt('Upload $pathToFile to POEditor? y/n');
     if (uploadTerms == 'y' || uploadTerms == 'yes') {
       final uploadResults = await client.post<Map<String, dynamic>>(
         '/v2/projects/upload',
@@ -69,7 +77,7 @@ class POEditorUploadTermsCommand extends Command<int> {
           'api_token': writeKey,
           'id': projectId,
           'updating': 'terms',
-          'file': await MultipartFile.fromFile('strings.json'),
+          'file': await MultipartFile.fromFile(pathToFile),
           'tags': '{"obsolete":"removed-strings"}',
         }),
       );
@@ -83,7 +91,7 @@ class POEditorUploadTermsCommand extends Command<int> {
     }
 
     // Now remove the strings file.
-    File('strings.json').deleteSync();
+    File(pathToFile).deleteSync();
 
     return ExitCode.success.code;
   }
