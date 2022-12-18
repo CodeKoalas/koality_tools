@@ -1,16 +1,17 @@
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/version.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
+
+import 'package:koality_tools/src/command_runner.dart';
+import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/version.dart';
 
 import 'commands/update_command_test.dart';
 
 class MockLogger extends Mock implements Logger {}
 
-class MockPubUpdater extends Mock implements PubUpdater {}
+class MockUpdater extends Mock implements PackageUpdater {}
 
 const latestVersion = '0.0.0';
 
@@ -20,28 +21,28 @@ Run ${lightCyan.wrap('$executableName update')} to update''';
 
 void main() {
   group('KoalityToolsCommandRunner', () {
-    late PubUpdater pubUpdater;
+    late PackageUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
 
     setUp(() {
-      pubUpdater = MockPubUpdater();
+      updater = MockUpdater();
 
       when(
-        () => pubUpdater.getLatestVersion(any()),
+        () => updater.getLatestVersion(),
       ).thenAnswer((_) async => packageVersion);
 
       logger = MockLogger();
 
       commandRunner = KoalityToolsCommandRunner(
         logger: logger,
-        pubUpdater: pubUpdater,
+        updater: updater,
       );
     });
 
     test('shows update message when newer version exists', () async {
       when(
-        () => pubUpdater.getLatestVersion(any()),
+        () => updater.getLatestVersion(),
       ).thenAnswer((_) async => latestVersion);
 
       final result = await commandRunner.run(['--version']);
@@ -51,17 +52,11 @@ void main() {
 
     test('doesnt show update message when using update command', () async {
       when(
-        () => pubUpdater.getLatestVersion(any()),
+        () => updater.getLatestVersion(),
       ).thenAnswer((_) async => latestVersion);
       when(
-        () => pubUpdater.update(packageName: packageName),
+        () => updater.updatePackage(),
       ).thenAnswer((_) => Future.value(FakeProcessResult()));
-      when(
-        () => pubUpdater.isUpToDate(
-          packageName: any(named: 'packageName'),
-          currentVersion: any(named: 'currentVersion'),
-        ),
-      ).thenAnswer((_) => Future.value(true));
 
       final progress = MockProgress();
       final progressLogs = <String>[];

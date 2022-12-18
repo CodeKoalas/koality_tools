@@ -1,8 +1,8 @@
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/version.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:pub_updater/pub_updater.dart';
+
+import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/version.dart';
 
 /// {@template update_command}
 /// A command which updates the CLI.
@@ -11,12 +11,12 @@ class UpdateCommand extends Command<int> {
   /// {@macro update_command}
   UpdateCommand({
     required Logger logger,
-    PubUpdater? pubUpdater,
+    PackageUpdater? updater,
   })  : _logger = logger,
-        _pubUpdater = pubUpdater ?? PubUpdater();
+        _updater = updater ?? PackageUpdater();
 
   final Logger _logger;
-  final PubUpdater _pubUpdater;
+  final PackageUpdater _updater;
 
   @override
   String get description => 'Update the CLI.';
@@ -31,7 +31,7 @@ class UpdateCommand extends Command<int> {
     final updateCheckProgress = _logger.progress('Checking for updates');
     late final String latestVersion;
     try {
-      latestVersion = await _pubUpdater.getLatestVersion(packageName);
+      latestVersion = await _updater.getLatestVersion();
     } catch (error) {
       updateCheckProgress.fail();
       _logger.err('$error');
@@ -47,7 +47,7 @@ class UpdateCommand extends Command<int> {
 
     final updateProgress = _logger.progress('Updating to $latestVersion');
     try {
-      await _pubUpdater.update(packageName: packageName);
+      await _updater.updatePackage();
     } catch (error) {
       updateProgress.fail();
       _logger.err('$error');
