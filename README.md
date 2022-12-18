@@ -60,12 +60,12 @@ and for also uploading terms to the project.
 
 ```sh
 # This will download the locales into assets/locales/[locale].po
-$ koality poeditor locales
+$ koality poeditor locales --key=[read API key goes here] --project=[project ID here] --locales=[path to locales file]
 ```
 
 And for uploading terms:
 
 ```sh
 # This will 
-$ koality poeditor upload --writekey=[write API key goes here] --project=[project ID here] --file=[path where json file will be generated]
+$ koality poeditor upload --key=[write API key goes here] --project=[project ID here] --file=[path where json file will be generated]
 ```

@@ -16,7 +16,7 @@ class POEditorUploadTermsCommand extends Command<int> {
   }) : _logger = logger {
     argParser
       ..addOption('project', abbr: 'p', mandatory: true, help: 'The POEditor project ID')
-      ..addOption('writekey', abbr: 'w', mandatory: true, help: 'The POEditor API write key')
+      ..addOption('key', abbr: 'w', mandatory: true, help: 'The POEditor API write key')
       ..addOption(
         'file',
         abbr: 'f',
@@ -45,7 +45,7 @@ class POEditorUploadTermsCommand extends Command<int> {
   @override
   Future<int> run() async {
     final projectId = argResults?['project'] as String;
-    final writeKey = argResults?['writekey'] as String;
+    final writeKey = argResults?['key'] as String;
     final pathToFile = argResults?['file'] as String;
 
     _logger.info('Generating $pathToFile file...');
