@@ -1,3 +1,7 @@
+[0.1.5] - 18/12/2022
+
+* Making update command actually work.
+
 [0.1.4] - 18/12/2022
 
 * Fixing some parameters names and README updates.
