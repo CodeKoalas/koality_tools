@@ -1,3 +1,7 @@
+[0.1.4] - 18/12/2022
+
+* Fixing some parameters names and README updates.
+
 [0.1.3] - 17/12/2022
 
 * Fixing upload command to allow specifying where the JSON file is created.
