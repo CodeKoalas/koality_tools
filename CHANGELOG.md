@@ -1,3 +1,7 @@
+[0.1.6] - 18/12/2022
+
+* Update command was using wrong text search.
+
 [0.1.5] - 18/12/2022
 
 * Making update command actually work.
