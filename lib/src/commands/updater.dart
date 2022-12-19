@@ -18,6 +18,7 @@ class PackageUpdater {
   );
 
   final projectUrl = '/api/v4/projects/640/repository/files/lib%2Fsrc%2Fversion%2Edart?ref=master';
+  final versionTextCheck = 'const packageVersion = ';
 
   /// Get the latest version from Gitlab.
   Future<String> getLatestVersion() async {
@@ -26,9 +27,11 @@ class PackageUpdater {
       /// Now let's parse the string from the dart file and find the version number and compare it to the passed
       /// version number.
       final fileContents = response.data ?? '';
-      final versionIndex = fileContents.indexOf('packageVersion = ');
-      final versionString = fileContents.substring(versionIndex + 18, versionIndex + 23);
-      return versionString;
+      final versionIndex = fileContents.indexOf(versionTextCheck);
+      if (versionIndex >= 0) {
+        final versionString = fileContents.substring(versionTextCheck.length + 1, versionTextCheck.length + 5);
+        return versionString;
+      }
     }
     return '0.0.0';
   }
