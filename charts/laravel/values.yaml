@@ -143,6 +143,13 @@ aws:
     ## @param aws.s3.usePathStyleEndpoint If set to true, this will use the path style endpoint for S3.
     ##
     usePathStyleEndpoint: true
+    ## @param aws.s3.tagSets The tag sets to use for S3. See below for an example.
+    ##
+    # tagSets:
+    #   - key: "kubernetes.io/cluster/example-cluster"
+    #     value: "owned"
+    #   - key: "kubernetes.io/cluster-service"
+    #     value: "true"
 
 # The HorizontalPodAutosacler
 hpa:
