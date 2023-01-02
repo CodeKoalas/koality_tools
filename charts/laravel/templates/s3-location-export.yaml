@@ -3,8 +3,6 @@ apiVersion: services.k8s.aws/v1alpha1
 kind: FieldExport
 metadata:
   name: {{ template "appname" . }}-s3-location
-  labels:
-    app: {{ template "appname" . }}
 spec:  
   to:
     name: {{ template "appname" . }} # Matches the ConfigMap we created above
