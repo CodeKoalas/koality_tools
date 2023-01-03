@@ -30,10 +30,47 @@ spec:
 {{ include "sharedlabels" . | indent 8 }}
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
+      # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
+      initContainers:
+      # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
+      - name: create-db
+        image: {{ .Values.deployment.initContainerImage }}
+        imagePullPolicy: "Always"
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+        env:
+        - name: DB_DATABASE
+          value: {{ .Values.persistence.databaseName }}
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-port"
+        - name: DB_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DB_PASSWORD
+      # The deployment container spec
       containers:
       - name: {{ .Values.deployment.name }}
         image: {{ template "imagename" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.persistence.limits.cpu }}
+            memory: {{ .Values.persistence.limits.memory }}
+          requests:
+            cpu: {{ .Values.persistence.requests.cpu }}
+            memory: {{ .Values.persistence.requests.memory }}
         ports:
         - containerPort: 80
 {{- if .Values.persistence.enabled }}
@@ -46,13 +83,6 @@ spec:
             {{- end }}
 {{- end }}
 {{- end }}
-        resources:
-          limits:
-            cpu: {{ .Values.persistence.limits.cpu }}
-            memory: {{ .Values.persistence.limits.memory }}
-          requests:
-            cpu: {{ .Values.persistence.requests.cpu }}
-            memory: {{ .Values.persistence.requests.memory }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
@@ -93,35 +123,6 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
               key: APP_KEY
-      # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
-      initContainers:
-      # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
-      - name: create-db
-        image: {{ .Values.deployment.initContainerImage }}
-        imagePullPolicy: "Always"
-        envFrom:
-        - configMapRef:
-            name: {{ template "appname" . }}
-        env:
-        - name: DB_DATABASE
-          value: {{ .Values.persistence.databaseName }}
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: "gitlab-managed-apps.mysql-instance-config-host"
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: "gitlab-managed-apps.mysql-instance-config-port"
-        - name: DB_USERNAME
-          value: {{ .Values.persistence.databaseUser }}
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "appname" . }}-secrets
-              key: DB_PASSWORD
       imagePullSecrets:
       - name: regcred
 

@@ -71,32 +71,32 @@ hpa:
 
 # The persistence image; for review apps this allows a DB to be created
 # for use with this review.
-# persistence:
-#   enabled: true
-#   name: example-flutter-web-db
-#   databaseName: example-flutter-web
-#   databaseUser: flutter-web
-#   databasePassword: password
-#   replicaCount: 1
-#   limits:
-#     cpu: 900m
-#     memory: 950Mi
-#   requests:
-#     cpu: 600m
-#     memory: 550Mi
-#   volumes:
-#     - name: data
-#       mount:
-#         mountPath: /var/www/html/storage
-#         subPath: storage
-#         # subPath: "/pvc-mount/config.txt"
-#       claim:
-#         accessMode: ReadWriteMany
-#         size: 100Gi
-#         # If you want to use a custom storage class, you can specify `storageClass`. In this case, you need to create a storage class at first.
-#         # If `storageClass` is not specified, the behavior will vary per Kubernetes provider.
-#         # For example, GKE automatically chooses a default storage class and allocate a physical storage.
-#         # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
+persistence:
+  enabled: true
+  name: example-flutter-web-db
+  databaseName: example-flutter-web
+  databaseUser: flutter-web
+  databasePassword: password
+  replicaCount: 1
+  limits:
+    cpu: 900m
+    memory: 950Mi
+  requests:
+    cpu: 600m
+    memory: 550Mi
+  # volumes:
+  #   - name: data
+  #     mount:
+  #       mountPath: /var/www/html/storage
+  #       subPath: storage
+  #       # subPath: "/pvc-mount/config.txt"
+  #     claim:
+  #       accessMode: ReadWriteMany
+  #       size: 100Gi
+  #       # If you want to use a custom storage class, you can specify `storageClass`. In this case, you need to create a storage class at first.
+  #       # If `storageClass` is not specified, the behavior will vary per Kubernetes provider.
+  #       # For example, GKE automatically chooses a default storage class and allocate a physical storage.
+  #       # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
 
 # The service that is used with the Ingress.
 service:
