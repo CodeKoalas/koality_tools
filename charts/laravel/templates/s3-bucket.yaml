@@ -5,14 +5,14 @@ metadata:
   name: {{ .Values.aws.s3.bucket }}
 spec:
   name: {{ .Values.aws.s3.bucket }}
-{{- if .Values.aws.s3.tagSets -}}
+{{- if .Values.aws.s3.tagSets }}
   tagging:
     tagSet:
-{{- range $tag := .Values.aws.s3.tagSets -}}
+{{- range $tag := .Values.aws.s3.tagSets }}
     - key: {{ $tag.key }}
       value: {{ $tag.value }}
-{{- end -}}
-{{- end -}}
+{{- end }}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
