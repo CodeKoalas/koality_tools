@@ -13,4 +13,43 @@ spec:
       value: {{ $tag.value }}
 {{- end }}
 {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "appname" . }}-s3-config
+  namespace: gitlab-managed-apps
+data: {}
+---
+apiVersion: services.k8s.aws/v1alpha1
+kind: FieldExport
+metadata:
+  name: {{ template "appname" . }}-s3-location
+spec:  
+  to:
+    name: {{ template "appname" . }}-s3-config # Matches the ConfigMap we created above
+    kind: configmap
+    namespace: gitlab-managed-apps
+  from:
+    path: ".status.location"
+    resource:
+      group: s3.services.k8s.aws
+      kind: Bucket
+      name: {{ .Values.aws.s3.bucket }}
+---
+apiVersion: services.k8s.aws/v1alpha1
+kind: FieldExport
+metadata:
+  name: {{ template "appname" . }}-s3-bucket-name
+spec:  
+  to:
+    name: {{ template "appname" . }}-s3-config # Matches the ConfigMap we created above
+    kind: configmap
+    namespace: gitlab-managed-apps
+  from:
+    path: ".name"
+    resource:
+      group: s3.services.k8s.aws
+      kind: Bucket
+      name: {{ .Values.aws.s3.bucket }}
 {{- end }}

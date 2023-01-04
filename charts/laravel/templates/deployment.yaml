@@ -105,12 +105,12 @@ spec:
         - name: AWS_URL
           valueFrom:
             configMapKeyRef:
-              name: {{ template "appname" . }}
+              name: {{ template "appname" . }}-s3-config
               key: "gitlab-managed-apps.{{ template "appname" . }}-s3-location"
         - name: AWS_BUCKET
           valueFrom:
             configMapKeyRef:
-              name: {{ template "appname" . }}
+              name: {{ template "appname" . }}-s3-config
               key: "gitlab-managed-apps.{{ template "appname" . }}-s3-bucket-name"
         {{- end }}
         - name: DB_PASSWORD
