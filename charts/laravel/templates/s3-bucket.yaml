@@ -9,8 +9,8 @@ spec:
   tagging:
     tagSet:
 {{- range $tag := .Values.aws.s3.tagSets }}
-    - key: {{ $tag.key }}
-      value: {{ $tag.value }}
+    - key: "{{ $tag.key }}"
+      value: "{{ $tag.value }}"
 {{- end }}
 {{- end }}
 ---
