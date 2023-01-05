@@ -66,8 +66,9 @@ data:
 {{- end }}
 {{- if and .Values.redis.enabled .Values.echo.enabled }}
   BROADCAST_DRIVER: "redis"
+  REDIS_HOST: "{{ template "appname" . }}-redis"
+  REDIS_PORT: {{ .Values.redis.port | quote }}
   LARAVEL_ECHO_SERVER_REDIS_HOST: "{{ template "appname" . }}-redis"
-  LARAVEL_ECHO_SERVER_REDIS_PORT: "{{ .Values.redis.port }}"
-  LARAVEL_ECHO_SERVER_REDIS_PASSWORD: "{{ .Values.redis.password }}"
-{{- end}}
+  LARAVEL_ECHO_SERVER_REDIS_PORT: {{ .Values.redis.port | quote }}
+{{- end }}
 
