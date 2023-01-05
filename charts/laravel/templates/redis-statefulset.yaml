@@ -1,0 +1,53 @@
+{{- if .Values.redis.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "appname" . }}-redis
+  labels:
+    track: "{{ $.Values.application.track }}"
+    tier: "{{ $.Values.application.tier }}"
+    layer: redis
+spec:
+  serviceName: {{ template "appname" . }}-redis
+  selector:
+    matchLabels:
+      track: "{{ $.Values.application.track }}"
+      tier: "{{ $.Values.application.tier }}"
+      layer: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        track: "{{ $.Values.application.track }}"
+        tier: "{{ $.Values.application.tier }}"
+        layer: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        command: ["redis-server", "--appendonly", "yes"]
+        ports:
+        - containerPort: {{ .Values.redis.port }}
+          name: web
+{{- if .Values.redis.enabled }}
+          volumeMounts:
+{{- range $volume := .Values.redis.volumes }}
+          - name: {{ $volume.name | quote }}
+            mountPath: {{ $volume.mount.mountPath | quote }}
+            {{- if $volume.mount.subPath }}
+            subPath: {{ $volume.mount.subPath | quote }}
+            {{- end }}
+{{- end }}
+{{- end }}
+
+{{- if .Values.redis.enabled }}
+{{- $context := . }}
+      volumes:
+{{- range $volume := .Values.redis.volumes }}
+        - name: {{ $volume.name | quote }}
+          persistentVolumeClaim:
+            {{ $args := dict "context" $context "name" $volume.name }}
+            claimName: {{ template "pvcName" $args }}
+{{- end }}
+{{- end }}
+{{- end -}}

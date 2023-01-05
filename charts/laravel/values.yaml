@@ -114,8 +114,20 @@ mixpusher:
   appCluster: null
 
 redis:
+  enabled: false
   password: password
   port: 6379
+  volumes:
+  - name: redis-aof
+    mount:
+      mountPath: /data
+    claim:
+      accessMode: ReadWriteMany
+      size: 100Gi
+      # If you want to use a custom storage class, you can specify `storageClass`. In this case, you need to create a storage class at first.
+      # If `storageClass` is not specified, the behavior will vary per Kubernetes provider.
+      # For example, GKE automatically chooses a default storage class and allocate a physical storage.
+      # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
 
 ## AWS/Laravel configuration
 aws:
