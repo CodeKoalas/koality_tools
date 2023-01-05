@@ -123,7 +123,7 @@ redis:
       mountPath: /data
     claim:
       accessMode: ReadWriteMany
-      size: 100Gi
+      size: 10Gi
       # If you want to use a custom storage class, you can specify `storageClass`. In this case, you need to create a storage class at first.
       # If `storageClass` is not specified, the behavior will vary per Kubernetes provider.
       # For example, GKE automatically chooses a default storage class and allocate a physical storage.
@@ -134,11 +134,11 @@ echo:
   enabled: false
   port: 6001
   limits:
-    cpu: 900m
-    memory: 950Mi
+    cpu: 500m
+    memory: 500Mi
   requests:
-    cpu: 600m
-    memory: 550Mi
+    cpu: 250m
+    memory: 250Mi
 
 ## AWS/Laravel configuration
 aws:
@@ -184,15 +184,15 @@ persistence:
   databasePassword: password
   replicaCount: 1
   limits:
-    cpu: 900m
-    memory: 950Mi
+    cpu: 500m
+    memory: 500Mi
   requests:
-    cpu: 600m
-    memory: 550Mi
+    cpu: 250m
+    memory: 250Mi
   volumes:
     - name: data
       mount:
-        mountPath: /var/www/html/storage
+        mountPath: /var/www/html/storage/app
         subPath: storage
         # subPath: "/pvc-mount/config.txt"
       claim:
@@ -243,6 +243,7 @@ ingress:
 # Prometheus stuff
 prometheus:
   metrics: false
+
 livenessProbe:
   path: "/login"
   initialDelaySeconds: 15

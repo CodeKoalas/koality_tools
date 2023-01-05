@@ -30,13 +30,13 @@ spec:
         - containerPort: {{ .Values.redis.port }}
           name: web
 {{- if .Values.redis.enabled }}
-          volumeMounts:
+        volumeMounts:
 {{- range $volume := .Values.redis.volumes }}
-          - name: {{ $volume.name | quote }}
-            mountPath: {{ $volume.mount.mountPath | quote }}
-            {{- if $volume.mount.subPath }}
-            subPath: {{ $volume.mount.subPath | quote }}
-            {{- end }}
+        - name: {{ $volume.name | quote }}
+          mountPath: {{ $volume.mount.mountPath | quote }}
+          {{- if $volume.mount.subPath }}
+          subPath: {{ $volume.mount.subPath | quote }}
+          {{- end }}
 {{- end }}
 {{- end }}
 
