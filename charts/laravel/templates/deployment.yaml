@@ -140,6 +140,29 @@ spec:
       imagePullSecrets:
       - name: regcred
 
+{{- if .Values.echo.enabled }}
+      - name: {{ .Values.deployment.name }}
+        image: {{ template "imagename" . }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["/bin/sh", "-c", "laravel-echo-server start"]
+        resources:
+          limits:
+            cpu: {{ .Values.echo.limits.cpu }}
+            memory: {{ .Values.echo.limits.memory }}
+          requests:
+            cpu: {{ .Values.echo.requests.cpu }}
+            memory: {{ .Values.echo.requests.memory }}
+        ports:
+        - containerPort: {{ .Values.echo.port }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+        {{- if .Values.application.secretName }}
+        - secretRef:
+            name: {{ .Values.application.secretName }}
+        {{- end }}
+{{- end }}
+
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
       volumes:

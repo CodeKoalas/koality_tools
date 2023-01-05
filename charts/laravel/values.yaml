@@ -129,6 +129,17 @@ redis:
       # For example, GKE automatically chooses a default storage class and allocate a physical storage.
       # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
 
+# If the Laravel site uses an Echo Socket server.
+echo:
+  enabled: false
+  port: 6001
+  limits:
+    cpu: 900m
+    memory: 950Mi
+  requests:
+    cpu: 600m
+    memory: 550Mi
+
 ## AWS/Laravel configuration
 aws:
   ## @param aws.region The AWS region to use.
