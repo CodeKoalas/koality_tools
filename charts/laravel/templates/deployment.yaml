@@ -70,9 +70,8 @@ spec:
               name: {{ template "appname" . }}-secrets
               key: DB_PASSWORD
       - name: artisan-migrate
-        image: {{ template "imagename" . }}
+        image: registry.codekoalas.com/devops/helm/koality-charts:init-laravel
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["/bin/sh", "-c", "php exec artisan migrate"]
       # The deployment container spec
       containers:
       - name: {{ .Values.deployment.name }}
