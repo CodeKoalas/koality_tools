@@ -2,6 +2,7 @@ FROM php:8.0.25-cli
 
 ADD ./init.sh /opt/var/
 
+# Make init script executable
 RUN chmod +x /opt/var/init.sh
 
 # Copy the script into the container and set as the entrypoint
