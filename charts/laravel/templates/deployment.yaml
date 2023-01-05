@@ -69,9 +69,6 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
               key: DB_PASSWORD
-      - name: artisan-migrate
-        image: registry.codekoalas.com/devops/helm/koality-charts:init-laravel
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
       # The deployment container spec
       containers:
       - name: {{ .Values.deployment.name }}
