@@ -79,11 +79,11 @@ persistence:
   databasePassword: password
   replicaCount: 1
   limits:
-    cpu: 900m
-    memory: 950Mi
+    cpu: 500m
+    memory: 500Mi
   requests:
-    cpu: 600m
-    memory: 550Mi
+    cpu: 250m
+    memory: 250Mi
   # volumes:
   #   - name: data
   #     mount:
@@ -136,6 +136,7 @@ ingress:
 # Prometheus stuff
 prometheus:
   metrics: false
+
 livenessProbe:
   path: "/"
   initialDelaySeconds: 15
