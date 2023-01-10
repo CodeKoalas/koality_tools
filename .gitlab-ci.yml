@@ -39,6 +39,18 @@ build init laravel image:
         paths:
           - docker/init-laravel/*
 
+build laravel echo image:
+  extends: .build-base
+  script:
+    - cd docker/laravel-echo
+    - docker build -t $CI_REGISTRY_IMAGE:laravel-echo ./
+    - docker push $CI_REGISTRY_IMAGE:laravel-echo
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/laravel-echo/*
+
 # @TODO: Clean this up into a utility script that gets fired on a tag and
 # that script decides what it should build and upload to the Helm Repo. Hopefully
 # Gitlab's Helm Registry will have some better out-of-box support soon.

@@ -132,6 +132,7 @@ redis:
 # If the Laravel site uses an Echo Socket server.
 echo:
   enabled: false
+  image: registry.codekoalas.com/devops/helm/koality-charts:laravel-echo
   port: 6001
   limits:
     cpu: 500m

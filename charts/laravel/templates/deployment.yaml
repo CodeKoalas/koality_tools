@@ -71,6 +71,7 @@ spec:
               key: DB_PASSWORD
       # The deployment container spec
       containers:
+      # Main container deployment
       - name: {{ .Values.deployment.name }}
         image: {{ template "imagename" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -133,14 +134,26 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
               key: APP_KEY
+      # The echo server deployment image.
+      - name: {{ .Values.deployment.name }}-echo
+        image: {{ .Values.echo.image }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.echo.limits.cpu }}
+            memory: {{ .Values.echo.limits.memory }}
+          requests:
+            cpu: {{ .Values.echo.requests.cpu }}
+            memory: {{ .Values.echo.requests.memory }}
+        ports:
+        - containerPort: {{ .Values.echo.port }}
       imagePullSecrets:
       - name: regcred
 
 {{- if .Values.echo.enabled }}
-      - name: {{ .Values.deployment.name }}
-        image: {{ template "imagename" . }}
+      - name: {{ .Values.deployment.name }}-echo
+        image: {{ .Values.echo.image }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        command: ["/bin/sh", "-c", "laravel-echo-server start"]
         resources:
           limits:
             cpu: {{ .Values.echo.limits.cpu }}
