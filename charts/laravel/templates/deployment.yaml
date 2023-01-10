@@ -147,9 +147,6 @@ spec:
             memory: {{ .Values.echo.requests.memory }}
         ports:
         - containerPort: {{ .Values.echo.port }}
-      imagePullSecrets:
-      - name: regcred
-
 {{- if .Values.echo.enabled }}
       - name: {{ .Values.deployment.name }}-echo
         image: {{ .Values.echo.image }}
@@ -171,6 +168,8 @@ spec:
             name: {{ .Values.application.secretName }}
         {{- end }}
 {{- end }}
+      imagePullSecrets:
+      - name: regcred
 
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
