@@ -134,19 +134,6 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
               key: APP_KEY
-      # The echo server deployment image.
-      - name: {{ .Values.deployment.name }}-echo
-        image: {{ .Values.echo.image }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        resources:
-          limits:
-            cpu: {{ .Values.echo.limits.cpu }}
-            memory: {{ .Values.echo.limits.memory }}
-          requests:
-            cpu: {{ .Values.echo.requests.cpu }}
-            memory: {{ .Values.echo.requests.memory }}
-        ports:
-        - containerPort: {{ .Values.echo.port }}
 {{- if .Values.echo.enabled }}
       - name: {{ .Values.deployment.name }}-echo
         image: {{ .Values.echo.image }}
@@ -170,7 +157,6 @@ spec:
 {{- end }}
       imagePullSecrets:
       - name: regcred
-
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
       volumes:
