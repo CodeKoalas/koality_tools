@@ -76,4 +76,7 @@ data:
   {{ $key }}: {{ $value | quote }}
 {{- end }}
 {{- end }}
+{{- if .Values.deployment.fcmSenderId }}
+  FCM_SENDER_ID: "{{ .Values.deployment.fcmSenderId }}"
+{{- end }}
 

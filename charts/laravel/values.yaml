@@ -104,17 +104,17 @@ deployment:
   ##
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
-  ## @param deployment.extraEnv Extra environment variables to pass to the deployment.
-  # extraEnv:
-  #   EXAMPLE_KEY: "example value"
+  ## @param deployment.fcmSenderId The FCM Sender ID to use for the deployment.
+  ##
+  # fcmSenderId: 
 
-  ## @param deploymeny.extraEnvSecrets Extra environment variables to pass to the deployment as secrets.
-  # extraEnvSecrets:
-  #   EXAMPLE_KEY: "example-secret"
-  
-  ## @param deployment.extraEnvRaw: Extra environment variables to pass to the deployment as raw values.
-  # extraEnvRaw:
-  #   EXAMPLE_KEY: "example value"
+  ## @param deployment.fcmServerKey The FCM Server Key to use for the deployment.
+  ##
+  # fcmServerKey:
+
+  ## @param deployment.jwtSecret The JWT Secret if using JWT authentication tokens.
+  ##
+  # jwtSecret:
 
 ## Mail ConfigMap values.
 mail:
