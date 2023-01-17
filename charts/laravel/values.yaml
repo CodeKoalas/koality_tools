@@ -56,18 +56,65 @@ image:
 
 ## The deployment object with environment variables to use.
 deployment:
+  ## @param deployment.apiVersion The apiVersion to use for the deployment.
+  ##
   apiVersion: apps/v1
+
+  ## @param deployment.name The name of the deployment.
+  ##
   name: gitlab-autodevops-laravel
+
+  ## @param deployment.track The track of the deployment (stable/canary).
+  ##
   track: stable
+
+  ## @param deployment.tier The tier of the deployment (web/worker).
+  ##
   tier: web
+
+  ## @param deploymeny.appEnv The environment of the deployment (production/staging).
+  ##
   appEnv: staging
+
+  ## @param deployment.virtualHost The virtual host to use for the deployment.
+  ##
   virtualHost: gitlab-autodevops-laravel.ckstage.site
+
+  ## @param deployment.letsEncryptHost The letsEncryptHost to use for the deployment.
+  ##
   letsEncryptHost: gitlab-autodevops-laravel.ckstage.site
+
+  ## @param deployment.appUrl The appUrl to use for the deployment.
+  ##
   appUrl: "https://gitlab-autodevops-laravel.ckstage.site"
+
+  ## @param deployment.appKey The appKey to use for the deployment.
+  ##
   appKey: exampleappkeygoeshere
+
+  ## @param deployment.appDebug The will cause the DebugBar to be enabled or not.
+  ##
   appDebug: false
+
+  ## @param deployment.apacheDocroot For backwards compatibility for Apache based images.
+  ##
   apacheDocroot: /var/www/html/public
+
+  ## @param deployment.initContainerImage The image to use for the init container.
+  ##
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
+
+  ## @param deployment.extraEnv Extra environment variables to pass to the deployment.
+  # extraEnv:
+  #   EXAMPLE_KEY: "example value"
+
+  ## @param deploymeny.extraEnvSecrets Extra environment variables to pass to the deployment as secrets.
+  # extraEnvSecrets:
+  #   EXAMPLE_KEY: "example-secret"
+  
+  ## @param deployment.extraEnvRaw: Extra environment variables to pass to the deployment as raw values.
+  # extraEnvRaw:
+  #   EXAMPLE_KEY: "example value"
 
 ## Mail ConfigMap values.
 mail:
@@ -104,19 +151,48 @@ mail:
 
 ## Laravel Pusher service.
 pusher:
+  ## @param pusher.appId The Pusher App ID.
+  ##
   appId: null
+
+  ## @param pusher.appKey The Pusher Key.
+  ##
   appKey: null
+
+  ## @param pusher.appSecret The Pusher Secret.
+  ##
   appSecret: null
+
+  ## @param pusher.appCluster The Pusher Cluster.
+  ##
   appCluster: null
 
+## Laravel MixPusher service.
 mixpusher:
+  ## @param mixpusher.appKey The MixPusher App key.
+  ##
   appKey: null
+
+  ## @param mixpusher.appCluster The MixPusher Cluster.
+  ##
   appCluster: null
 
+## Laravel Redis statefulset.
 redis:
+  ## @param redis.enabled Specifies whether a redis statefulset should be created.
+  ##
   enabled: false
+
+  ## @param redis.password The password to use for redis.
+  ##
   password: password
+
+  ## @param redis.port The port to use for redis.
+  ##
   port: 6379
+
+  ## @param redis.volumes The volumes to use for redis.
+  ##
   volumes:
   - name: redis-aof
     mount:

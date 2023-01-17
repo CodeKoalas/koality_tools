@@ -71,4 +71,9 @@ data:
   LARAVEL_ECHO_SERVER_REDIS_HOST: "{{ template "appname" . }}-redis"
   LARAVEL_ECHO_SERVER_REDIS_PORT: {{ .Values.redis.port | quote }}
 {{- end }}
+{{- if .Values.deployment.extraEnv }}
+{{- range $key, $value := .Values.deployment.extraEnv }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
 
