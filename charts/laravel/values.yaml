@@ -211,10 +211,10 @@ echo:
   image: registry.codekoalas.com/devops/helm/koality-charts:laravel-echo
   port: 6001
   limits:
-    cpu: 500m
+    cpu: 200m
     memory: 500Mi
   requests:
-    cpu: 250m
+    cpu: 50m
     memory: 250Mi
 
 ## AWS/Laravel configuration
