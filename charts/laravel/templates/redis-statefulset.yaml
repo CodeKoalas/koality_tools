@@ -24,8 +24,13 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:7-alpine
-        command: ["redis-server", "--appendonly", "yes", "--requirepass", "{{ .Values.redis.password }}"]
+        image: redis:7
+        command: 
+          - redis-server
+          - --appendonly
+          - "yes"
+          - --requirepass
+          - "{{ .Values.redis.password }}"
         ports:
         - containerPort: {{ .Values.redis.port }}
           name: web
