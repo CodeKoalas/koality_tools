@@ -1,0 +1,38 @@
+{{- if .Values.cron.enabled -}}
+apiVersion: {{ .Values.deployment.apiVersion }}
+kind: Deployment
+metadata:
+  name: {{ template "trackableappname" . }}
+  labels:
+      app: {{ template "appname" . }}
+      track: "{{ .Values.application.track }}"
+      tier: "{{ .Values.application.tier }}"
+      layer: cron
+spec:
+  replicas: {{ .Values.cron.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "appname" . }}
+      track: "{{ .Values.application.track }}"
+      tier: "{{ .Values.application.tier }}"
+      layer: cron
+  template:
+    metadata:
+      labels:
+        app: {{ template "appname" . }}
+        track: "{{ .Values.application.track }}"
+        tier: "{{ .Values.application.tier }}"
+        layer: cron
+    spec:
+      containers:
+        - name: cron
+          image: {{ template "imagename" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - configMapRef:
+              name: {{ template "appname" . }}
+          {{- if .Values.application.secretName }}
+          - secretRef:
+              name: {{ .Values.application.secretName }}
+          {{- end }}
+{{- end -}}

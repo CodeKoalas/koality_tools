@@ -120,6 +120,7 @@ deployment:
 ## @TODO: Create a YAML structure for adding additional queue workers to the deployment.
 queueWorker:
   enabled: false
+  replicaCount: 1
   resources:
     limits:
       cpu: 150m
@@ -127,6 +128,18 @@ queueWorker:
     requests:
       cpu: 50m
       memory: 250Mi
+
+## A cron deployment for running cron in a container.
+cron:
+  enabled: false
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 500Mi
+    requests:
+      cpu: 50m
+      memory: 100Mi
 
 ## Mail ConfigMap values.
 mail:

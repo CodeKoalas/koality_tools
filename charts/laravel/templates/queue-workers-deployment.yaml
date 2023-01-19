@@ -14,7 +14,7 @@ metadata:
     queue: default
 {{ include "sharedlabels" . | indent 4 }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.queueWorker.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "appname" . }}
