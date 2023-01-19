@@ -121,25 +121,23 @@ deployment:
 queueWorker:
   enabled: false
   replicaCount: 1
-  resources:
-    limits:
-      cpu: 150m
-      memory: 750Mi
-    requests:
-      cpu: 50m
-      memory: 250Mi
+  limits:
+    cpu: 150m
+    memory: 750Mi
+  requests:
+    cpu: 50m
+    memory: 250Mi
 
 ## A cron deployment for running cron in a container.
 cron:
   enabled: false
   replicaCount: 1
-  resources:
-    limits:
-      cpu: 100m
-      memory: 500Mi
-    requests:
-      cpu: 50m
-      memory: 100Mi
+  limits:
+    cpu: 100m
+    memory: 500Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi
 
 ## Mail ConfigMap values.
 mail:
