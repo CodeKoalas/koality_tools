@@ -116,6 +116,18 @@ deployment:
   ##
   # jwtSecret:
 
+## The queue worker configuration. Defaults to calling queues for Redis.
+## @TODO: Create a YAML structure for adding additional queue workers to the deployment.
+queueWorker:
+  enabled: false
+  resources:
+    limits:
+      cpu: 150m
+      memory: 750Mi
+    requests:
+      cpu: 50m
+      memory: 250Mi
+
 ## Mail ConfigMap values.
 mail:
   ## @param mail.mailer Specifies the mailer to use.

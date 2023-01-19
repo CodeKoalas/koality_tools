@@ -1,0 +1,62 @@
+{{- if .Values.queueWorker.enabled -}}
+apiVersion: {{ .Values.deployment.apiVersion }}
+kind: Deployment
+metadata:
+  name: {{ template "trackableappname" . }}
+  annotations:
+    {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
+    {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
+  labels:
+    app: {{ template "appname" . }}
+    track: "{{ .Values.application.track }}"
+    tier: "{{ .Values.application.tier }}"
+    layer: queue-worker
+    queue: default
+{{ include "sharedlabels" . | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "appname" . }}
+      track: "{{ .Values.application.track }}"
+      tier: "{{ .Values.application.tier }}"
+      layer: queue-worker
+      queue: default
+  template:
+    metadata:
+      labels:
+        app: {{ template "appname" . }}
+        track: "{{ .Values.application.track }}"
+        tier: "{{ .Values.application.tier }}"
+        layer: queue-worker
+        queue: default
+    spec:
+      containers:
+        - name: queue-worker-default
+          image: {{ template "imagename" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+            - php
+          args:
+            - artisan
+            - queue:work 
+            - redis 
+            - --sleep=3 
+            - --tries=3
+          resources:
+            limits:
+              cpu: {{ .Values.queueWorker.limits.cpu }}
+              memory: {{ .Values.queueWorker.limits.memory }}
+            requests:
+              cpu: {{ .Values.queueWorker.requests.cpu }}
+              memory: {{ .Values.queueWorker.requests.memory }}
+          ports:
+          - containerPort: 80
+          envFrom:
+          - configMapRef:
+              name: {{ template "appname" . }}
+          {{- if .Values.application.secretName }}
+          - secretRef:
+              name: {{ .Values.application.secretName }}
+          {{- end }}
+{{- end -}}
