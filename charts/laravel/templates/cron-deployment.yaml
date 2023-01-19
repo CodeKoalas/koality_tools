@@ -2,7 +2,7 @@
 apiVersion: {{ .Values.deployment.apiVersion }}
 kind: Deployment
 metadata:
-  name: {{ template "trackableappname" . }}
+  name: {{ template "trackableappname" . }}-cron
   labels:
       app: {{ template "appname" . }}
       track: "{{ .Values.application.track }}"

@@ -2,7 +2,7 @@
 apiVersion: {{ .Values.deployment.apiVersion }}
 kind: Deployment
 metadata:
-  name: {{ template "trackableappname" . }}
+  name: {{ template "trackableappname" . }}-queue-workers
   annotations:
     {{ if .Values.gitlab.app }}app.gitlab.com/app: {{ .Values.gitlab.app | quote }}{{ end }}
     {{ if .Values.gitlab.env }}app.gitlab.com/env: {{ .Values.gitlab.env | quote }}{{ end }}
@@ -32,7 +32,7 @@ spec:
         queue: default
     spec:
       containers:
-        - name: queue-worker-default
+        - name: queue-worker-redis
           image: {{ template "imagename" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
