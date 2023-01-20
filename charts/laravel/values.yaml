@@ -131,6 +131,10 @@ queueWorker:
 ## A cron deployment for running cron in a container.
 cron:
   enabled: false
+
+  ## @param cron.image The image to use for the cron deployment.
+  ##
+  image: registry.codekoalas.com/devops/helm/koality-charts:cron
   replicaCount: 1
   limits:
     cpu: 100m
