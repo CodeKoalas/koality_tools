@@ -35,4 +35,6 @@ spec:
           - secretRef:
               name: {{ .Values.application.secretName }}
           {{- end }}
+      imagePullSecrets:
+        - name: regcred
 {{- end -}}
