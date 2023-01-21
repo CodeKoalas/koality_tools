@@ -282,6 +282,22 @@ hpa:
 # for use with this review.
 persistence:
   enabled: true
+  
+  ## If you want an in-memory database, for example a short-lived review app, you can set "enabled" to true
+  ## and then an additional deployment will be created and the MySQL information overridden.
+  ephemeral:
+    ## @param persistence.ephemeral.enabled If set to true, this will enable ephemeral persistence.
+    ##
+    enabled: false
+
+    ## @param persistence.ephemeral.image The image to use for the ephemeral database.
+    ##
+    image: mariadb:10.3
+
+    ## @param persistence.ephemeral.port The port to use for the ephemeral database.
+    ##
+    port: 3306
+
   name: gitlab-autodevops-laravel
   databaseName: laravel
   databaseUser: laravel

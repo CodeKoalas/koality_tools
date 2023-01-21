@@ -51,6 +51,18 @@ build laravel echo image:
         paths:
           - docker/laravel-echo/*
 
+build review mysql image:
+  extends: .build-base
+  script:
+    - cd docker/review-mysql
+    - docker build -t $CI_REGISTRY_IMAGE:review-mysql ./
+    - docker push $CI_REGISTRY_IMAGE:review-mysql
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/review-mysql/*
+
 # @TODO: Clean this up into a utility script that gets fired on a tag and
 # that script decides what it should build and upload to the Helm Repo. Hopefully
 # Gitlab's Helm Registry will have some better out-of-box support soon.
