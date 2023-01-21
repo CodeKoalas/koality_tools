@@ -29,6 +29,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+{{- define "cronimagename" -}}
+{{- if eq .Values.cron.image "" -}}
+{{- printf "%s:%s" .Values.image.repository "cron-latest" -}}
+{{- else -}}
+{{- .Values.cron.image -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "trackableappname" -}}
 {{- $trackableName := printf "%s-%s" (include "appname" .) .Values.application.track -}}
 {{- $trackableName | trimSuffix "-stable" | trunc 63 | trimSuffix "-" -}}
