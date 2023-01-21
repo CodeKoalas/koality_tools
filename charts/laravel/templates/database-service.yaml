@@ -1,0 +1,21 @@
+{{- if .Values.database.ephemeral.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "appname" . }}-database
+  labels:
+    app: {{ template "appname" . }}
+    track: "{{ $.Values.application.track }}"
+    tier: "{{ $.Values.application.tier }}"
+    layer: database
+spec:
+  ports:
+  - port: {{ .Values.database.ephemeral.port }}
+    protocol: TCP
+  selector:
+    app: {{ template "appname" . }}
+    track: "{{ $.Values.application.track }}"
+    tier: "{{ $.Values.application.tier }}"
+    layer: database
+  type: ClusterIP
+{{- end -}}
