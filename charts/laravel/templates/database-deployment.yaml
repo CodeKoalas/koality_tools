@@ -49,7 +49,7 @@ spec:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-port"
         - name: MYSQL_DATABASE
-          value: {{ .Values.gitlab.envName }}
+          value: {{ .Values.gitlab.env }}
         - name: MYSQL_USER
           valueFrom:
             configMapKeyRef:
