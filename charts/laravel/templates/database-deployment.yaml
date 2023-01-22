@@ -25,48 +25,48 @@ spec:
         layer: database
     spec:
       containers:
-        - name: {{ template "appname" . }}-database
-          image: {{ .Values.persistence.ephemeral.image }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-          - configMapRef:
-              name: {{ template "appname" . }}
-          env:
-          - name: DB_DATABASE
-            value: {{ .Values.persistence.databaseName }}
-          - name: DB_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: mysql-instance-config
-                key: "gitlab-managed-apps.mysql-instance-config-host"
-          - name: DB_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: mysql-instance-config
-                key: "gitlab-managed-apps.mysql-instance-config-port"
-          - name: MYSQL_DATABASE
-            value: {{ .Values.gitlab.envName }}
-          - name: MYSQL_USER
-            valueFrom:
-              configMapKeyRef:
-                name: mysql-instance-config
-                key: "gitlab-managed-apps.mysql-instance-config-user"
-          - name: MYSQL_MASTER_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: ck-database-instance-password
-                key: MYSQL_MASTER_PASSWORD
-          - name: DB_USERNAME
-            value: {{ .Values.persistence.databaseUser }}
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "appname" . }}-secrets
-                key: DB_PASSWORD
-          {{- if .Values.application.secretName }}
-          - secretRef:
-              name: {{ .Values.application.secretName }}
-          {{- end }}
+      - name: {{ template "appname" . }}-database
+        image: {{ .Values.persistence.ephemeral.image }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+{{- if .Values.application.secretName }}
+        - secretRef:
+            name: {{ .Values.application.secretName }}
+{{- end }}
+        env:
+        - name: DB_DATABASE
+          value: {{ .Values.persistence.databaseName }}
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-port"
+        - name: MYSQL_DATABASE
+          value: {{ .Values.gitlab.envName }}
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-user"
+        - name: MYSQL_MASTER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ck-database-instance-password
+              key: MYSQL_MASTER_PASSWORD
+        - name: DB_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DB_PASSWORD
       imagePullSecrets:
         - name: regcred
 {{- end -}}
