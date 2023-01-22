@@ -1,4 +1,4 @@
-{{- if .Values.database.ephemeral.enabled -}}
+{{- if .Values.persistence.ephemeral.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,7 +10,7 @@ metadata:
     layer: database
 spec:
   ports:
-  - port: {{ .Values.database.ephemeral.port }}
+  - port: {{ .Values.persistence.ephemeral.port }}
     protocol: TCP
   selector:
     app: {{ template "appname" . }}
