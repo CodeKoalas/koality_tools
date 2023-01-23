@@ -55,6 +55,11 @@ spec:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-user"
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DB_PASSWORD
         - name: MYSQL_MASTER_PASSWORD
           valueFrom:
             secretKeyRef:
