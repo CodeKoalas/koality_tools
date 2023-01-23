@@ -60,6 +60,11 @@ spec:
             secretKeyRef:
               name: ck-database-instance-password
               key: MYSQL_MASTER_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ck-database-instance-password
+              key: MYSQL_MASTER_PASSWORD
         - name: DB_USERNAME
           value: {{ .Values.persistence.databaseUser }}
         - name: DB_PASSWORD
