@@ -31,6 +31,7 @@ spec:
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
       # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
+{{- if not .Values.persistence.ephemeral.enabled }}
       initContainers:
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
@@ -69,6 +70,7 @@ spec:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
               key: DB_PASSWORD
+{{- end }}
       # The deployment container spec
       containers:
       # Main container deployment
