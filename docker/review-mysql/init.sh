@@ -5,10 +5,10 @@ table=`mysql -B --disable-column-names --host $DB_HOST --user $MYSQL_USER -p$MYS
 
 # get database dump and import
 if [[ $table == 0 ]]; then
-        # get dump from targeted DB 
-        echo "Fetching database..."
-        mysqldump -u $MYSQL_USER -p"$DB_PASSWORD" -h $DB_HOST $DB_DATABASE > /tmp/database.sql
-        # import into local DB
-        echo "Importing database..."
-        mysql -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
+    # get dump from targeted DB 
+    echo "Fetching database..."
+    mysqldump -u $MYSQL_USER -p"$DB_PASSWORD" -h $DB_HOST $DB_DATABASE > /tmp/database.sql
+    # import into local DB
+    echo "Importing database..."
+    mysql -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
 fi
