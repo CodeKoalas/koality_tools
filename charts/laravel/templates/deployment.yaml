@@ -109,7 +109,7 @@ spec:
 {{- if .Values.persistence.ephemeral.enabled }}
         # If using ephemeral database have it point to the ephemeral db service and host
         - name: DB_DATABASE
-          value: {{ .Values.gitlab.envName }}
+          value: {{ .Values.gitlab.env }}
         - name: DB_HOST
           value: {{ template "appname" . }}-database
 {{- else }}
