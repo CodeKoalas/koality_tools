@@ -8,7 +8,7 @@ if [[ $table == 0 ]]; then
     # get dump from targeted DB 
     echo "Fetching database..."
     mysqldump -u $MYSQL_ROOT_USER -p"$MYSQL_MASTER_PASSWORD" -h $DB_HOST $DB_DATABASE > /tmp/database.sql
-    # import into local DB
+    # import into local DB using root superuser
     echo "Importing database..."
-    mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
+    mysql -u root -p"$MYSQL_ROOT_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
 fi
