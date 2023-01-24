@@ -1,3 +1,7 @@
+[0.1.7] - 24/01/2023
+
+* Adding new `kubectl` command with subcommands.
+
 [0.1.6] - 18/12/2022
 
 * Update command was using wrong text search.

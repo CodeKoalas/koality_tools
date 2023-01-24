@@ -27,6 +27,9 @@ $ koality poeditor locales
 # POEditor upload terms command
 $ koality poeditor upload
 
+# Kubectl command to clean pods
+$ koality kubectl clean-pods --namespace my-namespace --status Evicted
+
 # Show CLI version
 $ koality --version
 
@@ -68,4 +71,14 @@ And for uploading terms:
 ```sh
 # This will 
 $ koality poeditor upload --key=[write API key goes here] --project=[project ID here] --file=[path where json file will be generated]
+```
+
+
+## Running Kubectl commands. 🕹️
+
+For some helpful kubectl commands, these are Koality scripts to help manage and maintain clusters.
+
+```sh
+# This will delete any pods within a namespace matching a specific status. (Status defaults to "Evicted")
+$ koality kubectl clean-pods --namespace gitlab-managed-apps --status CrashLoopBackOff
 ```

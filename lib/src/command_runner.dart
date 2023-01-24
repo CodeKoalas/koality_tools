@@ -5,6 +5,7 @@ import 'package:mason_logger/mason_logger.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
 import 'package:koality_tools/src/commands/coverage_helper_command.dart';
+import 'package:koality_tools/src/commands/kubectl/kubectl_command.dart';
 import 'package:koality_tools/src/commands/test_runner_command.dart';
 import 'package:koality_tools/src/commands/updater.dart';
 import 'package:koality_tools/src/version.dart';
@@ -45,6 +46,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
     addCommand(SetupCommand(logger: _logger));
     addCommand(CoverageHelperCommand(logger: _logger));
     addCommand(POEditorCommand(logger: _logger));
+    addCommand(KubectlCommand(logger: _logger));
     addCommand(TestRunnerCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, updater: _updater));
   }
