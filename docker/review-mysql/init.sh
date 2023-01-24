@@ -10,5 +10,5 @@ if [[ $table == 0 ]]; then
     mysqldump -u $DB_USERNAME -p"$DB_PASSWORD" -h $DB_HOST $DB_DATABASE > /tmp/database.sql
     # import into local DB
     echo "Importing database..."
-    mysql -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
+    mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" $MYSQL_DATABASE < /tmp/database.sql
 fi
