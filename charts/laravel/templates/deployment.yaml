@@ -168,6 +168,8 @@ spec:
         - secretRef:
             name: {{ .Values.application.secretName }}
         {{- end }}
+        - secretRef:
+            name: {{ template "appname" . }}-secrets
 {{- end }}
 
       imagePullSecrets:
