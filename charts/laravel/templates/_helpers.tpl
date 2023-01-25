@@ -47,6 +47,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- $trackableDbName | trimSuffix "-stable" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "echoserverhost" -}}
+{{- if eq .Values.echo.host "" -}}
+{{- printf "%s-%s" .Release.Name "echo" | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := .Values.echo.host -}}
+{{- end -}}
+{{- end -}}
+
 {{/*
 Get a hostname from URL
 */}}
