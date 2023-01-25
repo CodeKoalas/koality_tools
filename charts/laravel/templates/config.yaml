@@ -68,7 +68,7 @@ data:
   BROADCAST_DRIVER: "redis"
   REDIS_HOST: "{{ template "appname" . }}-redis"
   REDIS_PORT: {{ .Values.redis.port | quote }}
-  LARAVEL_ECHO_SERVER_HOST: {{ template "echoserverhost" . | quote }}
+  LARAVEL_ECHO_SERVER_HOST: "{{ .Values.echo.host }}"
   LARAVEL_ECHO_SERVER_PORT: "{{ .Values.echo.port }}"
   LARAVEL_ECHO_SERVER_REDIS_HOST: "{{ template "appname" . }}-redis"
   LARAVEL_ECHO_SERVER_REDIS_PORT: {{ .Values.redis.port | quote }}
