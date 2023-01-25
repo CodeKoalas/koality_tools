@@ -30,3 +30,4 @@ spec:
     app: {{ template "appname" . }}
     tier: "{{ .Values.application.tier }}"
     track: "{{ .Values.application.track }}"
+    layer: laravel

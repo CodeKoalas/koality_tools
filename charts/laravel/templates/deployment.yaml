@@ -9,6 +9,7 @@ metadata:
     app: {{ template "appname" . }}
     track: "{{ .Values.application.track }}"
     tier: "{{ .Values.application.tier }}"
+    layer: laravel
 {{ include "sharedlabels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -17,6 +18,7 @@ spec:
       app: {{ template "appname" . }}
       track: "{{ .Values.application.track }}"
       tier: "{{ .Values.application.tier }}"
+      layer: laravel
       release: {{ .Release.Name }}
   template:
     metadata:
@@ -27,6 +29,7 @@ spec:
       labels:
         track: "{{ .Values.application.track }}"
         tier: "{{ .Values.application.tier }}"
+        layer: laravel
 {{ include "sharedlabels" . | indent 8 }}
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
