@@ -235,6 +235,9 @@ redis:
 # If the Laravel site uses an Echo Socket server.
 echo:
   enabled: false
+  ## @param echo.host The LARAVEL_SERVER_ECHO_HOST environment variable.
+  ##
+  host: localhost
   image: registry.codekoalas.com/devops/helm/koality-charts:laravel-echo
   port: 6001
   limits:
