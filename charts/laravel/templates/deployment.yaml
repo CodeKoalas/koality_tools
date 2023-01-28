@@ -124,6 +124,13 @@ spec:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-host"
 {{- end }}
+        - name: DB_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DB_PASSWORD
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
@@ -141,11 +148,6 @@ spec:
               name: {{ template "appname" . }}-s3-config
               key: "gitlab-managed-apps.{{ template "appname" . }}-s3-bucket-name"
 {{- end }}
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "appname" . }}-secrets
-              key: DB_PASSWORD
         - name: APP_KEY
           valueFrom:
             secretKeyRef:
