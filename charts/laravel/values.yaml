@@ -326,7 +326,6 @@ persistence:
         # For example, GKE automatically chooses a default storage class and allocate a physical storage.
         # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
 
-
 # The service that is used with the Ingress.
 service:
   enabled: true
@@ -391,4 +390,3 @@ startupProbe:
   scheme: "HTTP"
   probeType: "httpGet"
   httpHeaders: []
-
