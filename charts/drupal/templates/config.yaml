@@ -6,6 +6,7 @@ metadata:
     app: {{ template "appname" . }}
 data:
   VIRTUAL_HOST: "{{ .Values.deployment.virtualHost }}"
+  DRUPAL_TRUSTED_HOSTS: "{{ .Values.deployment.virtualHost }}"
   LETSENCRYPT_HOST: "{{ .Values.deployment.letsEncryptHost }}"
   DRUPAL_BASE_URL: "{{ .Values.deployment.drupalBaseUrl }}"
   APACHE_DOCROOT: "{{ .Values.deployment.apacheDocroot }}"
