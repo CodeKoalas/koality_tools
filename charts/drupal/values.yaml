@@ -61,11 +61,26 @@ deployment:
   track: stable
   tier: web
   siteEnv: dev
-  virtualHost: gitlab-autodevops.werewolfga.me
-  letsEncryptHost: gitlab-autodevops.werewolfga.me
-  drupalBaseUrl: "https://gitlab-autodevops.werewolfga.me"
+  virtualHost: gitlab-autodevops.ckstage.site
+  letsEncryptHost: gitlab-autodevops.ckstagae.site
+  drupalBaseUrl: "https://gitlab-autodevops.ckstage.site"
   apacheDocroot: /var/www/html/docroot
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
+
+## A cron deployment for running cron in a container.
+cron:
+  enabled: false
+
+  ## @param cron.image The image to use for the cron deployment.
+  ##
+  image: registry.codekoalas.com/devops/helm/koality-charts:cron
+  replicaCount: 1
+  limits:
+    cpu: 100m
+    memory: 500Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi
 
 # The HorizontalPodAutosacler
 hpa:
@@ -74,25 +89,42 @@ hpa:
 
 # The persistence image; for review apps this allows a DB to be created
 # for use with this review.
+# The persistence image; for review apps this allows a DB to be created
+# for use with this review.
 persistence:
   enabled: true
-  apiVersion: apps/v1
+  
+  ## If you want an in-memory database, for example a short-lived review app, you can set "enabled" to true
+  ## and then an additional deployment will be created and the MySQL information overridden.
+  ephemeral:
+    ## @param persistence.ephemeral.enabled If set to true, this will enable ephemeral persistence.
+    ##
+    enabled: false
+
+    ## @param persistence.ephemeral.image The image to use for the ephemeral database.
+    ##
+    image: mariadb:10.3
+
+    ## @param persistence.ephemeral.port The port to use for the ephemeral database.
+    ##
+    port: 3306
+
   name: gitlab-autodevops-drupal
   databaseName: drupal
-  databaseHost: mysql
   databaseUser: drupal
-  databasePassword: root
+  databasePassword: pleasereplaceme
+  replicaCount: 1
   limits:
-    cpu: 900m
-    memory: 950Mi
+    cpu: 500m
+    memory: 500Mi
   requests:
-    cpu: 600m
-    memory: 550Mi
+    cpu: 250m
+    memory: 250Mi
   volumes:
     - name: data
       mount:
         mountPath: /var/www/html/docroot/sites/default/files
-        subPath: gitlab-autodevops
+        subPath: drupal-files
         # subPath: "/pvc-mount/config.txt"
       claim:
         accessMode: ReadWriteMany
@@ -108,9 +140,9 @@ service:
   enabled: true
   type: ClusterIP
   name: service-gitlab-autodevops-drupal
-  url: "https://gitlab-autodevops.ckstage.site"
+  url: "https://gitlab-autodevops-drupal.ckstage.site"
   extraHosts:
-    - "test.gitlab-autodevops.ckstage.site"
+    - "test.gitlab-autodevops-drupal.ckstage.site"
   externalPort: 80
   internalPort: 80
   annotations:
@@ -142,6 +174,7 @@ ingress:
 # Prometheus stuff
 prometheus:
   metrics: false
+
 livenessProbe:
   path: "/user/login"
   initialDelaySeconds: 15
@@ -166,4 +199,3 @@ startupProbe:
   scheme: "HTTP"
   probeType: "httpGet"
   httpHeaders: []
-

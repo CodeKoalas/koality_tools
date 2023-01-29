@@ -9,6 +9,7 @@ metadata:
     app: {{ template "appname" . }}
     track: "{{ .Values.application.track }}"
     tier: "{{ .Values.application.tier }}"
+    layer: drupal
 {{ include "sharedlabels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -17,6 +18,7 @@ spec:
       app: {{ template "appname" . }}
       track: "{{ .Values.application.track }}"
       tier: "{{ .Values.application.tier }}"
+      layer: drupal
       release: {{ .Release.Name }}
   template:
     metadata:
@@ -27,13 +29,63 @@ spec:
       labels:
         track: "{{ .Values.application.track }}"
         tier: "{{ .Values.application.tier }}"
+        layer: drupal
 {{ include "sharedlabels" . | indent 8 }}
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
+      # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
+{{- if not .Values.persistence.ephemeral.enabled }}
+      initContainers:
+      # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
+      - name: create-db
+        image: {{ .Values.deployment.initContainerImage }}
+        imagePullPolicy: "Always"
+        envFrom:
+        - configMapRef:
+            name: {{ template "appname" . }}
+        env:
+        - name: DB_DATABASE
+          value: {{ .Values.persistence.databaseName }}
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-host"
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-port"
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-instance-config
+              key: "gitlab-managed-apps.mysql-instance-config-user"
+        - name: MYSQL_MASTER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ck-database-instance-password
+              key: MYSQL_MASTER_PASSWORD
+        - name: DB_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DB_PASSWORD
+{{- end }}
+      # The deployment container spec
       containers:
       - name: {{ .Values.deployment.name }}
         image: {{ template "imagename" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        resources:
+          limits:
+            cpu: {{ .Values.persistence.limits.cpu }}
+            memory: {{ .Values.persistence.limits.memory }}
+          requests:
+            cpu: {{ .Values.persistence.requests.cpu }}
+            memory: {{ .Values.persistence.requests.memory }}
         ports:
         - containerPort: 80
 {{- if .Values.persistence.enabled }}
@@ -46,13 +98,6 @@ spec:
             {{- end }}
 {{- end }}
 {{- end }}
-        resources:
-          limits:
-            cpu: {{ .Values.persistence.limits.cpu }}
-            memory: {{ .Values.persistence.limits.memory }}
-          requests:
-            cpu: {{ .Values.persistence.requests.cpu }}
-            memory: {{ .Values.persistence.requests.memory }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
@@ -60,51 +105,38 @@ spec:
         - secretRef:
             name: {{ .Values.application.secretName }}
         {{- end }}
+        - secretRef:
+            name: {{ template "appname" . }}-secrets
         env:
-        - name: MYSQL_HOST
+{{- if .Values.persistence.ephemeral.enabled }}
+        # If using ephemeral database have it point to the ephemeral db service and host
+        - name: DATABASE_NAME
+          value: {{ .Values.gitlab.env }}
+        - name: DATABASE_HOST
+          value: {{ template "appname" . }}-database
+{{- else }}
+        - name: DATABASE_NAME
+          value: {{ .Values.persistence.databaseName }}
+        - name: DATABASE_HOST
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-host"
-        - name: MYSQL_PORT
+{{- end }}
+        - name: DATABASE_USERNAME
+          value: {{ .Values.persistence.databaseUser }}
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "appname" . }}-secrets
+              key: DATABASE_PASSWORD
+        - name: DATABASE_PORT
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-port"
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "appname" . }}-secrets
-              key: MYSQL_PASSWORD
-      # This will wait for MySQL to be ready and then check if the DB_NAME database exists and if it doesn't it will create it.
-      initContainers:
-      # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
-      - name: create-db
-        image: {{ .Values.deployment.initContainerImage }}
-        imagePullPolicy: "Always"
-        envFrom:
-        - configMapRef:
-            name: {{ template "appname" . }}
-        env:
-        - name: MYSQL_DATABASE
-          value: {{ .Values.persistence.databaseName }}
-        - name: MYSQL_SERVER
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: mysql-instance-config-host
-        - name: MYSQL_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-instance-config
-              key: mysql-instance-config-port
-        - name: MYSQL_USER
-          value: {{ .Values.persistence.databaseUser }}
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "appname" . }}-db-secret
-              key: MYSQL_PASSWORD
+      imagePullSecrets:
+      - name: regcred
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
       volumes:
