@@ -1,3 +1,8 @@
+[0.1.8] - 07/02/2023
+
+* Adding new status to `kubectl clean-pods` command.
+* Fixing an issue with the updater not correctly parsing the version string.
+
 [0.1.7] - 24/01/2023
 
 * Adding new `kubectl` command with subcommands.
