@@ -17,7 +17,7 @@ class PackageUpdater {
     ),
   );
 
-  final projectUrl = '/api/v4/projects/640/repository/files/lib%2Fsrc%2Fversion%2Edart?ref=master';
+  final projectUrl = '/api/v4/projects/640/repository/files/lib%2Fsrc%2Fversion%2Edart/raw?ref=master';
   final versionTextCheck = 'const packageVersion = ';
 
   /// Get the latest version from Gitlab.
@@ -29,7 +29,7 @@ class PackageUpdater {
       final fileContents = response.data ?? '';
       final versionIndex = fileContents.indexOf(versionTextCheck);
       if (versionIndex >= 0) {
-        final versionString = fileContents.substring(versionTextCheck.length + 1, versionTextCheck.length + 5);
+        final versionString = fileContents.substring(versionIndex + 24, versionIndex + 29);
         return versionString;
       }
     }

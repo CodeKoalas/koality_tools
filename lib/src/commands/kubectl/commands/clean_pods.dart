@@ -38,7 +38,7 @@ class KubectlCleanPodsCommand extends Command<int> {
 
   final Logger _logger;
 
-  static List<String> allowedStatuses = ['Evicted', 'CrashLoopBackOff', 'Completed'];
+  static List<String> allowedStatuses = ['Evicted', 'CrashLoopBackOff', 'Completed', 'ContainerStatusUnknown'];
 
   @override
   Future<int> run() async {
