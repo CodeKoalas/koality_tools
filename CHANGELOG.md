@@ -1,3 +1,8 @@
+[0.1.9] - 27/02/2023
+
+* Adding new `parse` command with a `version` subcommand that will get the version
+from a `pubspec.yaml` file.
+
 [0.1.8] - 07/02/2023
 
 * Adding new status to `kubectl clean-pods` command.

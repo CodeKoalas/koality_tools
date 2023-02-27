@@ -82,3 +82,16 @@ For some helpful kubectl commands, these are Koality scripts to help manage and 
 # This will delete any pods within a namespace matching a specific status. (Status defaults to "Evicted")
 $ koality kubectl clean-pods --namespace gitlab-managed-apps --status CrashLoopBackOff
 ```
+
+
+## Running Parse Commands. 🪄
+
+For commands that deal with parsing the `pubspec.yaml file` the `parse` command can be used.
+
+```sh
+# This will read the pubspec.yaml file and parse the version (Defaults to writing to stdout)
+$ koality parse version
+
+# It can also write the version to a file
+$ koality parse version -o /path/to/version.txt
+```
