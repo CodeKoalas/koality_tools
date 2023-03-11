@@ -110,27 +110,27 @@ spec:
         env:
 {{- if .Values.persistence.ephemeral.enabled }}
         # If using ephemeral database have it point to the ephemeral db service and host
-        - name: DATABASE_NAME
+        - name: MYSQL_DATABASE
           value: {{ .Values.gitlab.env }}
-        - name: DATABASE_HOST
+        - name: MYSQL_SERVER
           value: {{ template "appname" . }}-database
 {{- else }}
-        - name: DATABASE_NAME
+        - name: MYSQL_DATABASE
           value: {{ .Values.persistence.databaseName }}
-        - name: DATABASE_HOST
+        - name: MYSQL_SERVER
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-host"
 {{- end }}
-        - name: DATABASE_USERNAME
+        - name: MYSQL_USER
           value: {{ .Values.persistence.databaseUser }}
-        - name: DATABASE_PASSWORD
+        - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
               name: {{ template "appname" . }}-secrets
-              key: DATABASE_PASSWORD
-        - name: DATABASE_PORT
+              key: DB_PASSWORD
+        - name: MYSQL_PORT
           valueFrom:
             configMapKeyRef:
               name: mysql-instance-config

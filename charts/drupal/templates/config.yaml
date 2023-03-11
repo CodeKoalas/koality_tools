@@ -10,6 +10,6 @@ data:
   LETSENCRYPT_HOST: "{{ .Values.deployment.letsEncryptHost }}"
   DRUPAL_BASE_URL: "{{ .Values.deployment.drupalBaseUrl }}"
   APACHE_DOCROOT: "{{ .Values.deployment.apacheDocroot }}"
-  DATABASE_NAME: "{{ .Values.persistence.databaseName }}"
-  DATABASE_USERNAME: "{{ .Values.persistence.databaseUser }}"
+  DB_DATABASE: "{{ .Values.persistence.databaseName }}"
+  DB_USERNAME: "{{ .Values.persistence.databaseUser }}"
   SITE_ENV: "{{ .Values.deployment.siteEnv }}"
