@@ -9,6 +9,7 @@ data:
   DRUPAL_TRUSTED_HOSTS: "{{ .Values.deployment.virtualHost }}"
   LETSENCRYPT_HOST: "{{ .Values.deployment.letsEncryptHost }}"
   DRUPAL_BASE_URL: "{{ .Values.deployment.drupalBaseUrl }}"
+  DRUPAL_HTTPS: "{{ .Values.deployment.drupalHttps }}"
   APACHE_DOCROOT: "{{ .Values.deployment.apacheDocroot }}"
   DB_DATABASE: "{{ .Values.persistence.databaseName }}"
   DB_USERNAME: "{{ .Values.persistence.databaseUser }}"

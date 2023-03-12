@@ -64,6 +64,7 @@ deployment:
   virtualHost: gitlab-autodevops.ckstage.site
   letsEncryptHost: gitlab-autodevops.ckstagae.site
   drupalBaseUrl: "https://gitlab-autodevops.ckstage.site"
+  drupalHttps: "on"
   apacheDocroot: /var/www/html/docroot
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
 
