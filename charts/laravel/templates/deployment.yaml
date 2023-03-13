@@ -102,7 +102,7 @@ spec:
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
-        {{- if and .Values.application.secretName (not eq .Values.application.secretName "") }}
+        {{- if and .Values.application.secretName }}
         - secretRef:
             name: {{ .Values.application.secretName }}
         {{- end }}
