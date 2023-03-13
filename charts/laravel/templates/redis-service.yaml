@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: {{ template "appname" . }}-redis
   labels:
+    app: {{ template "appname" . }}
     track: "{{ $.Values.application.track }}"
     tier: "{{ $.Values.application.tier }}"
     layer: redis
@@ -12,6 +13,7 @@ spec:
   - port: {{ .Values.redis.port }}
     protocol: TCP
   selector:
+    app: {{ template "appname" . }}
     track: "{{ $.Values.application.track }}"
     tier: "{{ $.Values.application.tier }}"
     layer: redis
