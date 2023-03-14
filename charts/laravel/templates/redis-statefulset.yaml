@@ -4,6 +4,7 @@ kind: StatefulSet
 metadata:
   name: {{ template "appname" . }}-redis
   labels:
+    app: {{ template "appname" . }}-redis
     track: "{{ $.Values.application.track }}"
     tier: "{{ $.Values.application.tier }}"
     layer: redis
@@ -11,6 +12,7 @@ spec:
   serviceName: {{ template "appname" . }}-redis
   selector:
     matchLabels:
+      app: {{ template "appname" . }}-redis
       track: "{{ $.Values.application.track }}"
       tier: "{{ $.Values.application.tier }}"
       layer: redis
@@ -18,6 +20,7 @@ spec:
   template:
     metadata:
       labels:
+        app: {{ template "appname" . }}-redis
         track: "{{ $.Values.application.track }}"
         tier: "{{ $.Values.application.tier }}"
         layer: redis
