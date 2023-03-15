@@ -88,7 +88,8 @@ spec:
             cpu: {{ .Values.persistence.requests.cpu }}
             memory: {{ .Values.persistence.requests.memory }}
         ports:
-        - containerPort: 80
+        - name: http
+          containerPort: 80
 {{- if .Values.persistence.enabled }}
         volumeMounts:
 {{- range $volume := .Values.persistence.volumes }}
