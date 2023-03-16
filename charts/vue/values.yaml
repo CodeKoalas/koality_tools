@@ -162,28 +162,40 @@ service:
   ## @param service.enabled If a service should be created.
   ##
   enabled: true
+
   ## @param service.type The service type.
   ##
   type: ClusterIP
+
   ## @param service.name The service name.
   ##
-  name: example-vue-service
+  name:
+
   ## @param service.commonName Specifics a common name from Auto DevOps. (unset by default)
   ##
   commonName:
+
   ## @param service.url The service base URL to be used.
   ##
   url: "https://example-vue.ckstage.site"
+
   ## @param service.extraHosts Additional hostnames to be covered in the service.
   ##
   extraHosts:
     - "example-vue.ckstage.site"
+
+  ## @param service.additionalHosts Provided by Gitlab Auto DevOps in certain cases.
+  ##
+  additionalHosts:
+
   ## @param service.externalPort The port exposed externally by the service.
   ##
   externalPort: 80
+
   ## @param service.internalPort The port exposed internally by the service.
   ##
   internalPort: 80
+  
   ## @param service.annotations Additional annotations for the service
   ##
   annotations:

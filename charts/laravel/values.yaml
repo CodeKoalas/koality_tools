@@ -129,6 +129,10 @@ deployment:
   ##
   # jwtSecret:
 
+  ## @param deployment.extraEnv Additional ENV variables we want to add.
+  ###
+  extraEnv:
+
 ## The queue worker configuration. Defaults to calling queues for Redis.
 ## @TODO: Create a YAML structure for adding additional queue workers to the deployment.
 queueWorker:
