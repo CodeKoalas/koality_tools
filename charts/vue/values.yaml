@@ -15,7 +15,8 @@ replicaCount: 1
 
 ## Host aliases
 hostAliases:
-  ## Point CK registry to a private IP.
+  ## @param hostAliases.ip point CK registry to a private IP.
+  ##
   - ip: 10.170.3.234
     hostnames:
       - "registry.codekoalas.com"
@@ -33,59 +34,114 @@ serviceAccount:
   ##
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::069344082335:role/EKSManageEFS
-
   ## @param serviceAccount.automountServiceAccountToken Automount API credentials for a service account.
   ##
   automountServiceAccountToken: true
 
 # Gitlab Application values.
 application:
+  ## @param.application.track The application track.
+  ##
   track: stable
+  ## @param.application.tier The application tier.
+  ##
   tier: web
-  secretName: gitlab-secret
-  # Passed by Gitlab so we know when the deployment has changed.
+  ## @param.application.secretName The application secret provided by Gitlab Auto DevOps.
+  ##
+  secretName:
+  ## @param application.secretChecksum Passed by Gitlab so we know when the deployment has changed.
+  ##
   secretChecksum:
 
 # The deployment application image.
 image:
+  ## @param.image.repository The pod image repository.
+  ##
   repository: gitlab.example.com/group/project
+  ## @param.image.tag The pod image tag.
+  ##
   tag: stable
+  ## @param.image.pullPolicy The pod image pull policy.
+  ##
   pullPolicy: Always
+  ## @param.secrets The secrets to use for pulling images.
+  ##
   secrets:
     - name: gitlab-registry
 
 # The deployment object with environment variables to use.
 deployment:
+  ## @param deployment.apiVersion The deployment API version we are using.
+  ##
   apiVersion: apps/v1
+  ## @param deployment.name The deployment name.
+  ##
   name: gitlab-autodevops-laravel
+  ## @param deployment.track The deployment track.
+  ##
   track: stable
+  ## @param deployment.tier The deployment tier.
+  ##
   tier: web
+  ## @param deployment.appEnv The deployment app environment level.
+  ##
   appEnv: staging
+  ## @param deployment.virtualHost The deployment virtual host used for NGINX.
+  ##
   virtualHost: example-vue.ckstage.site
+  ## @param deployment.letsEncryptHost The Let's Encrypt host used for generating certificates.
+  ##
   letsEncryptHost: example-vue.ckstage.site
+  ## @param deployment.config Additional values passed as configmap values.
+  ##
   config:
     VUE_APP_TITLE: App Title
     VUE_APP_URL: http://example-vue.ckstage.site
     VUE_APP_API_URL: https://example-vue.ckstage.site
 
-# The HorizontalPodAutosacler
+# The HorizontalPodAutoscaler
 hpa:
+  ## @param hpa.enabled Minimum number of replicas.
+  ##
   minReplicas: 1
+  ## @param hpa.enabled Maximum number of replicas.
+  ##
   maxReplicas: 4
 
-# The persistence image; for review apps this allows a DB to be created
-# for use with this review.
+# The persistence settings for things like the database, file storage, etc etc.
 persistence:
+  ## @param persistence.enabled If persistence should be enabled.
+  ##
   enabled: true
+  ## @param persistence.name The persistence name.
+  ##
   name: gitlab-autodevops-laravel
+  ## @param persistence.databaseName The name of the database to connect to.
+  ##
   databaseName: laravel
+  ## @param persistence.databaseUser The user to connect to the database with.
+  ##
   databaseUser: laravel
+  ## @param persistence.databasePassword The password to connect to the database with.
+  ##
   databasePassword: password
+  ## @param persistence.limits The limits applied to the pods to determine maximum CPU/RAM usage.
+  ##
   limits:
+    ## @param persistence.limits.cpu The maximum CPU usage. (1000m is an entire core)
+    ##
     cpu: 900m
+    ## @param persistence.limits.memory The maximum RAM usage. (100Mi is 100 MB)
+    ##
     memory: 950Mi
+  ## @param persistence.requests The requests applied to the pods to determine requests CPU/RAM resources.
+  ##
   requests:
+    ## @param persistence.requests.cpu The requested CPU usage. (1000m is an entire core)
+    ##
     cpu: 600m
+    ## @param persistence.requests.memory The requested RAM usage. (100Mi is 100MB)
+    ##
     memory: 550Mi
 #   volumes:
 #     - name: data
@@ -103,34 +159,77 @@ persistence:
 
 # The service that is used with the Ingress.
 service:
+  ## @param service.enabled If a service should be created.
+  ##
   enabled: true
+  ## @param service.type The service type.
+  ##
   type: ClusterIP
+  ## @param service.name The service name.
+  ##
   name: example-vue-service
+  ## @param service.commonName Specifics a common name from Auto DevOps. (unset by default)
+  ##
+  commonName:
+  ## @param service.url The service base URL to be used.
+  ##
   url: "https://example-vue.ckstage.site"
-  additionalHosts:
+  ## @param service.extraHosts Additional hostnames to be covered in the service.
+  ##
+  extraHosts:
     - "example-vue.ckstage.site"
+  ## @param service.externalPort The port exposed externally by the service.
+  ##
   externalPort: 80
+  ## @param service.internalPort The port exposed internally by the service.
+  ##
   internalPort: 80
+  ## @param service.annotations Additional annotations for the service
+  ##
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: nlb
 
 # If we want to deploy an ingress class and what class name to use.
 ingress:
+  ## @param ingress.enabled If an ingress object should be created.
+  ##
   enabled: true
+  ## @param ingress.className The ingress class name.
+  ##
   className: nginx
+  ## @param ingress.path The ingress base path.
+  ##
   path: /
+  ## @param ingress.tls If TLS should be enabled and if ACME should be used.
+  ##
   tls:
+    ## @param ingress.tls.enabled If TLS should be enabled.
+    ##
     enabled: true
+    ## @param ingress.tls.acme If ACME should be used.
+    ##
     acme: true
+  ## @param ingress.modSecurity Mod Security rules to be used by the ingress object.
+  ##
   modSecurity:
+    ## @param ingress.modSecurity.enabled If Mod Security should be enabled.
+    ##
     enabled: false
+    ## @param ingress.modSecurity.secRuleEngine The Mod Security rule engine type to be used.
+    ##
     secRuleEngine: "DetectionOnly"
     # secRules:
     #   - variable: ""
     #     operator: ""
     #     action: ""
+  ## @param ingress.canary Ingress canary values to be set for the deployment.
+  ## 
   canary:
+    ## @param ingress.canary.weight If a weight for this canary build should be specified.
+    ##
     weight:
+  ## @param ingress.annotations Additional annotations for the ingress object.
+  ##
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -138,7 +237,11 @@ ingress:
 
 # Prometheus stuff
 prometheus:
+  ## @param prometheus.metrics If Prometheus metrics should be enabled.
+  ##
   metrics: false
+
+# Probe stuff
 livenessProbe:
   path: "/"
   initialDelaySeconds: 15

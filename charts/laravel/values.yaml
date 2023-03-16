@@ -1,16 +1,29 @@
+## Globals such as storageClass used for PVCs, etc etc.
 global:
   storageClass: "efs-sc"
 
+## Common values applied to every metadata labels.
 commonLabels:
 
 ## Gitlab values for app tracking.
 gitlab:
+  ## @param gitlab.app The Gitlab app name.
+  ##
   app:
+  ## @param gitlab.env The Gitlab environment.
+  ##
   env:
+  ## @param gitlab.envName The Gitlab environment name.
+  ##
   envName:
+  ## @param gitlab.envURL The Gitlab environment URL.
+  ##
   envURL:
+  ## @param gitlab.projectID The Gitlab project ID.
+  ##
   projectID:
 
+## @DEPRECATED No longer used.
 replicaCount: 1
 
 ## Host aliases
@@ -232,7 +245,7 @@ redis:
       # For example, GKE automatically chooses a default storage class and allocate a physical storage.
       # See https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes for more information.
 
-# If the Laravel site uses an Echo Socket server.
+## Laravel Echo service values.
 echo:
   enabled: false
   ## @param echo.host The LARAVEL_SERVER_ECHO_HOST environment variable.
@@ -276,13 +289,13 @@ aws:
       - key: "kubernetes.io/cluster-service"
         value: "true"
 
-# The HorizontalPodAutosacler
+## The HorizontalPodAutosacler
 hpa:
   minReplicas: 1
   maxReplicas: 4
 
-# The persistence image; for review apps this allows a DB to be created
-# for use with this review.
+## The persistence image; for review apps this allows a DB to be created
+## for use with this review.
 persistence:
   enabled: true
   

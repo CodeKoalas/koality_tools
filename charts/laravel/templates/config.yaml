@@ -8,7 +8,7 @@ data:
   LETSENCRYPT_HOST: "{{ .Values.deployment.letsEncryptHost }}"
   APP_NAME: "{{ template "appname" . }}"
   APP_ENV: "{{ .Values.deployment.appEnv }}"
-  APP_URL: "{{ .Values.deployment.virtualHost }}"
+  VIRTUAL_HOST: "{{ .Values.deployment.virtualHost }}"
   APP_DEBUG: "{{ .Values.deployment.appDebug }}"
   APP_URL: "{{ .Values.deployment.appUrl }}"
   LOG_CHANNEL: "stack"
