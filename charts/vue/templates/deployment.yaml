@@ -50,5 +50,13 @@ spec:
         - secretRef:
             name: {{ .Values.application.secretName }}
         {{- end }}
+        volumeMounts:
+        - name: env-file
+          mountPath: /app/.env
+          subPath: env
+        volumes:
+        - name: env-file
+          configMap:
+            name: {{ template "appname" . }}-env
       imagePullSecrets:
       - name: regcred

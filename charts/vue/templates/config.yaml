@@ -6,3 +6,18 @@ metadata:
     app: {{ template "appname" . }}
 data:
   {{ .Values.deployment.config | toYaml | nindent 2 }}
+
+---
+# Need to read the values from deployment.extraEnv in the YAML file
+# and create an inline environment variable file for each key/value pair
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "appname" . }}-env
+  labels:
+    app: {{ template "appname" . }}
+data:
+  env: |
+  {{- range $key, $value := .Values.deployment.config }}
+    {{ $key }}={{ $value }}
+  {{- end }}
