@@ -79,6 +79,6 @@ data:
 {{- end }}
 {{- end }}
 {{- if .Values.deployment.fcmSenderId }}
-  FCM_SENDER_ID: {{ .Values.deployment.fcmSenderId | quote }}
+  FCM_SENDER_ID: {{ .Values.deployment.fcmSenderId }}
 {{- end }}
 
