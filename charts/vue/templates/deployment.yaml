@@ -31,32 +31,32 @@ spec:
     spec:
       serviceAccountName: {{ template "serviceAccountName" . }}
       containers:
-      - name: {{ .Values.deployment.name }}
-        image: {{ template "imagename" . }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        resources:
-          limits:
-            cpu: {{ .Values.persistence.limits.cpu }}
-            memory: {{ .Values.persistence.limits.memory }}
-          requests:
-            cpu: {{ .Values.persistence.requests.cpu }}
-            memory: {{ .Values.persistence.requests.memory }}
-        ports:
-        - containerPort: 80
-        envFrom:
-        - configMapRef:
-            name: {{ template "appname" . }}
-        {{- if .Values.application.secretName }}
-        - secretRef:
-            name: {{ .Values.application.secretName }}
-        {{- end }}
-        volumeMounts:
-        - name: env-file
-          mountPath: /app/.env
-          subPath: env
-        volumes:
+        - name: {{ .Values.deployment.name }}
+          image: {{ template "imagename" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            limits:
+              cpu: {{ .Values.persistence.limits.cpu }}
+              memory: {{ .Values.persistence.limits.memory }}
+            requests:
+              cpu: {{ .Values.persistence.requests.cpu }}
+              memory: {{ .Values.persistence.requests.memory }}
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: {{ template "appname" . }}
+            {{- if .Values.application.secretName }}
+            - secretRef:
+                name: {{ .Values.application.secretName }}
+            {{- end }}
+          volumeMounts:
+            - name: env-file
+              mountPath: /app/.env
+              subPath: env
+      volumes:
         - name: env-file
           configMap:
             name: {{ template "appname" . }}-env
       imagePullSecrets:
-      - name: regcred
+        - name: regcred
