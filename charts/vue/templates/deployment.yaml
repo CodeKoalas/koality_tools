@@ -50,10 +50,12 @@ spec:
             - secretRef:
                 name: {{ .Values.application.secretName }}
             {{- end }}
+          {{- if .Values.deployment.config }}
           volumeMounts:
             - name: env-file
-              mountPath: /app/.env
+              mountPath: {{ default "/usr/share/nginx/html/.env" .Values.deployment.config.mountPath }}
               subPath: env
+          {{- end }}
       volumes:
         - name: env-file
           configMap:

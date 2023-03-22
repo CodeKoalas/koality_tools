@@ -95,9 +95,11 @@ deployment:
   ## @param deployment.config Additional values passed as configmap values.
   ##
   config:
-    VUE_APP_TITLE: App Title
-    VUE_APP_URL: http://example-vue.ckstage.site
-    VUE_APP_API_URL: https://example-vue.ckstage.site
+    mountPath: /usr/share/nginx/html/.env
+    data:
+      VUE_APP_TITLE: App Title
+      VUE_APP_URL: http://example-vue.ckstage.site
+      VUE_APP_API_URL: https://example-vue.ckstage.site
 
 # The HorizontalPodAutoscaler
 hpa:

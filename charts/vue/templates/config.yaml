@@ -18,6 +18,6 @@ metadata:
     app: {{ template "appname" . }}
 data:
   env: |
-  {{- range $key, $value := .Values.deployment.config }}
+  {{- range $key, $value := .Values.deployment.config.data }}
     {{ $key }}={{ $value }}
   {{- end }}
