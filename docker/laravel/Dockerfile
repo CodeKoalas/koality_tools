@@ -51,7 +51,8 @@ RUN mkdir /etc/supervisor.d
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Install packages like git, supervisor, nginx, and PHP extensions
-RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext
+# su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
+RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec
 
 # Add extra extensions for Redis.
 RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \

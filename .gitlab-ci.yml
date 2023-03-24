@@ -20,7 +20,7 @@ build laravel base image:
   extends: .build-base
   script:
     - cd docker/laravel
-    - echo VERSION=$(cat version.txt) > .env
+    - VERSION=`cat version.txt`
     - docker build -t $CI_REGISTRY_IMAGE/laravel:$VERSION ./
     - docker push $CI_REGISTRY_IMAGE/laravel:$VERSION
   rules:
