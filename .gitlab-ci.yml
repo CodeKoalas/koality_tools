@@ -19,13 +19,14 @@ build laravel base image:
   extends: .build-base
   script:
     - cd docker/laravel
-    - docker build -t $CI_REGISTRY_IMAGE:laravel ./
-    - docker push $CI_REGISTRY_IMAGE:laravel
+    - echo VERSION=$(cat version.txt) > .env
+    - docker build -t $CI_REGISTRY_IMAGE/laravel:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/laravel:$VERSION
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
-          - docker/laravel/*
+          - docker/laravel/version.txt
 
 build init mysql image:
   extends: .build-base
