@@ -12,6 +12,7 @@ stages:
   services:
     - docker:dind
   before_script:
+    - until docker info; do sleep 1; done
     - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
