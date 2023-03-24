@@ -15,6 +15,18 @@ stages:
     - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
+build laravel base image:
+  extends: .build-base
+  script:
+    - cd docker/laravel
+    - docker build -t $CI_REGISTRY_IMAGE:laravel ./
+    - docker push $CI_REGISTRY_IMAGE:laravel
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/laravel/*
+
 build init mysql image:
   extends: .build-base
   script:
