@@ -2,9 +2,6 @@
 # For copying compiled composer.
 FROM composer:2.4.4 as composer-env
 
-# For copying compiled node.
-FROM node:14.21-buster as node-env
-
 # Base image for Laravel.
 FROM php:8.0.25-fpm-alpine as base
 
@@ -29,12 +26,6 @@ RUN docker-php-ext-install bcmath pcntl pdo_mysql zip gd
 
 # Create the /var/www/html directory.
 RUN mkdir -p /var/www/html
-
-# Copy Node and Composer from their stages.
-COPY --from=node-env --chown=www-data /usr/local/bin /usr/local/bin
-
-# Copy node_modules from node-env stage.
-COPY --from=node-env --chown=www-data /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 COPY --from=composer-env /usr/bin/composer /usr/bin/composer
 
