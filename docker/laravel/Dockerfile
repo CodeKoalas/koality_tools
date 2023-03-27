@@ -8,17 +8,35 @@ FROM node:14.21-buster as node-env
 # Base image for Laravel.
 FROM php:8.0.25-fpm-alpine as base
 
-# Create the /var/www/html directory.
-RUN mkdir -p /var/www/html
-
-# Copy Node and Composer from their stages.
-COPY --from=node-env /usr/local/bin /usr/local/bin
-
-COPY --from=composer-env /usr/bin/composer /usr/bin/composer
+# Install packages like git, supervisor, nginx, and PHP extensions
+# su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
+RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec
 
 # Configure Pickel for PHP 8.0+
 RUN wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/local/bin/pickle \
     && chmod +x /usr/local/bin/pickle
+
+# Add extra extensions for Redis.
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
+    && pickle install redis \
+    && docker-php-ext-enable redis.so
+
+# Run as www-data user.
+RUN su-exec www-data:www-data
+
+# Enable Docker PHP extensions
+RUN docker-php-ext-install bcmath pcntl pdo_mysql zip gd
+
+# Create the /var/www/html directory.
+RUN mkdir -p /var/www/html
+
+# Copy Node and Composer from their stages.
+COPY --from=node-env --chown=www-data /usr/local/bin /usr/local/bin
+
+# Copy node_modules from node-env stage.
+COPY --from=node-env --chown=www-data /usr/local/lib/node_modules /usr/local/lib/node_modules
+
+COPY --from=composer-env /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
@@ -49,17 +67,5 @@ RUN mkdir /etc/supervisor.d
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-
-# Install packages like git, supervisor, nginx, and PHP extensions
-# su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
-RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec
-
-# Add extra extensions for Redis.
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
-    && pickle install redis \
-    && docker-php-ext-enable redis.so
-
-# Enable Docker PHP extensions
-RUN docker-php-ext-install bcmath pcntl pdo_mysql zip gd
 
 FROM base
