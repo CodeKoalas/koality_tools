@@ -27,7 +27,7 @@ RUN docker-php-ext-install bcmath pcntl pdo_mysql zip gd
 # Create the /var/www/html directory.
 RUN mkdir -p /var/www/html
 
-COPY --from=composer-env /usr/bin/composer /usr/bin/composer
+COPY --from=composer-env --chown=www-data:www-data /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
@@ -58,5 +58,7 @@ RUN mkdir /etc/supervisor.d
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+RUN su-exec nobody
 
 FROM base
