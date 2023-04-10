@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ template "appname" . }}
 data:
-  {{ .Values.deployment.config | toYaml | nindent 2 }}
+  APP_ENV: {{ .Values.deployment.appEnv }}
 
 ---
 # Need to read the values from deployment.extraEnv in the YAML file
