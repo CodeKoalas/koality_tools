@@ -28,6 +28,8 @@ spec:
         - name: cron
           image: {{ template "cronimagename" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.cron.resources | nindent 12 }}
           envFrom:
           - configMapRef:
               name: {{ template "appname" . }}

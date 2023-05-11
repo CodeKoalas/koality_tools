@@ -153,12 +153,13 @@ cron:
   ##
   image: registry.codekoalas.com/devops/helm/koality-charts:cron
   replicaCount: 1
-  limits:
-    cpu: 100m
-    memory: 500Mi
-  requests:
-    cpu: 50m
-    memory: 100Mi
+  resources:
+    limits:
+      cpu: 100m
+      memory: 500Mi
+    requests:
+      cpu: 50m
+      memory: 100Mi
 
 ## Mail ConfigMap values.
 mail:
