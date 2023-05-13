@@ -39,6 +39,12 @@ with pre-downloaded packages and configured to our liking to help keep the actua
 should be put into these images to keep build times fast; aside from very specific use-cases any packages required for a site/app should be added
 here instead of being done directly in the project's `Dockerfile`.
 
+### Docker Image build process
+On Merge Requests depending on file changes, `/bin/build.sh` is called, which follows this process:
+Based on changes in `/docker` and for each one builds an image for `koality-charts/[directory]/[subdirectory if exists]:$CI_COMMIT_SHA`.
+On tag events, we will call `/bin/build.sh` but this time since we have `$CI_COMMIT_TAG` then we will grab the `version.txt` file next to the
+`Dockerfile` and use that to create a tagged image.
+
 ### Drupal
 This image is preinstalled with things we require for Drupal itself or our typical list of modules we use/install.
 

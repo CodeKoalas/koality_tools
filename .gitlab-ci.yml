@@ -7,7 +7,7 @@ stages:
   - upload
 
 .build-base:
-  image: docker:latest
+  image: docker:23.0.6
   stage: build
   services:
     - docker:dind
@@ -15,6 +15,25 @@ stages:
     - until docker info; do sleep 1; done
     - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" --password-stdin
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+# Need a build that runs on tags and based on the tag name we will build
+# the images and then set some environment variables before calling the
+# /bin/build.sh script. The tags will look like "laravel-1.2.4" where we
+# want to extra anything before the `-1.4.3` and pass that as $DIRECTORY
+# and then extract the version as $VERSION and use those.
+build docker image:
+  extends: .build-base
+  script:
+    - DIRECTORY=`echo $CI_COMMIT_TAG | cut -d "-" -f1`
+    - VERSION=`echo $CI_COMMIT_TAG | cut -d "-" -f2`
+    - echo "Building $DIRECTORY:$VERSION"
+    - cd docker/$DIRECTORY
+    - docker build -t $CI_REGISTRY_IMAGE/$DIRECTORY:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/$DIRECTORY:$VERSION
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
+    - if: $CI_COMMIT_TAG =~ /^docker\/.*/
 
 build laravel base image:
   extends: .build-base
@@ -24,10 +43,42 @@ build laravel base image:
     - docker build -t $CI_REGISTRY_IMAGE/laravel:$VERSION ./
     - docker push $CI_REGISTRY_IMAGE/laravel:$VERSION
   rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
           - docker/laravel/version.txt
+
+build drupal 7 image:
+  extends: .build-base
+  script:
+    - cd docker/drupal/7
+    - VERSION=`cat version.txt`
+    - docker build -t $CI_REGISTRY_IMAGE/drupal/7:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/drupal/7:$VERSION
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/drupal/7/*
+
+build drupal 9 image:
+  extends: .build-base
+  script:
+    - cd docker/drupal/9
+    - VERSION=`cat version.txt`
+    - docker build -t $CI_REGISTRY_IMAGE/drupal/9:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/drupal/9:$VERSION
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/drupal/9/*
 
 build init mysql image:
   extends: .build-base
@@ -36,6 +87,8 @@ build init mysql image:
     - docker build -t $CI_REGISTRY_IMAGE:init-mysql ./
     - docker push $CI_REGISTRY_IMAGE:init-mysql
   rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
@@ -48,6 +101,8 @@ build init laravel image:
     - docker build -t $CI_REGISTRY_IMAGE:init-laravel ./
     - docker push $CI_REGISTRY_IMAGE:init-laravel
   rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
@@ -60,6 +115,8 @@ build laravel echo image:
     - docker build -t $CI_REGISTRY_IMAGE:laravel-echo ./
     - docker push $CI_REGISTRY_IMAGE:laravel-echo
   rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
@@ -72,6 +129,8 @@ build review mysql image:
     - docker build -t $CI_REGISTRY_IMAGE:review-mysql ./
     - docker push $CI_REGISTRY_IMAGE:review-mysql
   rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
