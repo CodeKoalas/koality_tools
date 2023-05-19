@@ -23,8 +23,14 @@ data:
   SESSION_DRIVER: "file"
   SESSION_LIFETIME: "120"
   MEMCACHED_HOST: "memcached"
-  REDIS_HOST: "{{ template "appname" . }}-redis"
+{{- if Values.redis.auth.username }}
+  REDIS_USERNAME: "{{ .Values.redis.auth.username }}"
+{{- end }}
+{{- if Values.redis.auth.password }}
   REDIS_PASSWORD: "{{ .Values.redis.password }}"
+{{- end }}
+  REDIS_SCHEME: "{{ .Values.redis.scheme }}"
+  REDIS_HOST: "{{ template "appname" . }}-redis"
   REDIS_PORT: "{{ .Values.redis.port }}"
   MAIL_MAILER: "{{ .Values.mail.mailer }}"
   MAIL_HOST: "{{ .Values.mail.host }}"

@@ -230,11 +230,19 @@ redis:
 
   ## @param redis.password The password to use for redis.
   ##
-  password: password
+  ## password: password
+
+  ## @param redis.username The username used for auth with redis.
+  ##
+  ## username: myusername
 
   ## @param redis.port The port to use for redis.
   ##
   port: 6379
+
+  ## @param redis.scheme Options allowed are 'tcp' and 'tls'.
+  ##
+  scheme: "tcp"
 
   ## @param redis.volumes The volumes to use for redis.
   ##
