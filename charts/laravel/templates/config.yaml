@@ -23,10 +23,10 @@ data:
   SESSION_DRIVER: "file"
   SESSION_LIFETIME: "120"
   MEMCACHED_HOST: "memcached"
-{{- if Values.redis.auth.username }}
+{{- if Values.redis.username }}
   REDIS_USERNAME: "{{ .Values.redis.auth.username }}"
 {{- end }}
-{{- if Values.redis.auth.password }}
+{{- if Values.redis.password }}
   REDIS_PASSWORD: "{{ .Values.redis.password }}"
 {{- end }}
   REDIS_SCHEME: "{{ .Values.redis.scheme }}"
