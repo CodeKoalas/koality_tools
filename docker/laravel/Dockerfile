@@ -9,6 +9,9 @@ FROM php:8.0.25-fpm-alpine as base
 # su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
 RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec
 
+# Make NGINX owned by www-data user.
+RUN chown -R www-data:www-data /var/lib/nginx
+
 # Configure Pickel for PHP 8.0+
 RUN wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/local/bin/pickle \
     && chmod +x /usr/local/bin/pickle
