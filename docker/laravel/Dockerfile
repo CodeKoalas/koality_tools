@@ -21,9 +21,6 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && pickle install redis \
     && docker-php-ext-enable redis.so
 
-# Run as www-data user.
-RUN su-exec www-data:www-data
-
 # Enable Docker PHP extensions
 RUN docker-php-ext-install bcmath pcntl pdo_mysql zip gd
 
