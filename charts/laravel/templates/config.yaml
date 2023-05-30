@@ -100,5 +100,5 @@ metadata:
     app: {{ template "appname" . }}
 data:
   laravel-echo-server.json: |
-{{ .Values.echo.config.data }}
+{{ .Values.echo.config.data | toJson | quote }}
 {{- end }}

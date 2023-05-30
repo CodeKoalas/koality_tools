@@ -281,8 +281,8 @@ echo:
   port: 6001
   config:
     mountPath: /var/www/html/laravel-echo-server.json
-    data: |
-    {}
+    data:
+      {}
   limits:
     cpu: 200m
     memory: 500Mi
