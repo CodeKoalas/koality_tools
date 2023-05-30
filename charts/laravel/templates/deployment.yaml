@@ -176,6 +176,11 @@ spec:
         {{- end }}
         - secretRef:
             name: {{ template "appname" . }}-secrets
+        {{- if .Values.echo.config }}
+        volumeMounts:
+          - name: echo-server-file
+            mountPath: {{ default "/var/www/html" .Values.echo.config.mountPath }}
+        {{- end }}
 {{- end }}
 
       imagePullSecrets:

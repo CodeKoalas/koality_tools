@@ -88,3 +88,17 @@ data:
   FCM_SENDER_ID: "{{ .Values.deployment.fcmSenderId }}"
 {{- end }}
 
+---
+# Need to assign a configmap as a laravel-echo-server.json file to have configurable
+# options for laravel-echo-server.
+{{- if .Values.echo.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "appname" . }}-echo-server-file
+  labels:
+    app: {{ template "appname" . }}
+data:
+  laravel-echo-server.json: |
+{{ .Values.echo.config.data }}
+{{- end }}
