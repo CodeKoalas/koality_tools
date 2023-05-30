@@ -99,6 +99,6 @@ metadata:
   labels:
     app: {{ template "appname" . }}
 data:
-  laravel-echo-server.json: |
-{{ .Values.echo.config.data | toJson | quote }}
+  laravel-echo-server.json:
+    {{ .Values.echo.config.data }}
 {{- end }}
