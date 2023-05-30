@@ -188,6 +188,11 @@ spec:
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
       volumes:
+{{- if .Values.echo.config }}
+        - name: echo-server-file
+          configMap:
+            name: {{ template "appname" . }}-echo-server-file
+{{- end }}
 {{- range $volume := .Values.persistence.volumes }}
         - name: {{ $volume.name | quote }}
           persistentVolumeClaim:
