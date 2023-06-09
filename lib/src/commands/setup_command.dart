@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/utilities.dart';
 import 'package:mason_logger/mason_logger.dart';
+import 'package:riverpod/riverpod.dart';
+
+import 'package:koality_tools/src/providers/config.dart';
+import 'package:koality_tools/src/utilities.dart';
 
 /// {@template sample_command}
 ///
@@ -13,12 +16,21 @@ class SetupCommand extends Command<int> {
   /// {@macro sample_command}
   SetupCommand({
     required Logger logger,
-  }) : _logger = logger {
-    argParser.addFlag(
-      'skip-ask',
-      abbr: 's',
-      help: 'Skips asking for confirmation before installing tools.',
-    );
+    required ProviderContainer container,
+  })  : _logger = logger,
+        _container = container {
+    argParser
+      ..addFlag(
+        'skip-ask',
+        abbr: 's',
+        help: 'Skips asking for confirmation before installing tools.',
+      )
+      ..addOption('config-path', abbr: 'p', help: 'The path to the config file.')
+      ..addOption(
+        'config-file',
+        abbr: 'c',
+        help: 'The config file to use for sensitive data and configuration. (default: .koality_config.json)',
+      );
   }
 
   @override
@@ -31,10 +43,19 @@ This will ask about installing tools unless the --skip-ask flag is passed.
   String get name => 'setup';
 
   final Logger _logger;
+  final ProviderContainer _container;
 
   @override
   Future<int> run() async {
     final skipAsking = argResults?['skip-ask'] as bool;
+    final configPath = argResults?['config-path'] as String?;
+    final config = await _container.read(getKoalityConfigProvider(logger: _logger, overrideConfigPath: configPath).future);
+
+    if (File(config.configPath).existsSync()) {
+      _logger.info('Found config file at ${config.configPath}');
+    } else {
+      _logger.err('No config file found at ${config.configPath}');
+    }
 
     /// Let's install jq now.
     final jqProcess = await Process.run('command', ['-v', 'jq']);

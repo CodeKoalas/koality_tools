@@ -10,6 +10,7 @@ import 'package:koality_tools/src/commands/kubectl/kubectl_command.dart';
 import 'package:koality_tools/src/commands/test_runner_command.dart';
 import 'package:koality_tools/src/commands/updater.dart';
 import 'package:koality_tools/src/version.dart';
+import 'package:riverpod/riverpod.dart';
 
 const executableName = 'koality';
 const packageName = 'koality_tools';
@@ -25,6 +26,7 @@ const description = 'A collection of useful tools created by Code Koalas.';
 class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   /// {@macro koality_tools_command_runner}
   KoalityToolsCommandRunner({
+    required this.container,
     Logger? logger,
     PackageUpdater? updater,
   })  : _logger = logger ?? Logger(),
@@ -44,10 +46,10 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
       );
 
     // Add sub commands
-    addCommand(SetupCommand(logger: _logger));
+    addCommand(SetupCommand(logger: _logger, container: container));
     addCommand(CoverageHelperCommand(logger: _logger));
     addCommand(POEditorCommand(logger: _logger));
-    addCommand(KubectlCommand(logger: _logger));
+    addCommand(KubectlCommand(logger: _logger, container: container));
     addCommand(TestRunnerCommand(logger: _logger));
     addCommand(ParseCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, updater: _updater));
@@ -56,6 +58,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   @override
   void printUsage() => _logger.info(usage);
 
+  final ProviderContainer container;
   final Logger _logger;
   final PackageUpdater _updater;
 

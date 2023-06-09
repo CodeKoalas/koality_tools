@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
@@ -24,6 +27,7 @@ void main() {
     late PackageUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
+    late ProviderContainer container;
 
     setUp(() {
       updater = MockUpdater();
@@ -33,9 +37,11 @@ void main() {
       ).thenAnswer((_) async => packageVersion);
 
       logger = MockLogger();
+      container = ProviderContainer();
 
       commandRunner = KoalityToolsCommandRunner(
         logger: logger,
+        container: container,
         updater: updater,
       );
     });
@@ -56,7 +62,7 @@ void main() {
       ).thenAnswer((_) async => latestVersion);
       when(
         () => updater.updatePackage(),
-      ).thenAnswer((_) => Future.value(FakeProcessResult()));
+      ).thenAnswer((_) => Future.value(ProcessResult(0, 0, '', '')));
 
       final progress = MockProgress();
       final progressLogs = <String>[];
@@ -71,9 +77,8 @@ void main() {
       verifyNever(() => logger.info(updatePrompt));
     });
 
-    test('can be instantiated without an explicit analytics/logger instance',
-        () {
-      final commandRunner = KoalityToolsCommandRunner();
+    test('can be instantiated without an explicit analytics/logger instance', () {
+      final commandRunner = KoalityToolsCommandRunner(container: ProviderContainer());
       expect(commandRunner, isNotNull);
     });
 
@@ -129,17 +134,15 @@ void main() {
       test('enables verbose logging for sub commands', () async {
         final result = await commandRunner.run([
           '--verbose',
-          'sample',
-          '--cyan',
+          'help',
         ]);
         expect(result, equals(ExitCode.success.code));
 
         verify(() => logger.detail('Argument information:')).called(1);
         verify(() => logger.detail('  Top level options:')).called(1);
         verify(() => logger.detail('  - verbose: true')).called(1);
-        verify(() => logger.detail('  Command: sample')).called(1);
+        verify(() => logger.detail('  Command: help')).called(1);
         verify(() => logger.detail('    Command options:')).called(1);
-        verify(() => logger.detail('    - cyan: true')).called(1);
       });
     });
   });

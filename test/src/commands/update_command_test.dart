@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
@@ -9,7 +10,7 @@ import 'package:koality_tools/src/commands/updater.dart';
 import 'package:koality_tools/src/command_runner.dart';
 import 'package:koality_tools/src/version.dart';
 
-class FakeProcessResult extends Fake implements ProcessResult {}
+//class FakeProcessResult extends Fake implements ProcessResult {}
 
 class MockLogger extends Mock implements Logger {}
 
@@ -28,10 +29,12 @@ void main() {
     setUp(() {
       final progress = MockProgress();
       final progressLogs = <String>[];
+      final container = ProviderContainer();
       updater = MockUpdater();
       logger = MockLogger();
       commandRunner = KoalityToolsCommandRunner(
         logger: logger,
+        container: container,
         updater: updater,
       );
 
@@ -93,7 +96,7 @@ void main() {
         ).thenAnswer((_) async => latestVersion);
         when(
           () => updater.updatePackage(),
-        ).thenAnswer((_) => Future.value(FakeProcessResult()));
+        ).thenAnswer((_) => Future.value(ProcessResult(0, 0, '', '')));
         when(() => logger.progress(any())).thenReturn(MockProgress());
         final result = await commandRunner.run(['update']);
         expect(result, equals(ExitCode.success.code));

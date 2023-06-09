@@ -83,6 +83,21 @@ For some helpful kubectl commands, these are Koality scripts to help manage and 
 $ koality kubectl clean-pods --namespace gitlab-managed-apps --status CrashLoopBackOff
 ```
 
+```sh
+# This will exec into any pod within a namespace matching text strings. (Namespace defaults to "gitlab-managed-apps" and
+# can be configured in the .koality_config.json file)
+$ koality kubectl exec --namespace gitlab-managed-apps safet
+```
+This will return a list of pods matching the passed text args (can pass multiple arguments, e.g. `safet grow cert` will return 
+any pod matching any of those strings) and allow you to select the one you want to exec into.
+
+```sh
+# This will describe any pods within a namespace matching text strings. (Namespace defaults to "gitlab-managed-apps" and
+# can be configured in the .koality_config.json file)
+$ koality kubectl describe --namespace gitlab-managed-apps safet
+```
+This will return a list of pods matching the passed text args (can pass multiple arguments, e.g. `safet grow cert` will return 
+any pod matching any of those strings) and allow you to select the one you want to describe.
 
 ## Running Parse Commands. 🪄
 

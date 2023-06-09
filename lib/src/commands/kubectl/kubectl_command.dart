@@ -1,7 +1,10 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/commands/kubectl/commands/clean_pods.dart';
+import 'package:koality_tools/src/commands/kubectl/commands/describe_pods.dart';
+import 'package:koality_tools/src/commands/kubectl/commands/exec_pods.dart';
 
 /// {@template kubectl_command}
 ///
@@ -12,8 +15,11 @@ class KubectlCommand extends Command<int> {
   /// {@macro poeditor_command}
   KubectlCommand({
     required Logger logger,
+    required ProviderContainer container,
   }) {
-    addSubcommand(KubectlCleanPodsCommand(logger: logger));
+    addSubcommand(KubectlCleanPodsCommand(logger: logger, container: container));
+    addSubcommand(KubectlDescribePodsCommand(logger: logger, container: container));
+    addSubcommand(KubectlExecPodsCommand(logger: logger, container: container));
   }
 
   @override
