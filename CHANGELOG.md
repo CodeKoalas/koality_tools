@@ -1,3 +1,7 @@
+[0.2.0] - 9/06/2023
+* Adding new `kubectl` commands for `exec` and `describe`.
+* Added a `.koality_config.json` file to help setup for future configuration options.
+
 [0.1.9] - 27/02/2023
 
 * Adding new `parse` command with a `version` subcommand that will get the version

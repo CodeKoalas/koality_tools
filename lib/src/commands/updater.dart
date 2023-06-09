@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+
 import 'package:koality_tools/src/constants.dart';
 
 class PackageUpdater {
