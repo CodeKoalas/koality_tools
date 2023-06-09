@@ -309,18 +309,18 @@ packages:
     dependency: "direct main"
     description:
       name: dcli
-      sha256: ce3ae0f12508b1522d1c8bb484c197cb6e945eb56e91483afbfe7d8f10b97f0f
+      sha256: "036afa6aa442a27ebdddc765b53d5d8786e9600c0a25de8d035f136fbb2ad3b2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.1"
+    version: "2.2.4"
   dcli_core:
     dependency: transitive
     description:
       name: dcli_core
-      sha256: aabfd5645dded76e4813a63fbc1907c7b9810fa45d8a8e84113311aba9c86a3f
+      sha256: "98eaf8975d47abd990ed58d96b2442abcd541eb627943ffb20ce23d734c18c5e"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.3"
+    version: "2.2.4"
   dio:
     dependency: "direct main"
     description:
@@ -346,13 +346,13 @@ packages:
     source: hosted
     version: "2.0.2"
   file:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: file
-      sha256: "5fc22d7c25582e38ad9a8515372cd9a93834027aacf1801cf01164dac0ffa08c"
+      sha256: "1b92bec4fc2a72f59a8e15af5f52cd441e4a7860b49499d69dfa817af20e925d"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "6.1.4"
   fixnum:
     dependency: transitive
     description:
@@ -730,13 +730,13 @@ packages:
     source: hosted
     version: "4.0.1"
   settings_yaml:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: settings_yaml
-      sha256: d1e4df76d0fba7aae772ff59c56ef756eb1ae7a4b836387d3ae87765bf968505
+      sha256: "7b24fabf8595da060cb98d72541d594c3d3c706272b4d7bec70b251473257909"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "6.0.0"
   shelf:
     dependency: transitive
     description:
