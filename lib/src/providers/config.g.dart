@@ -13,12 +13,14 @@ _$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) =>
           ? const KubectlConfig()
           : KubectlConfig.fromJson(
               json['kubectlConfig'] as Map<String, dynamic>),
+      gitlabAccessToken: json['gitlabAccessToken'] as String?,
     );
 
 Map<String, dynamic> _$$_KoalityConfigToJson(_$_KoalityConfig instance) =>
     <String, dynamic>{
       'configPath': instance.configPath,
       'kubectlConfig': instance.kubectlConfig,
+      'gitlabAccessToken': instance.gitlabAccessToken,
     };
 
 _$_KubectlConfig _$$_KubectlConfigFromJson(Map<String, dynamic> json) =>
@@ -36,7 +38,7 @@ Map<String, dynamic> _$$_KubectlConfigToJson(_$_KubectlConfig instance) =>
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getKoalityConfigHash() => r'e7a91b3bc3558a14e2551b9c2f03109aff957358';
+String _$getKoalityConfigHash() => r'0b6cfbf0ac2b85a8c65055af57fd061f2b9bf4de';
 
 /// Copied from Dart SDK
 class _SystemHash {

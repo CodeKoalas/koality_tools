@@ -7,7 +7,7 @@ build/
 
 # Files generated during tests
 .test_coverage.dart
-coverage/
+/coverage/
 .test_runner.dart
 
 # Android studio and IntelliJ

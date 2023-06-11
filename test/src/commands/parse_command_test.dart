@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
 import 'package:koality_tools/src/commands/parse/parse_command.dart';
-import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/services/updater.dart';
 
 //class FakeProcessResult extends Fake implements ProcessResult {}
 

@@ -1,14 +1,14 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
-import 'package:koality_tools/src/commands/parse/parse_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
-import 'package:koality_tools/src/commands/coverage_helper_command.dart';
+import 'package:koality_tools/src/commands/coverage/coverage_command.dart';
 import 'package:koality_tools/src/commands/kubectl/kubectl_command.dart';
-import 'package:koality_tools/src/commands/test_runner_command.dart';
-import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/commands/parse/parse_command.dart';
+import 'package:koality_tools/src/commands/test/test_command.dart';
+import 'package:koality_tools/src/services/updater.dart';
 import 'package:koality_tools/src/version.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -27,10 +27,9 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   /// {@macro koality_tools_command_runner}
   KoalityToolsCommandRunner({
     required this.container,
+    required this.updater,
     Logger? logger,
-    PackageUpdater? updater,
   })  : _logger = logger ?? Logger(),
-        _updater = updater ?? PackageUpdater(),
         super(executableName, description) {
     // Add root options and flags
     argParser
@@ -47,20 +46,20 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
 
     // Add sub commands
     addCommand(SetupCommand(logger: _logger, container: container));
-    addCommand(CoverageHelperCommand(logger: _logger));
+    addCommand(CoverageCommand(logger: _logger));
     addCommand(POEditorCommand(logger: _logger));
     addCommand(KubectlCommand(logger: _logger, container: container));
     addCommand(TestRunnerCommand(logger: _logger));
     addCommand(ParseCommand(logger: _logger));
-    addCommand(UpdateCommand(logger: _logger, updater: _updater));
+    addCommand(UpdateCommand(logger: _logger, updater: updater));
   }
 
   @override
   void printUsage() => _logger.info(usage);
 
   final ProviderContainer container;
+  final PackageUpdater updater;
   final Logger _logger;
-  final PackageUpdater _updater;
 
   @override
   Future<int> run(Iterable<String> args) async {
@@ -135,7 +134,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   /// user.
   Future<void> _checkForUpdates() async {
     try {
-      final latestVersion = await _updater.getLatestVersion();
+      final latestVersion = await updater.getLatestVersion();
       final isUpToDate = packageVersion == latestVersion;
       if (!isUpToDate) {
         _logger

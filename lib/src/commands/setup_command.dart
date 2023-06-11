@@ -53,6 +53,11 @@ This will ask about installing tools unless the --skip-ask flag is passed.
 
     if (File(config.configPath).existsSync()) {
       _logger.info('Found config file at ${config.configPath}');
+
+      if (config.gitlabAccessToken?.isEmpty ?? false) {
+        final token = _logger.prompt('Enter your Gitlab API Access Token');
+        //await 
+      }
     } else {
       _logger.err('No config file found at ${config.configPath}');
     }

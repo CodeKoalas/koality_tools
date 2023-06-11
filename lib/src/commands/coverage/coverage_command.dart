@@ -9,9 +9,9 @@ import 'package:sprintf/sprintf.dart';
 /// `koality coverage`
 /// A [Command] that creates a file referencing all code files to make sure coverage is run on all files.
 /// {@endtemplate}
-class CoverageHelperCommand extends Command<int> {
+class CoverageCommand extends Command<int> {
   /// {@macro coverage_command}
-  CoverageHelperCommand({
+  CoverageCommand({
     required Logger logger,
   }) : _logger = logger {
     argParser.addOption(

@@ -22,6 +22,7 @@ KoalityConfig _$KoalityConfigFromJson(Map<String, dynamic> json) {
 mixin _$KoalityConfig {
   String get configPath => throw _privateConstructorUsedError;
   KubectlConfig get kubectlConfig => throw _privateConstructorUsedError;
+  String? get gitlabAccessToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,10 @@ abstract class $KoalityConfigCopyWith<$Res> {
           KoalityConfig value, $Res Function(KoalityConfig) then) =
       _$KoalityConfigCopyWithImpl<$Res, KoalityConfig>;
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      String? gitlabAccessToken});
 
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
 }
@@ -55,6 +59,7 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig>
   $Res call({
     Object? configPath = null,
     Object? kubectlConfig = null,
+    Object? gitlabAccessToken = freezed,
   }) {
     return _then(_value.copyWith(
       configPath: null == configPath
@@ -65,6 +70,10 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig>
           ? _value.kubectlConfig
           : kubectlConfig // ignore: cast_nullable_to_non_nullable
               as KubectlConfig,
+      gitlabAccessToken: freezed == gitlabAccessToken
+          ? _value.gitlabAccessToken
+          : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -85,7 +94,10 @@ abstract class _$$_KoalityConfigCopyWith<$Res>
       __$$_KoalityConfigCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      String? gitlabAccessToken});
 
   @override
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
@@ -104,6 +116,7 @@ class __$$_KoalityConfigCopyWithImpl<$Res>
   $Res call({
     Object? configPath = null,
     Object? kubectlConfig = null,
+    Object? gitlabAccessToken = freezed,
   }) {
     return _then(_$_KoalityConfig(
       configPath: null == configPath
@@ -114,6 +127,10 @@ class __$$_KoalityConfigCopyWithImpl<$Res>
           ? _value.kubectlConfig
           : kubectlConfig // ignore: cast_nullable_to_non_nullable
               as KubectlConfig,
+      gitlabAccessToken: freezed == gitlabAccessToken
+          ? _value.gitlabAccessToken
+          : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -122,7 +139,9 @@ class __$$_KoalityConfigCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_KoalityConfig extends _KoalityConfig {
   const _$_KoalityConfig(
-      {required this.configPath, this.kubectlConfig = const KubectlConfig()})
+      {required this.configPath,
+      this.kubectlConfig = const KubectlConfig(),
+      this.gitlabAccessToken})
       : super._();
 
   factory _$_KoalityConfig.fromJson(Map<String, dynamic> json) =>
@@ -133,10 +152,12 @@ class _$_KoalityConfig extends _KoalityConfig {
   @override
   @JsonKey()
   final KubectlConfig kubectlConfig;
+  @override
+  final String? gitlabAccessToken;
 
   @override
   String toString() {
-    return 'KoalityConfig(configPath: $configPath, kubectlConfig: $kubectlConfig)';
+    return 'KoalityConfig(configPath: $configPath, kubectlConfig: $kubectlConfig, gitlabAccessToken: $gitlabAccessToken)';
   }
 
   @override
@@ -147,12 +168,15 @@ class _$_KoalityConfig extends _KoalityConfig {
             (identical(other.configPath, configPath) ||
                 other.configPath == configPath) &&
             (identical(other.kubectlConfig, kubectlConfig) ||
-                other.kubectlConfig == kubectlConfig));
+                other.kubectlConfig == kubectlConfig) &&
+            (identical(other.gitlabAccessToken, gitlabAccessToken) ||
+                other.gitlabAccessToken == gitlabAccessToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, configPath, kubectlConfig);
+  int get hashCode =>
+      Object.hash(runtimeType, configPath, kubectlConfig, gitlabAccessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +195,8 @@ class _$_KoalityConfig extends _KoalityConfig {
 abstract class _KoalityConfig extends KoalityConfig {
   const factory _KoalityConfig(
       {required final String configPath,
-      final KubectlConfig kubectlConfig}) = _$_KoalityConfig;
+      final KubectlConfig kubectlConfig,
+      final String? gitlabAccessToken}) = _$_KoalityConfig;
   const _KoalityConfig._() : super._();
 
   factory _KoalityConfig.fromJson(Map<String, dynamic> json) =
@@ -181,6 +206,8 @@ abstract class _KoalityConfig extends KoalityConfig {
   String get configPath;
   @override
   KubectlConfig get kubectlConfig;
+  @override
+  String? get gitlabAccessToken;
   @override
   @JsonKey(ignore: true)
   _$$_KoalityConfigCopyWith<_$_KoalityConfig> get copyWith =>

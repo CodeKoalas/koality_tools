@@ -1,13 +1,24 @@
 import 'dart:io';
 
-import 'package:koality_tools/src/command_runner.dart';
+import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
+
+import 'package:koality_tools/src/command_runner.dart';
+import 'package:koality_tools/src/providers/package_updater.dart';
 
 typedef VoidCallback = void Function();
 
 Future<void> main(List<String> args) async {
   final container = ProviderContainer();
-  await _flushThenExit(await KoalityToolsCommandRunner(container: container).run(args), container.dispose);
+  final logger = Logger();
+  final updater = await container.read(getPackageUpdaterProvider(logger: logger).future);
+  await _flushThenExit(
+    await KoalityToolsCommandRunner(
+      container: container,
+      updater: updater,
+    ).run(args),
+    container.dispose,
+  );
 }
 
 /// Flushes the stdout and stderr streams, then exits the program with the given

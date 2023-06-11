@@ -2,24 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import 'package:koality_tools/src/constants.dart';
-
 class PackageUpdater {
-  PackageUpdater();
+  const PackageUpdater({required this.client});
 
-  final Dio client = Dio(
-    BaseOptions(
-      baseUrl: 'https://gitlab.codekoalas.com',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'PRIVATE-TOKEN': kGitlabAccessToken,
-      },
-    ),
-  );
+  final Dio client;
 
-  final projectUrl = '/api/v4/projects/640/repository/files/lib%2Fsrc%2Fversion%2Edart/raw?ref=master';
-  final versionTextCheck = 'const packageVersion = ';
+  String get projectUrl => '/api/v4/projects/640/repository/files/lib%2Fsrc%2Fversion%2Edart/raw?ref=master';
+  String get versionTextCheck => 'const packageVersion = ';
 
   /// Get the latest version from Gitlab.
   Future<String> getLatestVersion() async {

@@ -1,7 +1,7 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/services/updater.dart';
 import 'package:koality_tools/src/version.dart';
 
 /// {@template update_command}
@@ -11,9 +11,9 @@ class UpdateCommand extends Command<int> {
   /// {@macro update_command}
   UpdateCommand({
     required Logger logger,
-    PackageUpdater? updater,
+    required PackageUpdater updater,
   })  : _logger = logger,
-        _updater = updater ?? PackageUpdater();
+        _updater = updater;
 
   final Logger _logger;
   final PackageUpdater _updater;

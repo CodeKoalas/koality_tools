@@ -6,7 +6,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
-import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/services/updater.dart';
 import 'package:koality_tools/src/command_runner.dart';
 import 'package:koality_tools/src/version.dart';
 
@@ -49,7 +49,7 @@ void main() {
     });
 
     test('can be instantiated without a pub updater', () {
-      final command = UpdateCommand(logger: logger);
+      final command = UpdateCommand(logger: logger, updater: updater);
       expect(command, isNotNull);
     });
 

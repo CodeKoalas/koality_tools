@@ -7,7 +7,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/commands/updater.dart';
+import 'package:koality_tools/src/services/updater.dart';
 import 'package:koality_tools/src/version.dart';
 
 import 'commands/update_command_test.dart';
@@ -78,7 +78,7 @@ void main() {
     });
 
     test('can be instantiated without an explicit analytics/logger instance', () {
-      final commandRunner = KoalityToolsCommandRunner(container: ProviderContainer());
+      final commandRunner = KoalityToolsCommandRunner(container: ProviderContainer(), updater: updater);
       expect(commandRunner, isNotNull);
     });
 
