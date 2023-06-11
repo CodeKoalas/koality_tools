@@ -1,4 +1,7 @@
-[0.2.0] - 9/06/2023
+[0.2.1] - 11/06/2023
+* Adding config manager to help with adding a Gitlab token during setup.
+
+[0.2.0] - 09/06/2023
 * Adding new `kubectl` commands for `exec` and `describe`.
 * Added a `.koality_config.json` file to help setup for future configuration options.
 

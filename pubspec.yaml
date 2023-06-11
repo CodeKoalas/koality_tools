@@ -1,6 +1,6 @@
 name: koality_tools
 description: A collection of useful scripts for various projects.
-version: 0.2.0
+version: 0.2.1
 repository: https://gitlab.codekoalas.com/tools/koality_tools
 publish_to: none
 
