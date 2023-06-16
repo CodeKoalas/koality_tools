@@ -1,6 +1,10 @@
 # syntax=docker/dockerfile:1
 # Base image for Dart executables.
-FROM dart:stable as base
+FROM dart:stable as dart
+
+FROM alpine:3.18 as base
+
+COPY --from=dart /runtime/ /
 
 # Install packages like git, supervisor, bash and vim
 # su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
