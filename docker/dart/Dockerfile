@@ -4,8 +4,12 @@ FROM dart:stable as dart
 
 FROM alpine:3.18 as base
 
-COPY --from=dart /usr/bin/dart /usr/bin/dart
+COPY --from=dart /usr/lib/dart /usr/bin/dart
 COPY --from=dart /runtime/ /
+
+# Set the Dart SDK environment variable and add to path.
+ENV DART_SDK /usr/bin/dart
+ENV PATH $DART_SDK/bin:$PATH
 
 # Install packages like git, supervisor, bash and vim
 # su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
