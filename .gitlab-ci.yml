@@ -151,6 +151,21 @@ build dart base image:
         paths:
           - docker/dart/version.txt
 
+build koality alpine base image:
+  extends: .build-base
+  script:
+    - cd docker/alpine
+    - VERSION=`cat version.txt`
+    - docker build -t $CI_REGISTRY_IMAGE/alpine:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/alpine:$VERSION
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      when: manual
+    - if: $CI_COMMIT_BRANCH == "master"
+      changes:
+        paths:
+          - docker/alpine/version.txt
+
 # @TODO: Clean this up into a utility script that gets fired on a tag and
 # that script decides what it should build and upload to the Helm Repo. Hopefully
 # Gitlab's Helm Registry will have some better out-of-box support soon.

@@ -2,7 +2,7 @@
 # Base image for Dart executables.
 FROM dart:stable as dart
 
-FROM alpine:3.18 as base
+FROM debian:bullseye as base
 
 COPY --from=dart /usr/lib/dart /usr/bin/dart
 COPY --from=dart /runtime/ /
