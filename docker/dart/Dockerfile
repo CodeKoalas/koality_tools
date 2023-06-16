@@ -4,6 +4,7 @@ FROM dart:stable as dart
 
 FROM alpine:3.18 as base
 
+COPY --from=dart /usr/bin/dart /usr/bin/dart
 COPY --from=dart /runtime/ /
 
 # Install packages like git, supervisor, bash and vim
