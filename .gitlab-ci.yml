@@ -53,17 +53,17 @@ build laravel base image:
 build laravel php8.1 base image:
   extends: .build-base
   script:
-    - cd docker/laravel/php8.1
+    - cd docker/laravel/php-8.1
     - VERSION=`cat version.txt`
-    - docker build -t $CI_REGISTRY_IMAGE/laravel/php8.1:$VERSION ./
-    - docker push $CI_REGISTRY_IMAGE/laravel/php8.1:$VERSION
+    - docker build -t $CI_REGISTRY_IMAGE/laravel/php-8.1:$VERSION ./
+    - docker push $CI_REGISTRY_IMAGE/laravel/php-8.1:$VERSION
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
       when: manual
     - if: $CI_COMMIT_BRANCH == "master"
       changes:
         paths:
-          - docker/laravel/php8.1/version.txt
+          - docker/laravel/php-8.1/version.txt
 
 build drupal 7 image:
   extends: .build-base
