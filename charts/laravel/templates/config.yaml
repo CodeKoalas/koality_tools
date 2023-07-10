@@ -128,8 +128,7 @@ metadata:
 # and the values as the file contents.
 data:
   {{- range $dataKey, $dataValue := $value.data }}
-  {{ $dataKey }}:
-{{ $dataValue | indent 4 }}
+  {{ $dataKey }}: {{ $dataValue }}
   {{- end }}
 {{- end }}
 {{- end }}
