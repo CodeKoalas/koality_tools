@@ -205,9 +205,10 @@ spec:
 # Check for deployment.configMaps and then map each of them to a volume.
 {{- if .Values.deployment.configMaps }}
 {{- range $key, $value := .Values.deployment.configMaps }}
+        {{ $args := dict "Release" .Release "Values" .Values }}
         - name: {{ $key }}
           configMap:
-            name: {{ template "appname" . }}-{{ $key }}
+            name: {{ template "appname" $args }}-{{ $key }}
 {{- end }}
 {{- end }}
 {{- range $volume := .Values.persistence.volumes }}
