@@ -114,13 +114,14 @@ data:
 #       server-file.json: |-
 #         {}
 {{- if .Values.deployment.configMaps }}
+{{- $appname := include "appname" . -}}
 {{- range $key, $value := .Values.deployment.configMaps }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "appname" . }}-{{ $key }}
+  name: {{ $appname }}-{{ $key }}
   labels:
-    app: {{ template "appname" . }}
+    app: {{ $appname }}
 # Now we need to loop over each data value and use the keys as file names
 # and the values as the file contents.
 data:
