@@ -114,10 +114,10 @@ data:
 #       server-file.json: |-
 #         {}
 {{- if .Values.deployment.configMaps }}
+{{- $context := . }}
 {{- range $key, $value := .Values.deployment.configMaps }}
 # Range looses some context, so we create a new dict and pass on the .Release
 # and .Values to the template functions.
-{{- $context := . }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
