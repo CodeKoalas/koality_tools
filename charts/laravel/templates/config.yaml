@@ -102,3 +102,31 @@ data:
   laravel-echo-server.json: |-
     {{ .Values.echo.config.data }}
 {{- end }}
+
+---
+# Need to allow the deployment to define config maps as files that we can mount
+# inside the pods.
+# The configMaps value can look like the below.
+# configMaps:
+#   serverFile:
+#     mountPath: /etc/config
+#     data: 
+#       server-file.json: |-
+#         {}
+{{- if .Values.deployment.configMaps }}
+{{- range $key, $value := .Values.deployment.configMaps }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "appname" . }}-{{ $key }}
+  labels:
+    app: {{ template "appname" . }}
+# Now we need to loop over each data value and use the keys as file names
+# and the values as the file contents.
+data:
+  {{- range $dataKey, $dataValue := $value.data }}
+  {{ $dataKey }}: |-
+    {{ $dataValue }}
+  {{- end }}
+{{- end }}
+{{- end }}

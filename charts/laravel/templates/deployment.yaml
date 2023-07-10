@@ -176,8 +176,17 @@ spec:
         {{- end }}
         - secretRef:
             name: {{ template "appname" . }}-secrets
-        {{- if .Values.echo.config }}
+        # If we have deployment.configMaps set then we need to create a volume mount for each one.
         volumeMounts:
+        {{- if .Values.deployment.configMaps }}
+        {{- range $key, $value := .Values.deployment.configMaps }}
+        # Now we need to map each one to the container using the mountPath as the mount
+        # and then each key as the name.
+          - name: {{ $key }}
+            mountPath: {{ $value.mountPath }}
+        {{- end }}
+        {{- end }}
+        {{- if .Values.echo.config }}
           - name: echo-server-file
             mountPath: {{ default "/var/www/html" .Values.echo.config.mountPath }}
         {{- end }}
@@ -192,6 +201,14 @@ spec:
         - name: echo-server-file
           configMap:
             name: {{ template "appname" . }}-echo-server-file
+{{- end }}
+# Check for deployment.configMaps and then map each of them to a volume.
+{{- if .Values.deployment.configMaps }}
+{{- range $key, $value := .Values.deployment.configMaps }}
+        - name: {{ $key }}
+          configMap:
+            name: {{ template "appname" . }}-{{ $key }}
+{{- end }}
 {{- end }}
 {{- range $volume := .Values.persistence.volumes }}
         - name: {{ $volume.name | quote }}
