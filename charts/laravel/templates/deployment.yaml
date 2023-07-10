@@ -183,7 +183,7 @@ spec:
         # Now we need to map each one to the container using the mountPath as the mount
         # and then each key as the name.
           - name: {{ $key }}
-            mountPath: {{ $value.mountPath }}
+            mountPath: {{ default "/var/www/html" $value.mountPath }}
         {{- end }}
         {{- end }}
         {{- if .Values.echo.config }}
