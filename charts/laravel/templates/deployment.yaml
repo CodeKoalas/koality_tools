@@ -99,6 +99,14 @@ spec:
             subPath: {{ $volume.mount.subPath | quote }}
             {{- end }}
 {{- end }}
+{{- if .Values.deployment.configMaps }}
+{{- range $key, $value := .Values.deployment.configMaps }}
+        # Now we need to map each one to the container using the mountPath as the mount
+        # and then each key as the name.
+          - name: {{ $key }}
+            mountPath: {{ default "/var/www/html" $value.mountPath }}
+{{- end }}
+{{- end }}
 {{- end }}
         envFrom:
         - configMapRef:
@@ -178,14 +186,6 @@ spec:
             name: {{ template "appname" . }}-secrets
         # If we have deployment.configMaps set then we need to create a volume mount for each one.
         volumeMounts:
-        {{- if .Values.deployment.configMaps }}
-        {{- range $key, $value := .Values.deployment.configMaps }}
-        # Now we need to map each one to the container using the mountPath as the mount
-        # and then each key as the name.
-          - name: {{ $key }}
-            mountPath: {{ default "/var/www/html" $value.mountPath }}
-        {{- end }}
-        {{- end }}
         {{- if .Values.echo.config }}
           - name: echo-server-file
             mountPath: {{ default "/var/www/html" .Values.echo.config.mountPath }}

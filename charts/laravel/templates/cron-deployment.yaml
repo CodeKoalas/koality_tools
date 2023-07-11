@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: cron
-          image: {{ template "docker.image" (dict "Values" .Values.cron.image) }}
+          image: "{{ template "docker.image" (dict "Values" .Values.cron.image) }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.cron.resources | nindent 12 }}
