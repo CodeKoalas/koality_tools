@@ -1,4 +1,5 @@
 import 'package:args/command_runner.dart';
+import 'package:koality_tools/src/commands/kubectl/commands/logs_resources.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -20,6 +21,7 @@ class KubectlCommand extends Command<int> {
     addSubcommand(KubectlCleanPodsCommand(logger: logger, container: container));
     addSubcommand(KubectlDescribePodsCommand(logger: logger, container: container));
     addSubcommand(KubectlExecPodsCommand(logger: logger, container: container));
+    addSubcommand(KubectlLogsResourcesCommand(logger: logger, container: container));
   }
 
   @override

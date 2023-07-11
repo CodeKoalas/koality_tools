@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -34,13 +35,14 @@ class KubectlDescribePodsCommand extends Command<int> {
 
   final Logger _logger;
   final ProviderContainer _container;
+  final SearchPodsExecutor searchPods = const SearchPodsExecutor();
 
   @override
   Future<int> run() async {
     final namespace = argResults?['namespace'] as String?;
     final searchTerms = argResults?.arguments ?? [];
     final config = await _container.read(getKoalityConfigProvider(logger: _logger).future);
-    _logger.info('Running kubectl search command');
+    _logger.info('Running kubectl describe command');
     final computedNamespace = namespace ?? config.kubectlConfig.defaultNamespace;
 
     /// Now let's run this command in a single process:
@@ -48,19 +50,7 @@ class KubectlDescribePodsCommand extends Command<int> {
     /// pods that have the $serchTerm value, then we need to make this a vertical list of values and then we
     /// want to present these options to the user and let them select which pod they want.
     try {
-      final podList = Process.runSync(
-        'bash',
-        ['-c', "kubectl get pod -n $computedNamespace | awk '{print \$1}'"],
-        runInShell: true,
-      );
-      final podListString = podList.stdout.toString();
-      final newLines = podListString.split('\n');
-      final filtered = newLines.where((element) {
-        // Check to see if elements contains any of the values in searchTerms.
-        return searchTerms.any((searchTerm) {
-          return element.contains(searchTerm);
-        });
-      }).toList();
+      final filtered = searchPods(searchTerms, namespace: computedNamespace);
       final podName = _logger.chooseOne<String>(
         'Which pod would you like to describe?',
         choices: filtered,
