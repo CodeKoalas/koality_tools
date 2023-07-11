@@ -1,3 +1,6 @@
+[0.3.1] - 11/07/2023
+* Adding new `kubectl logs` command to grab logs for a resource.
+
 [0.3.0] - 22/06/2023
 * Adding new `firebase` command with the `configure` subcommand.
 * Adding new `scaffold` command from the Koality Scaffold tool. Merged into this tool.

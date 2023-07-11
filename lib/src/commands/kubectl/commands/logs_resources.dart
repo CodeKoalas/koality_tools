@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:dcli/dcli.dart';
 import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
@@ -10,12 +10,12 @@ import 'package:koality_tools/src/providers/config.dart';
 
 /// {@template kubectl_command}
 ///
-/// `koality kubectl exec`
-/// A [Command] to exec into a pod and find it by matching text to the pod name.
+/// `koality kubectl logs`
+/// A [Command] to get the logs of a resource and find it by matching text to the resource name.
 /// {@endtemplate}
-class KubectlExecPodsCommand extends Command<int> {
+class KubectlLogsResourcesCommand extends Command<int> {
   /// {@macro poeditor_command}
-  KubectlExecPodsCommand({
+  KubectlLogsResourcesCommand({
     required Logger logger,
     required ProviderContainer container,
   })  : _logger = logger,
@@ -24,32 +24,44 @@ class KubectlExecPodsCommand extends Command<int> {
       ..addOption(
         'namespace',
         abbr: 'n',
-        help: 'The namespace where we will search for pods. Defaults to config value.',
+        help: 'The namespace where we will search for resources. Defaults to config value.',
       )
-      ..addFlag('stdin', abbr: 'i', help: 'Forwarded to kubectl.', defaultsTo: true)
-      ..addFlag('tty', abbr: 't', help: 'Forwarded to kubectl.', defaultsTo: true)
-      ..addOption('shell', abbr: 's', help: 'The shell to use when execing into the pod.', defaultsTo: '/bin/bash');
+      ..addOption(
+        'type',
+        abbr: 't',
+        allowed: allowedTypes,
+        defaultsTo: 'pod',
+        help: 'What type of resource to search for (pod, deployment, configmap, etc etc).',
+      );
   }
 
   @override
-  String get description => 'A command to exec into pods from a namespace by matching the name.';
+  String get description => 'A command to get logs of a resource from a namespace by matching the name.';
 
   @override
-  String get name => 'exec';
+  String get name => 'logs';
 
   final Logger _logger;
   final ProviderContainer _container;
-  final SearchPodsExecutor searchPods = const SearchPodsExecutor();
+  final SearchResourceExecutor searchResources = const SearchResourceExecutor();
+
+  final List<String> allowedTypes = const [
+    'pod',
+    'deployment',
+    'statefulset',
+    'configmap',
+    'service',
+    'secret',
+    'ingress',
+  ];
 
   @override
   Future<int> run() async {
     final namespace = argResults?['namespace'] as String?;
-    final useTTY = argResults?['tty'] as bool;
-    final useStdin = argResults?['stdin'] as bool;
-    final shell = argResults?['shell'] as String? ?? '/bin/bash';
+    final type = argResults?['type'] as String;
     final searchTerms = argResults?.arguments ?? [];
     final config = await _container.read(getKoalityConfigProvider(logger: _logger).future);
-    _logger.info('Running kubectl exec command');
+    _logger.info('Running kubectl logs command');
     final computedNamespace = namespace ?? config.kubectlConfig.defaultNamespace;
 
     /// Now let's run this command in a single process:
@@ -57,20 +69,14 @@ class KubectlExecPodsCommand extends Command<int> {
     /// pods that have the $serchTerm value, then we need to make this a vertical list of values and then we
     /// want to present these options to the user and let them select which pod they want.
     try {
-      final filtered = searchPods(searchTerms, namespace: computedNamespace);
-      final podName = _logger.chooseOne<String>(
-        'Which pod would you like to exec into?',
+      final filtered = searchResources(searchTerms, namespace: computedNamespace, element: type);
+      final resourceName = _logger.chooseOne<String>(
+        'Which $type would you like to get logs from?',
         choices: filtered,
         defaultValue: filtered[0],
       );
-
-      // Run command.
-      [
-        'kubectl exec',
-        if (useTTY) '-t' else '',
-        if (useStdin) '-i' else '',
-        '-n $computedNamespace $podName -- $shell',
-      ].join(' ').start(terminal: useStdin);
+      final describedResource = await Process.run('kubectl', ['logs', resourceName, '-n', computedNamespace]);
+      _logger.info(describedResource.stdout.toString());
     } catch (e) {
       _logger.err(e.toString());
       return ExitCode.software.code;

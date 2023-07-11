@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -42,6 +43,7 @@ class KubectlCleanPodsCommand extends Command<int> {
 
   final Logger _logger;
   final ProviderContainer _container;
+  final SearchPodsExecutor searchPods = const SearchPodsExecutor();
 
   static List<String> allowedStatuses = ['Evicted', 'CrashLoopBackOff', 'Completed', 'ContainerStatusUnknown'];
 
@@ -50,7 +52,7 @@ class KubectlCleanPodsCommand extends Command<int> {
     final namespace = argResults?['namespace'] as String?;
     final status = argResults?['status'] as String;
     final config = await _container.read(getKoalityConfigProvider(logger: _logger).future);
-    _logger.info('Running kubectl clean-evicted command');
+    _logger.info('Running kubectl clean-pods command');
     final computedNamespace = namespace ?? config.kubectlConfig.defaultNamespace;
 
     /// Now let's run this command in a single process:
