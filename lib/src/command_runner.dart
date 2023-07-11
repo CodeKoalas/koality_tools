@@ -1,6 +1,8 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
+import 'package:koality_tools/src/commands/refactor_command.dart';
+import 'package:koality_tools/src/commands/scaffold_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
@@ -46,6 +48,8 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
 
     // Add sub commands
     addCommand(SetupCommand(logger: _logger, container: container));
+    addCommand(ScaffoldCommand(logger: _logger, container: container));
+    addCommand(RefactorCommand(logger: _logger));
     addCommand(CoverageCommand(logger: _logger));
     addCommand(POEditorCommand(logger: _logger));
     addCommand(KubectlCommand(logger: _logger, container: container));

@@ -61,7 +61,18 @@ class KoalityConfigManager {
     if (!configFile.existsSync()) {
       configFile
         ..createSync(recursive: true)
-        ..writeAsStringSync('{"configPath": "${configFile.path}", "kubectlConfig": {}, "gitlabAccessToken": ""}');
+        ..writeAsStringSync(
+            '''
+{
+  "configPath": "${configFile.path}", 
+  "kubectlConfig": {}, 
+  "gitlabAccessToken": "", 
+  "firebase": {
+    "skipDev" false,
+    "skipProd" false,
+  }
+}
+            ''');
     }
 
     final data = await configFile.readAsString();

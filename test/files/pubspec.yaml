@@ -1,0 +1,8 @@
+name: koality_tools_test
+description: An example YAML file for parsing
+version: 0.2.0
+repository: https://gitlab.codekoalas.com/tools/koality_tools
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"

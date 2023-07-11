@@ -1,0 +1,29 @@
+import 'package:args/command_runner.dart';
+import 'package:mason_logger/mason_logger.dart';
+import 'package:riverpod/riverpod.dart';
+
+import 'package:koality_tools/src/commands/firebase/commands/configure_command.dart';
+
+/// {@template firebase_command}
+///
+/// `koality firebase [command]`
+/// A [Command] to do stuff related to Firebase CLI
+/// {@endtemplate}
+class FirebaseCommand extends Command<int> {
+  /// {@macro poeditor_command}
+  FirebaseCommand({
+    required Logger logger,
+    required ProviderContainer container,
+  }) {
+    addSubcommand(FirebaseConfigureCommand(logger: logger, container: container));
+  }
+
+  @override
+  String get description => 'A command for handling Firebase stuff.';
+
+  @override
+  String get name => 'firebase';
+
+  @override
+  String get invocation => 'koality firebase <subcommand> [arguments]';
+}

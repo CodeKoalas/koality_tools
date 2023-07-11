@@ -18,7 +18,7 @@ class MockProgress extends Mock implements Progress {}
 class MockUpdater extends Mock implements PackageUpdater {}
 
 void main() {
-  const yamlFile = 'pubspec.yaml';
+  const yamlFile = 'test/files/pubspec.yaml';
 
   group('update', () {
     late PackageUpdater updater;

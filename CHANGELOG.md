@@ -1,3 +1,8 @@
+[0.3.0] - 22/06/2023
+* Adding new `firebase` command with the `configure` subcommand.
+* Adding new `scaffold` command from the Koality Scaffold tool. Merged into this tool.
+* Adding new `refactor` command that will help rename imports from one name to another.
+
 [0.2.1] - 11/06/2023
 * Adding config manager to help with adding a Gitlab token during setup.
 
