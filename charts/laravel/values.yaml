@@ -115,7 +115,9 @@ deployment:
 
   ## @param deployment.initContainerImage The image to use for the init container.
   ##
-  initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
+  initContainerImage:
+    repository: registry.codekoalas.com/devops/helm/koality-charts
+    tag: init-mysql
 
   ## @param deployment.fcmSenderId The FCM Sender ID to use for the deployment.
   ##
@@ -160,7 +162,9 @@ cron:
 
   ## @param cron.image The image to use for the cron deployment.
   ##
-  image: registry.codekoalas.com/devops/helm/koality-charts:cron
+  image: 
+    repository: registry.codekoalas.com/devops/helm/koality-charts
+    tag: cron
   replicaCount: 1
   resources:
     limits:
@@ -233,6 +237,12 @@ mixpusher:
 
 ## Laravel Redis statefulset.
 redis:
+  ## @param redis.image The image to use for the redis statefulset.
+  ##
+  image:
+    repository: redis
+    tag: "7"
+
   ## @param redis.enabled Specifies whether a redis statefulset should be created.
   ##
   enabled: false
@@ -286,7 +296,9 @@ echo:
   ## @param echo.host The LARAVEL_SERVER_ECHO_HOST environment variable.
   ##
   host: localhost
-  image: registry.codekoalas.com/devops/helm/koality-charts:laravel-echo
+  image: 
+    repository: registry.codekoalas.com/devops/helm/koality-charts
+    tag: laravel-echo
   port: 6001
   config:
     mountPath: /var/www/html/laravel-echo-server.json
@@ -347,7 +359,9 @@ persistence:
 
     ## @param persistence.ephemeral.image The image to use for the ephemeral database.
     ##
-    image: mariadb:10.3
+    image: 
+      repository: mariadb
+      tag: "10.3"
 
     ## @param persistence.ephemeral.port The port to use for the ephemeral database.
     ##

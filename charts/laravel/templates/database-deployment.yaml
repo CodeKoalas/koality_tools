@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: {{ template "appname" . }}-database
-        image: {{ .Values.persistence.ephemeral.image }}
+        image: {{ template "docker.image" (dict "Values" .Values.persistence.ephemeral.image) }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         envFrom:
         - configMapRef:

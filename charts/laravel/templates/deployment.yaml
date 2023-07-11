@@ -38,7 +38,7 @@ spec:
       initContainers:
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
-        image: {{ .Values.deployment.initContainerImage }}
+        image: {{ template "docker.image" (dict "Values" .Values.deployment.initContainerImage) }}
         imagePullPolicy: "Always"
         envFrom:
         - configMapRef:
@@ -156,7 +156,7 @@ spec:
               key: APP_KEY
 {{- if .Values.echo.enabled }}
       - name: {{ .Values.deployment.name }}-echo
-        image: {{ .Values.echo.image }}
+        image: {{ template "docker.image" (dict "Values" .Values.echo.image) }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
           limits:

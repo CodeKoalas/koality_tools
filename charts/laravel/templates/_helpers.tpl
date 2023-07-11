@@ -29,6 +29,15 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+# Pass values and grab the tag/repository to create an image name.
+{{- define "docker.image" -}}
+{{- if eq .Values.tag "" -}}
+{{- .Values.repository -}}
+{{- else -}}
+{{- printf "%s:%s" .Values.repository .Values.tag -}}
+{{- end -}}
+{{- end -}}
+
 {{- define "cronimagename" -}}
 {{- if eq .Values.cron.image "" -}}
 {{- printf "%s:%s" .Values.image.repository "cron-latest" -}}

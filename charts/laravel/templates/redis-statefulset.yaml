@@ -26,8 +26,8 @@ spec:
         layer: redis
     spec:
       containers:
-      - name: redis
-        image: redis:7
+      - name: {{ template "appname" . }}-redis
+        image: {{ template "docker.image" (dict "Values" .Values.redis.image) }}
         command: 
           - redis-server
           - --appendonly
