@@ -18,8 +18,14 @@ dart pub global activate -sgit git@gitlab.codekoalas.com:internal/koality-tools.
 # Setup command
 $ koality setup
 
-# Test command optioon
+# Test command
 $ koality test
+
+# Refactor command
+$ koality refactor --old koality_flutter --new my_awesome_app
+
+# Scaffold native files for project.
+$ koality scaffold --bundle com.codekoalas.koalityFlutter --app-name Koality Flutter
 
 # POEditor download locales command
 $ koality poeditor locales
@@ -29,6 +35,15 @@ $ koality poeditor upload
 
 # Kubectl command to clean pods
 $ koality kubectl clean-pods --namespace my-namespace --status Evicted
+
+# Kubectl command to describe pods (partial text search)
+$ koality kubectl describe --namespace my-namespace cert
+
+# Kubectl command to exec into a pod (partial text search)
+$ koality kubectl exec --namespace my-namespace nginx
+
+# Firebase command to configure Firebase options files.
+$ koality firebase configure --dev my-firebase-project-id-dev --prod my-firebase-project-id
 
 # Show CLI version
 $ koality --version

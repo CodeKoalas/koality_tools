@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:koality_tools/src/providers/config_manager.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -42,100 +43,56 @@ This will ask about installing tools unless the --skip-ask flag is passed.
   @override
   String get name => 'setup';
 
+  Map<String, PackageTool> packagesToInstall = {
+    'gum': PackageTool.brew,
+    'curl': PackageTool.brew,
+    'jq': PackageTool.brew,
+    'firebase-tools': PackageTool.npm,
+    'very_good_cli': PackageTool.dart,
+    'rps': PackageTool.dart,
+    'flutterfire_cli': PackageTool.dart,
+  };
+
   final Logger _logger;
   final ProviderContainer _container;
 
   @override
   Future<int> run() async {
+    final manager = _container.read(getConfigManagerProvider(logger: _logger));
     final skipAsking = argResults?['skip-ask'] as bool;
     final configPath = argResults?['config-path'] as String?;
-    final config = await _container.read(getKoalityConfigProvider(logger: _logger, overrideConfigPath: configPath).future);
+    final config = await _container.read(
+      getKoalityConfigProvider(
+        logger: _logger,
+        overrideConfigPath: configPath,
+      ).future,
+    );
 
     if (File(config.configPath).existsSync()) {
       _logger.info('Found config file at ${config.configPath}');
 
       if (config.gitlabAccessToken?.isEmpty ?? false) {
         final token = _logger.prompt('Enter your Gitlab API Access Token');
-        //await 
+        final updated = config.copyWith(gitlabAccessToken: token);
+        await manager.saveConfig(updated, configPath);
       }
     } else {
       _logger.err('No config file found at ${config.configPath}');
     }
 
-    /// Let's install jq now.
-    final jqProcess = await Process.run('command', ['-v', 'jq']);
-    if (jqProcess.stdout.toString().isNotEmpty) {
-      _logger.info('jq is already installed.');
-    } else {
-      _logger.info('jq is not installed.');
-      if (!skipAsking) {
-        final confirmChoice = confirmUserChoice(confirmMessage: 'Install curl with brew?', logger: _logger);
-        if (confirmChoice) {
-          await installJq(_logger);
-        } else {
-          _logger.info('Skipping curl installation.');
-        }
-      } else {
-        await installJq(_logger);
-      }
-
-      /// If we failed installing then we move onto the next.
-      _logger.info('Next install curl.');
-    }
-
-    // Let's install curl now.
-    final curlProcess = await Process.run('command', ['-v', 'curl']);
-    if (curlProcess.stdout.toString().isNotEmpty) {
-      _logger.info('curl is already installed.');
-    } else {
-      _logger.info('curl is not installed.');
-      if (!skipAsking) {
-        final confirmChoice = confirmUserChoice(confirmMessage: 'Install curl with brew?', logger: _logger);
-        if (confirmChoice) {
-          await installCurl(_logger);
-        } else {
-          _logger.info('Skipping curl installation.');
-        }
-      } else {
-        await installCurl(_logger);
-      }
-    }
-
-    // Let's install very_good_cli now.
-    final veryGoodCliProcess = await Process.run('command', ['-v', 'very_good']);
-    if (veryGoodCliProcess.stdout.toString().isNotEmpty) {
-      _logger.info('very_good_cli is already installed.');
-    } else {
-      _logger.info('very_good_cli is not installed.');
-      if (!skipAsking) {
-        final confirmChoice = confirmUserChoice(confirmMessage: 'Install very_good_cli?', logger: _logger);
-        if (confirmChoice) {
-          await installVeryGoodCli(_logger);
-        } else {
-          _logger.info('Skipping very_good_cli installation.');
-        }
-      } else {
-        await installVeryGoodCli(_logger);
-      }
-    }
-
-    // Let's install rps now.
-    final rpsProcess = await Process.run('command', ['-v', 'rps']);
-    if (rpsProcess.stdout.toString().isNotEmpty) {
-      _logger.info('rps is already installed.');
-    } else {
-      _logger.info('rps is not installed.');
-      if (!skipAsking) {
-        final confirmChoice = confirmUserChoice(confirmMessage: 'Install rps?', logger: _logger);
-        if (confirmChoice) {
-          await installRps(_logger);
-        } else {
-          _logger.info('Skipping rps installation.');
-        }
-      } else {
-        await installRps(_logger);
-      }
-    }
+    /// Let's install desired packages.
+    await Future.wait(
+      packagesToInstall.entries.map(
+        (entry) async {
+          await handleInstallPackage(
+            logger: _logger,
+            packageName: entry.key,
+            tool: entry.value,
+            skipAsking: skipAsking,
+          );
+        },
+      ),
+    );
 
     return ExitCode.success.code;
   }

@@ -21,6 +21,7 @@ class KoalityConfig with _$KoalityConfig {
   const factory KoalityConfig({
     required String configPath,
     @Default(KubectlConfig()) KubectlConfig kubectlConfig,
+    @Default(FirebaseConfig()) FirebaseConfig firebaseConfig,
     String? gitlabAccessToken,
   }) = _KoalityConfig;
   const KoalityConfig._();
@@ -36,4 +37,15 @@ class KubectlConfig with _$KubectlConfig {
   const KubectlConfig._();
 
   factory KubectlConfig.fromJson(Map<String, dynamic> json) => _$KubectlConfigFromJson(json);
+}
+
+@freezed
+class FirebaseConfig with _$FirebaseConfig {
+  const factory FirebaseConfig({
+    @Default(false) bool skipDev,
+    @Default(false) bool skipProd,
+  }) = _FirebaseConfig;
+  const FirebaseConfig._();
+
+  factory FirebaseConfig.fromJson(Map<String, dynamic> json) => _$FirebaseConfigFromJson(json);
 }

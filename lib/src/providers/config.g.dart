@@ -13,6 +13,10 @@ _$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) =>
           ? const KubectlConfig()
           : KubectlConfig.fromJson(
               json['kubectlConfig'] as Map<String, dynamic>),
+      firebaseConfig: json['firebaseConfig'] == null
+          ? const FirebaseConfig()
+          : FirebaseConfig.fromJson(
+              json['firebaseConfig'] as Map<String, dynamic>),
       gitlabAccessToken: json['gitlabAccessToken'] as String?,
     );
 
@@ -20,6 +24,7 @@ Map<String, dynamic> _$$_KoalityConfigToJson(_$_KoalityConfig instance) =>
     <String, dynamic>{
       'configPath': instance.configPath,
       'kubectlConfig': instance.kubectlConfig,
+      'firebaseConfig': instance.firebaseConfig,
       'gitlabAccessToken': instance.gitlabAccessToken,
     };
 
@@ -32,6 +37,18 @@ _$_KubectlConfig _$$_KubectlConfigFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_KubectlConfigToJson(_$_KubectlConfig instance) =>
     <String, dynamic>{
       'defaultNamespace': instance.defaultNamespace,
+    };
+
+_$_FirebaseConfig _$$_FirebaseConfigFromJson(Map<String, dynamic> json) =>
+    _$_FirebaseConfig(
+      skipDev: json['skipDev'] as bool? ?? false,
+      skipProd: json['skipProd'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$$_FirebaseConfigToJson(_$_FirebaseConfig instance) =>
+    <String, dynamic>{
+      'skipDev': instance.skipDev,
+      'skipProd': instance.skipProd,
     };
 
 // **************************************************************************

@@ -34,6 +34,7 @@ class TestRunnerCommand extends Command<int> {
 
     /// Run tests with coverage
     try {
+      _logger.info('Started');
       if (useCoverage) {
         await Process.run('very_good', ['test', '--coverage']);
         await Process.run('lcov', [
@@ -50,9 +51,9 @@ class TestRunnerCommand extends Command<int> {
           await Process.run('genhtml', ['coverage/lcov.info', '-o', 'coverage/']);
         }
       } else {
+        _logger.info('Running tests');
         await Process.run('very_good', ['test']);
       }
-      _logger.info('Tests ran successfully.');
     } catch (e) {
       _logger.err(e.toString());
       return ExitCode.software.code;
