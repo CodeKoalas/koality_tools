@@ -134,6 +134,15 @@ deployment:
   ## @param deployment.extraEnv Additional ENV variables we want to add.
   ###
   extraEnv:
+    BROADCAST_DRIVER: "redis"
+    CACHE_DRIVER: "file"
+    FILESYSTEM_DRIVER: "local"
+    LOG_CHANNEL: "stack"
+    LOG_LEVEL: "debug"
+    MEMCACHED_HOST: "memcached"
+    QUEUE_CONNECTION: "sync"
+    SESSION_DRIVER: "file"
+    SESSION_LIFETIME: "120"
 
   ## @param deployment.configMaps Additional configMaps we want to add.
   ##
@@ -349,6 +358,10 @@ hpa:
 ## for use with this review.
 persistence:
   enabled: true
+
+  ## @param persistence.databaseConnection The database connection name to use.
+  ##
+  databaseConnection: "mysql"
   
   ## If you want an in-memory database, for example a short-lived review app, you can set "enabled" to true
   ## and then an additional deployment will be created and the MySQL information overridden.
