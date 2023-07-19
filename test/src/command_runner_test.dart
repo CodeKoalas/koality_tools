@@ -3,20 +3,20 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/services/updater.dart';
+import 'package:koality_tools/src/constants.dart';
 import 'package:koality_tools/src/version.dart';
 
-import 'commands/update_command_test.dart';
+import '../mocks.dart';
+import 'constants.dart';
 
 class MockLogger extends Mock implements Logger {}
 
-class MockUpdater extends Mock implements PackageUpdater {}
-
-const latestVersion = '0.0.0';
+class MockUpdater extends Mock implements PubUpdater {}
 
 final updatePrompt = '''
 ${lightYellow.wrap('Update available!')} ${lightCyan.wrap(packageVersion)} \u2192 ${lightCyan.wrap(latestVersion)}
@@ -24,7 +24,7 @@ Run ${lightCyan.wrap('$executableName update')} to update''';
 
 void main() {
   group('KoalityToolsCommandRunner', () {
-    late PackageUpdater updater;
+    late PubUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
     late ProviderContainer container;
@@ -33,7 +33,7 @@ void main() {
       updater = MockUpdater();
 
       when(
-        () => updater.getLatestVersion(),
+        () => updater.getLatestVersion(kPackageName),
       ).thenAnswer((_) async => packageVersion);
 
       logger = MockLogger();
@@ -48,7 +48,7 @@ void main() {
 
     test('shows update message when newer version exists', () async {
       when(
-        () => updater.getLatestVersion(),
+        () => updater.getLatestVersion(kPackageName),
       ).thenAnswer((_) async => latestVersion);
 
       final result = await commandRunner.run(['--version']);
@@ -58,10 +58,10 @@ void main() {
 
     test('doesnt show update message when using update command', () async {
       when(
-        () => updater.getLatestVersion(),
+        () => updater.getLatestVersion(kPackageName),
       ).thenAnswer((_) async => latestVersion);
       when(
-        () => updater.updatePackage(),
+        () => updater.update(packageName: kPackageName, versionConstraint: latestVersion),
       ).thenAnswer((_) => Future.value(ProcessResult(0, 0, '', '')));
 
       final progress = MockProgress();

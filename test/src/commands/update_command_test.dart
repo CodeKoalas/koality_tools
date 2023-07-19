@@ -2,27 +2,21 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
-import 'package:koality_tools/src/services/updater.dart';
 import 'package:koality_tools/src/command_runner.dart';
+import 'package:koality_tools/src/constants.dart';
 import 'package:koality_tools/src/version.dart';
 
-//class FakeProcessResult extends Fake implements ProcessResult {}
-
-class MockLogger extends Mock implements Logger {}
-
-class MockProgress extends Mock implements Progress {}
-
-class MockUpdater extends Mock implements PackageUpdater {}
+import '../../mocks.dart';
+import '../constants.dart';
 
 void main() {
-  const latestVersion = '0.0.0';
-
   group('update', () {
-    late PackageUpdater updater;
+    late PubUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
 
@@ -39,8 +33,8 @@ void main() {
       );
 
       when(
-        () => updater.getLatestVersion(),
-      ).thenAnswer((_) async => packageVersion);
+        () => updater.getLatestVersion(kPackageName),
+      ).thenAnswer((_) async => latestVersion);
       when(() => progress.complete(any())).thenAnswer((_) {
         final message = _.positionalArguments.elementAt(0) as String?;
         if (message != null) progressLogs.add(message);
@@ -57,14 +51,14 @@ void main() {
       'handles pub latest version query errors',
       () async {
         when(
-          () => updater.getLatestVersion(),
+          () => updater.getLatestVersion(kPackageName),
         ).thenThrow(Exception('oops'));
         final result = await commandRunner.run(['update']);
         expect(result, equals(ExitCode.software.code));
         verify(() => logger.progress('Checking for updates')).called(1);
         verify(() => logger.err('Exception: oops'));
         verifyNever(
-          () => updater.updatePackage(),
+          () => updater.update(packageName: kPackageName, versionConstraint: latestVersion),
         );
       },
     );
@@ -73,17 +67,17 @@ void main() {
       'handles pub update errors',
       () async {
         when(
-          () => updater.getLatestVersion(),
+          () => updater.getLatestVersion(kPackageName),
         ).thenAnswer((_) async => latestVersion);
         when(
-          () => updater.updatePackage(),
+          () => updater.update(packageName: kPackageName, versionConstraint: latestVersion),
         ).thenThrow(Exception('oops'));
         final result = await commandRunner.run(['update']);
         expect(result, equals(ExitCode.software.code));
         verify(() => logger.progress('Checking for updates')).called(1);
         verify(() => logger.err('Exception: oops'));
         verify(
-          () => updater.updatePackage(),
+          () => updater.update(packageName: kPackageName, versionConstraint: latestVersion),
         ).called(1);
       },
     );
@@ -92,17 +86,17 @@ void main() {
       'updates when newer version exists',
       () async {
         when(
-          () => updater.getLatestVersion(),
+          () => updater.getLatestVersion(kPackageName),
         ).thenAnswer((_) async => latestVersion);
         when(
-          () => updater.updatePackage(),
+          () => updater.update(packageName: kPackageName, versionConstraint: latestVersion),
         ).thenAnswer((_) => Future.value(ProcessResult(0, 0, '', '')));
         when(() => logger.progress(any())).thenReturn(MockProgress());
         final result = await commandRunner.run(['update']);
         expect(result, equals(ExitCode.success.code));
         verify(() => logger.progress('Checking for updates')).called(1);
         verify(() => logger.progress('Updating to $latestVersion')).called(1);
-        verify(() => updater.updatePackage()).called(1);
+        verify(() => updater.update(packageName: kPackageName, versionConstraint: latestVersion)).called(1);
       },
     );
 
@@ -110,7 +104,7 @@ void main() {
       'does not update when already on latest version',
       () async {
         when(
-          () => updater.getLatestVersion(),
+          () => updater.getLatestVersion(kPackageName),
         ).thenAnswer((_) async => packageVersion);
         when(() => logger.progress(any())).thenReturn(MockProgress());
         final result = await commandRunner.run(['update']);
@@ -119,7 +113,7 @@ void main() {
           () => logger.info('CLI is already at the latest version.'),
         ).called(1);
         verifyNever(() => logger.progress('Updating to $latestVersion'));
-        verifyNever(() => updater.updatePackage());
+        verifyNever(() => updater.update(packageName: kPackageName, versionConstraint: latestVersion));
       },
     );
   });

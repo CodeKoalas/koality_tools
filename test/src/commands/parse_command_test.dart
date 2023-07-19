@@ -2,26 +2,20 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
 import 'package:koality_tools/src/commands/parse/parse_command.dart';
-import 'package:koality_tools/src/services/updater.dart';
 
-//class FakeProcessResult extends Fake implements ProcessResult {}
-
-class MockLogger extends Mock implements Logger {}
-
-class MockProgress extends Mock implements Progress {}
-
-class MockUpdater extends Mock implements PackageUpdater {}
+import '../../mocks.dart';
 
 void main() {
   const yamlFile = 'test/files/pubspec.yaml';
 
   group('update', () {
-    late PackageUpdater updater;
+    late PubUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
 

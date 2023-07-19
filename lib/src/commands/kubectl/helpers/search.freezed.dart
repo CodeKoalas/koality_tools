@@ -19,8 +19,7 @@ mixin _$SearchPodsExecutor {}
 
 /// @nodoc
 abstract class $SearchPodsExecutorCopyWith<$Res> {
-  factory $SearchPodsExecutorCopyWith(
-          SearchPodsExecutor value, $Res Function(SearchPodsExecutor) then) =
+  factory $SearchPodsExecutorCopyWith(SearchPodsExecutor value, $Res Function(SearchPodsExecutor) then) =
       _$SearchPodsExecutorCopyWithImpl<$Res, SearchPodsExecutor>;
 }
 
@@ -37,17 +36,14 @@ class _$SearchPodsExecutorCopyWithImpl<$Res, $Val extends SearchPodsExecutor>
 
 /// @nodoc
 abstract class _$$_SearchPodsExecutorCopyWith<$Res> {
-  factory _$$_SearchPodsExecutorCopyWith(_$_SearchPodsExecutor value,
-          $Res Function(_$_SearchPodsExecutor) then) =
+  factory _$$_SearchPodsExecutorCopyWith(_$_SearchPodsExecutor value, $Res Function(_$_SearchPodsExecutor) then) =
       __$$_SearchPodsExecutorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SearchPodsExecutorCopyWithImpl<$Res>
-    extends _$SearchPodsExecutorCopyWithImpl<$Res, _$_SearchPodsExecutor>
+class __$$_SearchPodsExecutorCopyWithImpl<$Res> extends _$SearchPodsExecutorCopyWithImpl<$Res, _$_SearchPodsExecutor>
     implements _$$_SearchPodsExecutorCopyWith<$Res> {
-  __$$_SearchPodsExecutorCopyWithImpl(
-      _$_SearchPodsExecutor _value, $Res Function(_$_SearchPodsExecutor) _then)
+  __$$_SearchPodsExecutorCopyWithImpl(_$_SearchPodsExecutor _value, $Res Function(_$_SearchPodsExecutor) _then)
       : super(_value, _then);
 }
 
@@ -63,8 +59,7 @@ class _$_SearchPodsExecutor extends _SearchPodsExecutor {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_SearchPodsExecutor);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_SearchPodsExecutor);
   }
 
   @override
@@ -81,14 +76,12 @@ mixin _$SearchResourceExecutor {}
 
 /// @nodoc
 abstract class $SearchResourceExecutorCopyWith<$Res> {
-  factory $SearchResourceExecutorCopyWith(SearchResourceExecutor value,
-          $Res Function(SearchResourceExecutor) then) =
+  factory $SearchResourceExecutorCopyWith(SearchResourceExecutor value, $Res Function(SearchResourceExecutor) then) =
       _$SearchResourceExecutorCopyWithImpl<$Res, SearchResourceExecutor>;
 }
 
 /// @nodoc
-class _$SearchResourceExecutorCopyWithImpl<$Res,
-        $Val extends SearchResourceExecutor>
+class _$SearchResourceExecutorCopyWithImpl<$Res, $Val extends SearchResourceExecutor>
     implements $SearchResourceExecutorCopyWith<$Res> {
   _$SearchResourceExecutorCopyWithImpl(this._value, this._then);
 
@@ -100,18 +93,17 @@ class _$SearchResourceExecutorCopyWithImpl<$Res,
 
 /// @nodoc
 abstract class _$$_SearchResourceExecutorCopyWith<$Res> {
-  factory _$$_SearchResourceExecutorCopyWith(_$_SearchResourceExecutor value,
-          $Res Function(_$_SearchResourceExecutor) then) =
+  factory _$$_SearchResourceExecutorCopyWith(
+          _$_SearchResourceExecutor value, $Res Function(_$_SearchResourceExecutor) then) =
       __$$_SearchResourceExecutorCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$_SearchResourceExecutorCopyWithImpl<$Res>
-    extends _$SearchResourceExecutorCopyWithImpl<$Res,
-        _$_SearchResourceExecutor>
+    extends _$SearchResourceExecutorCopyWithImpl<$Res, _$_SearchResourceExecutor>
     implements _$$_SearchResourceExecutorCopyWith<$Res> {
-  __$$_SearchResourceExecutorCopyWithImpl(_$_SearchResourceExecutor _value,
-      $Res Function(_$_SearchResourceExecutor) _then)
+  __$$_SearchResourceExecutorCopyWithImpl(
+      _$_SearchResourceExecutor _value, $Res Function(_$_SearchResourceExecutor) _then)
       : super(_value, _then);
 }
 
@@ -127,9 +119,7 @@ class _$_SearchResourceExecutor extends _SearchResourceExecutor {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_SearchResourceExecutor);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_SearchResourceExecutor);
   }
 
   @override

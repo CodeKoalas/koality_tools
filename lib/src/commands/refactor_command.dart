@@ -15,7 +15,12 @@ class RefactorCommand extends Command<int> {
     argParser
       ..addOption('old', abbr: 'o', help: 'The old package name')
       ..addOption('new', abbr: 'n', help: 'The new package name')
-      ..addOption('paths', abbr: 'p', defaultsTo: 'lib,test', help: 'A list of comma-separated paths to the directories where we want to refactor. Defaults to "lib,test"');
+      ..addOption(
+        'paths',
+        abbr: 'p',
+        defaultsTo: 'lib,test',
+        help: 'A list of comma-separated paths to the directories where we want to refactor. Defaults to "lib,test"',
+      );
   }
 
   final Logger _logger;
