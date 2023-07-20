@@ -61,8 +61,7 @@ class KoalityConfigManager {
     if (!configFile.existsSync()) {
       configFile
         ..createSync(recursive: true)
-        ..writeAsStringSync(
-            '''
+        ..writeAsStringSync('''
 {
   "configPath": "${configFile.path}", 
   "kubectlConfig": {}, 

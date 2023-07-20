@@ -8,4 +8,5 @@ import 'package:koality_tools/src/commands/commands.dart';
 import 'package:koality_tools/src/commands/setup_command.dart';
 import 'package:koality_tools/src/command_runner.dart';
 
-void main(){}
+// @TODO: Is this even worth testing?
+void main() {}

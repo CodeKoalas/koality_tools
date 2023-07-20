@@ -1,18 +1,19 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
-import 'package:koality_tools/src/commands/refactor_command.dart';
-import 'package:koality_tools/src/commands/scaffold_command.dart';
 import 'package:mason_logger/mason_logger.dart';
+import 'package:pub_updater/pub_updater.dart';
+import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/commands/commands.dart';
 import 'package:koality_tools/src/commands/coverage/coverage_command.dart';
 import 'package:koality_tools/src/commands/kubectl/kubectl_command.dart';
 import 'package:koality_tools/src/commands/parse/parse_command.dart';
+import 'package:koality_tools/src/commands/refactor_command.dart';
+import 'package:koality_tools/src/commands/scaffold_command.dart';
 import 'package:koality_tools/src/commands/test/test_command.dart';
-import 'package:koality_tools/src/services/updater.dart';
+import 'package:koality_tools/src/constants.dart';
 import 'package:koality_tools/src/version.dart';
-import 'package:riverpod/riverpod.dart';
 
 const executableName = 'koality';
 const packageName = 'koality_tools';
@@ -62,7 +63,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   void printUsage() => _logger.info(usage);
 
   final ProviderContainer container;
-  final PackageUpdater updater;
+  final PubUpdater updater;
   final Logger _logger;
 
   @override
@@ -138,7 +139,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
   /// user.
   Future<void> _checkForUpdates() async {
     try {
-      final latestVersion = await updater.getLatestVersion();
+      final latestVersion = await updater.getLatestVersion(kPackageName);
       final isUpToDate = packageVersion == latestVersion;
       if (!isUpToDate) {
         _logger

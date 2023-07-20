@@ -1,0 +1,52 @@
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Dart.gitlab-ci.yml
+image: dart:3
+
+variables:
+  # To learn more go to https://dart.dev/tools/dart-test
+  # Or run `dart test --help`
+  PUB_VARS: "--chain-stack-traces --platform vm --timeout 30s --concurrency=6 --test-randomize-ordering-seed=random --reporter=expanded"
+
+# Make PUB_CACHE cacheable in GitLab;
+# see also https://gitlab.com/gitlab-org/gitlab/-/merge_requests/77791/diffs and
+# https://dikman.medium.com/optimising-flutter-ci-by-caching-packages-8a1d537e0b23
+# Requires extending job to set DART_VERSION variable.
+.use-pub-cache-bin:
+  before_script:
+    - export PUB_CACHE="$CI_PROJECT_DIR/.pub-cache" # https://dart.dev/tools/pub/environment-variables
+    - export PATH="$PATH":"$PUB_CACHE/bin"
+
+cache:
+  paths:
+    - $CI_PROJECT_DIR/.pub-cache/
+
+.install-dependencies:
+  before_script:
+    - dart pub get
+
+unit-test:
+  stage: test
+  extends:
+    - .use-pub-cache-bin
+    - .install-dependencies
+  script:
+    - dart test $PUB_VARS
+
+lint-test:
+  stage: test
+  extends:
+    - .use-pub-cache-bin
+    - .install-dependencies
+  script:
+    - dart analyze .
+
+format-test:
+  stage: test
+  extends:
+    - .use-pub-cache-bin
+    - .install-dependencies
+  script:
+    - dart format -l 120 --set-exit-if-changed bin/ lib/ test/
+

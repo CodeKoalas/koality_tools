@@ -1,17 +1,15 @@
 import 'dart:io';
 
-import 'package:mason_logger/mason_logger.dart';
+import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/providers/package_updater.dart';
 
 typedef VoidCallback = void Function();
 
 Future<void> main(List<String> args) async {
   final container = ProviderContainer();
-  final logger = Logger();
-  final updater = await container.read(getPackageUpdaterProvider(logger: logger).future);
+  final updater = PubUpdater();
   await _flushThenExit(
     await KoalityToolsCommandRunner(
       container: container,
