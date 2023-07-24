@@ -13,6 +13,10 @@ enum PackageTool {
   final List<String> commandArgs;
 }
 
+extension StringifyYesNo on String {
+  bool get isYes => this == 'y' || this == 'yes';
+}
+
 /// A basic function that will check for the existence of Gum.
 /// Will ensure it's installed before trying to use it with other scripts.
 Future<bool> isExecutableInstalled(String executableName) async {

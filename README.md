@@ -45,6 +45,9 @@ $ koality kubectl exec --namespace my-namespace nginx
 # Firebase command to configure Firebase options files.
 $ koality firebase configure --dev my-firebase-project-id-dev --prod my-firebase-project-id
 
+# Firebase command to setup Firebase tools locally.
+$ koality firebase setup
+
 # Show CLI version
 $ koality --version
 
@@ -124,4 +127,19 @@ $ koality parse version
 
 # It can also write the version to a file
 $ koality parse version -o /path/to/version.txt
+```
+
+## Runnng Firebase Commands. 🔥
+
+```sh
+# This command will configure firebase_option.dart files for connecting to a Firebase instance.
+# It will create two files, one for a prod instance and one for dev.
+$ koality firebase configure --dev my-firebase-project-id-dev --prod my-firebase-project-id
+
+# This command will install Firebase CLI tools and create a firebase.json file with some
+# opinionated defaults.
+$ koality firebase setup
+
+# This command will start the firebase emulators for the passed firebase project ID.
+$ koality firebase emulators -p koality-tools
 ```

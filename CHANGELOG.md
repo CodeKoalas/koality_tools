@@ -1,3 +1,10 @@
+[0.3.3] - 24/07/2023
+* Adding `firebase setup` command.
+* Adding `firebase emulators` command that will start the emulators.
+
+[0.3.2] - 23/07/2023
+* Adding classic pub updater to prep for pub.dev release.
+
 [0.3.1] - 11/07/2023
 * Adding new `kubectl logs` command to grab logs for a resource.
 
