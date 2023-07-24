@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
+import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
@@ -48,14 +49,15 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
       );
 
     // Add sub commands
-    addCommand(SetupCommand(logger: _logger, container: container));
-    addCommand(ScaffoldCommand(logger: _logger, container: container));
-    addCommand(RefactorCommand(logger: _logger));
     addCommand(CoverageCommand(logger: _logger));
-    addCommand(POEditorCommand(logger: _logger));
+    addCommand(FirebaseCommand(logger: _logger, container: container));
     addCommand(KubectlCommand(logger: _logger, container: container));
-    addCommand(TestRunnerCommand(logger: _logger));
     addCommand(ParseCommand(logger: _logger));
+    addCommand(POEditorCommand(logger: _logger));
+    addCommand(TestRunnerCommand(logger: _logger));
+    addCommand(RefactorCommand(logger: _logger));
+    addCommand(ScaffoldCommand(logger: _logger, container: container));
+    addCommand(SetupCommand(logger: _logger, container: container));
     addCommand(UpdateCommand(logger: _logger, updater: updater));
   }
 

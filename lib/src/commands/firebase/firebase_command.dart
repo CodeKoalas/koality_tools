@@ -3,6 +3,8 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/commands/firebase/commands/configure_command.dart';
+import 'package:koality_tools/src/commands/firebase/commands/emulators_command.dart';
+import 'package:koality_tools/src/commands/firebase/commands/setup_command.dart';
 
 /// {@template firebase_command}
 ///
@@ -10,12 +12,14 @@ import 'package:koality_tools/src/commands/firebase/commands/configure_command.d
 /// A [Command] to do stuff related to Firebase CLI
 /// {@endtemplate}
 class FirebaseCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro firebase_command}
   FirebaseCommand({
     required Logger logger,
     required ProviderContainer container,
   }) {
     addSubcommand(FirebaseConfigureCommand(logger: logger, container: container));
+    addSubcommand(FirebaseEmulatorsCommand(logger: logger, container: container));
+    addSubcommand(FirebaseSetupCommand(logger: logger, container: container));
   }
 
   @override

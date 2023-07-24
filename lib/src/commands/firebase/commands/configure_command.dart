@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code
+
 import 'dart:async';
 import 'dart:io';
 
@@ -13,7 +15,7 @@ import 'package:koality_tools/src/providers/config.dart';
 /// A [Command] to fetch Firebase config files from the CLI.
 /// {@endtemplate}
 class FirebaseConfigureCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro firebase_command}
   FirebaseConfigureCommand({
     required Logger logger,
     required ProviderContainer container,
@@ -37,6 +39,9 @@ class FirebaseConfigureCommand extends Command<int> {
 
   @override
   Future<int> run() async {
+    _logger.err('This command is not yet implemented.');
+    return ExitCode.software.code;
+
     /// This command is in charge of running the flutterfire configure command.
     /// We take a handful of args for overriding scenarios where we may not want to
     /// configure both dev and prod.
