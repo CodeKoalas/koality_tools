@@ -7,7 +7,7 @@ FROM php:8.0.25-fpm-alpine as base
 
 # Install packages like git, supervisor, nginx, and PHP extensions
 # su-exec specifically for running COPY commands as the www-data user to prevent needing to chown anything.
-RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec
+RUN apk add --no-cache git supervisor nginx libzip-dev libpng-dev bash vim mysql-client gettext su-exec patch
 
 # Make NGINX owned by www-data user.
 RUN chown -R www-data:www-data /var/lib/nginx
