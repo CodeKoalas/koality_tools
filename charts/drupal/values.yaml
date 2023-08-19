@@ -56,17 +56,58 @@ image:
 
 # The deployment object with environment variables to use.
 deployment:
+  ## @param deployment.apiVersion The deployment apiVersion.
+  ## 
   apiVersion: apps/v1
+
+  ## @param deployment.name The deployment name.
+  ##
   name: gitlab-autodevops-drupal
+
+  ## @param deployment.track The deployment track type.
+  ##
   track: stable
+
+  ## @param deployment.tier The deployment tier type.
+  ##
   tier: web
+
+  ## @param deployment.siteEnv The deployment site env value.
+  ##
   siteEnv: dev
+
+  ## @param deployment.virtualHost The deployment virtual host.
+  ##
   virtualHost: gitlab-autodevops.ckstage.site
+
+  ## @param deployment.letsEncryptHost The deployment Let's Encrypt host.
+  ##
   letsEncryptHost: gitlab-autodevops.ckstagae.site
+
+  ## @param deployment.drupalBaseUrl The Drupal base URL passed as an environment variable.
+  ##
   drupalBaseUrl: "https://gitlab-autodevops.ckstage.site"
+
+  ## @param deployment.drupalHttps Whether to force HTTPS for Drupal.
+  ##
   drupalHttps: "on"
+
+  ## @param deployment.apacheDocroot @DEPRECATED The Apcahe docroot.
+  ##
   apacheDocroot: /var/www/html/docroot
+
+  ## @param deployment.initContainerImage The image used for the initContainer.
+  ##
   initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
+
+  ## @param deployment.configMapFiles Additional configMaps as files we want to add.
+  ##
+  # configMapFiles:
+  #   serverFile:
+  #     mountPath: /etc/config
+  #     data: 
+  #       server-file.json: |-
+  #         {}
 
 ## A cron deployment for running cron in a container.
 cron:

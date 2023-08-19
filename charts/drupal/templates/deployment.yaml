@@ -38,7 +38,7 @@ spec:
       initContainers:
       # Check for if the DB_DATABASE database exists and if it doesn't, we create it.
       - name: create-db
-        image: {{ .Values.deployment.initContainerImage }}
+        image: {{ template "docker.image" (dict "Values" .Values.deployment.initContainerImage) }}
         imagePullPolicy: "Always"
         envFrom:
         - configMapRef:
@@ -76,6 +76,7 @@ spec:
 {{- end }}
       # The deployment container spec
       containers:
+      # Main container deployment.
       - name: {{ .Values.deployment.name }}
         image: {{ template "imagename" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -98,11 +99,19 @@ spec:
             subPath: {{ $volume.mount.subPath | quote }}
             {{- end }}
 {{- end }}
+{{- if .Values.deployment.configMapFiles }}
+{{- range $key, $value := .Values.deployment.configMapFiles }}
+          # Now we need to map each one to the container using the mountPath as the mount
+          # and then each key as the name.
+          - name: {{ $key }}
+            mountPath: {{ default "/var/www/html" $value.mountPath }}
+{{- end }}
+{{- end }}
 {{- end }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
-        {{- if .Values.application.secretName }}
+        {{- if and .Values.application.secretName }}
         - secretRef:
             name: {{ .Values.application.secretName }}
         {{- end }}
@@ -137,10 +146,18 @@ spec:
               name: mysql-instance-config
               key: "gitlab-managed-apps.mysql-instance-config-port"
       imagePullSecrets:
-      - name: regcred
+        - name: regcred
 {{- if .Values.persistence.enabled }}
 {{- $context := . }}
       volumes:
+# Check for deployment.configMaps and then map each of them to a volume.
+{{- if .Values.deployment.configMapFiles }}
+{{- range $key, $value := .Values.deployment.configMapFiles }}
+        - name: {{ $key }}
+          configMap:
+            name: {{ template "appname" $context }}-{{ $key }}
+{{- end }}
+{{- end }}
 {{- range $volume := .Values.persistence.volumes }}
         - name: {{ $volume.name | quote }}
           persistentVolumeClaim:
