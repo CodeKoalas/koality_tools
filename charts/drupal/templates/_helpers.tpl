@@ -79,6 +79,13 @@ Generate a name for a Persistent Volume Claim
 {{- printf "%s-%s" (include "fullname" .context) .name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{/*
+Generate a cleaned name for an included file.
+*/}}
+{{- define "cleanName" -}}
+{{- printf "%s-%s" (include "fullname" .context) .name | trunc 63 | trimSuffix "-" | replace "_" "-" | replace "." "-" -}}
+{{- end -}}
+
 {{- define "sharedlabels" -}}
 app: {{ template "appname" . }}
 chart: "{{ .Chart.Name }}-{{ .Chart.Version| replace "+" "_" }}"
