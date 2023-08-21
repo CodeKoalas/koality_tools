@@ -96,9 +96,11 @@ deployment:
   ##
   apacheDocroot: /var/www/html/docroot
 
-  ## @param deployment.initContainerImage The image used for the initContainer.
+  ## @param deployment.initContainerImage The image to use for the init container.
   ##
-  initContainerImage: registry.codekoalas.com/devops/helm/koality-charts:init-mysql
+  initContainerImage:
+    repository: registry.codekoalas.com/devops/helm/koality-charts
+    tag: init-mysql
 
   ## @param deployment.configMapFiles Additional configMaps as files we want to add.
   ##
