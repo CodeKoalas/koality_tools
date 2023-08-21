@@ -1,3 +1,5 @@
+# Setting context as the original list of values.
+{{- $context := . }}
 apiVersion: {{ .Values.deployment.apiVersion }}
 kind: Deployment
 metadata:
@@ -206,7 +208,6 @@ spec:
       imagePullSecrets:
       - name: regcred
 {{- if .Values.persistence.enabled }}
-{{- $context := . }}
       volumes:
 {{- if .Values.echo.config }}
         - name: echo-server-file

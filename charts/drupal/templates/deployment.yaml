@@ -1,3 +1,5 @@
+# Setting context as the original list of values.
+{{- $context := . }}
 apiVersion: {{ .Values.deployment.apiVersion }}
 kind: Deployment
 metadata:
@@ -158,7 +160,6 @@ spec:
       imagePullSecrets:
         - name: regcred
 {{- if .Values.persistence.enabled }}
-{{- $context := . }}
       volumes:
 # Check for deployment.configMaps and then map each of them to a volume.
 {{- if .Values.deployment.configMapFiles }}
