@@ -123,25 +123,3 @@ data:
   {{- end }}
 {{- end }}
 {{- end }}
-
----
-# Now let's loop over any files included with the template that are 
-# not .yaml files and create file mappings for those.
-# What we are going to do is grab all files NOT matching *.yaml
-# and for each one trim off the path to just the filename as
-# the key.
-{{- $context := . }}
-{{- range $key, $value := .Files }}
-{{- if not (hasSuffix $key ".yaml") }}
-{{ $args := dict "context" $context "name" (base $path) }}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ template "cleanName" $args }}
-  labels:
-    app: {{ template "appname" $context }}
-data:
-  {{ base $key }}: |
-{{ $value | indent 4 }}
-{{- end }}
-{{- end }}

@@ -109,17 +109,6 @@ spec:
             mountPath: {{ default "/var/www/html" $value.mountPath }}
 {{- end }}
 {{- end }}
-# Now let's map all the files into the container, using the path
-# to the file as the mountPath value.
-{{- if .Files }}
-{{- range $path, $bytes := .Files }}
-{{- if not (hasSuffix $path ".yaml") }}
-          {{ $args := dict "context" $context "name" (base $path) }}
-          - name: {{ template "cleanName" $args }}
-            mountPath: {{ default "/var/www/html" (dir $path) }}
-{{- end }}
-{{- end }}
-{{- end }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
@@ -169,17 +158,6 @@ spec:
             name: {{ template "appname" $context }}-{{ $key }}
 {{- end }}
 {{- end }}
-# Now grab all included files and map them to config maps.
-{{- if .Files }}
-{{- range $path, $bytes := .Files }}
-{{- if not (hasSuffix $path ".yaml") }}
-        {{ $args := dict "context" $context "name" (base $path) }}
-        - name: {{ template "cleanName" $args }}
-          configMap:
-            name: {{ template "cleanName" $args }}
-{{- end }}
-{{- end }}
-{{- end }}
 {{- range $volume := .Values.persistence.volumes }}
         - name: {{ $volume.name | quote }}
           persistentVolumeClaim:
@@ -187,4 +165,3 @@ spec:
             claimName: {{ template "pvcName" $args }}
 {{- end }}
 {{- end }}
-
