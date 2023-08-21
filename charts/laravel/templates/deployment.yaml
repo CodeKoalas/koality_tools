@@ -109,6 +109,7 @@ spec:
             mountPath: {{ default "/var/www/html" $value.mountPath }}
 {{- end }}
 {{- end }}
+{{- end }}
         envFrom:
         - configMapRef:
             name: {{ template "appname" . }}
