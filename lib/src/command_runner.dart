@@ -2,6 +2,7 @@ import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
 import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
+import 'package:koality_tools/src/commands/jwt/jwt_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
@@ -59,6 +60,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
     addCommand(ScaffoldCommand(logger: _logger, container: container));
     addCommand(SetupCommand(logger: _logger, container: container));
     addCommand(UpdateCommand(logger: _logger, updater: updater));
+    addCommand(JwtCommand(logger: _logger));
   }
 
   @override
