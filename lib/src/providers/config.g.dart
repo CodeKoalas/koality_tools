@@ -6,38 +6,47 @@ part of 'config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) => _$_KoalityConfig(
+_$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) =>
+    _$_KoalityConfig(
       configPath: json['configPath'] as String,
       kubectlConfig: json['kubectlConfig'] == null
           ? const KubectlConfig()
-          : KubectlConfig.fromJson(json['kubectlConfig'] as Map<String, dynamic>),
+          : KubectlConfig.fromJson(
+              json['kubectlConfig'] as Map<String, dynamic>),
       firebaseConfig: json['firebaseConfig'] == null
           ? const FirebaseConfig()
-          : FirebaseConfig.fromJson(json['firebaseConfig'] as Map<String, dynamic>),
+          : FirebaseConfig.fromJson(
+              json['firebaseConfig'] as Map<String, dynamic>),
       gitlabAccessToken: json['gitlabAccessToken'] as String?,
     );
 
-Map<String, dynamic> _$$_KoalityConfigToJson(_$_KoalityConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$_KoalityConfigToJson(_$_KoalityConfig instance) =>
+    <String, dynamic>{
       'configPath': instance.configPath,
       'kubectlConfig': instance.kubectlConfig,
       'firebaseConfig': instance.firebaseConfig,
       'gitlabAccessToken': instance.gitlabAccessToken,
     };
 
-_$_KubectlConfig _$$_KubectlConfigFromJson(Map<String, dynamic> json) => _$_KubectlConfig(
-      defaultNamespace: json['defaultNamespace'] as String? ?? 'gitlab-managed-apps',
+_$_KubectlConfig _$$_KubectlConfigFromJson(Map<String, dynamic> json) =>
+    _$_KubectlConfig(
+      defaultNamespace:
+          json['defaultNamespace'] as String? ?? 'gitlab-managed-apps',
     );
 
-Map<String, dynamic> _$$_KubectlConfigToJson(_$_KubectlConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$_KubectlConfigToJson(_$_KubectlConfig instance) =>
+    <String, dynamic>{
       'defaultNamespace': instance.defaultNamespace,
     };
 
-_$_FirebaseConfig _$$_FirebaseConfigFromJson(Map<String, dynamic> json) => _$_FirebaseConfig(
+_$_FirebaseConfig _$$_FirebaseConfigFromJson(Map<String, dynamic> json) =>
+    _$_FirebaseConfig(
       skipDev: json['skipDev'] as bool? ?? false,
       skipProd: json['skipProd'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_FirebaseConfigToJson(_$_FirebaseConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$_FirebaseConfigToJson(_$_FirebaseConfig instance) =>
+    <String, dynamic>{
       'skipDev': instance.skipDev,
       'skipProd': instance.skipProd,
     };
@@ -109,14 +118,16 @@ class GetKoalityConfigFamily extends Family<AsyncValue<KoalityConfig>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'getKoalityConfigProvider';
 }
 
 /// See also [getKoalityConfig].
-class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> {
+class GetKoalityConfigProvider
+    extends AutoDisposeFutureProvider<KoalityConfig> {
   /// See also [getKoalityConfig].
   GetKoalityConfigProvider({
     required this.logger,
@@ -129,9 +140,13 @@ class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> 
           ),
           from: getKoalityConfigProvider,
           name: r'getKoalityConfigProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getKoalityConfigHash,
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getKoalityConfigHash,
           dependencies: GetKoalityConfigFamily._dependencies,
-          allTransitiveDependencies: GetKoalityConfigFamily._allTransitiveDependencies,
+          allTransitiveDependencies:
+              GetKoalityConfigFamily._allTransitiveDependencies,
         );
 
   final Logger logger;
