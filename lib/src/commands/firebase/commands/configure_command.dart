@@ -1,5 +1,3 @@
-// ignore_for_file: dead_code
-
 import 'dart:async';
 import 'dart:io';
 
@@ -9,13 +7,13 @@ import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/providers/config.dart';
 
-/// {@template firebase_command}
+/// {@template firebase_configure_command}
 ///
 /// `koality firebase configure`
 /// A [Command] to fetch Firebase config files from the CLI.
 /// {@endtemplate}
 class FirebaseConfigureCommand extends Command<int> {
-  /// {@macro firebase_command}
+  /// {@macro firebase_configure_command}
   FirebaseConfigureCommand({
     required Logger logger,
     required ProviderContainer container,
@@ -39,9 +37,6 @@ class FirebaseConfigureCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    _logger.err('This command is not yet implemented.');
-    return ExitCode.software.code;
-
     /// This command is in charge of running the flutterfire configure command.
     /// We take a handful of args for overriding scenarios where we may not want to
     /// configure both dev and prod.
@@ -80,7 +75,7 @@ Future<bool> flutterfireConfigureProject({required Logger logger, required Strin
     defaultValue: 'lib/features/firebase/domain/value_objects/firebase_options_$env.dart',
   );
 
-  if (iosBundle.isEmpty || androidBundle.isEmpty || firebaseOptionsOutputFile.isEmpty) {
+  if (hasRequiredFiles(iosBundle, androidBundle, firebaseOptionsOutputFile)) {
     logger.err('You must provide all the required values.');
     return false;
   }
@@ -98,4 +93,8 @@ Future<bool> flutterfireConfigureProject({required Logger logger, required Strin
   await Process.run('mv', ['android/app/google-services.json', 'android/app/src/$env/google-services.json']);
 
   return true;
+}
+
+bool hasRequiredFiles(String iosBundle, String androidBundle, String firebaseOptionsOutputFile) {
+  return iosBundle.isNotEmpty && androidBundle.isNotEmpty && firebaseOptionsOutputFile.isNotEmpty;
 }

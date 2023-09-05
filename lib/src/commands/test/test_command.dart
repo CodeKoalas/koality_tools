@@ -6,7 +6,7 @@ import 'package:mason_logger/mason_logger.dart';
 /// {@template test_command}
 ///
 /// `koality test`
-/// A [Command] to do cool stuff.
+/// A [Command] to run out usual testing procedure for Flutter apps.
 /// {@endtemplate}
 class TestRunnerCommand extends Command<int> {
   /// {@macro test_command}
@@ -44,7 +44,7 @@ class TestRunnerCommand extends Command<int> {
           'lib/*/*.freezed.dart',
           'lib/*/*.g.dart',
           '-o',
-          'coverage/lcov.info'
+          'coverage/lcov.info',
         ]);
 
         if (generateHtml) {

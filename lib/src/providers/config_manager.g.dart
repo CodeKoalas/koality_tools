@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef GetConfigManagerRef = AutoDisposeProviderRef<KoalityConfigManager>;
-
 /// See also [getConfigManager].
 @ProviderFor(getConfigManager)
 const getConfigManagerProvider = GetConfigManagerFamily();
@@ -76,10 +74,10 @@ class GetConfigManagerFamily extends Family<KoalityConfigManager> {
 class GetConfigManagerProvider extends AutoDisposeProvider<KoalityConfigManager> {
   /// See also [getConfigManager].
   GetConfigManagerProvider({
-    required this.logger,
-  }) : super.internal(
+    required Logger logger,
+  }) : this._internal(
           (ref) => getConfigManager(
-            ref,
+            ref as GetConfigManagerRef,
             logger: logger,
           ),
           from: getConfigManagerProvider,
@@ -87,9 +85,43 @@ class GetConfigManagerProvider extends AutoDisposeProvider<KoalityConfigManager>
           debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getConfigManagerHash,
           dependencies: GetConfigManagerFamily._dependencies,
           allTransitiveDependencies: GetConfigManagerFamily._allTransitiveDependencies,
+          logger: logger,
         );
 
+  GetConfigManagerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.logger,
+  }) : super.internal();
+
   final Logger logger;
+
+  @override
+  Override overrideWith(
+    KoalityConfigManager Function(GetConfigManagerRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetConfigManagerProvider._internal(
+        (ref) => create(ref as GetConfigManagerRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        logger: logger,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<KoalityConfigManager> createElement() {
+    return _GetConfigManagerProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -104,4 +136,18 @@ class GetConfigManagerProvider extends AutoDisposeProvider<KoalityConfigManager>
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin GetConfigManagerRef on AutoDisposeProviderRef<KoalityConfigManager> {
+  /// The parameter `logger` of this provider.
+  Logger get logger;
+}
+
+class _GetConfigManagerProviderElement extends AutoDisposeProviderElement<KoalityConfigManager>
+    with GetConfigManagerRef {
+  _GetConfigManagerProviderElement(super.provider);
+
+  @override
+  Logger get logger => (origin as GetConfigManagerProvider).logger;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

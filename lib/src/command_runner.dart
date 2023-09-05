@@ -113,17 +113,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
         _logger.detail('  - $option: ${topLevelResults[option]}');
       }
     }
-    if (topLevelResults.command != null) {
-      final commandResult = topLevelResults.command!;
-      _logger
-        ..detail('  Command: ${commandResult.name}')
-        ..detail('    Command options:');
-      for (final option in commandResult.options) {
-        if (commandResult.wasParsed(option)) {
-          _logger.detail('    - $option: ${commandResult[option]}');
-        }
-      }
-    }
+    writeCommandOptionDetails(topLevelResults);
 
     final int? exitCode;
     if (topLevelResults['version'] == true) {
@@ -136,6 +126,21 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
       await _checkForUpdates();
     }
     return exitCode;
+  }
+
+  /// Write out a formatted list of options for this command.
+  void writeCommandOptionDetails(ArgResults topLevelResults) {
+    if (topLevelResults.command != null) {
+      final commandResult = topLevelResults.command!;
+      _logger
+        ..detail('  Command: ${commandResult.name}')
+        ..detail('    Command options:');
+      for (final option in commandResult.options) {
+        if (commandResult.wasParsed(option)) {
+          _logger.detail('    - $option: ${commandResult[option]}');
+        }
+      }
+    }
   }
 
   /// Checks if the current version (set by the build runner on the

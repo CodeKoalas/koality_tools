@@ -2,19 +2,22 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
+/// Global providers.
 import 'package:koality_tools/src/providers/config.dart';
 
-/// {@template kubectl_command}
+/// Kubectl command helpers.
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
+
+/// {@template kubectl_describe_pods_command}
 ///
-/// `koality kubectl describe`
+/// `koality kubectl describe [arguments]`
 /// A [Command] to describe a pod and find it by matching text to the pod name.
 /// {@endtemplate}
 class KubectlDescribePodsCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro kubectl_describe_pods_command}
   KubectlDescribePodsCommand({
     required Logger logger,
     required ProviderContainer container,

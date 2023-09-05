@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-/// {@template update_command}
-///   A command which will refactor all package imports from koality_flutter to the actual
-///   package name.
+/// {@template refactor_command}
+///
+/// `koality refactor`
+/// A [Command] which will refactor all package imports from koality_flutter to the actual
+/// package name.
 /// {@endtemplate}
 class RefactorCommand extends Command<int> {
-  /// {@macro update_command}
+  /// {@macro refactor_command}
   RefactorCommand({
     required Logger logger,
   }) : _logger = logger {

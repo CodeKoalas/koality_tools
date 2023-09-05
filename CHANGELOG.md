@@ -1,3 +1,12 @@
+[0.4.0] - 04/09/2023
+* Adding the `mysql` command and it's subcommands.
+* Cleanup internal docs.
+* Small refactoring.
+* Adding docs.
+
+[0.3.4] - 01/09/2023
+* Adding the `jwt` command.
+
 [0.3.3] - 24/07/2023
 * Adding `firebase setup` command.
 * Adding `firebase emulators` command that will start the emulators.

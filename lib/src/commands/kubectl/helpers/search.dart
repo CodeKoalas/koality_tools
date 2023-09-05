@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search.freezed.dart';
 
+/// These search executors help collection functionality for searching for pods and other resources in 'kubectl'.
+/// Each one override the built in `.call` method for Dart objects.
 @freezed
 class SearchPodsExecutor with _$SearchPodsExecutor {
   const SearchPodsExecutor._();

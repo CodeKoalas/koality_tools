@@ -4,20 +4,17 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:koality_tools/src/utilities.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:riverpod/riverpod.dart';
 
-/// {@template firebase_command}
+/// {@template firebase_setup_command}
 ///
 /// `koality firebase setup`
 /// A [Command] to setup Firebase tools locally.
 /// {@endtemplate}
 class FirebaseSetupCommand extends Command<int> {
-  /// {@macro firebase_command}
+  /// {@macro firebase_setup_command}
   FirebaseSetupCommand({
     required Logger logger,
-    required ProviderContainer container,
-  })  : _logger = logger,
-        _container = container {
+  }) : _logger = logger {
     argParser.addFlag(
       'npm',
       abbr: 'n',
@@ -32,8 +29,6 @@ class FirebaseSetupCommand extends Command<int> {
   String get name => 'setup';
 
   final Logger _logger;
-  // ignore: unused_field
-  final ProviderContainer _container;
 
   @override
   Future<int> run() async {
@@ -44,24 +39,10 @@ class FirebaseSetupCommand extends Command<int> {
 
     /// Now let's make sure the Firebase tools are installed globally with Yarn or NPM depending
     /// on the arg.
-    if (useNpm) {
-      /// Now let's make sure the Firebase tools are installed globally with NPM.
-      _logger.info('Installing Firebase tools with NPM');
-      final result = await Process.run('npm', ['install', '-g', 'firebase-tools']);
-      if (result.exitCode != 0) {
-        _logger.err('Failed to install Firebase tools with NPM');
-        return result.exitCode;
-      }
-    } else {
-      /// Now let's make sure the Firebase tools are installed globally with Yarn.
-      _logger.info('Installing Firebase tools with Yarn');
-      final result = await Process.run('yarn', ['global', 'add', 'firebase-tools']);
-      if (result.exitCode != 0) {
-        _logger
-          ..err('Failed to install Firebase tools with Yarn')
-          ..err(result.stderr.toString());
-        return result.exitCode;
-      }
+    final code = await installFirebaseCLI(useNpm: useNpm);
+    if (code == ExitCode.software.code) {
+      /// We failed, exit out;
+      return code;
     }
 
     // Now check if we should Firebase init this directory.
@@ -90,6 +71,39 @@ class FirebaseSetupCommand extends Command<int> {
     }
 
     return ExitCode.success.code;
+  }
+
+  /// Install the Firebase CLI tool with NPM/Yarn based on the arg.
+  Future<int> installFirebaseCLI({required bool useNpm}) async {
+    if (useNpm) {
+      /// Now let's make sure the Firebase tools are installed globally with NPM.
+      _logger.info('Installing Firebase tools with NPM');
+      return installFirebaseCLIWithNpm();
+    } else {
+      /// Now let's make sure the Firebase tools are installed globally with Yarn.
+      _logger.info('Installing Firebase tools with Yarn');
+      return installFirebaseCLIWithYarn();
+    }
+  }
+
+  /// Install the Firebase CLI tool with NPM.
+  Future<int> installFirebaseCLIWithNpm() async {
+    final result = await Process.run('npm', ['install', '-g', 'firebase-tools']);
+    if (result.exitCode != 0) {
+      _logger.err('Failed to install Firebase tools with NPM');
+    }
+    return result.exitCode;
+  }
+
+  /// Install the Firebase CLI tool with Yarn.
+  Future<int> installFirebaseCLIWithYarn() async {
+    final result = await Process.run('yarn', ['global', 'add', 'firebase-tools']);
+    if (result.exitCode != 0) {
+      _logger
+        ..err('Failed to install Firebase tools with Yarn')
+        ..err(result.stderr.toString());
+    }
+    return result.exitCode;
   }
 }
 
