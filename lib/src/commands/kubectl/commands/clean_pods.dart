@@ -8,13 +8,13 @@ import 'package:riverpod/riverpod.dart';
 
 import 'package:koality_tools/src/providers/config.dart';
 
-/// {@template kubectl_command}
+/// {@template kubectl_clean_pods_command}
 ///
-/// `koality kubectl clean-evicted`
-/// A [Command] to remove all evicted pods from a namespace.
+/// `koality kubectl clean-pods`
+/// A [Command] to clean pods from a namespace matching statuses.
 /// {@endtemplate}
 class KubectlCleanPodsCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro kubectl_clean_pods_command}
   KubectlCleanPodsCommand({
     required Logger logger,
     required ProviderContainer container,

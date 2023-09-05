@@ -71,6 +71,8 @@ class CoverageCommand extends Command<int> {
       // Now need to loop over the entire `lib` folder and add all dart files
       // that do not end with our 'ignored_files' list. Then we need to trim off
       // the last 4 characters (dart) and add the package name to the front.
+      //
+      // @TODO: Move this to a util function; is it too much to turn into a "find" Process?
       final importsToAdd = Directory('lib')
           .listSync(recursive: true)
           .where((element) => element.path.endsWith('.dart'))

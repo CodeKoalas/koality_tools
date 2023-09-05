@@ -5,14 +5,14 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:yaml/yaml.dart';
 
-/// {@template kubectl_command}
+/// {@template parse_command}
 ///
-/// `koality kubectl clean-evicted`
-/// A [Command] to remove all evicted pods from a namespace.
+/// `koality parse version`
+/// A [Command] to parse a pubspec.yaml file and get the version.
 /// {@endtemplate}
-class ParseGetVersionCommand extends Command<int> {
-  /// {@macro poeditor_command}
-  ParseGetVersionCommand({
+class ParseVersionCommand extends Command<int> {
+  /// {@macro parse_command}
+  ParseVersionCommand({
     required Logger logger,
   }) : _logger = logger {
     // Add optional flag for the path to the pubspec.yaml file.

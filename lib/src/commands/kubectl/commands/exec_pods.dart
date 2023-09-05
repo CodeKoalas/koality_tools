@@ -2,19 +2,22 @@ import 'dart:async';
 
 import 'package:args/command_runner.dart';
 import 'package:dcli/dcli.dart';
-import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
+/// Global providers.
 import 'package:koality_tools/src/providers/config.dart';
 
-/// {@template kubectl_command}
+// Kubectl command helpers.
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
+
+/// {@template kubectl_exec_pods_command}
 ///
-/// `koality kubectl exec`
+/// `koality kubectl exec [arguments]`
 /// A [Command] to exec into a pod and find it by matching text to the pod name.
 /// {@endtemplate}
 class KubectlExecPodsCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro kubectl_exec_pods_command}
   KubectlExecPodsCommand({
     required Logger logger,
     required ProviderContainer container,

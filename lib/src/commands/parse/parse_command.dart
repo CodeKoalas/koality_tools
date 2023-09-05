@@ -1,23 +1,23 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 
-import 'package:koality_tools/src/commands/parse/commands/get_version.dart';
+import 'package:koality_tools/src/commands/parse/commands/parse_version_command.dart';
 
-/// {@template poeditor_command}
+/// {@template parse_command}
 ///
-/// `koality poeditor [command]`
-/// A [Command] to do stuff related to parsing project files.
+/// `koality parse [command]`
+/// A [Command] with some utility for parsing various file formats.
 /// {@endtemplate}
 class ParseCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro parse_command}
   ParseCommand({
     required Logger logger,
   }) {
-    addSubcommand(ParseGetVersionCommand(logger: logger));
+    addSubcommand(ParseVersionCommand(logger: logger));
   }
 
   @override
-  String get description => 'A command to do cool parsing stuff.';
+  String get description => 'A command to parse various file formats.';
 
   @override
   String get name => 'parse';

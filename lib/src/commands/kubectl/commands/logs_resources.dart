@@ -2,19 +2,22 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
+// Global providers.
 import 'package:koality_tools/src/providers/config.dart';
 
-/// {@template kubectl_command}
+// Kubectl command helpers.
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
+
+/// {@template kubectl_logs_resources_command}
 ///
-/// `koality kubectl logs`
+/// `koality kubectl logs [arguments]`
 /// A [Command] to get the logs of a resource and find it by matching text to the resource name.
 /// {@endtemplate}
 class KubectlLogsResourcesCommand extends Command<int> {
-  /// {@macro poeditor_command}
+  /// {@macro kubectl_logs_resources_command}
   KubectlLogsResourcesCommand({
     required Logger logger,
     required ProviderContainer container,
@@ -45,6 +48,7 @@ class KubectlLogsResourcesCommand extends Command<int> {
   final ProviderContainer _container;
   final SearchResourceExecutor searchResources = const SearchResourceExecutor();
 
+  /// This helps the tool list out available values.
   final List<String> allowedTypes = const [
     'pod',
     'deployment',

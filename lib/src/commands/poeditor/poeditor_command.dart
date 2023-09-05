@@ -7,7 +7,7 @@ import 'package:koality_tools/src/commands/poeditor/commands/upload_terms_comman
 /// {@template poeditor_command}
 ///
 /// `koality poeditor [command]`
-/// A [Command] to do stuff related to poeditor.com
+/// A [Command] to work with poeditor.com's API.
 /// {@endtemplate}
 class POEditorCommand extends Command<int> {
   /// {@macro poeditor_command}

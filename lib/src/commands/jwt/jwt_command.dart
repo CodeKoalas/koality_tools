@@ -7,10 +7,10 @@ import 'package:mason_logger/mason_logger.dart';
 /// {@template jwt_command}
 ///
 /// `koality jwt`
-/// A [Command] that creates a file referencing all code files to make sure coverage is run on all files.
+/// A [Command] that creates a base64 encoded secure key that can be used for signing JWT keys.
 /// {@endtemplate}
 class JwtCommand extends Command<int> {
-  /// {@macro coverage_command}
+  /// {@macro jwt_command}
   JwtCommand({
     required Logger logger,
   }) : _logger = logger;

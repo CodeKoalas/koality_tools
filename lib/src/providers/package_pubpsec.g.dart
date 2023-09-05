@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef GetPackagePubspecRef = AutoDisposeFutureProviderRef<Map<String, dynamic>>;
-
 /// See also [getPackagePubspec].
 @ProviderFor(getPackagePubspec)
 const getPackagePubspecProvider = GetPackagePubspecFamily();
@@ -76,10 +74,10 @@ class GetPackagePubspecFamily extends Family<AsyncValue<Map<String, dynamic>>> {
 class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dynamic>> {
   /// See also [getPackagePubspec].
   GetPackagePubspecProvider({
-    required this.path,
-  }) : super.internal(
+    required String path,
+  }) : this._internal(
           (ref) => getPackagePubspec(
-            ref,
+            ref as GetPackagePubspecRef,
             path: path,
           ),
           from: getPackagePubspecProvider,
@@ -87,9 +85,43 @@ class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dy
           debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getPackagePubspecHash,
           dependencies: GetPackagePubspecFamily._dependencies,
           allTransitiveDependencies: GetPackagePubspecFamily._allTransitiveDependencies,
+          path: path,
         );
 
+  GetPackagePubspecProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.path,
+  }) : super.internal();
+
   final String path;
+
+  @override
+  Override overrideWith(
+    FutureOr<Map<String, dynamic>> Function(GetPackagePubspecRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetPackagePubspecProvider._internal(
+        (ref) => create(ref as GetPackagePubspecRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        path: path,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Map<String, dynamic>> createElement() {
+    return _GetPackagePubspecProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -104,4 +136,18 @@ class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dy
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin GetPackagePubspecRef on AutoDisposeFutureProviderRef<Map<String, dynamic>> {
+  /// The parameter `path` of this provider.
+  String get path;
+}
+
+class _GetPackagePubspecProviderElement extends AutoDisposeFutureProviderElement<Map<String, dynamic>>
+    with GetPackagePubspecRef {
+  _GetPackagePubspecProviderElement(super.provider);
+
+  @override
+  String get path => (origin as GetPackagePubspecProvider).path;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

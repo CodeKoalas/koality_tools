@@ -8,13 +8,13 @@ import 'package:riverpod/riverpod.dart';
 import 'package:koality_tools/src/providers/config.dart';
 import 'package:koality_tools/src/utilities.dart';
 
-/// {@template sample_command}
+/// {@template setup_command}
 ///
 /// `koality setup`
 /// A [Command] to configure some local tools used by other scripts.
 /// {@endtemplate}
 class SetupCommand extends Command<int> {
-  /// {@macro sample_command}
+  /// {@macro setup_command}
   SetupCommand({
     required Logger logger,
     required ProviderContainer container,

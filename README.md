@@ -48,6 +48,9 @@ $ koality firebase configure --dev my-firebase-project-id-dev --prod my-firebase
 # Firebase command to setup Firebase tools locally.
 $ koality firebase setup
 
+# MySQL command to create a database with a user/pass combo.
+$ koality mysql create database --host localhost --user user --password root --database my_database
+
 # Show CLI version
 $ koality --version
 
@@ -142,4 +145,13 @@ $ koality firebase setup
 
 # This command will start the firebase emulators for the passed firebase project ID.
 $ koality firebase emulators -p koality-tools
+```
+
+## Running MySQL Commands. 🔐
+
+```sh
+# This command will create a new database with the passed name (or allow skipping if it exists/command fails)
+# and then will create a user with a password and grant them all priviledges to the database. Great for local use
+# to make sure you have a user that can do anything to the database.
+$ koality mysql create database --host localhost --user root --password root --database my_database
 ```

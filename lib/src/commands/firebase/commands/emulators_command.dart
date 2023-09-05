@@ -6,13 +6,13 @@ import 'package:dcli/dcli.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
-/// {@template firebase_command}
+/// {@template firebase_emulators_command}
 ///
 /// `koality firebase emulators`
 /// A [Command] to choose a Firebase project and start the emulators for it.
 /// {@endtemplate}
 class FirebaseEmulatorsCommand extends Command<int> {
-  /// {@macro firebase_command}
+  /// {@macro firebase_emulators_command}
   FirebaseEmulatorsCommand({
     required Logger logger,
     required ProviderContainer container,

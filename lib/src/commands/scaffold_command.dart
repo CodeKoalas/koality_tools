@@ -1,16 +1,20 @@
+// ignore_for_file: dead_code
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/providers/package_pubpsec.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
+
+// Global providers.
+import 'package:koality_tools/src/providers/package_pubpsec.dart';
 
 /// @TODO: Fixup the code to correctly rename files and write test.
 /// {@template scaffold_command}
 ///
-/// `scaffold setup`
-/// A [Command] to do cool stuff.
+/// `koality scaffold`
+/// A [Command] to try and update some native files to match values in the pubspec file.
 /// {@endtemplate}
 class ScaffoldCommand extends Command<int> {
   /// {@macro scaffold_command}
@@ -52,6 +56,10 @@ class ScaffoldCommand extends Command<int> {
 
   @override
   Future<int> run() async {
+    // @TODO: Sort this command out.
+    _logger.warn('Not fully implemented yet.');
+    return ExitCode.success.code;
+
     final androidLanguage = argResults?['android-lang'] as String;
     final androidTestLanguage = argResults?['android-test-lang'] as String;
     final oldAppName = argResults?['app-name'] as String;
@@ -91,6 +99,7 @@ class ScaffoldCommand extends Command<int> {
     final appName = data['app_name'] as String;
     final oldPackagePath = bundleName.replaceAll('.', '/');
 
+    // @TODO: Fix these up to better handle updating files.
     // Now try renaming the android files.
     await fixAndroidAppDirectoryNames(_logger, path, packageName, oldPackagePath, androidLanguage);
 
@@ -144,13 +153,16 @@ Future<void> fixIosPbxprojFile(String path, String packageName, [String? customP
   if (FileSystemEntity.isFileSync(pbxprojPath)) {
     // Adding the empty string for Mac OSX since it requires a file name for the replacement file
     // and if we leave it blank then it prevents Mac from creating a "backup" file.
-    await Process.run('sed', [
-      '-i',
-      '',
-      '-e',
-      's/PRODUCT_BUNDLE_IDENTIFIER = [^;]*;/PRODUCT_BUNDLE_IDENTIFIER = $packageName;/g',
-      pbxprojPath
-    ]);
+    await Process.run(
+      'sed',
+      [
+        '-i',
+        '',
+        '-e',
+        's/PRODUCT_BUNDLE_IDENTIFIER = [^;]*;/PRODUCT_BUNDLE_IDENTIFIER = $packageName;/g',
+        pbxprojPath,
+      ],
+    );
   }
 }
 

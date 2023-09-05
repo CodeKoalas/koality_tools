@@ -69,8 +69,6 @@ class _SystemHash {
   }
 }
 
-typedef GetKoalityConfigRef = AutoDisposeFutureProviderRef<KoalityConfig>;
-
 /// See also [getKoalityConfig].
 @ProviderFor(getKoalityConfig)
 const getKoalityConfigProvider = GetKoalityConfigFamily();
@@ -119,11 +117,11 @@ class GetKoalityConfigFamily extends Family<AsyncValue<KoalityConfig>> {
 class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> {
   /// See also [getKoalityConfig].
   GetKoalityConfigProvider({
-    required this.logger,
-    this.overrideConfigPath,
-  }) : super.internal(
+    required Logger logger,
+    String? overrideConfigPath,
+  }) : this._internal(
           (ref) => getKoalityConfig(
-            ref,
+            ref as GetKoalityConfigRef,
             logger: logger,
             overrideConfigPath: overrideConfigPath,
           ),
@@ -132,10 +130,47 @@ class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> 
           debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getKoalityConfigHash,
           dependencies: GetKoalityConfigFamily._dependencies,
           allTransitiveDependencies: GetKoalityConfigFamily._allTransitiveDependencies,
+          logger: logger,
+          overrideConfigPath: overrideConfigPath,
         );
+
+  GetKoalityConfigProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.logger,
+    required this.overrideConfigPath,
+  }) : super.internal();
 
   final Logger logger;
   final String? overrideConfigPath;
+
+  @override
+  Override overrideWith(
+    FutureOr<KoalityConfig> Function(GetKoalityConfigRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetKoalityConfigProvider._internal(
+        (ref) => create(ref as GetKoalityConfigRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        logger: logger,
+        overrideConfigPath: overrideConfigPath,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<KoalityConfig> createElement() {
+    return _GetKoalityConfigProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -153,4 +188,23 @@ class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> 
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+
+mixin GetKoalityConfigRef on AutoDisposeFutureProviderRef<KoalityConfig> {
+  /// The parameter `logger` of this provider.
+  Logger get logger;
+
+  /// The parameter `overrideConfigPath` of this provider.
+  String? get overrideConfigPath;
+}
+
+class _GetKoalityConfigProviderElement extends AutoDisposeFutureProviderElement<KoalityConfig>
+    with GetKoalityConfigRef {
+  _GetKoalityConfigProviderElement(super.provider);
+
+  @override
+  Logger get logger => (origin as GetKoalityConfigProvider).logger;
+  @override
+  String? get overrideConfigPath => (origin as GetKoalityConfigProvider).overrideConfigPath;
+}
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,12 +1,15 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
-
-import 'package:koality_tools/src/constants.dart';
-import 'package:koality_tools/src/version.dart';
 import 'package:pub_updater/pub_updater.dart';
 
+// Global values.
+import 'package:koality_tools/src/constants.dart';
+import 'package:koality_tools/src/version.dart';
+
 /// {@template update_command}
-/// A command which updates the CLI.
+///
+/// `koality update`
+/// A [Command] to update this package.
 /// {@endtemplate}
 class UpdateCommand extends Command<int> {
   /// {@macro update_command}
