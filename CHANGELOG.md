@@ -1,3 +1,6 @@
+[0.4.1] - 04/09/2023
+* Fixing README installation instructions.
+
 [0.4.0] - 04/09/2023
 * Adding the `mysql` command and it's subcommands.
 * Cleanup internal docs.
