@@ -1,3 +1,7 @@
+[0.4.2] - 11/09/2023
+* Fixing some misspellings.
+* Scaffolding the riverpod graph command - waiting for riverpod_graph to be Dart >= 3.0 compatible.
+
 [0.4.1] - 04/09/2023
 * Fixing README installation instructions.
 

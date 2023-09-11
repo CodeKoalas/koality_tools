@@ -1,12 +1,14 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
-import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
-import 'package:koality_tools/src/commands/jwt/jwt_command.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:riverpod/riverpod.dart';
 
+// Command elements.
+import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
+import 'package:koality_tools/src/commands/jwt/jwt_command.dart';
+import 'package:koality_tools/src/commands/riverpod/riverpod_command.dart';
 import 'package:koality_tools/src/commands/commands.dart';
 import 'package:koality_tools/src/commands/coverage/coverage_command.dart';
 import 'package:koality_tools/src/commands/kubectl/kubectl_command.dart';
@@ -14,12 +16,10 @@ import 'package:koality_tools/src/commands/parse/parse_command.dart';
 import 'package:koality_tools/src/commands/refactor_command.dart';
 import 'package:koality_tools/src/commands/scaffold_command.dart';
 import 'package:koality_tools/src/commands/test/test_command.dart';
+
+// Global elements.
 import 'package:koality_tools/src/constants.dart';
 import 'package:koality_tools/src/version.dart';
-
-const executableName = 'koality';
-const packageName = 'koality_tools';
-const description = 'A collection of useful tools created by Code Koalas.';
 
 /// {@template koality_tools_command_runner}
 /// A [CommandRunner] for the CLI.
@@ -35,7 +35,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
     required this.updater,
     Logger? logger,
   })  : _logger = logger ?? Logger(),
-        super(executableName, description) {
+        super(kExecutableName, kDescription) {
     // Add root options and flags
     argParser
       ..addFlag(
@@ -61,6 +61,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
     addCommand(SetupCommand(logger: _logger, container: container));
     addCommand(UpdateCommand(logger: _logger, updater: updater));
     addCommand(JwtCommand(logger: _logger));
+    addCommand(RiverpodCommand(logger: _logger));
   }
 
   @override

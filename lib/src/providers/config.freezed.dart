@@ -27,22 +27,29 @@ mixin _$KoalityConfig {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $KoalityConfigCopyWith<KoalityConfig> get copyWith => throw _privateConstructorUsedError;
+  $KoalityConfigCopyWith<KoalityConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $KoalityConfigCopyWith<$Res> {
-  factory $KoalityConfigCopyWith(KoalityConfig value, $Res Function(KoalityConfig) then) =
+  factory $KoalityConfigCopyWith(
+          KoalityConfig value, $Res Function(KoalityConfig) then) =
       _$KoalityConfigCopyWithImpl<$Res, KoalityConfig>;
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig, FirebaseConfig firebaseConfig, String? gitlabAccessToken});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      FirebaseConfig firebaseConfig,
+      String? gitlabAccessToken});
 
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
   $FirebaseConfigCopyWith<$Res> get firebaseConfig;
 }
 
 /// @nodoc
-class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $KoalityConfigCopyWith<$Res> {
+class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig>
+    implements $KoalityConfigCopyWith<$Res> {
   _$KoalityConfigCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -96,12 +103,18 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
 }
 
 /// @nodoc
-abstract class _$$_KoalityConfigCopyWith<$Res> implements $KoalityConfigCopyWith<$Res> {
-  factory _$$_KoalityConfigCopyWith(_$_KoalityConfig value, $Res Function(_$_KoalityConfig) then) =
+abstract class _$$_KoalityConfigCopyWith<$Res>
+    implements $KoalityConfigCopyWith<$Res> {
+  factory _$$_KoalityConfigCopyWith(
+          _$_KoalityConfig value, $Res Function(_$_KoalityConfig) then) =
       __$$_KoalityConfigCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig, FirebaseConfig firebaseConfig, String? gitlabAccessToken});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      FirebaseConfig firebaseConfig,
+      String? gitlabAccessToken});
 
   @override
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
@@ -110,9 +123,12 @@ abstract class _$$_KoalityConfigCopyWith<$Res> implements $KoalityConfigCopyWith
 }
 
 /// @nodoc
-class __$$_KoalityConfigCopyWithImpl<$Res> extends _$KoalityConfigCopyWithImpl<$Res, _$_KoalityConfig>
+class __$$_KoalityConfigCopyWithImpl<$Res>
+    extends _$KoalityConfigCopyWithImpl<$Res, _$_KoalityConfig>
     implements _$$_KoalityConfigCopyWith<$Res> {
-  __$$_KoalityConfigCopyWithImpl(_$_KoalityConfig _value, $Res Function(_$_KoalityConfig) _then) : super(_value, _then);
+  __$$_KoalityConfigCopyWithImpl(
+      _$_KoalityConfig _value, $Res Function(_$_KoalityConfig) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -153,7 +169,8 @@ class _$_KoalityConfig extends _KoalityConfig {
       this.gitlabAccessToken})
       : super._();
 
-  factory _$_KoalityConfig.fromJson(Map<String, dynamic> json) => _$$_KoalityConfigFromJson(json);
+  factory _$_KoalityConfig.fromJson(Map<String, dynamic> json) =>
+      _$$_KoalityConfigFromJson(json);
 
   @override
   final String configPath;
@@ -176,15 +193,20 @@ class _$_KoalityConfig extends _KoalityConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KoalityConfig &&
-            (identical(other.configPath, configPath) || other.configPath == configPath) &&
-            (identical(other.kubectlConfig, kubectlConfig) || other.kubectlConfig == kubectlConfig) &&
-            (identical(other.firebaseConfig, firebaseConfig) || other.firebaseConfig == firebaseConfig) &&
-            (identical(other.gitlabAccessToken, gitlabAccessToken) || other.gitlabAccessToken == gitlabAccessToken));
+            (identical(other.configPath, configPath) ||
+                other.configPath == configPath) &&
+            (identical(other.kubectlConfig, kubectlConfig) ||
+                other.kubectlConfig == kubectlConfig) &&
+            (identical(other.firebaseConfig, firebaseConfig) ||
+                other.firebaseConfig == firebaseConfig) &&
+            (identical(other.gitlabAccessToken, gitlabAccessToken) ||
+                other.gitlabAccessToken == gitlabAccessToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, configPath, kubectlConfig, firebaseConfig, gitlabAccessToken);
+  int get hashCode => Object.hash(runtimeType, configPath, kubectlConfig,
+      firebaseConfig, gitlabAccessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -208,7 +230,8 @@ abstract class _KoalityConfig extends KoalityConfig {
       final String? gitlabAccessToken}) = _$_KoalityConfig;
   const _KoalityConfig._() : super._();
 
-  factory _KoalityConfig.fromJson(Map<String, dynamic> json) = _$_KoalityConfig.fromJson;
+  factory _KoalityConfig.fromJson(Map<String, dynamic> json) =
+      _$_KoalityConfig.fromJson;
 
   @override
   String get configPath;
@@ -220,7 +243,8 @@ abstract class _KoalityConfig extends KoalityConfig {
   String? get gitlabAccessToken;
   @override
   @JsonKey(ignore: true)
-  _$$_KoalityConfigCopyWith<_$_KoalityConfig> get copyWith => throw _privateConstructorUsedError;
+  _$$_KoalityConfigCopyWith<_$_KoalityConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 KubectlConfig _$KubectlConfigFromJson(Map<String, dynamic> json) {
@@ -233,19 +257,22 @@ mixin _$KubectlConfig {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $KubectlConfigCopyWith<KubectlConfig> get copyWith => throw _privateConstructorUsedError;
+  $KubectlConfigCopyWith<KubectlConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $KubectlConfigCopyWith<$Res> {
-  factory $KubectlConfigCopyWith(KubectlConfig value, $Res Function(KubectlConfig) then) =
+  factory $KubectlConfigCopyWith(
+          KubectlConfig value, $Res Function(KubectlConfig) then) =
       _$KubectlConfigCopyWithImpl<$Res, KubectlConfig>;
   @useResult
   $Res call({String defaultNamespace});
 }
 
 /// @nodoc
-class _$KubectlConfigCopyWithImpl<$Res, $Val extends KubectlConfig> implements $KubectlConfigCopyWith<$Res> {
+class _$KubectlConfigCopyWithImpl<$Res, $Val extends KubectlConfig>
+    implements $KubectlConfigCopyWith<$Res> {
   _$KubectlConfigCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -268,8 +295,10 @@ class _$KubectlConfigCopyWithImpl<$Res, $Val extends KubectlConfig> implements $
 }
 
 /// @nodoc
-abstract class _$$_KubectlConfigCopyWith<$Res> implements $KubectlConfigCopyWith<$Res> {
-  factory _$$_KubectlConfigCopyWith(_$_KubectlConfig value, $Res Function(_$_KubectlConfig) then) =
+abstract class _$$_KubectlConfigCopyWith<$Res>
+    implements $KubectlConfigCopyWith<$Res> {
+  factory _$$_KubectlConfigCopyWith(
+          _$_KubectlConfig value, $Res Function(_$_KubectlConfig) then) =
       __$$_KubectlConfigCopyWithImpl<$Res>;
   @override
   @useResult
@@ -277,9 +306,12 @@ abstract class _$$_KubectlConfigCopyWith<$Res> implements $KubectlConfigCopyWith
 }
 
 /// @nodoc
-class __$$_KubectlConfigCopyWithImpl<$Res> extends _$KubectlConfigCopyWithImpl<$Res, _$_KubectlConfig>
+class __$$_KubectlConfigCopyWithImpl<$Res>
+    extends _$KubectlConfigCopyWithImpl<$Res, _$_KubectlConfig>
     implements _$$_KubectlConfigCopyWith<$Res> {
-  __$$_KubectlConfigCopyWithImpl(_$_KubectlConfig _value, $Res Function(_$_KubectlConfig) _then) : super(_value, _then);
+  __$$_KubectlConfigCopyWithImpl(
+      _$_KubectlConfig _value, $Res Function(_$_KubectlConfig) _then)
+      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -298,9 +330,11 @@ class __$$_KubectlConfigCopyWithImpl<$Res> extends _$KubectlConfigCopyWithImpl<$
 /// @nodoc
 @JsonSerializable()
 class _$_KubectlConfig extends _KubectlConfig {
-  const _$_KubectlConfig({this.defaultNamespace = 'gitlab-managed-apps'}) : super._();
+  const _$_KubectlConfig({this.defaultNamespace = 'gitlab-managed-apps'})
+      : super._();
 
-  factory _$_KubectlConfig.fromJson(Map<String, dynamic> json) => _$$_KubectlConfigFromJson(json);
+  factory _$_KubectlConfig.fromJson(Map<String, dynamic> json) =>
+      _$$_KubectlConfigFromJson(json);
 
   @override
   @JsonKey()
@@ -316,7 +350,8 @@ class _$_KubectlConfig extends _KubectlConfig {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_KubectlConfig &&
-            (identical(other.defaultNamespace, defaultNamespace) || other.defaultNamespace == defaultNamespace));
+            (identical(other.defaultNamespace, defaultNamespace) ||
+                other.defaultNamespace == defaultNamespace));
   }
 
   @JsonKey(ignore: true)
@@ -338,16 +373,19 @@ class _$_KubectlConfig extends _KubectlConfig {
 }
 
 abstract class _KubectlConfig extends KubectlConfig {
-  const factory _KubectlConfig({final String defaultNamespace}) = _$_KubectlConfig;
+  const factory _KubectlConfig({final String defaultNamespace}) =
+      _$_KubectlConfig;
   const _KubectlConfig._() : super._();
 
-  factory _KubectlConfig.fromJson(Map<String, dynamic> json) = _$_KubectlConfig.fromJson;
+  factory _KubectlConfig.fromJson(Map<String, dynamic> json) =
+      _$_KubectlConfig.fromJson;
 
   @override
   String get defaultNamespace;
   @override
   @JsonKey(ignore: true)
-  _$$_KubectlConfigCopyWith<_$_KubectlConfig> get copyWith => throw _privateConstructorUsedError;
+  _$$_KubectlConfigCopyWith<_$_KubectlConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 FirebaseConfig _$FirebaseConfigFromJson(Map<String, dynamic> json) {
@@ -361,19 +399,22 @@ mixin _$FirebaseConfig {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FirebaseConfigCopyWith<FirebaseConfig> get copyWith => throw _privateConstructorUsedError;
+  $FirebaseConfigCopyWith<FirebaseConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $FirebaseConfigCopyWith<$Res> {
-  factory $FirebaseConfigCopyWith(FirebaseConfig value, $Res Function(FirebaseConfig) then) =
+  factory $FirebaseConfigCopyWith(
+          FirebaseConfig value, $Res Function(FirebaseConfig) then) =
       _$FirebaseConfigCopyWithImpl<$Res, FirebaseConfig>;
   @useResult
   $Res call({bool skipDev, bool skipProd});
 }
 
 /// @nodoc
-class _$FirebaseConfigCopyWithImpl<$Res, $Val extends FirebaseConfig> implements $FirebaseConfigCopyWith<$Res> {
+class _$FirebaseConfigCopyWithImpl<$Res, $Val extends FirebaseConfig>
+    implements $FirebaseConfigCopyWith<$Res> {
   _$FirebaseConfigCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -401,8 +442,10 @@ class _$FirebaseConfigCopyWithImpl<$Res, $Val extends FirebaseConfig> implements
 }
 
 /// @nodoc
-abstract class _$$_FirebaseConfigCopyWith<$Res> implements $FirebaseConfigCopyWith<$Res> {
-  factory _$$_FirebaseConfigCopyWith(_$_FirebaseConfig value, $Res Function(_$_FirebaseConfig) then) =
+abstract class _$$_FirebaseConfigCopyWith<$Res>
+    implements $FirebaseConfigCopyWith<$Res> {
+  factory _$$_FirebaseConfigCopyWith(
+          _$_FirebaseConfig value, $Res Function(_$_FirebaseConfig) then) =
       __$$_FirebaseConfigCopyWithImpl<$Res>;
   @override
   @useResult
@@ -410,9 +453,11 @@ abstract class _$$_FirebaseConfigCopyWith<$Res> implements $FirebaseConfigCopyWi
 }
 
 /// @nodoc
-class __$$_FirebaseConfigCopyWithImpl<$Res> extends _$FirebaseConfigCopyWithImpl<$Res, _$_FirebaseConfig>
+class __$$_FirebaseConfigCopyWithImpl<$Res>
+    extends _$FirebaseConfigCopyWithImpl<$Res, _$_FirebaseConfig>
     implements _$$_FirebaseConfigCopyWith<$Res> {
-  __$$_FirebaseConfigCopyWithImpl(_$_FirebaseConfig _value, $Res Function(_$_FirebaseConfig) _then)
+  __$$_FirebaseConfigCopyWithImpl(
+      _$_FirebaseConfig _value, $Res Function(_$_FirebaseConfig) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -437,9 +482,11 @@ class __$$_FirebaseConfigCopyWithImpl<$Res> extends _$FirebaseConfigCopyWithImpl
 /// @nodoc
 @JsonSerializable()
 class _$_FirebaseConfig extends _FirebaseConfig {
-  const _$_FirebaseConfig({this.skipDev = false, this.skipProd = false}) : super._();
+  const _$_FirebaseConfig({this.skipDev = false, this.skipProd = false})
+      : super._();
 
-  factory _$_FirebaseConfig.fromJson(Map<String, dynamic> json) => _$$_FirebaseConfigFromJson(json);
+  factory _$_FirebaseConfig.fromJson(Map<String, dynamic> json) =>
+      _$$_FirebaseConfigFromJson(json);
 
   @override
   @JsonKey()
@@ -459,7 +506,8 @@ class _$_FirebaseConfig extends _FirebaseConfig {
         (other.runtimeType == runtimeType &&
             other is _$_FirebaseConfig &&
             (identical(other.skipDev, skipDev) || other.skipDev == skipDev) &&
-            (identical(other.skipProd, skipProd) || other.skipProd == skipProd));
+            (identical(other.skipProd, skipProd) ||
+                other.skipProd == skipProd));
   }
 
   @JsonKey(ignore: true)
@@ -481,10 +529,12 @@ class _$_FirebaseConfig extends _FirebaseConfig {
 }
 
 abstract class _FirebaseConfig extends FirebaseConfig {
-  const factory _FirebaseConfig({final bool skipDev, final bool skipProd}) = _$_FirebaseConfig;
+  const factory _FirebaseConfig({final bool skipDev, final bool skipProd}) =
+      _$_FirebaseConfig;
   const _FirebaseConfig._() : super._();
 
-  factory _FirebaseConfig.fromJson(Map<String, dynamic> json) = _$_FirebaseConfig.fromJson;
+  factory _FirebaseConfig.fromJson(Map<String, dynamic> json) =
+      _$_FirebaseConfig.fromJson;
 
   @override
   bool get skipDev;
@@ -492,5 +542,6 @@ abstract class _FirebaseConfig extends FirebaseConfig {
   bool get skipProd;
   @override
   @JsonKey(ignore: true)
-  _$$_FirebaseConfigCopyWith<_$_FirebaseConfig> get copyWith => throw _privateConstructorUsedError;
+  _$$_FirebaseConfigCopyWith<_$_FirebaseConfig> get copyWith =>
+      throw _privateConstructorUsedError;
 }

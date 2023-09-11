@@ -95,8 +95,8 @@ class MysqlCreateDatabaseCommand extends Command<int> {
       return ExitCode.software.code;
     }
 
-    // Finally let's set priviledges for this user on this database.
-    final setPriviledgesResult = await Process.run(
+    // Finally let's set privileges for this user on this database.
+    final setPrivilegesResult = await Process.run(
       'mysql',
       [
         '--host',
@@ -105,8 +105,8 @@ class MysqlCreateDatabaseCommand extends Command<int> {
         "GRANT ALL on $databaseName.* TO '$user'@'%';",
       ],
     );
-    if (setPriviledgesResult.exitCode != 0) {
-      _logger.err('Failed to set priviledges: ${setPriviledgesResult.stderr}');
+    if (setPrivilegesResult.exitCode != 0) {
+      _logger.err('Failed to set priviledges: ${setPrivilegesResult.stderr}');
       return ExitCode.software.code;
     }
 

@@ -20,7 +20,7 @@ class MockUpdater extends Mock implements PubUpdater {}
 
 final updatePrompt = '''
 ${lightYellow.wrap('Update available!')} ${lightCyan.wrap(packageVersion)} \u2192 ${lightCyan.wrap(latestVersion)}
-Run ${lightCyan.wrap('$executableName update')} to update''';
+Run ${lightCyan.wrap('$kExecutableName update')} to update''';
 
 void main() {
   group('KoalityToolsCommandRunner', () {
