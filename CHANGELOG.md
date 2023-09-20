@@ -1,3 +1,6 @@
+[0.4.2] - 20/09/2023
+* Fixing issue with kubectl commands throwing if they return empty lists. (i.e. nothing matches search term).
+
 [0.4.1] - 04/09/2023
 * Fixing README installation instructions.
 

@@ -74,6 +74,12 @@ class KubectlLogsResourcesCommand extends Command<int> {
     /// want to present these options to the user and let them select which pod they want.
     try {
       final filtered = searchResources(searchTerms, namespace: computedNamespace, element: type);
+
+      // If we find nothing, just warn the user and exit gracefully since we did technically complete the command.
+      if (filtered.isEmpty) {
+        _logger.warn('No $type resources found in namespace $computedNamespace');
+        return ExitCode.success.code;
+      }
       final resourceName = _logger.chooseOne<String>(
         'Which $type would you like to get logs from?',
         choices: filtered,
