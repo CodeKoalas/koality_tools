@@ -64,14 +64,16 @@ class GetPackagePubspecFamily extends Family<AsyncValue<Map<String, dynamic>>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'getPackagePubspecProvider';
 }
 
 /// See also [getPackagePubspec].
-class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dynamic>> {
+class GetPackagePubspecProvider
+    extends AutoDisposeFutureProvider<Map<String, dynamic>> {
   /// See also [getPackagePubspec].
   GetPackagePubspecProvider({
     required String path,
@@ -82,9 +84,13 @@ class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dy
           ),
           from: getPackagePubspecProvider,
           name: r'getPackagePubspecProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getPackagePubspecHash,
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getPackagePubspecHash,
           dependencies: GetPackagePubspecFamily._dependencies,
-          allTransitiveDependencies: GetPackagePubspecFamily._allTransitiveDependencies,
+          allTransitiveDependencies:
+              GetPackagePubspecFamily._allTransitiveDependencies,
           path: path,
         );
 
@@ -102,7 +108,8 @@ class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dy
 
   @override
   Override overrideWith(
-    FutureOr<Map<String, dynamic>> Function(GetPackagePubspecRef provider) create,
+    FutureOr<Map<String, dynamic>> Function(GetPackagePubspecRef provider)
+        create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -137,12 +144,14 @@ class GetPackagePubspecProvider extends AutoDisposeFutureProvider<Map<String, dy
   }
 }
 
-mixin GetPackagePubspecRef on AutoDisposeFutureProviderRef<Map<String, dynamic>> {
+mixin GetPackagePubspecRef
+    on AutoDisposeFutureProviderRef<Map<String, dynamic>> {
   /// The parameter `path` of this provider.
   String get path;
 }
 
-class _GetPackagePubspecProviderElement extends AutoDisposeFutureProviderElement<Map<String, dynamic>>
+class _GetPackagePubspecProviderElement
+    extends AutoDisposeFutureProviderElement<Map<String, dynamic>>
     with GetPackagePubspecRef {
   _GetPackagePubspecProviderElement(super.provider);
 

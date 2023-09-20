@@ -63,6 +63,11 @@ class KubectlCleanPodsCommand extends Command<int> {
       final podListLines = podListString.split('\n');
       final podListFiltered = podListLines.where((element) => element.contains(status)).toList();
       final podListNames = podListFiltered.map((e) => e.split(' ')[0]).toList();
+      // If we find nothing, just warn the user and exit gracefully since we did technically complete the command.
+      if (podListNames.isEmpty) {
+        _logger.warn('No pods matching "$status" status found in namespace $computedNamespace');
+        return ExitCode.success.code;
+      }
       for (final podName in podListNames) {
         _logger.info('Deleting pod: $podName');
         final deletePod = await Process.run('kubectl', ['delete', 'pod', '-n', computedNamespace, podName]);

@@ -54,6 +54,11 @@ class KubectlDescribePodsCommand extends Command<int> {
     /// want to present these options to the user and let them select which pod they want.
     try {
       final filtered = searchPods(searchTerms, namespace: computedNamespace);
+      // If we find nothing, just warn the user and exit gracefully since we did technically complete the command.
+      if (filtered.isEmpty) {
+        _logger.warn('No pod matching "$searchTerms" found in namespace $computedNamespace');
+        return ExitCode.success.code;
+      }
       final podName = _logger.chooseOne<String>(
         'Which pod would you like to describe?',
         choices: filtered,

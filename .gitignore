@@ -12,3 +12,6 @@ build/
 
 # Android studio and IntelliJ
 .idea
+
+# Mac OS
+.DS_Store
