@@ -1,7 +1,7 @@
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:koality_tools/src/services/config.dart';
+import 'package:koality_tools/src/services/config_manager.dart';
 
 part 'config_manager.g.dart';
 

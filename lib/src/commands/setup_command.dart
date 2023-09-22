@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/providers/config_manager.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -58,7 +57,6 @@ This will ask about installing tools unless the --skip-ask flag is passed.
 
   @override
   Future<int> run() async {
-    final manager = _container.read(getConfigManagerProvider(logger: _logger));
     final skipAsking = argResults?['skip-ask'] as bool;
     final configPath = argResults?['config-path'] as String?;
     final config = await _container.read(
@@ -70,12 +68,6 @@ This will ask about installing tools unless the --skip-ask flag is passed.
 
     if (File(config.configPath).existsSync()) {
       _logger.info('Found config file at ${config.configPath}');
-
-      if (config.gitlabAccessToken?.isEmpty ?? false) {
-        final token = _logger.prompt('Enter your Gitlab API Access Token');
-        final updated = config.copyWith(gitlabAccessToken: token);
-        await manager.saveConfig(updated, configPath);
-      }
     } else {
       _logger.err('No config file found at ${config.configPath}');
     }

@@ -68,7 +68,6 @@ class KoalityConfigManager {
 {
   "configPath": "${configFile.path}", 
   "kubectlConfig": {}, 
-  "gitlabAccessToken": "", 
   "firebase": {
     "skipDev" false,
     "skipProd" false,
