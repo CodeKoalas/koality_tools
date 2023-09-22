@@ -14,6 +14,17 @@ class KoalityConfigManager {
 
   static const String _configKey = 'koality_config';
 
+  static Map<String, dynamic> defaultConfig(String configPath) {
+    return <String, dynamic>{
+      'configPath': configPath, 
+      'kubectlConfig': const <String, dynamic>{}, 
+      'firebase': {
+        'skipDev': false,
+        'skipProd': false,
+      }
+    };
+  }
+
   File getConfigFile(String? overrideConfigPath) {
     /// Let's first setup a config file for some sensitive data and config so it's not
     /// contained in the repo. Depending on whether we are on Linux/MacOS/Windows
@@ -62,18 +73,11 @@ class KoalityConfigManager {
 
     // Make sure the file exists.
     if (!configFile.existsSync()) {
+      // Generate default config and then write it.
+      final stringToWrite = json.encode(defaultConfig);
       configFile
         ..createSync(recursive: true)
-        ..writeAsStringSync('''
-{
-  "configPath": "${configFile.path}", 
-  "kubectlConfig": {}, 
-  "firebase": {
-    "skipDev" false,
-    "skipProd" false,
-  }
-}
-            ''');
+        ..writeAsStringSync(stringToWrite);
     }
 
     final data = await configFile.readAsString();
