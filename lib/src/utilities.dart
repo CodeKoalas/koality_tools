@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:koality_tools/src/models/package_install.dart';
 import 'package:mason_logger/mason_logger.dart';
 
 enum PackageTool {
@@ -24,29 +25,30 @@ Future<bool> isExecutableInstalled(String executableName) async {
   return process.stdout.toString().isNotEmpty;
 }
 
+/// Handles installing a single executable package. Will first check to see if the executable
+/// is already installed before asking.
 Future<void> handleInstallPackage({
   required Logger logger,
-  required String packageName,
-  required PackageTool tool,
+  required PackageInstallStruct struct,
   bool skipAsking = false,
 }) async {
-  if (await isExecutableInstalled(packageName)) {
-    logger.info('$packageName is already installed.');
+  if (await isExecutableInstalled(struct.commandName)) {
+    logger.info('${struct.packageName} is already installed.');
   } else {
-    logger.info('$packageName is not installed.');
+    logger.info('${struct.packageName} is not installed.');
     if (!skipAsking) {
-      final confirmChoice = confirmUserChoice(confirmMessage: 'Install $packageName?', logger: logger);
+      final confirmChoice = confirmUserChoice(confirmMessage: 'Install ${struct.packageName}?', logger: logger);
       if (confirmChoice) {
-        await installPackage(logger: logger, packageName: packageName, tool: tool);
+        await installPackage(logger: logger, packageName: struct.packageName, tool: struct.tool);
       } else {
-        logger.info('Skipping $packageName installation.');
+        logger.info('Skipping ${struct.packageName} installation.');
       }
     } else {
-      await installPackage(logger: logger, packageName: packageName, tool: tool);
+      await installPackage(logger: logger, packageName: struct.packageName, tool: struct.tool);
     }
 
     /// If we failed installing then we move onto the next.
-    logger.info('Finished installing $packageName.');
+    logger.info('Finished installing ${struct.packageName}.');
   }
 }
 
@@ -67,7 +69,7 @@ Future<ProcessResult> installPackage({
 
 bool confirmUserChoice({required String confirmMessage, required Logger logger}) {
   final choice = logger.prompt(confirmMessage);
-  if (choice == 'y' || choice == 'yes') {
+  if (choice.isYes) {
     return true;
   } else {
     return false;

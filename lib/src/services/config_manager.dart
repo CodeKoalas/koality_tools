@@ -73,8 +73,11 @@ class KoalityConfigManager {
 
     // Make sure the file exists.
     if (!configFile.existsSync()) {
+      logger.warn('No config file found at ${configFile.path}; creating new one...');
       // Generate default config and then write it.
-      final stringToWrite = json.encode(defaultConfig);
+      final spaces = ' ' * 4;
+      final encoder = JsonEncoder.withIndent(spaces);
+      final stringToWrite = encoder.convert(defaultConfig(configFile.path));
       configFile
         ..createSync(recursive: true)
         ..writeAsStringSync(stringToWrite);

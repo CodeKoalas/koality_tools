@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
+import 'package:koality_tools/src/models/package_install.dart';
 import 'package:koality_tools/src/providers/config.dart';
 import 'package:koality_tools/src/utilities.dart';
 
@@ -42,15 +41,15 @@ This will ask about installing tools unless the --skip-ask flag is passed.
   @override
   String get name => 'setup';
 
-  Map<String, PackageTool> packagesToInstall = {
-    'gum': PackageTool.brew,
-    'curl': PackageTool.brew,
-    'jq': PackageTool.brew,
-    'firebase-tools': PackageTool.npm,
-    'very_good_cli': PackageTool.dart,
-    'rps': PackageTool.dart,
-    'flutterfire_cli': PackageTool.dart,
-  };
+  List<PackageInstallStruct> packagesToInstall = const [
+    PackageInstallStruct(packageName: 'gum', commandName: 'gum', tool: PackageTool.brew),
+    PackageInstallStruct(packageName: 'curl', commandName: 'curl', tool: PackageTool.brew),
+    PackageInstallStruct(packageName: 'jq', commandName: 'jq', tool: PackageTool.brew),
+    PackageInstallStruct(packageName: 'firebase-tools', commandName: 'firebase', tool: PackageTool.npm),
+    PackageInstallStruct(packageName: 'very_good_cli', commandName: 'very_good', tool: PackageTool.dart),
+    PackageInstallStruct(packageName: 'rps', commandName: 'rps', tool: PackageTool.dart),
+    PackageInstallStruct(packageName: 'flutterfire_cli', commandName: 'flutterfire', tool: PackageTool.dart),
+  ];
 
   final Logger _logger;
   final ProviderContainer _container;
@@ -59,6 +58,9 @@ This will ask about installing tools unless the --skip-ask flag is passed.
   Future<int> run() async {
     final skipAsking = argResults?['skip-ask'] as bool;
     final configPath = argResults?['config-path'] as String?;
+
+    // @NOTE: Read once here to ensure the file is created.
+    // ignore: unused_local_variable
     final config = await _container.read(
       getKoalityConfigProvider(
         logger: _logger,
@@ -66,20 +68,13 @@ This will ask about installing tools unless the --skip-ask flag is passed.
       ).future,
     );
 
-    if (File(config.configPath).existsSync()) {
-      _logger.info('Found config file at ${config.configPath}');
-    } else {
-      _logger.err('No config file found at ${config.configPath}');
-    }
-
     /// Let's install desired packages.
     await Future.wait(
-      packagesToInstall.entries.map(
+      packagesToInstall.map(
         (entry) async {
           await handleInstallPackage(
             logger: _logger,
-            packageName: entry.key,
-            tool: entry.value,
+            struct: entry,
             skipAsking: skipAsking,
           );
         },
