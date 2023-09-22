@@ -16,8 +16,8 @@ class KoalityConfigManager {
 
   static Map<String, dynamic> defaultConfig(String configPath) {
     return <String, dynamic>{
-      'configPath': configPath, 
-      'kubectlConfig': const <String, dynamic>{}, 
+      'configPath': configPath,
+      'kubectlConfig': const <String, dynamic>{},
       'firebase': {
         'skipDev': false,
         'skipProd': false,
