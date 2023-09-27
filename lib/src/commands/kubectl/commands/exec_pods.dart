@@ -78,7 +78,7 @@ class KubectlExecPodsCommand extends Command<int> {
         if (useTTY) '-t' else '',
         if (useStdin) '-i' else '',
         '-n $computedNamespace $podName -- $shell',
-      ].join(' ').start(terminal: useStdin);
+      ].join(' ').run;
     } catch (e) {
       _logger.err(e.toString());
       return ExitCode.software.code;

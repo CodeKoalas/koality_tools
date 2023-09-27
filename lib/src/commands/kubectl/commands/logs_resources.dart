@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:dcli/dcli.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -85,8 +85,13 @@ class KubectlLogsResourcesCommand extends Command<int> {
         choices: filtered,
         defaultValue: filtered[0],
       );
-      final describedResource = await Process.run('kubectl', ['logs', resourceName, '-n', computedNamespace]);
-      _logger.info(describedResource.stdout.toString());
+      [
+        'kubectl',
+        'logs',
+        resourceName,
+        '-n',
+        computedNamespace,
+      ].join(' ').run;
     } catch (e) {
       _logger.err(e.toString());
       return ExitCode.software.code;

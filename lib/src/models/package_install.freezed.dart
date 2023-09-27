@@ -21,19 +21,22 @@ mixin _$PackageInstallStruct {
   PackageTool get tool => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $PackageInstallStructCopyWith<PackageInstallStruct> get copyWith => throw _privateConstructorUsedError;
+  $PackageInstallStructCopyWith<PackageInstallStruct> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PackageInstallStructCopyWith<$Res> {
-  factory $PackageInstallStructCopyWith(PackageInstallStruct value, $Res Function(PackageInstallStruct) then) =
+  factory $PackageInstallStructCopyWith(PackageInstallStruct value,
+          $Res Function(PackageInstallStruct) then) =
       _$PackageInstallStructCopyWithImpl<$Res, PackageInstallStruct>;
   @useResult
   $Res call({String packageName, String commandName, PackageTool tool});
 }
 
 /// @nodoc
-class _$PackageInstallStructCopyWithImpl<$Res, $Val extends PackageInstallStruct>
+class _$PackageInstallStructCopyWithImpl<$Res,
+        $Val extends PackageInstallStruct>
     implements $PackageInstallStructCopyWith<$Res> {
   _$PackageInstallStructCopyWithImpl(this._value, this._then);
 
@@ -67,8 +70,10 @@ class _$PackageInstallStructCopyWithImpl<$Res, $Val extends PackageInstallStruct
 }
 
 /// @nodoc
-abstract class _$$_PackageInstallStructCopyWith<$Res> implements $PackageInstallStructCopyWith<$Res> {
-  factory _$$_PackageInstallStructCopyWith(_$_PackageInstallStruct value, $Res Function(_$_PackageInstallStruct) then) =
+abstract class _$$_PackageInstallStructCopyWith<$Res>
+    implements $PackageInstallStructCopyWith<$Res> {
+  factory _$$_PackageInstallStructCopyWith(_$_PackageInstallStruct value,
+          $Res Function(_$_PackageInstallStruct) then) =
       __$$_PackageInstallStructCopyWithImpl<$Res>;
   @override
   @useResult
@@ -79,7 +84,8 @@ abstract class _$$_PackageInstallStructCopyWith<$Res> implements $PackageInstall
 class __$$_PackageInstallStructCopyWithImpl<$Res>
     extends _$PackageInstallStructCopyWithImpl<$Res, _$_PackageInstallStruct>
     implements _$$_PackageInstallStructCopyWith<$Res> {
-  __$$_PackageInstallStructCopyWithImpl(_$_PackageInstallStruct _value, $Res Function(_$_PackageInstallStruct) _then)
+  __$$_PackageInstallStructCopyWithImpl(_$_PackageInstallStruct _value,
+      $Res Function(_$_PackageInstallStruct) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +115,11 @@ class __$$_PackageInstallStructCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PackageInstallStruct extends _PackageInstallStruct {
-  const _$_PackageInstallStruct({required this.packageName, required this.commandName, required this.tool}) : super._();
+  const _$_PackageInstallStruct(
+      {required this.packageName,
+      required this.commandName,
+      required this.tool})
+      : super._();
 
   @override
   final String packageName;
@@ -128,8 +138,10 @@ class _$_PackageInstallStruct extends _PackageInstallStruct {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PackageInstallStruct &&
-            (identical(other.packageName, packageName) || other.packageName == packageName) &&
-            (identical(other.commandName, commandName) || other.commandName == commandName) &&
+            (identical(other.packageName, packageName) ||
+                other.packageName == packageName) &&
+            (identical(other.commandName, commandName) ||
+                other.commandName == commandName) &&
             (identical(other.tool, tool) || other.tool == tool));
   }
 
@@ -140,7 +152,8 @@ class _$_PackageInstallStruct extends _PackageInstallStruct {
   @override
   @pragma('vm:prefer-inline')
   _$$_PackageInstallStructCopyWith<_$_PackageInstallStruct> get copyWith =>
-      __$$_PackageInstallStructCopyWithImpl<_$_PackageInstallStruct>(this, _$identity);
+      __$$_PackageInstallStructCopyWithImpl<_$_PackageInstallStruct>(
+          this, _$identity);
 }
 
 abstract class _PackageInstallStruct extends PackageInstallStruct {
@@ -158,5 +171,6 @@ abstract class _PackageInstallStruct extends PackageInstallStruct {
   PackageTool get tool;
   @override
   @JsonKey(ignore: true)
-  _$$_PackageInstallStructCopyWith<_$_PackageInstallStruct> get copyWith => throw _privateConstructorUsedError;
+  _$$_PackageInstallStructCopyWith<_$_PackageInstallStruct> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:dcli/dcli.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -64,8 +64,8 @@ class KubectlDescribePodsCommand extends Command<int> {
         choices: filtered,
         defaultValue: filtered[0],
       );
-      final describePod = await Process.run('kubectl', ['describe', 'pod', podName, '-n', computedNamespace]);
-      _logger.info(describePod.stdout.toString());
+      // Run command
+      ['kubectl', 'describe', 'pod', podName, '-n', computedNamespace].join(' ').run;
     } catch (e) {
       _logger.err(e.toString());
       return ExitCode.software.code;
