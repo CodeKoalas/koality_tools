@@ -1,3 +1,6 @@
+[0.5.0] - 20/10/2023
+* Adding a new `drupal` command that currently just has the `lint` subcommand. Will add more commands soon!
+
 [0.4.4] - 27/09/2023
 * Fixing an isuse with `kubectl` commands and the way `.start()` works. Switched over to `.run` to allow `stderr` and `stdout` to be handled directly in the terminal session, rather than trying to run detached processes and handling those manually.
 

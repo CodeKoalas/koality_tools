@@ -64,16 +64,14 @@ class GetConfigManagerFamily extends Family<KoalityConfigManager> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
 
   @override
   String? get name => r'getConfigManagerProvider';
 }
 
 /// See also [getConfigManager].
-class GetConfigManagerProvider
-    extends AutoDisposeProvider<KoalityConfigManager> {
+class GetConfigManagerProvider extends AutoDisposeProvider<KoalityConfigManager> {
   /// See also [getConfigManager].
   GetConfigManagerProvider({
     required Logger logger,
@@ -84,13 +82,9 @@ class GetConfigManagerProvider
           ),
           from: getConfigManagerProvider,
           name: r'getConfigManagerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getConfigManagerHash,
+          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getConfigManagerHash,
           dependencies: GetConfigManagerFamily._dependencies,
-          allTransitiveDependencies:
-              GetConfigManagerFamily._allTransitiveDependencies,
+          allTransitiveDependencies: GetConfigManagerFamily._allTransitiveDependencies,
           logger: logger,
         );
 
@@ -148,8 +142,7 @@ mixin GetConfigManagerRef on AutoDisposeProviderRef<KoalityConfigManager> {
   Logger get logger;
 }
 
-class _GetConfigManagerProviderElement
-    extends AutoDisposeProviderElement<KoalityConfigManager>
+class _GetConfigManagerProviderElement extends AutoDisposeProviderElement<KoalityConfigManager>
     with GetConfigManagerRef {
   _GetConfigManagerProviderElement(super.provider);
 
