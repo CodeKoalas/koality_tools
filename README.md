@@ -51,6 +51,9 @@ $ koality firebase setup
 # MySQL command to create a database with a user/pass combo.
 $ koality mysql create database --host localhost --user user --password root --database my_database
 
+# Drupal commands for ease of use.
+$ koality drupal lint --fix-errors --drupal-root ./ --modules-root ./docroot/modules/custom --themes-root ./docroot/themes/custom
+
 # Show CLI version
 $ koality --version
 
@@ -154,4 +157,13 @@ $ koality firebase emulators -p koality-tools
 # and then will create a user with a password and grant them all priviledges to the database. Great for local use
 # to make sure you have a user that can do anything to the database.
 $ koality mysql create database --host localhost --user root --password root --database my_database
+```
+
+## Running Drupal Commands. 💧
+```sh
+# This command will look for the phpcs/phpcbf commands inside the `vendor` directory from where the Drupal root is.
+# Default ignored directories are "vendor,node_modules,bower_components", default checked extensions are
+# php,module,inc,install,test,profile,theme,css,info,txt,md,yml. Checks inside "./docroot/modules/custom" and
+# "./docroot/themes/custom" by default.
+$ koality drupal lint
 ```
