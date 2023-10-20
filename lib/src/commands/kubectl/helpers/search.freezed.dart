@@ -35,22 +35,24 @@ class _$SearchPodsExecutorCopyWithImpl<$Res, $Val extends SearchPodsExecutor>
 }
 
 /// @nodoc
-abstract class _$$_SearchPodsExecutorCopyWith<$Res> {
-  factory _$$_SearchPodsExecutorCopyWith(_$_SearchPodsExecutor value, $Res Function(_$_SearchPodsExecutor) then) =
-      __$$_SearchPodsExecutorCopyWithImpl<$Res>;
+abstract class _$$SearchPodsExecutorImplCopyWith<$Res> {
+  factory _$$SearchPodsExecutorImplCopyWith(
+          _$SearchPodsExecutorImpl value, $Res Function(_$SearchPodsExecutorImpl) then) =
+      __$$SearchPodsExecutorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SearchPodsExecutorCopyWithImpl<$Res> extends _$SearchPodsExecutorCopyWithImpl<$Res, _$_SearchPodsExecutor>
-    implements _$$_SearchPodsExecutorCopyWith<$Res> {
-  __$$_SearchPodsExecutorCopyWithImpl(_$_SearchPodsExecutor _value, $Res Function(_$_SearchPodsExecutor) _then)
+class __$$SearchPodsExecutorImplCopyWithImpl<$Res>
+    extends _$SearchPodsExecutorCopyWithImpl<$Res, _$SearchPodsExecutorImpl>
+    implements _$$SearchPodsExecutorImplCopyWith<$Res> {
+  __$$SearchPodsExecutorImplCopyWithImpl(_$SearchPodsExecutorImpl _value, $Res Function(_$SearchPodsExecutorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SearchPodsExecutor extends _SearchPodsExecutor {
-  const _$_SearchPodsExecutor() : super._();
+class _$SearchPodsExecutorImpl extends _SearchPodsExecutor {
+  const _$SearchPodsExecutorImpl() : super._();
 
   @override
   String toString() {
@@ -59,7 +61,7 @@ class _$_SearchPodsExecutor extends _SearchPodsExecutor {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_SearchPodsExecutor);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$SearchPodsExecutorImpl);
   }
 
   @override
@@ -67,7 +69,7 @@ class _$_SearchPodsExecutor extends _SearchPodsExecutor {
 }
 
 abstract class _SearchPodsExecutor extends SearchPodsExecutor {
-  const factory _SearchPodsExecutor() = _$_SearchPodsExecutor;
+  const factory _SearchPodsExecutor() = _$SearchPodsExecutorImpl;
   const _SearchPodsExecutor._() : super._();
 }
 
@@ -92,25 +94,25 @@ class _$SearchResourceExecutorCopyWithImpl<$Res, $Val extends SearchResourceExec
 }
 
 /// @nodoc
-abstract class _$$_SearchResourceExecutorCopyWith<$Res> {
-  factory _$$_SearchResourceExecutorCopyWith(
-          _$_SearchResourceExecutor value, $Res Function(_$_SearchResourceExecutor) then) =
-      __$$_SearchResourceExecutorCopyWithImpl<$Res>;
+abstract class _$$SearchResourceExecutorImplCopyWith<$Res> {
+  factory _$$SearchResourceExecutorImplCopyWith(
+          _$SearchResourceExecutorImpl value, $Res Function(_$SearchResourceExecutorImpl) then) =
+      __$$SearchResourceExecutorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_SearchResourceExecutorCopyWithImpl<$Res>
-    extends _$SearchResourceExecutorCopyWithImpl<$Res, _$_SearchResourceExecutor>
-    implements _$$_SearchResourceExecutorCopyWith<$Res> {
-  __$$_SearchResourceExecutorCopyWithImpl(
-      _$_SearchResourceExecutor _value, $Res Function(_$_SearchResourceExecutor) _then)
+class __$$SearchResourceExecutorImplCopyWithImpl<$Res>
+    extends _$SearchResourceExecutorCopyWithImpl<$Res, _$SearchResourceExecutorImpl>
+    implements _$$SearchResourceExecutorImplCopyWith<$Res> {
+  __$$SearchResourceExecutorImplCopyWithImpl(
+      _$SearchResourceExecutorImpl _value, $Res Function(_$SearchResourceExecutorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_SearchResourceExecutor extends _SearchResourceExecutor {
-  const _$_SearchResourceExecutor() : super._();
+class _$SearchResourceExecutorImpl extends _SearchResourceExecutor {
+  const _$SearchResourceExecutorImpl() : super._();
 
   @override
   String toString() {
@@ -119,7 +121,7 @@ class _$_SearchResourceExecutor extends _SearchResourceExecutor {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$_SearchResourceExecutor);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _$SearchResourceExecutorImpl);
   }
 
   @override
@@ -127,6 +129,6 @@ class _$_SearchResourceExecutor extends _SearchResourceExecutor {
 }
 
 abstract class _SearchResourceExecutor extends SearchResourceExecutor {
-  const factory _SearchResourceExecutor() = _$_SearchResourceExecutor;
+  const factory _SearchResourceExecutor() = _$SearchResourceExecutorImpl;
   const _SearchResourceExecutor._() : super._();
 }

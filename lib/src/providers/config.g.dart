@@ -6,7 +6,7 @@ part of 'config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) => _$_KoalityConfig(
+_$KoalityConfigImpl _$$KoalityConfigImplFromJson(Map<String, dynamic> json) => _$KoalityConfigImpl(
       configPath: json['configPath'] as String,
       kubectlConfig: json['kubectlConfig'] == null
           ? const KubectlConfig()
@@ -17,27 +17,27 @@ _$_KoalityConfig _$$_KoalityConfigFromJson(Map<String, dynamic> json) => _$_Koal
       gitlabAccessToken: json['gitlabAccessToken'] as String?,
     );
 
-Map<String, dynamic> _$$_KoalityConfigToJson(_$_KoalityConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$KoalityConfigImplToJson(_$KoalityConfigImpl instance) => <String, dynamic>{
       'configPath': instance.configPath,
       'kubectlConfig': instance.kubectlConfig,
       'firebaseConfig': instance.firebaseConfig,
       'gitlabAccessToken': instance.gitlabAccessToken,
     };
 
-_$_KubectlConfig _$$_KubectlConfigFromJson(Map<String, dynamic> json) => _$_KubectlConfig(
+_$KubectlConfigImpl _$$KubectlConfigImplFromJson(Map<String, dynamic> json) => _$KubectlConfigImpl(
       defaultNamespace: json['defaultNamespace'] as String? ?? 'gitlab-managed-apps',
     );
 
-Map<String, dynamic> _$$_KubectlConfigToJson(_$_KubectlConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$KubectlConfigImplToJson(_$KubectlConfigImpl instance) => <String, dynamic>{
       'defaultNamespace': instance.defaultNamespace,
     };
 
-_$_FirebaseConfig _$$_FirebaseConfigFromJson(Map<String, dynamic> json) => _$_FirebaseConfig(
+_$FirebaseConfigImpl _$$FirebaseConfigImplFromJson(Map<String, dynamic> json) => _$FirebaseConfigImpl(
       skipDev: json['skipDev'] as bool? ?? false,
       skipProd: json['skipProd'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_FirebaseConfigToJson(_$_FirebaseConfig instance) => <String, dynamic>{
+Map<String, dynamic> _$$FirebaseConfigImplToJson(_$FirebaseConfigImpl instance) => <String, dynamic>{
       'skipDev': instance.skipDev,
       'skipProd': instance.skipProd,
     };

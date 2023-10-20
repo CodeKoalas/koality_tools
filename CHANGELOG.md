@@ -1,3 +1,6 @@
+[0.5.1] - 20/10/2023
+* Bugfix for mismatched versions in release.
+
 [0.5.0] - 20/10/2023
 * Adding a new `drupal` command that currently just has the `lint` subcommand. Will add more commands soon!
 
