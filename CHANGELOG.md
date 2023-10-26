@@ -1,3 +1,6 @@
+[0.6.0] - 26/10/2023
+* Adding new `devops` command for some typical Koality DevOps processes.
+
 [0.5.1] - 20/10/2023
 * Bugfix for mismatched versions in release.
 

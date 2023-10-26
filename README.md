@@ -167,3 +167,10 @@ $ koality mysql create database --host localhost --user root --password root --d
 # "./docroot/themes/custom" by default.
 $ koality drupal lint
 ```
+
+## Running DevOps Commands. 🛠️
+```sh
+# This command will create a directory called 'autodevops' in the current directory and then copy over some
+# YAML files that include the values needed for our Gitlab Auto DevOps helm chart to deploy the site.
+$ koality devops generate --site-name my-drupal-site --database-name koality_drupal_dev --site-type drupal --files-path autodevops
+```

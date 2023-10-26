@@ -6,38 +6,48 @@ part of 'config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$KoalityConfigImpl _$$KoalityConfigImplFromJson(Map<String, dynamic> json) => _$KoalityConfigImpl(
+_$KoalityConfigImpl _$$KoalityConfigImplFromJson(Map<String, dynamic> json) =>
+    _$KoalityConfigImpl(
       configPath: json['configPath'] as String,
       kubectlConfig: json['kubectlConfig'] == null
           ? const KubectlConfig()
-          : KubectlConfig.fromJson(json['kubectlConfig'] as Map<String, dynamic>),
+          : KubectlConfig.fromJson(
+              json['kubectlConfig'] as Map<String, dynamic>),
       firebaseConfig: json['firebaseConfig'] == null
           ? const FirebaseConfig()
-          : FirebaseConfig.fromJson(json['firebaseConfig'] as Map<String, dynamic>),
+          : FirebaseConfig.fromJson(
+              json['firebaseConfig'] as Map<String, dynamic>),
       gitlabAccessToken: json['gitlabAccessToken'] as String?,
     );
 
-Map<String, dynamic> _$$KoalityConfigImplToJson(_$KoalityConfigImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$KoalityConfigImplToJson(_$KoalityConfigImpl instance) =>
+    <String, dynamic>{
       'configPath': instance.configPath,
       'kubectlConfig': instance.kubectlConfig,
       'firebaseConfig': instance.firebaseConfig,
       'gitlabAccessToken': instance.gitlabAccessToken,
     };
 
-_$KubectlConfigImpl _$$KubectlConfigImplFromJson(Map<String, dynamic> json) => _$KubectlConfigImpl(
-      defaultNamespace: json['defaultNamespace'] as String? ?? 'gitlab-managed-apps',
+_$KubectlConfigImpl _$$KubectlConfigImplFromJson(Map<String, dynamic> json) =>
+    _$KubectlConfigImpl(
+      defaultNamespace:
+          json['defaultNamespace'] as String? ?? 'gitlab-managed-apps',
     );
 
-Map<String, dynamic> _$$KubectlConfigImplToJson(_$KubectlConfigImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$KubectlConfigImplToJson(_$KubectlConfigImpl instance) =>
+    <String, dynamic>{
       'defaultNamespace': instance.defaultNamespace,
     };
 
-_$FirebaseConfigImpl _$$FirebaseConfigImplFromJson(Map<String, dynamic> json) => _$FirebaseConfigImpl(
+_$FirebaseConfigImpl _$$FirebaseConfigImplFromJson(Map<String, dynamic> json) =>
+    _$FirebaseConfigImpl(
       skipDev: json['skipDev'] as bool? ?? false,
       skipProd: json['skipProd'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$FirebaseConfigImplToJson(_$FirebaseConfigImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$FirebaseConfigImplToJson(
+        _$FirebaseConfigImpl instance) =>
+    <String, dynamic>{
       'skipDev': instance.skipDev,
       'skipProd': instance.skipProd,
     };
@@ -107,14 +117,16 @@ class GetKoalityConfigFamily extends Family<AsyncValue<KoalityConfig>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'getKoalityConfigProvider';
 }
 
 /// See also [getKoalityConfig].
-class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> {
+class GetKoalityConfigProvider
+    extends AutoDisposeFutureProvider<KoalityConfig> {
   /// See also [getKoalityConfig].
   GetKoalityConfigProvider({
     required Logger logger,
@@ -127,9 +139,13 @@ class GetKoalityConfigProvider extends AutoDisposeFutureProvider<KoalityConfig> 
           ),
           from: getKoalityConfigProvider,
           name: r'getKoalityConfigProvider',
-          debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$getKoalityConfigHash,
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getKoalityConfigHash,
           dependencies: GetKoalityConfigFamily._dependencies,
-          allTransitiveDependencies: GetKoalityConfigFamily._allTransitiveDependencies,
+          allTransitiveDependencies:
+              GetKoalityConfigFamily._allTransitiveDependencies,
           logger: logger,
           overrideConfigPath: overrideConfigPath,
         );
@@ -197,14 +213,16 @@ mixin GetKoalityConfigRef on AutoDisposeFutureProviderRef<KoalityConfig> {
   String? get overrideConfigPath;
 }
 
-class _GetKoalityConfigProviderElement extends AutoDisposeFutureProviderElement<KoalityConfig>
+class _GetKoalityConfigProviderElement
+    extends AutoDisposeFutureProviderElement<KoalityConfig>
     with GetKoalityConfigRef {
   _GetKoalityConfigProviderElement(super.provider);
 
   @override
   Logger get logger => (origin as GetKoalityConfigProvider).logger;
   @override
-  String? get overrideConfigPath => (origin as GetKoalityConfigProvider).overrideConfigPath;
+  String? get overrideConfigPath =>
+      (origin as GetKoalityConfigProvider).overrideConfigPath;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
