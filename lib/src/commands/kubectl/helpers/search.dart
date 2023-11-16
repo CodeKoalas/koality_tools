@@ -18,6 +18,10 @@ class SearchPodsExecutor with _$SearchPodsExecutor {
     );
     final podListString = podList.stdout.toString();
     final newLines = podListString.split('\n');
+    // If no search term, return all.
+    if (searchTerms.isEmpty) {
+      return newLines;
+    }
     return newLines.where((element) {
       // Check to see if elements contains any of the values in searchTerms.
       return searchTerms.any((searchTerm) {
