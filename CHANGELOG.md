@@ -1,3 +1,8 @@
+[0.6.1] - 16/11/2023
+* Adding new `kubectl` subcommands: `cp` and `pods`.
+  - `cp` runs `kubectl cp` under the hood with some opinionated defaults and direction (source treated as local by default)
+  - `pods` just lists pods and matches passed text.
+
 [0.6.0] - 26/10/2023
 * Adding new `devops` command for some typical Koality DevOps processes.
 
