@@ -92,7 +92,7 @@ class KubectlCopyPodsCommand extends Command<int> {
       // Create the pod target which is [pod name]:[target path]. The kubectl cp command follows the format:
       // kubectl cp [source] [target]
       //
-      // It will always copy from source to target, where either can be local/remote. 
+      // It will always copy from source to target, where either can be local/remote.
       // We want to default to treating source as local and target as remote. We can pass the invert flag to instead
       // copy from remote to local.
       final podTarget = '$podName:$target';
