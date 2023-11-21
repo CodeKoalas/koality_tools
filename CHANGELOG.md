@@ -1,3 +1,6 @@
+[0.6.3] - 21/11/2023
+* The 1 out of 2 times a year that a rebase trips me up. Never registered the DevOps command runner.
+
 [0.6.2] - 21/11/2023
 * Fixing issue with `koality devops generate` not being registered correctly.
 

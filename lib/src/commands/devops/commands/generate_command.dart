@@ -41,7 +41,6 @@ class DevOpsGenerateCommand extends Command<int> {
         'files-path',
         abbr: 'p',
         help: 'The path where we should create these YAML files, defaults to (autodevops).',
-        mandatory: true,
         defaultsTo: 'autodevops',
       );
   }

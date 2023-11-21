@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
+import 'package:koality_tools/src/commands/devops/devops_command.dart';
 import 'package:koality_tools/src/commands/drupal/drupal_command.dart';
 import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
 import 'package:koality_tools/src/commands/jwt/jwt_command.dart';
@@ -52,6 +53,7 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
 
     // Add sub commands
     addCommand(CoverageCommand(logger: _logger));
+    addCommand(DevOpsCommand(logger: _logger, container: container));
     addCommand(DrupalCommand(logger: _logger, container: container));
     addCommand(FirebaseCommand(logger: _logger, container: container));
     addCommand(KubectlCommand(logger: _logger, container: container));
