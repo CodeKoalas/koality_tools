@@ -1,3 +1,6 @@
+[0.6.2] - 21/11/2023
+* Fixing issue with `koality devops generate` not being registered correctly.
+
 [0.6.1] - 16/11/2023
 * Adding new `kubectl` subcommands: `cp` and `pods`.
   - `cp` runs `kubectl cp` under the hood with some opinionated defaults and direction (source treated as local by default)

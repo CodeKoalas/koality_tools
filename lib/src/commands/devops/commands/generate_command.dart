@@ -50,7 +50,7 @@ class DevOpsGenerateCommand extends Command<int> {
   String get description => 'A command to run PHP linting against certain directories.';
 
   @override
-  String get name => 'lint';
+  String get name => 'generate';
 
   final List<String> _allowedTypes = const ['drupal', 'laravel', 'vue', 'magento'];
 
