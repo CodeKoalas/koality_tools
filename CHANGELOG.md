@@ -1,3 +1,6 @@
+[0.6.4] - 21/11/2023
+* Adjusting the way the templates are created to be simpler. Eventually replaced by mason bricks.
+
 [0.6.3] - 21/11/2023
 * The 1 out of 2 times a year that a rebase trips me up. Never registered the DevOps command runner.
 

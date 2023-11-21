@@ -1,7 +1,10 @@
+// ignore_for_file: unnecessary_string_escapes
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:koality_tools/src/commands/devops/templates/templates.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -81,35 +84,21 @@ class DevOpsGenerateCommand extends Command<int> {
 
   Future<int> generateAutoDevOpsFiles(String siteType, String siteName, String databaseName, String filesPath) async {
     // First create a copy of the templates/drupal/review.yaml and templates/drupal/staging.yaml files.
-    final reviewFile = File('templates/$siteType/review.yaml');
-    final stagingFile = File('templates/$siteType/staging.yaml');
+    final reviewFile = templateYamlFiles[siteType]!['review'] ?? '';
+    final stagingFile = templateYamlFiles[siteType]!['staging'] ?? '';
+
+    final replacedReviewFileText =
+        reviewFile.replaceAll('[SITE NAME]', siteName).replaceAll('[DATABASE NAME]', databaseName);
+    final replacedStagingFileText =
+        stagingFile.replaceAll('[SITE NAME]', siteName).replaceAll('[DATABASE NAME]', databaseName);
 
     // Now create copies inside the filesPath.
-    final reviewFileCopy = reviewFile.copySync('$filesPath/review.yaml');
-    final stagingFileCopy = stagingFile.copySync('$filesPath/staging.yaml');
-
-    // Now let's run a "sed" for [SITE NAME] inside the files with the siteName variable and [DATABASE NAME] with the
-    // databaseName variables.
-
-    // Review file changes.
-    final reviewFileSedSiteName = Process.runSync('sed', ['-i', 's/\[SITE NAME\]/$siteName/g', reviewFileCopy.path]);
-    final reviewFileSedDatabaseName =
-        Process.runSync('sed', ['-i', 's/\[DATABASE NAME\]/$databaseName/g', reviewFileCopy.path]);
-
-    if (reviewFileSedSiteName.exitCode != 0 || reviewFileSedDatabaseName.exitCode != 0) {
-      _logger.err('There was an error running sed on the review.yaml file.');
-      return ExitCode.ioError.code;
-    }
-
-    // Staging file changes.
-    final stagingFileSedSiteName = Process.runSync('sed', ['-i', 's/\[SITE NAME\]/$siteName/g', stagingFileCopy.path]);
-    final stagingFileSedDatabaseName =
-        Process.runSync('sed', ['-i', 's/\[DATABASE NAME\]/$databaseName/g', stagingFileCopy.path]);
-
-    if (stagingFileSedSiteName.exitCode != 0 || stagingFileSedDatabaseName.exitCode != 0) {
-      _logger.err('There was an error running sed on the staging.yaml file.');
-      return ExitCode.ioError.code;
-    }
+    File('$filesPath/review.yaml')
+      ..createSync()
+      ..writeAsStringSync(replacedReviewFileText);
+    File('$filesPath/staging.yaml')
+      ..createSync()
+      ..writeAsStringSync(replacedStagingFileText);
 
     return ExitCode.success.code;
   }

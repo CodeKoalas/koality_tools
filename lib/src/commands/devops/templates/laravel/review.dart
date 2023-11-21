@@ -1,5 +1,6 @@
+const laravelReviewYaml = '''
 global:
-  storageClass: "efs-sc-retain"
+  storageClass: "efs-sc"
 
 # The deployment object with environment variables to use.
 deployment:
@@ -7,12 +8,17 @@ deployment:
   name: [SITE NAME]-review
   track: stable
   tier: web
-  appEnv: review
-  virtualHost: [SITE NAME].ckstage.site
-  letsEncryptHost: [SITE NAME].ckstage.site
-  appUrl: "https://[SITE NAME].ckstage.site"
+  appEnv: staging
+  virtualHost: [SITE NAME]-review.ckstage.site
+  letsEncryptHost: [SITE NAME]-review.ckstage.site
+  appUrl: "https://[SITE NAME]-review.ckstage.site"
+  appDebug: true
+  apacheDocroot: /var/www/html/public
+  fcmSenderId: "821994389235"
+  fcmServerKey: pleasereplace
+  jwtSecret: pleasereplace
   extraEnv:
-    SITE_ENV: stage
+    FIREBASE_CREDENTIALS: /etc/firebase/google-credentials.json
 
 # The persistence image; for review apps this allows a DB to be created
 # for use with this review.
@@ -25,19 +31,19 @@ persistence:
   replicaCount: 1
   ephemeral:
     enabled: true
-    image:
-      repository: registry.codekoalas.com/devops/helm/koality-charts
-      tag: review-mysql
+    image: 
+      repository: registry.codekoalas.com/devops/helm/koality-charts/review-mysql
+      tag: 0.0.4
   limits:
     cpu: 300m
     memory: 1000Mi
   requests:
-    cpu: 150m
+    cpu: 100m
     memory: 500Mi
   volumes:
     - name: data
       mount:
-        mountPath: /var/www/html/sites/default/files
+        mountPath: /var/www/html/storage/app
         subPath: [SITE NAME]-review
         # subPath: "/pvc-mount/config.txt"
       claim:
@@ -50,26 +56,28 @@ persistence:
 
 # The service that is used with the Ingress.
 service:
-  enabled: true
-  type: ClusterIP
   name: service-[SITE NAME]-review
 
 # Set hostname for cert generation.
 ingress:
-  hostname: [SITE NAME].ckstage.site
+  hostname: [SITE NAME]-review.ckstage.site
   annotations:
     nginx.ingress.kubernetes.io/affinity: "cookie"
-    nginx.ingress.kubernetes.io/session-cookie-domain: ".[SITE NAME].ckstage.site"
+    nginx.ingress.kubernetes.io/session-cookie-domain: ".[SITE NAME]-review.ckstage.site"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
     nginx.ingress.kubernetes.io/proxy-body-size: 20m
     nginx.ingress.kubernetes.io/client-body-buffer-size: 20m
 
 redis:
-  enabled: false
+  enabled: true
+  username: default
+
+queueWorker:
+  enabled: true
 
 cron:
   enabled: true
-  image:
+  image: 
     repository: registry.codekoalas.com/sites/[SITE NAME]/cron
     # Overridden in Gitlab through the CI/CD variable HELM_EXTRA_UPGRADE_ARGS
     # tag: latest
@@ -81,3 +89,5 @@ aws:
     bucket: [SITE NAME]-staging
     url: ""
     usePathStyleEndpoints: false
+
+''';

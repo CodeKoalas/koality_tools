@@ -1,3 +1,4 @@
+const drupalStagingYaml = '''
 global:
   storageClass: "efs-sc"
 
@@ -67,3 +68,5 @@ cron:
   image:
     repository: registry.codekoalas.com/sites/[SITE NAME]/cron
     tag: latest
+
+''';
