@@ -73,8 +73,11 @@ To also generate an HTML coverage report you can use the `--generate|-g` flag.
 .
 
 ```sh
-# Generate Coverage Report in HTML with Koality Tools.
+# Generate coverage report in HTML with Koality Tools.
 $ koality test --coverage --generate
+
+# Generate coverage report in HTML for multiple coverage info files.
+$ koality test --coverage --generate --generate-files coverage/lcov.info coverage/lcov-integration.info
 ```
 
 If you want to generate the report separately you can use [lcov](https://github.com/linux-test-project/lcov)
