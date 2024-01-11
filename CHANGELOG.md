@@ -1,3 +1,7 @@
+[0.6.5] - 11/01/2024
+* Adding skeleton for Gitlab API feature to help with a new upcoming DevOps command.
+* Updating test command to allow generating HTML coverage for multiple coverage files.
+
 [0.6.4] - 21/11/2023
 * Adjusting the way the templates are created to be simpler. Eventually replaced by mason bricks.
 

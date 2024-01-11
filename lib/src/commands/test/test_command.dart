@@ -15,7 +15,14 @@ class TestRunnerCommand extends Command<int> {
   }) : _logger = logger {
     argParser
       ..addFlag('coverage', abbr: 'c', help: 'If you want a coverage report generated.')
-      ..addFlag('generate', abbr: 'g', help: 'If you want to generate an HTLM page using lcov');
+      ..addFlag('generate', abbr: 'g', help: 'If you want to generate an HTLM page using lcov')
+      ..addOption('output', abbr: 'o', help: 'The output coverage file.', defaultsTo: 'coverage/lcov.info')
+      ..addOption(
+        'generate-files',
+        abbr: 'f',
+        help: 'The coverage info files to generate HTML from.',
+        defaultsTo: 'coverage/lcov.info',
+      );
   }
 
   @override
@@ -30,6 +37,8 @@ class TestRunnerCommand extends Command<int> {
   Future<int> run() async {
     final useCoverage = argResults?['coverage'] as bool;
     final generateHtml = argResults?['generate'] as bool;
+    final outputFile = argResults?['output'] as String;
+    final generateHtmlFiles = argResults?['generate-files'] as String;
     _logger.info('Running test command');
 
     /// Run tests with coverage
@@ -39,16 +48,17 @@ class TestRunnerCommand extends Command<int> {
         await Process.run('very_good', ['test', '--coverage']);
         await Process.run('lcov', [
           '--remove',
-          'coverage/lcov.info',
+          outputFile,
           'lib/*/*.gr.dart',
           'lib/*/*.freezed.dart',
           'lib/*/*.g.dart',
           '-o',
-          'coverage/lcov.info',
+          outputFile,
         ]);
 
         if (generateHtml) {
-          await Process.run('genhtml', ['coverage/lcov.info', '-o', 'coverage/']);
+          final paths = generateHtmlFiles.split(' ').map((i) => i.trim()).where((e) => e.isNotEmpty);
+          await Process.run('genhtml', [...paths, '-o', 'coverage/']);
         }
       } else {
         _logger.info('Running tests');

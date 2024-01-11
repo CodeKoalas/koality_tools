@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'config.dart';
+part of 'koality_config.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -24,6 +24,7 @@ mixin _$KoalityConfig {
   KubectlConfig get kubectlConfig => throw _privateConstructorUsedError;
   FirebaseConfig get firebaseConfig => throw _privateConstructorUsedError;
   String? get gitlabAccessToken => throw _privateConstructorUsedError;
+  GitlabConfig get gitlabConfig => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,10 +36,16 @@ abstract class $KoalityConfigCopyWith<$Res> {
   factory $KoalityConfigCopyWith(KoalityConfig value, $Res Function(KoalityConfig) then) =
       _$KoalityConfigCopyWithImpl<$Res, KoalityConfig>;
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig, FirebaseConfig firebaseConfig, String? gitlabAccessToken});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      FirebaseConfig firebaseConfig,
+      String? gitlabAccessToken,
+      GitlabConfig gitlabConfig});
 
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
   $FirebaseConfigCopyWith<$Res> get firebaseConfig;
+  $GitlabConfigCopyWith<$Res> get gitlabConfig;
 }
 
 /// @nodoc
@@ -57,6 +64,7 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
     Object? kubectlConfig = null,
     Object? firebaseConfig = null,
     Object? gitlabAccessToken = freezed,
+    Object? gitlabConfig = null,
   }) {
     return _then(_value.copyWith(
       configPath: null == configPath
@@ -75,6 +83,10 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
           ? _value.gitlabAccessToken
           : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      gitlabConfig: null == gitlabConfig
+          ? _value.gitlabConfig
+          : gitlabConfig // ignore: cast_nullable_to_non_nullable
+              as GitlabConfig,
     ) as $Val);
   }
 
@@ -93,6 +105,14 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
       return _then(_value.copyWith(firebaseConfig: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GitlabConfigCopyWith<$Res> get gitlabConfig {
+    return $GitlabConfigCopyWith<$Res>(_value.gitlabConfig, (value) {
+      return _then(_value.copyWith(gitlabConfig: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -101,12 +121,19 @@ abstract class _$$KoalityConfigImplCopyWith<$Res> implements $KoalityConfigCopyW
       __$$KoalityConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String configPath, KubectlConfig kubectlConfig, FirebaseConfig firebaseConfig, String? gitlabAccessToken});
+  $Res call(
+      {String configPath,
+      KubectlConfig kubectlConfig,
+      FirebaseConfig firebaseConfig,
+      String? gitlabAccessToken,
+      GitlabConfig gitlabConfig});
 
   @override
   $KubectlConfigCopyWith<$Res> get kubectlConfig;
   @override
   $FirebaseConfigCopyWith<$Res> get firebaseConfig;
+  @override
+  $GitlabConfigCopyWith<$Res> get gitlabConfig;
 }
 
 /// @nodoc
@@ -122,6 +149,7 @@ class __$$KoalityConfigImplCopyWithImpl<$Res> extends _$KoalityConfigCopyWithImp
     Object? kubectlConfig = null,
     Object? firebaseConfig = null,
     Object? gitlabAccessToken = freezed,
+    Object? gitlabConfig = null,
   }) {
     return _then(_$KoalityConfigImpl(
       configPath: null == configPath
@@ -140,6 +168,10 @@ class __$$KoalityConfigImplCopyWithImpl<$Res> extends _$KoalityConfigCopyWithImp
           ? _value.gitlabAccessToken
           : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      gitlabConfig: null == gitlabConfig
+          ? _value.gitlabConfig
+          : gitlabConfig // ignore: cast_nullable_to_non_nullable
+              as GitlabConfig,
     ));
   }
 }
@@ -151,7 +183,8 @@ class _$KoalityConfigImpl extends _KoalityConfig {
       {required this.configPath,
       this.kubectlConfig = const KubectlConfig(),
       this.firebaseConfig = const FirebaseConfig(),
-      this.gitlabAccessToken})
+      this.gitlabAccessToken,
+      this.gitlabConfig = const GitlabConfig()})
       : super._();
 
   factory _$KoalityConfigImpl.fromJson(Map<String, dynamic> json) => _$$KoalityConfigImplFromJson(json);
@@ -166,10 +199,13 @@ class _$KoalityConfigImpl extends _KoalityConfig {
   final FirebaseConfig firebaseConfig;
   @override
   final String? gitlabAccessToken;
+  @override
+  @JsonKey()
+  final GitlabConfig gitlabConfig;
 
   @override
   String toString() {
-    return 'KoalityConfig(configPath: $configPath, kubectlConfig: $kubectlConfig, firebaseConfig: $firebaseConfig, gitlabAccessToken: $gitlabAccessToken)';
+    return 'KoalityConfig(configPath: $configPath, kubectlConfig: $kubectlConfig, firebaseConfig: $firebaseConfig, gitlabAccessToken: $gitlabAccessToken, gitlabConfig: $gitlabConfig)';
   }
 
   @override
@@ -180,12 +216,14 @@ class _$KoalityConfigImpl extends _KoalityConfig {
             (identical(other.configPath, configPath) || other.configPath == configPath) &&
             (identical(other.kubectlConfig, kubectlConfig) || other.kubectlConfig == kubectlConfig) &&
             (identical(other.firebaseConfig, firebaseConfig) || other.firebaseConfig == firebaseConfig) &&
-            (identical(other.gitlabAccessToken, gitlabAccessToken) || other.gitlabAccessToken == gitlabAccessToken));
+            (identical(other.gitlabAccessToken, gitlabAccessToken) || other.gitlabAccessToken == gitlabAccessToken) &&
+            (identical(other.gitlabConfig, gitlabConfig) || other.gitlabConfig == gitlabConfig));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, configPath, kubectlConfig, firebaseConfig, gitlabAccessToken);
+  int get hashCode =>
+      Object.hash(runtimeType, configPath, kubectlConfig, firebaseConfig, gitlabAccessToken, gitlabConfig);
 
   @JsonKey(ignore: true)
   @override
@@ -206,7 +244,8 @@ abstract class _KoalityConfig extends KoalityConfig {
       {required final String configPath,
       final KubectlConfig kubectlConfig,
       final FirebaseConfig firebaseConfig,
-      final String? gitlabAccessToken}) = _$KoalityConfigImpl;
+      final String? gitlabAccessToken,
+      final GitlabConfig gitlabConfig}) = _$KoalityConfigImpl;
   const _KoalityConfig._() : super._();
 
   factory _KoalityConfig.fromJson(Map<String, dynamic> json) = _$KoalityConfigImpl.fromJson;
@@ -220,8 +259,154 @@ abstract class _KoalityConfig extends KoalityConfig {
   @override
   String? get gitlabAccessToken;
   @override
+  GitlabConfig get gitlabConfig;
+  @override
   @JsonKey(ignore: true)
   _$$KoalityConfigImplCopyWith<_$KoalityConfigImpl> get copyWith => throw _privateConstructorUsedError;
+}
+
+GitlabConfig _$GitlabConfigFromJson(Map<String, dynamic> json) {
+  return _GitlabConfig.fromJson(json);
+}
+
+/// @nodoc
+mixin _$GitlabConfig {
+  String get gitlabApiUrl => throw _privateConstructorUsedError;
+  String get gitlabAccessToken => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GitlabConfigCopyWith<GitlabConfig> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GitlabConfigCopyWith<$Res> {
+  factory $GitlabConfigCopyWith(GitlabConfig value, $Res Function(GitlabConfig) then) =
+      _$GitlabConfigCopyWithImpl<$Res, GitlabConfig>;
+  @useResult
+  $Res call({String gitlabApiUrl, String gitlabAccessToken});
+}
+
+/// @nodoc
+class _$GitlabConfigCopyWithImpl<$Res, $Val extends GitlabConfig> implements $GitlabConfigCopyWith<$Res> {
+  _$GitlabConfigCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gitlabApiUrl = null,
+    Object? gitlabAccessToken = null,
+  }) {
+    return _then(_value.copyWith(
+      gitlabApiUrl: null == gitlabApiUrl
+          ? _value.gitlabApiUrl
+          : gitlabApiUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      gitlabAccessToken: null == gitlabAccessToken
+          ? _value.gitlabAccessToken
+          : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$GitlabConfigImplCopyWith<$Res> implements $GitlabConfigCopyWith<$Res> {
+  factory _$$GitlabConfigImplCopyWith(_$GitlabConfigImpl value, $Res Function(_$GitlabConfigImpl) then) =
+      __$$GitlabConfigImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String gitlabApiUrl, String gitlabAccessToken});
+}
+
+/// @nodoc
+class __$$GitlabConfigImplCopyWithImpl<$Res> extends _$GitlabConfigCopyWithImpl<$Res, _$GitlabConfigImpl>
+    implements _$$GitlabConfigImplCopyWith<$Res> {
+  __$$GitlabConfigImplCopyWithImpl(_$GitlabConfigImpl _value, $Res Function(_$GitlabConfigImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gitlabApiUrl = null,
+    Object? gitlabAccessToken = null,
+  }) {
+    return _then(_$GitlabConfigImpl(
+      gitlabApiUrl: null == gitlabApiUrl
+          ? _value.gitlabApiUrl
+          : gitlabApiUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      gitlabAccessToken: null == gitlabAccessToken
+          ? _value.gitlabAccessToken
+          : gitlabAccessToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$GitlabConfigImpl implements _GitlabConfig {
+  const _$GitlabConfigImpl({this.gitlabApiUrl = 'https://gitlab.com/api/v4', this.gitlabAccessToken = ''});
+
+  factory _$GitlabConfigImpl.fromJson(Map<String, dynamic> json) => _$$GitlabConfigImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String gitlabApiUrl;
+  @override
+  @JsonKey()
+  final String gitlabAccessToken;
+
+  @override
+  String toString() {
+    return 'GitlabConfig(gitlabApiUrl: $gitlabApiUrl, gitlabAccessToken: $gitlabAccessToken)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GitlabConfigImpl &&
+            (identical(other.gitlabApiUrl, gitlabApiUrl) || other.gitlabApiUrl == gitlabApiUrl) &&
+            (identical(other.gitlabAccessToken, gitlabAccessToken) || other.gitlabAccessToken == gitlabAccessToken));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, gitlabApiUrl, gitlabAccessToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GitlabConfigImplCopyWith<_$GitlabConfigImpl> get copyWith =>
+      __$$GitlabConfigImplCopyWithImpl<_$GitlabConfigImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GitlabConfigImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _GitlabConfig implements GitlabConfig {
+  const factory _GitlabConfig({final String gitlabApiUrl, final String gitlabAccessToken}) = _$GitlabConfigImpl;
+
+  factory _GitlabConfig.fromJson(Map<String, dynamic> json) = _$GitlabConfigImpl.fromJson;
+
+  @override
+  String get gitlabApiUrl;
+  @override
+  String get gitlabAccessToken;
+  @override
+  @JsonKey(ignore: true)
+  _$$GitlabConfigImplCopyWith<_$GitlabConfigImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
 KubectlConfig _$KubectlConfigFromJson(Map<String, dynamic> json) {

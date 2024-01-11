@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 
-import 'package:koality_tools/src/providers/config.dart';
+import 'package:koality_tools/src/models/koality_config.dart';
 
 /// This class is for managing the config file for this tool. Some global configuration can be set here
 /// to simplify some commands, and are also set with some defaults we us here at Code Koalas.
@@ -21,6 +21,10 @@ class KoalityConfigManager {
       'firebase': {
         'skipDev': false,
         'skipProd': false,
+      },
+      'gitlabConfig': const <String, dynamic>{
+        'gitlabApiUrl': 'https://gitlab.com/api/v4',
+        'gitlabAccessToken': '',
       }
     };
   }
