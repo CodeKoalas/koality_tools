@@ -1,3 +1,6 @@
+[0.6.6] - 23/01/2024
+* Updating the `devops generate` drupal template to use different default files path.
+
 [0.6.5] - 11/01/2024
 * Adding skeleton for Gitlab API feature to help with a new upcoming DevOps command.
 * Updating test command to allow generating HTML coverage for multiple coverage files.

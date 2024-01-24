@@ -33,7 +33,7 @@ persistence:
   volumes:
     - name: data
       mount:
-        mountPath: /var/www/html/sites/default/files
+        mountPath: /var/www/html/docroot/sites/default/files
         subPath: [SITE NAME]-staging
         # subPath: "/pvc-mount/config.txt"
       claim:

@@ -27,8 +27,8 @@ persistence:
   ephemeral:
     enabled: true
     image:
-      repository: registry.codekoalas.com/devops/helm/koality-charts
-      tag: review-mysql
+      repository: registry.codekoalas.com/devops/helm/koality-charts/review-mysql
+      tag: 0.0.4
   limits:
     cpu: 300m
     memory: 1000Mi
@@ -38,7 +38,7 @@ persistence:
   volumes:
     - name: data
       mount:
-        mountPath: /var/www/html/sites/default/files
+        mountPath: /var/www/html/docroot/sites/default/files
         subPath: [SITE NAME]-review
         # subPath: "/pvc-mount/config.txt"
       claim:
