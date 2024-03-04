@@ -6,17 +6,24 @@ part of 'deployment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GitlabDeploymentImpl _$$GitlabDeploymentImplFromJson(Map<String, dynamic> json) => _$GitlabDeploymentImpl(
+_$GitlabDeploymentImpl _$$GitlabDeploymentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GitlabDeploymentImpl(
       id: json['id'] as String,
       iid: json['iid'] as String,
       ref: json['ref'] as String?,
       sha: json['sha'] as String?,
-      createdAt: json['createdAt'] == null ? null : DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       status: json['status'] as String?,
-      user: json['user'] == null ? null : GitlabUserProfile.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : GitlabUserProfile.fromJson(json['user'] as Map<String, dynamic>),
       deployable: json['deployable'] == null
           ? null
-          : GitlabDeploymentDeployable.fromJson(json['deployable'] as Map<String, dynamic>),
+          : GitlabDeploymentDeployable.fromJson(
+              json['deployable'] as Map<String, dynamic>),
       artifacts: (json['artifacts'] as List<dynamic>?)
               ?.map((e) => _$recordConvert(
                     e,
@@ -31,7 +38,9 @@ _$GitlabDeploymentImpl _$$GitlabDeploymentImplFromJson(Map<String, dynamic> json
           const <GitlabArtifactItem>[],
     );
 
-Map<String, dynamic> _$$GitlabDeploymentImplToJson(_$GitlabDeploymentImpl instance) => <String, dynamic>{
+Map<String, dynamic> _$$GitlabDeploymentImplToJson(
+        _$GitlabDeploymentImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'iid': instance.iid,
       'ref': instance.ref,
@@ -56,7 +65,8 @@ $Rec _$recordConvert<$Rec>(
 ) =>
     convert(value as Map<String, dynamic>);
 
-_$GitlabDeploymentDeployableImpl _$$GitlabDeploymentDeployableImplFromJson(Map<String, dynamic> json) =>
+_$GitlabDeploymentDeployableImpl _$$GitlabDeploymentDeployableImplFromJson(
+        Map<String, dynamic> json) =>
     _$GitlabDeploymentDeployableImpl(
       id: json['id'] as String,
       status: json['status'] as String,
@@ -65,18 +75,33 @@ _$GitlabDeploymentDeployableImpl _$$GitlabDeploymentDeployableImplFromJson(Map<S
       ref: json['ref'] as String?,
       tag: json['tag'] as bool?,
       coverage: (json['coverage'] as num?)?.toDouble(),
-      createdAt: json['createdAt'] == null ? null : DateTime.parse(json['createdAt'] as String),
-      startedAt: json['startedAt'] == null ? null : DateTime.parse(json['startedAt'] as String),
-      finishedAt: json['finishedAt'] == null ? null : DateTime.parse(json['finishedAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      startedAt: json['startedAt'] == null
+          ? null
+          : DateTime.parse(json['startedAt'] as String),
+      finishedAt: json['finishedAt'] == null
+          ? null
+          : DateTime.parse(json['finishedAt'] as String),
       duration: (json['duration'] as num?)?.toDouble(),
-      user: json['user'] == null ? null : GitlabUserProfile.fromJson(json['user'] as Map<String, dynamic>),
-      commit: json['commit'] == null ? null : GitlabCommit.fromJson(json['commit'] as Map<String, dynamic>),
-      pipeline: json['pipeline'] == null ? null : GitlabPipeline.fromJson(json['pipeline'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : GitlabUserProfile.fromJson(json['user'] as Map<String, dynamic>),
+      commit: json['commit'] == null
+          ? null
+          : GitlabCommit.fromJson(json['commit'] as Map<String, dynamic>),
+      pipeline: json['pipeline'] == null
+          ? null
+          : GitlabPipeline.fromJson(json['pipeline'] as Map<String, dynamic>),
       webUrl: json['webUrl'] as String?,
-      artifactsExpireAt: json['artifactsExpireAt'] == null ? null : DateTime.parse(json['artifactsExpireAt'] as String),
+      artifactsExpireAt: json['artifactsExpireAt'] == null
+          ? null
+          : DateTime.parse(json['artifactsExpireAt'] as String),
     );
 
-Map<String, dynamic> _$$GitlabDeploymentDeployableImplToJson(_$GitlabDeploymentDeployableImpl instance) =>
+Map<String, dynamic> _$$GitlabDeploymentDeployableImplToJson(
+        _$GitlabDeploymentDeployableImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'status': instance.status,

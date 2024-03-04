@@ -70,11 +70,12 @@ class DevOpsGenerateCommand extends Command<int> {
 
     // Make sure the files path exists.
     if (!Directory(filesPath).existsSync()) {
-      final confirm = _logger.confirm('$filesPath does not exist, do you want us to create it?');
+      final confirm = _logger.confirm('"./$filesPath" directory does not exist, do you want us to create it? (Folder must exist for this command to work)');
       if (confirm) {
         Directory(filesPath).createSync(recursive: true);
       } else {
         _logger.warn('Please create $filesPath and then run this command again.');
+        return ExitCode.cantCreate.code;
       }
     }
 
