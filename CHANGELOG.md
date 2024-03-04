@@ -1,3 +1,6 @@
+[0.6.7] - 04/03/2024
+* Better error messaging for setup to make it clear what needs to happen.
+
 [0.6.6] - 23/01/2024
 * Updating the `devops generate` drupal template to use different default files path.
 
