@@ -8,7 +8,6 @@ part of 'project_variable.dart';
 
 _$GitlabProjectVariableImpl _$$GitlabProjectVariableImplFromJson(Map<String, dynamic> json) =>
     _$GitlabProjectVariableImpl(
-      id: json['id'] as String,
       key: json['key'] as String,
       value: json['value'] as String,
       protected: json['protected'] as bool? ?? false,
@@ -20,7 +19,6 @@ _$GitlabProjectVariableImpl _$$GitlabProjectVariableImplFromJson(Map<String, dyn
     );
 
 Map<String, dynamic> _$$GitlabProjectVariableImplToJson(_$GitlabProjectVariableImpl instance) => <String, dynamic>{
-      'id': instance.id,
       'key': instance.key,
       'value': instance.value,
       'protected': instance.protected,
@@ -32,6 +30,6 @@ Map<String, dynamic> _$$GitlabProjectVariableImplToJson(_$GitlabProjectVariableI
     };
 
 const _$GitlabProjectVariableTypeEnumMap = {
-  GitlabProjectVariableType.envVar: 'envVar',
+  GitlabProjectVariableType.env_var: 'env_var',
   GitlabProjectVariableType.file: 'file',
 };

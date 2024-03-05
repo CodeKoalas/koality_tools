@@ -6,7 +6,7 @@ part of 'gitlab_api.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getGitlabApiHash() => r'3ca0b2cf48d065624dc4ffd6fefdb41b7e566f69';
+String _$getGitlabApiHash() => r'53afd6f2accd1fffacd2f4f26ee485db6742e12c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -41,9 +41,11 @@ class GetGitlabApiFamily extends Family<AsyncValue<GitlabApi>> {
   /// See also [getGitlabApi].
   GetGitlabApiProvider call({
     required Logger logger,
+    String? accessToken,
   }) {
     return GetGitlabApiProvider(
       logger: logger,
+      accessToken: accessToken,
     );
   }
 
@@ -53,6 +55,7 @@ class GetGitlabApiFamily extends Family<AsyncValue<GitlabApi>> {
   ) {
     return call(
       logger: provider.logger,
+      accessToken: provider.accessToken,
     );
   }
 
@@ -75,10 +78,12 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
   /// See also [getGitlabApi].
   GetGitlabApiProvider({
     required Logger logger,
+    String? accessToken,
   }) : this._internal(
           (ref) => getGitlabApi(
             ref as GetGitlabApiRef,
             logger: logger,
+            accessToken: accessToken,
           ),
           from: getGitlabApiProvider,
           name: r'getGitlabApiProvider',
@@ -86,6 +91,7 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
           dependencies: GetGitlabApiFamily._dependencies,
           allTransitiveDependencies: GetGitlabApiFamily._allTransitiveDependencies,
           logger: logger,
+          accessToken: accessToken,
         );
 
   GetGitlabApiProvider._internal(
@@ -96,9 +102,11 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.logger,
+    required this.accessToken,
   }) : super.internal();
 
   final Logger logger;
+  final String? accessToken;
 
   @override
   Override overrideWith(
@@ -114,6 +122,7 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         logger: logger,
+        accessToken: accessToken,
       ),
     );
   }
@@ -125,13 +134,14 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
 
   @override
   bool operator ==(Object other) {
-    return other is GetGitlabApiProvider && other.logger == logger;
+    return other is GetGitlabApiProvider && other.logger == logger && other.accessToken == accessToken;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, logger.hashCode);
+    hash = _SystemHash.combine(hash, accessToken.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -140,6 +150,9 @@ class GetGitlabApiProvider extends AutoDisposeFutureProvider<GitlabApi> {
 mixin GetGitlabApiRef on AutoDisposeFutureProviderRef<GitlabApi> {
   /// The parameter `logger` of this provider.
   Logger get logger;
+
+  /// The parameter `accessToken` of this provider.
+  String? get accessToken;
 }
 
 class _GetGitlabApiProviderElement extends AutoDisposeFutureProviderElement<GitlabApi> with GetGitlabApiRef {
@@ -147,6 +160,8 @@ class _GetGitlabApiProviderElement extends AutoDisposeFutureProviderElement<Gitl
 
   @override
   Logger get logger => (origin as GetGitlabApiProvider).logger;
+  @override
+  String? get accessToken => (origin as GetGitlabApiProvider).accessToken;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -12,7 +12,7 @@ part of 'deployment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GitlabDeployment _$GitlabDeploymentFromJson(Map<String, dynamic> json) {
   return _GitlabDeployment.fromJson(json);
@@ -27,21 +27,18 @@ mixin _$GitlabDeployment {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   GitlabUserProfile? get user => throw _privateConstructorUsedError;
-  GitlabDeploymentDeployable? get deployable =>
+  GitlabDeploymentDeployable? get deployable => throw _privateConstructorUsedError;
+  List<({String? fileFormat, String fileType, String filename, int size})> get artifacts =>
       throw _privateConstructorUsedError;
-  List<({String? fileFormat, String fileType, String filename, int size})>
-      get artifacts => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GitlabDeploymentCopyWith<GitlabDeployment> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GitlabDeploymentCopyWith<GitlabDeployment> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GitlabDeploymentCopyWith<$Res> {
-  factory $GitlabDeploymentCopyWith(
-          GitlabDeployment value, $Res Function(GitlabDeployment) then) =
+  factory $GitlabDeploymentCopyWith(GitlabDeployment value, $Res Function(GitlabDeployment) then) =
       _$GitlabDeploymentCopyWithImpl<$Res, GitlabDeployment>;
   @useResult
   $Res call(
@@ -53,16 +50,14 @@ abstract class $GitlabDeploymentCopyWith<$Res> {
       String? status,
       GitlabUserProfile? user,
       GitlabDeploymentDeployable? deployable,
-      List<({String? fileFormat, String fileType, String filename, int size})>
-          artifacts});
+      List<({String? fileFormat, String fileType, String filename, int size})> artifacts});
 
   $GitlabUserProfileCopyWith<$Res>? get user;
   $GitlabDeploymentDeployableCopyWith<$Res>? get deployable;
 }
 
 /// @nodoc
-class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment>
-    implements $GitlabDeploymentCopyWith<$Res> {
+class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment> implements $GitlabDeploymentCopyWith<$Res> {
   _$GitlabDeploymentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -119,13 +114,7 @@ class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment>
       artifacts: null == artifacts
           ? _value.artifacts
           : artifacts // ignore: cast_nullable_to_non_nullable
-              as List<
-                  ({
-                    String? fileFormat,
-                    String fileType,
-                    String filename,
-                    int size
-                  })>,
+              as List<({String? fileFormat, String fileType, String filename, int size})>,
     ) as $Val);
   }
 
@@ -148,18 +137,15 @@ class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment>
       return null;
     }
 
-    return $GitlabDeploymentDeployableCopyWith<$Res>(_value.deployable!,
-        (value) {
+    return $GitlabDeploymentDeployableCopyWith<$Res>(_value.deployable!, (value) {
       return _then(_value.copyWith(deployable: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$GitlabDeploymentImplCopyWith<$Res>
-    implements $GitlabDeploymentCopyWith<$Res> {
-  factory _$$GitlabDeploymentImplCopyWith(_$GitlabDeploymentImpl value,
-          $Res Function(_$GitlabDeploymentImpl) then) =
+abstract class _$$GitlabDeploymentImplCopyWith<$Res> implements $GitlabDeploymentCopyWith<$Res> {
+  factory _$$GitlabDeploymentImplCopyWith(_$GitlabDeploymentImpl value, $Res Function(_$GitlabDeploymentImpl) then) =
       __$$GitlabDeploymentImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -172,8 +158,7 @@ abstract class _$$GitlabDeploymentImplCopyWith<$Res>
       String? status,
       GitlabUserProfile? user,
       GitlabDeploymentDeployable? deployable,
-      List<({String? fileFormat, String fileType, String filename, int size})>
-          artifacts});
+      List<({String? fileFormat, String fileType, String filename, int size})> artifacts});
 
   @override
   $GitlabUserProfileCopyWith<$Res>? get user;
@@ -182,11 +167,9 @@ abstract class _$$GitlabDeploymentImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GitlabDeploymentImplCopyWithImpl<$Res>
-    extends _$GitlabDeploymentCopyWithImpl<$Res, _$GitlabDeploymentImpl>
+class __$$GitlabDeploymentImplCopyWithImpl<$Res> extends _$GitlabDeploymentCopyWithImpl<$Res, _$GitlabDeploymentImpl>
     implements _$$GitlabDeploymentImplCopyWith<$Res> {
-  __$$GitlabDeploymentImplCopyWithImpl(_$GitlabDeploymentImpl _value,
-      $Res Function(_$GitlabDeploymentImpl) _then)
+  __$$GitlabDeploymentImplCopyWithImpl(_$GitlabDeploymentImpl _value, $Res Function(_$GitlabDeploymentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -238,13 +221,7 @@ class __$$GitlabDeploymentImplCopyWithImpl<$Res>
       artifacts: null == artifacts
           ? _value._artifacts
           : artifacts // ignore: cast_nullable_to_non_nullable
-              as List<
-                  ({
-                    String? fileFormat,
-                    String fileType,
-                    String filename,
-                    int size
-                  })>,
+              as List<({String? fileFormat, String fileType, String filename, int size})>,
     ));
   }
 }
@@ -261,19 +238,12 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
       this.status,
       this.user,
       this.deployable,
-      final List<
-              ({
-                String? fileFormat,
-                String fileType,
-                String filename,
-                int size
-              })>
-          artifacts = const <GitlabArtifactItem>[]})
+      final List<({String? fileFormat, String fileType, String filename, int size})> artifacts =
+          const <GitlabArtifactItem>[]})
       : _artifacts = artifacts,
         super._();
 
-  factory _$GitlabDeploymentImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GitlabDeploymentImplFromJson(json);
+  factory _$GitlabDeploymentImpl.fromJson(Map<String, dynamic> json) => _$$GitlabDeploymentImplFromJson(json);
 
   @override
   final String id;
@@ -291,12 +261,10 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
   final GitlabUserProfile? user;
   @override
   final GitlabDeploymentDeployable? deployable;
-  final List<({String? fileFormat, String fileType, String filename, int size})>
-      _artifacts;
+  final List<({String? fileFormat, String fileType, String filename, int size})> _artifacts;
   @override
   @JsonKey()
-  List<({String? fileFormat, String fileType, String filename, int size})>
-      get artifacts {
+  List<({String? fileFormat, String fileType, String filename, int size})> get artifacts {
     if (_artifacts is EqualUnmodifiableListView) return _artifacts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_artifacts);
@@ -308,7 +276,7 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabDeploymentImpl &&
@@ -316,36 +284,23 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
             (identical(other.iid, iid) || other.iid == iid) &&
             (identical(other.ref, ref) || other.ref == ref) &&
             (identical(other.sha, sha) || other.sha == sha) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
+            (identical(other.createdAt, createdAt) || other.createdAt == createdAt) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.deployable, deployable) ||
-                other.deployable == deployable) &&
-            const DeepCollectionEquality()
-                .equals(other._artifacts, _artifacts));
+            (identical(other.deployable, deployable) || other.deployable == deployable) &&
+            const DeepCollectionEquality().equals(other._artifacts, _artifacts));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      iid,
-      ref,
-      sha,
-      createdAt,
-      status,
-      user,
-      deployable,
+  int get hashCode => Object.hash(runtimeType, id, iid, ref, sha, createdAt, status, user, deployable,
       const DeepCollectionEquality().hash(_artifacts));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabDeploymentImplCopyWith<_$GitlabDeploymentImpl> get copyWith =>
-      __$$GitlabDeploymentImplCopyWithImpl<_$GitlabDeploymentImpl>(
-          this, _$identity);
+      __$$GitlabDeploymentImplCopyWithImpl<_$GitlabDeploymentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -357,26 +312,19 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
 
 abstract class _GitlabDeployment extends GitlabDeployment {
   const factory _GitlabDeployment(
-      {required final String id,
-      required final String iid,
-      final String? ref,
-      final String? sha,
-      final DateTime? createdAt,
-      final String? status,
-      final GitlabUserProfile? user,
-      final GitlabDeploymentDeployable? deployable,
-      final List<
-              ({
-                String? fileFormat,
-                String fileType,
-                String filename,
-                int size
-              })>
-          artifacts}) = _$GitlabDeploymentImpl;
+          {required final String id,
+          required final String iid,
+          final String? ref,
+          final String? sha,
+          final DateTime? createdAt,
+          final String? status,
+          final GitlabUserProfile? user,
+          final GitlabDeploymentDeployable? deployable,
+          final List<({String? fileFormat, String fileType, String filename, int size})> artifacts}) =
+      _$GitlabDeploymentImpl;
   const _GitlabDeployment._() : super._();
 
-  factory _GitlabDeployment.fromJson(Map<String, dynamic> json) =
-      _$GitlabDeploymentImpl.fromJson;
+  factory _GitlabDeployment.fromJson(Map<String, dynamic> json) = _$GitlabDeploymentImpl.fromJson;
 
   @override
   String get id;
@@ -395,16 +343,13 @@ abstract class _GitlabDeployment extends GitlabDeployment {
   @override
   GitlabDeploymentDeployable? get deployable;
   @override
-  List<({String? fileFormat, String fileType, String filename, int size})>
-      get artifacts;
+  List<({String? fileFormat, String fileType, String filename, int size})> get artifacts;
   @override
   @JsonKey(ignore: true)
-  _$$GitlabDeploymentImplCopyWith<_$GitlabDeploymentImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GitlabDeploymentImplCopyWith<_$GitlabDeploymentImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
-GitlabDeploymentDeployable _$GitlabDeploymentDeployableFromJson(
-    Map<String, dynamic> json) {
+GitlabDeploymentDeployable _$GitlabDeploymentDeployableFromJson(Map<String, dynamic> json) {
   return _GitlabDeploymentDeployable.fromJson(json);
 }
 
@@ -429,16 +374,14 @@ mixin _$GitlabDeploymentDeployable {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GitlabDeploymentDeployableCopyWith<GitlabDeploymentDeployable>
-      get copyWith => throw _privateConstructorUsedError;
+  $GitlabDeploymentDeployableCopyWith<GitlabDeploymentDeployable> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GitlabDeploymentDeployableCopyWith<$Res> {
-  factory $GitlabDeploymentDeployableCopyWith(GitlabDeploymentDeployable value,
-          $Res Function(GitlabDeploymentDeployable) then) =
-      _$GitlabDeploymentDeployableCopyWithImpl<$Res,
-          GitlabDeploymentDeployable>;
+  factory $GitlabDeploymentDeployableCopyWith(
+          GitlabDeploymentDeployable value, $Res Function(GitlabDeploymentDeployable) then) =
+      _$GitlabDeploymentDeployableCopyWithImpl<$Res, GitlabDeploymentDeployable>;
   @useResult
   $Res call(
       {String id,
@@ -464,8 +407,7 @@ abstract class $GitlabDeploymentDeployableCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GitlabDeploymentDeployableCopyWithImpl<$Res,
-        $Val extends GitlabDeploymentDeployable>
+class _$GitlabDeploymentDeployableCopyWithImpl<$Res, $Val extends GitlabDeploymentDeployable>
     implements $GitlabDeploymentDeployableCopyWith<$Res> {
   _$GitlabDeploymentDeployableCopyWithImpl(this._value, this._then);
 
@@ -600,11 +542,9 @@ class _$GitlabDeploymentDeployableCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$GitlabDeploymentDeployableImplCopyWith<$Res>
-    implements $GitlabDeploymentDeployableCopyWith<$Res> {
+abstract class _$$GitlabDeploymentDeployableImplCopyWith<$Res> implements $GitlabDeploymentDeployableCopyWith<$Res> {
   factory _$$GitlabDeploymentDeployableImplCopyWith(
-          _$GitlabDeploymentDeployableImpl value,
-          $Res Function(_$GitlabDeploymentDeployableImpl) then) =
+          _$GitlabDeploymentDeployableImpl value, $Res Function(_$GitlabDeploymentDeployableImpl) then) =
       __$$GitlabDeploymentDeployableImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -636,12 +576,10 @@ abstract class _$$GitlabDeploymentDeployableImplCopyWith<$Res>
 
 /// @nodoc
 class __$$GitlabDeploymentDeployableImplCopyWithImpl<$Res>
-    extends _$GitlabDeploymentDeployableCopyWithImpl<$Res,
-        _$GitlabDeploymentDeployableImpl>
+    extends _$GitlabDeploymentDeployableCopyWithImpl<$Res, _$GitlabDeploymentDeployableImpl>
     implements _$$GitlabDeploymentDeployableImplCopyWith<$Res> {
   __$$GitlabDeploymentDeployableImplCopyWithImpl(
-      _$GitlabDeploymentDeployableImpl _value,
-      $Res Function(_$GitlabDeploymentDeployableImpl) _then)
+      _$GitlabDeploymentDeployableImpl _value, $Res Function(_$GitlabDeploymentDeployableImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -755,8 +693,7 @@ class _$GitlabDeploymentDeployableImpl extends _GitlabDeploymentDeployable {
       this.artifactsExpireAt})
       : super._();
 
-  factory _$GitlabDeploymentDeployableImpl.fromJson(
-          Map<String, dynamic> json) =>
+  factory _$GitlabDeploymentDeployableImpl.fromJson(Map<String, dynamic> json) =>
       _$$GitlabDeploymentDeployableImplFromJson(json);
 
   @override
@@ -798,7 +735,7 @@ class _$GitlabDeploymentDeployableImpl extends _GitlabDeploymentDeployable {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabDeploymentDeployableImpl &&
@@ -808,52 +745,28 @@ class _$GitlabDeploymentDeployableImpl extends _GitlabDeploymentDeployable {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.ref, ref) || other.ref == ref) &&
             (identical(other.tag, tag) || other.tag == tag) &&
-            (identical(other.coverage, coverage) ||
-                other.coverage == coverage) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.startedAt, startedAt) ||
-                other.startedAt == startedAt) &&
-            (identical(other.finishedAt, finishedAt) ||
-                other.finishedAt == finishedAt) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration) &&
+            (identical(other.coverage, coverage) || other.coverage == coverage) &&
+            (identical(other.createdAt, createdAt) || other.createdAt == createdAt) &&
+            (identical(other.startedAt, startedAt) || other.startedAt == startedAt) &&
+            (identical(other.finishedAt, finishedAt) || other.finishedAt == finishedAt) &&
+            (identical(other.duration, duration) || other.duration == duration) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.commit, commit) || other.commit == commit) &&
-            (identical(other.pipeline, pipeline) ||
-                other.pipeline == pipeline) &&
+            (identical(other.pipeline, pipeline) || other.pipeline == pipeline) &&
             (identical(other.webUrl, webUrl) || other.webUrl == webUrl) &&
-            (identical(other.artifactsExpireAt, artifactsExpireAt) ||
-                other.artifactsExpireAt == artifactsExpireAt));
+            (identical(other.artifactsExpireAt, artifactsExpireAt) || other.artifactsExpireAt == artifactsExpireAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      status,
-      stage,
-      name,
-      ref,
-      tag,
-      coverage,
-      createdAt,
-      startedAt,
-      finishedAt,
-      duration,
-      user,
-      commit,
-      pipeline,
-      webUrl,
-      artifactsExpireAt);
+  int get hashCode => Object.hash(runtimeType, id, status, stage, name, ref, tag, coverage, createdAt, startedAt,
+      finishedAt, duration, user, commit, pipeline, webUrl, artifactsExpireAt);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl>
-      get copyWith => __$$GitlabDeploymentDeployableImplCopyWithImpl<
-          _$GitlabDeploymentDeployableImpl>(this, _$identity);
+  _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl> get copyWith =>
+      __$$GitlabDeploymentDeployableImplCopyWithImpl<_$GitlabDeploymentDeployableImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -883,8 +796,7 @@ abstract class _GitlabDeploymentDeployable extends GitlabDeploymentDeployable {
       final DateTime? artifactsExpireAt}) = _$GitlabDeploymentDeployableImpl;
   const _GitlabDeploymentDeployable._() : super._();
 
-  factory _GitlabDeploymentDeployable.fromJson(Map<String, dynamic> json) =
-      _$GitlabDeploymentDeployableImpl.fromJson;
+  factory _GitlabDeploymentDeployable.fromJson(Map<String, dynamic> json) = _$GitlabDeploymentDeployableImpl.fromJson;
 
   @override
   String get id;
@@ -920,6 +832,6 @@ abstract class _GitlabDeploymentDeployable extends GitlabDeploymentDeployable {
   DateTime? get artifactsExpireAt;
   @override
   @JsonKey(ignore: true)
-  _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'koality_config.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 KoalityConfig _$KoalityConfigFromJson(Map<String, dynamic> json) {
   return _KoalityConfig.fromJson(json);
@@ -209,7 +209,7 @@ class _$KoalityConfigImpl extends _KoalityConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KoalityConfigImpl &&
@@ -369,7 +369,7 @@ class _$GitlabConfigImpl implements _GitlabConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabConfigImpl &&
@@ -499,7 +499,7 @@ class _$KubectlConfigImpl extends _KubectlConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$KubectlConfigImpl &&
@@ -641,7 +641,7 @@ class _$FirebaseConfigImpl extends _FirebaseConfig {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FirebaseConfigImpl &&

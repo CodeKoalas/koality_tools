@@ -12,7 +12,7 @@ part of 'project_environment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GitlabProjectEnvironment _$GitlabProjectEnvironmentFromJson(Map<String, dynamic> json) {
   return _GitlabProjectEnvironment.fromJson(json);
@@ -20,7 +20,7 @@ GitlabProjectEnvironment _$GitlabProjectEnvironmentFromJson(Map<String, dynamic>
 
 /// @nodoc
 mixin _$GitlabProjectEnvironment {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   String? get slug => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $GitlabProjectEnvironmentCopyWith<$Res> {
       _$GitlabProjectEnvironmentCopyWithImpl<$Res, GitlabProjectEnvironment>;
   @useResult
   $Res call(
-      {String id,
+      {int id,
       String name,
       String? state,
       String? slug,
@@ -83,7 +83,7 @@ class _$GitlabProjectEnvironmentCopyWithImpl<$Res, $Val extends GitlabProjectEnv
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -132,7 +132,7 @@ abstract class _$$GitlabProjectEnvironmentImplCopyWith<$Res> implements $GitlabP
   @override
   @useResult
   $Res call(
-      {String id,
+      {int id,
       String name,
       String? state,
       String? slug,
@@ -170,7 +170,7 @@ class __$$GitlabProjectEnvironmentImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -231,7 +231,7 @@ class _$GitlabProjectEnvironmentImpl extends _GitlabProjectEnvironment {
       _$$GitlabProjectEnvironmentImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
@@ -257,7 +257,7 @@ class _$GitlabProjectEnvironmentImpl extends _GitlabProjectEnvironment {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabProjectEnvironmentImpl &&
@@ -295,7 +295,7 @@ class _$GitlabProjectEnvironmentImpl extends _GitlabProjectEnvironment {
 
 abstract class _GitlabProjectEnvironment extends GitlabProjectEnvironment {
   const factory _GitlabProjectEnvironment(
-      {required final String id,
+      {required final int id,
       required final String name,
       final String? state,
       final String? slug,
@@ -310,7 +310,7 @@ abstract class _GitlabProjectEnvironment extends GitlabProjectEnvironment {
   factory _GitlabProjectEnvironment.fromJson(Map<String, dynamic> json) = _$GitlabProjectEnvironmentImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override

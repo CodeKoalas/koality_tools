@@ -12,7 +12,7 @@ part of 'pipeline.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GitlabPipeline _$GitlabPipelineFromJson(Map<String, dynamic> json) {
   return _GitlabPipeline.fromJson(json);
@@ -28,22 +28,19 @@ mixin _$GitlabPipeline {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GitlabPipelineCopyWith<GitlabPipeline> get copyWith =>
-      throw _privateConstructorUsedError;
+  $GitlabPipelineCopyWith<GitlabPipeline> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GitlabPipelineCopyWith<$Res> {
-  factory $GitlabPipelineCopyWith(
-          GitlabPipeline value, $Res Function(GitlabPipeline) then) =
+  factory $GitlabPipelineCopyWith(GitlabPipeline value, $Res Function(GitlabPipeline) then) =
       _$GitlabPipelineCopyWithImpl<$Res, GitlabPipeline>;
   @useResult
   $Res call({String id, String sha, String ref, String status, String webUrl});
 }
 
 /// @nodoc
-class _$GitlabPipelineCopyWithImpl<$Res, $Val extends GitlabPipeline>
-    implements $GitlabPipelineCopyWith<$Res> {
+class _$GitlabPipelineCopyWithImpl<$Res, $Val extends GitlabPipeline> implements $GitlabPipelineCopyWith<$Res> {
   _$GitlabPipelineCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -86,10 +83,8 @@ class _$GitlabPipelineCopyWithImpl<$Res, $Val extends GitlabPipeline>
 }
 
 /// @nodoc
-abstract class _$$GitlabPipelineImplCopyWith<$Res>
-    implements $GitlabPipelineCopyWith<$Res> {
-  factory _$$GitlabPipelineImplCopyWith(_$GitlabPipelineImpl value,
-          $Res Function(_$GitlabPipelineImpl) then) =
+abstract class _$$GitlabPipelineImplCopyWith<$Res> implements $GitlabPipelineCopyWith<$Res> {
+  factory _$$GitlabPipelineImplCopyWith(_$GitlabPipelineImpl value, $Res Function(_$GitlabPipelineImpl) then) =
       __$$GitlabPipelineImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -97,11 +92,9 @@ abstract class _$$GitlabPipelineImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GitlabPipelineImplCopyWithImpl<$Res>
-    extends _$GitlabPipelineCopyWithImpl<$Res, _$GitlabPipelineImpl>
+class __$$GitlabPipelineImplCopyWithImpl<$Res> extends _$GitlabPipelineCopyWithImpl<$Res, _$GitlabPipelineImpl>
     implements _$$GitlabPipelineImplCopyWith<$Res> {
-  __$$GitlabPipelineImplCopyWithImpl(
-      _$GitlabPipelineImpl _value, $Res Function(_$GitlabPipelineImpl) _then)
+  __$$GitlabPipelineImplCopyWithImpl(_$GitlabPipelineImpl _value, $Res Function(_$GitlabPipelineImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -142,15 +135,10 @@ class __$$GitlabPipelineImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GitlabPipelineImpl extends _GitlabPipeline {
   const _$GitlabPipelineImpl(
-      {required this.id,
-      required this.sha,
-      required this.ref,
-      required this.status,
-      this.webUrl = ''})
+      {required this.id, required this.sha, required this.ref, required this.status, this.webUrl = ''})
       : super._();
 
-  factory _$GitlabPipelineImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GitlabPipelineImplFromJson(json);
+  factory _$GitlabPipelineImpl.fromJson(Map<String, dynamic> json) => _$$GitlabPipelineImplFromJson(json);
 
   @override
   final String id;
@@ -170,7 +158,7 @@ class _$GitlabPipelineImpl extends _GitlabPipeline {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabPipelineImpl &&
@@ -189,8 +177,7 @@ class _$GitlabPipelineImpl extends _GitlabPipeline {
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabPipelineImplCopyWith<_$GitlabPipelineImpl> get copyWith =>
-      __$$GitlabPipelineImplCopyWithImpl<_$GitlabPipelineImpl>(
-          this, _$identity);
+      __$$GitlabPipelineImplCopyWithImpl<_$GitlabPipelineImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -209,8 +196,7 @@ abstract class _GitlabPipeline extends GitlabPipeline {
       final String webUrl}) = _$GitlabPipelineImpl;
   const _GitlabPipeline._() : super._();
 
-  factory _GitlabPipeline.fromJson(Map<String, dynamic> json) =
-      _$GitlabPipelineImpl.fromJson;
+  factory _GitlabPipeline.fromJson(Map<String, dynamic> json) = _$GitlabPipelineImpl.fromJson;
 
   @override
   String get id;
@@ -224,6 +210,5 @@ abstract class _GitlabPipeline extends GitlabPipeline {
   String get webUrl;
   @override
   @JsonKey(ignore: true)
-  _$$GitlabPipelineImplCopyWith<_$GitlabPipelineImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GitlabPipelineImplCopyWith<_$GitlabPipelineImpl> get copyWith => throw _privateConstructorUsedError;
 }

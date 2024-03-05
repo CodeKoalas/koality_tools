@@ -27,10 +27,9 @@ persistence:
       repository: registry.codekoalas.com/devops/helm/koality-charts/review-mysql
       tag: 0.0.4
   limits:
-    cpu: 300m
     memory: 1000Mi
   requests:
-    cpu: 150m
+    cpu: 50m
     memory: 500Mi
   volumes:
     - name: data

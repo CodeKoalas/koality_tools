@@ -25,7 +25,7 @@ class KoalityConfigManager {
       'gitlabConfig': const <String, dynamic>{
         'gitlabApiUrl': 'https://gitlab.com/api/v4',
         'gitlabAccessToken': '',
-      }
+      },
     };
   }
 
@@ -59,12 +59,13 @@ class KoalityConfigManager {
     return configFile;
   }
 
-  Future<void> saveConfig(KoalityConfig config, String? overrideConfigPath) async {
+  Future<void> saveConfig({required KoalityConfig config, String? overrideConfigPath}) async {
     final configFile = getConfigFile(overrideConfigPath);
     final serialized = config.toJson();
     // Now write to the file.
     try {
       await configFile.writeAsString(jsonEncode(serialized));
+      logger.info('Config successfully saved!');
     } catch (e) {
       // If we failed writing, let's just print the error and continue.
       logger.err('Failed to write config file: $e');

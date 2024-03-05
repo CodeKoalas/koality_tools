@@ -30,10 +30,9 @@ persistence:
       repository: registry.codekoalas.com/devops/helm/koality-charts/review-mysql
       tag: 0.0.4
   limits:
-    cpu: 300m
     memory: 1000Mi
   requests:
-    cpu: 150m
+    cpu: 50m
     memory: 500Mi
   volumes:
     - name: data
@@ -71,7 +70,7 @@ redis:
 cron:
   enabled: true
   image:
-    repository: registry.codekoalas.com/sites/[SITE NAME]/cron
+    repository: [CONTAINER PATH]/cron
     # Overridden in Gitlab through the CI/CD variable HELM_EXTRA_UPGRADE_ARGS
     # tag: latest
 

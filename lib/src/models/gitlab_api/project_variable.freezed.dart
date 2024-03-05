@@ -12,7 +12,7 @@ part of 'project_variable.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GitlabProjectVariable _$GitlabProjectVariableFromJson(Map<String, dynamic> json) {
   return _GitlabProjectVariable.fromJson(json);
@@ -20,7 +20,6 @@ GitlabProjectVariable _$GitlabProjectVariableFromJson(Map<String, dynamic> json)
 
 /// @nodoc
 mixin _$GitlabProjectVariable {
-  String get id => throw _privateConstructorUsedError;
   String get key => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
   bool get protected => throw _privateConstructorUsedError;
@@ -41,8 +40,7 @@ abstract class $GitlabProjectVariableCopyWith<$Res> {
       _$GitlabProjectVariableCopyWithImpl<$Res, GitlabProjectVariable>;
   @useResult
   $Res call(
-      {String id,
-      String key,
+      {String key,
       String value,
       bool protected,
       bool masked,
@@ -65,7 +63,6 @@ class _$GitlabProjectVariableCopyWithImpl<$Res, $Val extends GitlabProjectVariab
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? key = null,
     Object? value = null,
     Object? protected = null,
@@ -76,10 +73,6 @@ class _$GitlabProjectVariableCopyWithImpl<$Res, $Val extends GitlabProjectVariab
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       key: null == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -124,8 +117,7 @@ abstract class _$$GitlabProjectVariableImplCopyWith<$Res> implements $GitlabProj
   @override
   @useResult
   $Res call(
-      {String id,
-      String key,
+      {String key,
       String value,
       bool protected,
       bool masked,
@@ -146,7 +138,6 @@ class __$$GitlabProjectVariableImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? key = null,
     Object? value = null,
     Object? protected = null,
@@ -157,10 +148,6 @@ class __$$GitlabProjectVariableImplCopyWithImpl<$Res>
     Object? description = freezed,
   }) {
     return _then(_$GitlabProjectVariableImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       key: null == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -201,8 +188,7 @@ class __$$GitlabProjectVariableImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
   const _$GitlabProjectVariableImpl(
-      {required this.id,
-      required this.key,
+      {required this.key,
       required this.value,
       this.protected = false,
       this.masked = false,
@@ -214,8 +200,6 @@ class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
 
   factory _$GitlabProjectVariableImpl.fromJson(Map<String, dynamic> json) => _$$GitlabProjectVariableImplFromJson(json);
 
-  @override
-  final String id;
   @override
   final String key;
   @override
@@ -239,15 +223,14 @@ class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
 
   @override
   String toString() {
-    return 'GitlabProjectVariable(id: $id, key: $key, value: $value, protected: $protected, masked: $masked, raw: $raw, environmentScope: $environmentScope, variableType: $variableType, description: $description)';
+    return 'GitlabProjectVariable(key: $key, value: $value, protected: $protected, masked: $masked, raw: $raw, environmentScope: $environmentScope, variableType: $variableType, description: $description)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GitlabProjectVariableImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.key, key) || other.key == key) &&
             (identical(other.value, value) || other.value == value) &&
             (identical(other.protected, protected) || other.protected == protected) &&
@@ -261,7 +244,7 @@ class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, key, value, protected, masked, raw, environmentScope, variableType, description);
+      Object.hash(runtimeType, key, value, protected, masked, raw, environmentScope, variableType, description);
 
   @JsonKey(ignore: true)
   @override
@@ -279,8 +262,7 @@ class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
 
 abstract class _GitlabProjectVariable extends GitlabProjectVariable {
   const factory _GitlabProjectVariable(
-      {required final String id,
-      required final String key,
+      {required final String key,
       required final String value,
       final bool protected,
       final bool masked,
@@ -292,8 +274,6 @@ abstract class _GitlabProjectVariable extends GitlabProjectVariable {
 
   factory _GitlabProjectVariable.fromJson(Map<String, dynamic> json) = _$GitlabProjectVariableImpl.fromJson;
 
-  @override
-  String get id;
   @override
   String get key;
   @override

@@ -1,4 +1,4 @@
-const magnetoStagingYaml = '''
+const magentoStagingYaml = '''
 global:
   storageClass: "efs-sc"
 
@@ -25,10 +25,9 @@ persistence:
   databasePassword: pleaseoverwriteme
   replicaCount: 1
   limits:
-    cpu: 900m
     memory: 4Gi
   requests:
-    cpu: 400m
+    cpu: 100m
     memory: 2Gi
   volumes:
     - name: data

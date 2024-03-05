@@ -44,7 +44,7 @@ void main() {
         expect(result, equals(ExitCode.software.code));
         verify(() => logger.err('Unable to locate vendor directory')).called(1);
         verifyNever(
-            () => logger.info('Successfully ran lints in [./docroot/modules/custom] + [./docroot/themes/custom].'));
+            () => logger.info('Successfully ran lints in [./docroot/modules/custom] + [./docroot/themes/custom].'),);
       },
     );
   });

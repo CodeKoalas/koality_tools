@@ -5,4 +5,4 @@
 4. Update `README.md` with some example uses and a heading for the commands and what they do.
 5. Commit and push up code.
 6. Create git tag like `git tag -a 0.5.2 -m "Version 0.5.2"` and then `git push --tags`.
-7. Run `dart pub publish`
+7. Run `dart pub lish`

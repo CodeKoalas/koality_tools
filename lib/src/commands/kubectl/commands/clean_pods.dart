@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:riverpod/riverpod.dart';
 
+import 'package:koality_tools/src/commands/kubectl/helpers/search.dart';
 import 'package:koality_tools/src/providers/config.dart';
 
 /// {@template kubectl_clean_pods_command}

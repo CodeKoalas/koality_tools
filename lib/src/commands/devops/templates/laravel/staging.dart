@@ -30,10 +30,9 @@ persistence:
   databasePassword: pleaseoverwriteme
   replicaCount: 1
   limits:
-    cpu: 900m
     memory: 1000Mi
   requests:
-    cpu: 150m
+    cpu: 50m
     memory: 550Mi
   volumes:
     - name: data
@@ -77,7 +76,7 @@ queueWorker:
 cron:
   enabled: true
   image: 
-    repository: registry.codekoalas.com/sites/[SITE NAME]/cron
+    repository: [CONTAINER PATH]/cron
     tag: latest
 
 aws:

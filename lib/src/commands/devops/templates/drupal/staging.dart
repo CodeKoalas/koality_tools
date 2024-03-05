@@ -25,10 +25,9 @@ persistence:
   databasePassword: pleaseoverwriteme
   replicaCount: 1
   limits:
-    cpu: 500m
     memory: 1000Mi
   requests:
-    cpu: 250m
+    cpu: 50m
     memory: 550Mi
   volumes:
     - name: data
@@ -66,7 +65,7 @@ ingress:
 cron:
   enabled: true
   image:
-    repository: registry.codekoalas.com/sites/[SITE NAME]/cron
+    repository: [CONTAINER PATH]/cron
     tag: latest
 
 ''';

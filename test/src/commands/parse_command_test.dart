@@ -47,7 +47,7 @@ void main() {
       'handles parsing YAML file',
       () async {
         final dir = Directory.current.path;
-        final result = await commandRunner.run(['parse', 'version', '--path', ('$dir/$yamlFile')]);
+        final result = await commandRunner.run(['parse', 'version', '--path', '$dir/$yamlFile']);
         expect(result, equals(ExitCode.success.code));
         verify(() => logger.write('0.2.0')).called(1);
         verifyNever(() => logger.err('Failed to read pubspec.yaml file.'));

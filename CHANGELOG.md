@@ -1,3 +1,8 @@
+[0.7.0] - 04/03/2024
+* Adding new `config` command with subcommands to handle updating config through the CLI instead of editing the JSON file.
+* Adjusted the `devops generate` command to have an additional parameter in the cli for the container path.
+* Improved the `devops generate` command to also handle scaffolding CI/CD variables and environments with Gitlab's Auto DevOps feature.
+
 [0.6.7] - 04/03/2024
 * Better error messaging for setup to make it clear what needs to happen.
 

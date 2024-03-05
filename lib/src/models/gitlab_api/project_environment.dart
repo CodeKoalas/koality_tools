@@ -9,7 +9,7 @@ enum GitlabProjectEnvironmentTier { production, staging, testing, development, o
 class GitlabProjectEnvironment with _$GitlabProjectEnvironment {
   const GitlabProjectEnvironment._();
   const factory GitlabProjectEnvironment({
-    required String id,
+    required int id,
     required String name,
     String? state,
     String? slug,

@@ -54,6 +54,9 @@ $ koality mysql create database --host localhost --user user --password root --d
 # Drupal commands for ease of use.
 $ koality drupal lint --fix-errors --drupal-root ./ --modules-root ./docroot/modules/custom --themes-root ./docroot/themes/custom
 
+# DevOps command for generating files and updating Gitlab projects for using Gitlab Auto DevOps.
+$ koality devops generate --site-name cool-site --database-name coolsite_dev --site-type drupal --container-path registry.gitlab.com/path/to/container/image
+
 # Show CLI version
 $ koality --version
 
@@ -175,5 +178,11 @@ $ koality drupal lint
 ```sh
 # This command will create a directory called 'autodevops' in the current directory and then copy over some
 # YAML files that include the values needed for our Gitlab Auto DevOps helm chart to deploy the site.
-$ koality devops generate --site-name my-drupal-site --database-name koality_drupal_dev --site-type drupal --files-path autodevops
+$ koality devops generate --site-name my-drupal-site --database-name koality_drupal_dev --site-type drupal --files-path autodevops --container-path registry.gitlab.com/path/to/container/image
+```
+
+## Running Config Commands. ⚙️
+```sh
+# This command will update the Gitlab API config values.
+$ koality config gitlab --api-token mycoolapitoken --api-url https://gitlab.mydomain.com/api/v4
 ```

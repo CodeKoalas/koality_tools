@@ -10,12 +10,15 @@ part 'gitlab_api.g.dart';
 Future<GitlabApi> getGitlabApi(
   GetGitlabApiRef ref, {
   required Logger logger,
+  String? accessToken,
 }) async {
   final config = await ref.watch(getKoalityConfigProvider(logger: logger).future);
+  final token = accessToken ?? config.gitlabConfig.gitlabAccessToken;
   final headers = <String, dynamic>{
-    if (config.gitlabConfig.gitlabAccessToken.isNotEmpty) 'PRIVATE_TOKEN': config.gitlabConfig.gitlabAccessToken,
+    if (token.isNotEmpty) 'PRIVATE-TOKEN': token,
   };
   return GitlabApi(
+    logger: logger,
     client: Dio(
       BaseOptions(
         baseUrl: config.gitlabConfig.gitlabApiUrl,

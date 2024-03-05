@@ -8,7 +8,7 @@ part of 'project_environment.dart';
 
 _$GitlabProjectEnvironmentImpl _$$GitlabProjectEnvironmentImplFromJson(Map<String, dynamic> json) =>
     _$GitlabProjectEnvironmentImpl(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
       state: json['state'] as String?,
       slug: json['slug'] as String?,
