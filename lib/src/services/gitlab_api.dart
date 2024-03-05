@@ -41,7 +41,8 @@ class GitlabApi {
           },
         );
         return Result.success(
-            [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],);
+          [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],
+        );
       } else if (searchTerm != null) {
         final response = await client.get<List<dynamic>>(
           getProjectEnvironmentsUrl(projectId),
@@ -50,11 +51,13 @@ class GitlabApi {
           },
         );
         return Result.success(
-            [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],);
+          [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],
+        );
       } else {
         final response = await client.get<List<dynamic>>(getProjectEnvironmentsUrl(projectId));
         return Result.success(
-            [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],);
+          [...response.data?.map((json) => GitlabProjectEnvironment.fromJson(json as Map<String, dynamic>)) ?? []],
+        );
       }
     } on DioException catch (e, trace) {
       logger
@@ -134,7 +137,9 @@ class GitlabApi {
         final messageKey = (message['key'] as List<String>).join(' ');
         if (messageKey.contains(key)) {
           return Result.failure(
-              'A variable with the key "$key" already exists in the scope "$environmentScope".', StackTrace.empty,);
+            'A variable with the key "$key" already exists in the scope "$environmentScope".',
+            StackTrace.empty,
+          );
         }
       }
       return Result.failure(e, trace);
