@@ -18,4 +18,5 @@ const templateYamlFiles = <String, Map<String, String>>{
     'review': magentoReviewYaml,
     'staging': magentoStagingYaml,
   },
+  'wordpress': {},
 };

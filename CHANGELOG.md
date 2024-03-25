@@ -1,3 +1,6 @@
+[0.7.1] - 25/03/2024
+* Adding new `wordpress` option for the `devops generate` command. Works for Koality Wordpress sites.
+
 [0.7.0] - 04/03/2024
 * Adding new `config` command with subcommands to handle updating config through the CLI instead of editing the JSON file.
 * Adjusted the `devops generate` command to have an additional parameter in the cli for the container path.
