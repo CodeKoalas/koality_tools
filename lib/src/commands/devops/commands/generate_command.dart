@@ -73,7 +73,7 @@ class DevOpsGenerateCommand extends Command<int> {
   @override
   String get name => 'generate';
 
-  final List<String> _allowedTypes = const ['drupal', 'laravel', 'vue', 'magento'];
+  final List<String> _allowedTypes = const ['drupal', 'laravel', 'vue', 'magento', 'wordpress'];
 
   final Logger _logger;
   // ignore: unused_field
