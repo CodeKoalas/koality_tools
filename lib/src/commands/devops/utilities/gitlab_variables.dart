@@ -70,6 +70,7 @@ String getDefaultHelmUpgradeExtraArgs({required String siteType, required String
     'drupal' => getDrupalHelmUpgradeExtraArgs(environment: environment),
     'laravel' => getLaravelHelmUpgradeExtraArgs(environment: environment),
     'magento' => getMagentoHelmUpgradeExtraArgs(environment: environment),
+    'wordpress' => getWordpressHelmUpgradeExtraArgs(environment: environment),
     _ => '',
   };
 }
@@ -131,6 +132,29 @@ String getLaravelHelmUpgradeExtraArgs({required String environment}) {
 --set deployment.jwtSecret=$JWT_SECRET
 --set deployment.configMaps.google-credentials.mountPath=/etc/firebase
 --set-file deployment.configMaps.google-credentials.data.google-credentials\.json=$FIREBASE_CONFIG_PATH
+''',
+    _ => '',
+  };
+}
+
+// Gets some Drupal default extra args to pass to the helm upgrade command with Gitlab's Auto DevOps feature.
+String getWordpressHelmUpgradeExtraArgs({required String environment}) {
+  return switch (environment) {
+    'review' => r'''
+--set cron.image.repository=$CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/cron
+--set cron.image.tag=$CI_COMMIT_SHA
+--set deployment.letsEncryptHost=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN  
+--set deployment.name=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG 
+--set deployment.virtualHost=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN  
+--set ingress.hostname=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
+--set ingress.annotations.nginx\.ingress\.kubernetes\.io/session-cookie-domain=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN 
+--set persistence.databasePassword=$DATABASE_PASSWORD 
+--set persistence.name=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG 
+--set persistence.volumes[0].name=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG-data 
+--set persistence.volumes[0].mount.subPath=$CI_PROJECT_ID-$CI_ENVIRONMENT_SLUG
+''',
+    'staging' => r'''
+--set persistence.databasePassword=$DATABASE_PASSWORD
 ''',
     _ => '',
   };

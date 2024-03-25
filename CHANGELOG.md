@@ -1,3 +1,6 @@
+[0.7.2] - 25/03/2024
+* Fixing issue with missing template files for new `wordpress` option.
+
 [0.7.1] - 25/03/2024
 * Adding new `wordpress` option for the `devops generate` command. Works for Koality Wordpress sites.
 
