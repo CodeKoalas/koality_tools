@@ -18,6 +18,14 @@ extension StringifyYesNo on String {
   bool get isYes => this == 'y' || this == 'yes';
 }
 
+String? greenTextStyle(String? m) {
+  return backgroundLightGreen.wrap(styleBold.wrap(white.wrap(m)));
+}
+
+String? yellowTextStyle(String? m) {
+  return backgroundLightYellow.wrap(styleBold.wrap(black.wrap(m)));
+}
+
 /// A basic function that will check for the existence of Gum.
 /// Will ensure it's installed before trying to use it with other scripts.
 Future<bool> isExecutableInstalled(String executableName) async {

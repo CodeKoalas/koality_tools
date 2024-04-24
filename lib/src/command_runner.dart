@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
+import 'package:koality_tools/src/commands/apple/apple_command.dart';
 import 'package:koality_tools/src/commands/devops/devops_command.dart';
 import 'package:koality_tools/src/commands/drupal/drupal_command.dart';
 import 'package:koality_tools/src/commands/firebase/firebase_command.dart';
@@ -52,19 +53,20 @@ class KoalityToolsCommandRunner extends CompletionCommandRunner<int> {
       );
 
     // Add sub commands
+    addCommand(AppleCommand(logger: _logger));
     addCommand(CoverageCommand(logger: _logger));
     addCommand(DevOpsCommand(logger: _logger, container: container));
     addCommand(DrupalCommand(logger: _logger, container: container));
     addCommand(FirebaseCommand(logger: _logger, container: container));
+    addCommand(JwtCommand(logger: _logger));
     addCommand(KubectlCommand(logger: _logger, container: container));
     addCommand(ParseCommand(logger: _logger));
     addCommand(POEditorCommand(logger: _logger));
-    addCommand(TestRunnerCommand(logger: _logger));
-    addCommand(RefactorCommand(logger: _logger));
     addCommand(ScaffoldCommand(logger: _logger, container: container));
     addCommand(SetupCommand(logger: _logger, container: container));
+    addCommand(RefactorCommand(logger: _logger));
+    addCommand(TestRunnerCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, updater: updater));
-    addCommand(JwtCommand(logger: _logger));
   }
 
   @override

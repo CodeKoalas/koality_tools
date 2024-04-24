@@ -186,3 +186,8 @@ $ koality devops generate --site-name my-drupal-site --database-name koality_dru
 # This command will update the Gitlab API config values.
 $ koality config gitlab --api-token mycoolapitoken --api-url https://gitlab.mydomain.com/api/v4
 ```
+
+## Running Apple Commands. 🖥️
+```sh
+$ koality apple required-apis --recursive --path /path/to/codebase
+```

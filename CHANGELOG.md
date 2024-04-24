@@ -1,3 +1,8 @@
+[0.8.0] - 24/04/2024
+* Adding new `apple` command for handling Apple/iOS things.
+* Adding new subcommand `required-apis` for the `apple` command to handle the new Required Reason APIs. It will search through Swift/Obj-C `*.m` files 
+and report any used APIs that will require a reason to be listed for it's usage.
+
 [0.7.2] - 25/03/2024
 * Fixing issue with missing template files for new `wordpress` option.
 
