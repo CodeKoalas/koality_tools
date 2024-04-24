@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'package:koality_tools/src/commands/apple/apple_command.dart';
+import 'package:koality_tools/src/utilities.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pub_updater/pub_updater.dart';
@@ -7,14 +7,12 @@ import 'package:riverpod/riverpod.dart';
 import 'package:test/test.dart';
 
 import 'package:koality_tools/src/command_runner.dart';
-import 'package:koality_tools/src/commands/parse/parse_command.dart';
 
-import '../../mocks.dart';
+import '../../../mocks.dart';
 
 void main() {
-  const yamlFile = 'test/files/pubspec.yaml';
 
-  group('update', () {
+  group('apple', () {
     late PubUpdater updater;
     late Logger logger;
     late KoalityToolsCommandRunner commandRunner;
@@ -38,19 +36,18 @@ void main() {
       when(() => logger.progress(any())).thenReturn(progress);
     });
 
-    test('can be instantiated without a pub updater', () {
-      final command = ParseCommand(logger: logger);
+    test('required-apis: can be instantiated without a pub updater', () {
+      final command = AppleCommand(logger: logger);
       expect(command, isNotNull);
     });
 
     test(
-      'handles parsing YAML file',
+      'required-apis: handles searching the Swift file',
       () async {
-        final dir = Directory.current.path;
-        final result = await commandRunner.run(['parse', 'version', '--path', '$dir/$yamlFile']);
+        final result = await commandRunner.run(['apple', 'required-apis', '--path', './test/files']);
         expect(result, equals(ExitCode.success.code));
-        verify(() => logger.write('0.2.0')).called(1);
-        verifyNever(() => logger.err('Failed to read pubspec.yaml file.'));
+        verify(() => logger.info('Searching for creationDate in ./test/files...', style: yellowTextStyle)).called(1);
+        verifyNever(() => logger.err('Error running grep'));
       },
     );
   });

@@ -84,8 +84,8 @@ class RequiredReasonAPICommand extends Command<int> {
 
           if (process.exitCode >= 2) {
             _logger
-              ..err('Error running grep: ${process.stderr}')
-              ..err(process.stdout.toString());
+              ..err('Error running grep')
+              ..err(process.stderr.toString());
             return process.exitCode;
           } else {
             final lines = process.stdout.toString().split('\n');
