@@ -11,7 +11,6 @@ import 'package:koality_tools/src/command_runner.dart';
 import '../../../mocks.dart';
 
 void main() {
-
   group('apple', () {
     late PubUpdater updater;
     late Logger logger;
