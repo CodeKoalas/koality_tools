@@ -35,8 +35,12 @@ mixin _$GitlabUserProfile {
   String get twitter => throw _privateConstructorUsedError;
   String get websiteUrl => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabUserProfile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabUserProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabUserProfileCopyWith<GitlabUserProfile> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -72,6 +76,8 @@ class _$GitlabUserProfileCopyWithImpl<$Res, $Val extends GitlabUserProfile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabUserProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -180,6 +186,8 @@ class __$$GitlabUserProfileImplCopyWithImpl<$Res> extends _$GitlabUserProfileCop
   __$$GitlabUserProfileImplCopyWithImpl(_$GitlabUserProfileImpl _value, $Res Function(_$GitlabUserProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabUserProfile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -341,12 +349,14 @@ class _$GitlabUserProfileImpl extends _GitlabUserProfile {
             (identical(other.websiteUrl, websiteUrl) || other.websiteUrl == websiteUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, username, state, avatarUrl, webUrl, createdAt, bio, location,
       publicEmail, skype, linkedin, twitter, websiteUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabUserProfile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabUserProfileImplCopyWith<_$GitlabUserProfileImpl> get copyWith =>
@@ -408,7 +418,10 @@ abstract class _GitlabUserProfile extends GitlabUserProfile {
   String get twitter;
   @override
   String get websiteUrl;
+
+  /// Create a copy of GitlabUserProfile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabUserProfileImplCopyWith<_$GitlabUserProfileImpl> get copyWith => throw _privateConstructorUsedError;
 }

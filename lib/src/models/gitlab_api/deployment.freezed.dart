@@ -31,8 +31,12 @@ mixin _$GitlabDeployment {
   List<({String? fileFormat, String fileType, String filename, int size})> get artifacts =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabDeployment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabDeploymentCopyWith<GitlabDeployment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,6 +69,8 @@ class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment> implem
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,6 +124,8 @@ class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment> implem
     ) as $Val);
   }
 
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabUserProfileCopyWith<$Res>? get user {
@@ -130,6 +138,8 @@ class _$GitlabDeploymentCopyWithImpl<$Res, $Val extends GitlabDeployment> implem
     });
   }
 
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabDeploymentDeployableCopyWith<$Res>? get deployable {
@@ -172,6 +182,8 @@ class __$$GitlabDeploymentImplCopyWithImpl<$Res> extends _$GitlabDeploymentCopyW
   __$$GitlabDeploymentImplCopyWithImpl(_$GitlabDeploymentImpl _value, $Res Function(_$GitlabDeploymentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -291,12 +303,14 @@ class _$GitlabDeploymentImpl extends _GitlabDeployment {
             const DeepCollectionEquality().equals(other._artifacts, _artifacts));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, iid, ref, sha, createdAt, status, user, deployable,
       const DeepCollectionEquality().hash(_artifacts));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabDeploymentImplCopyWith<_$GitlabDeploymentImpl> get copyWith =>
@@ -344,8 +358,11 @@ abstract class _GitlabDeployment extends GitlabDeployment {
   GitlabDeploymentDeployable? get deployable;
   @override
   List<({String? fileFormat, String fileType, String filename, int size})> get artifacts;
+
+  /// Create a copy of GitlabDeployment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabDeploymentImplCopyWith<_$GitlabDeploymentImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -372,8 +389,12 @@ mixin _$GitlabDeploymentDeployable {
   String? get webUrl => throw _privateConstructorUsedError;
   DateTime? get artifactsExpireAt => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabDeploymentDeployable to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabDeploymentDeployableCopyWith<GitlabDeploymentDeployable> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -416,6 +437,8 @@ class _$GitlabDeploymentDeployableCopyWithImpl<$Res, $Val extends GitlabDeployme
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -504,6 +527,8 @@ class _$GitlabDeploymentDeployableCopyWithImpl<$Res, $Val extends GitlabDeployme
     ) as $Val);
   }
 
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabUserProfileCopyWith<$Res>? get user {
@@ -516,6 +541,8 @@ class _$GitlabDeploymentDeployableCopyWithImpl<$Res, $Val extends GitlabDeployme
     });
   }
 
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabCommitCopyWith<$Res>? get commit {
@@ -528,6 +555,8 @@ class _$GitlabDeploymentDeployableCopyWithImpl<$Res, $Val extends GitlabDeployme
     });
   }
 
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabPipelineCopyWith<$Res>? get pipeline {
@@ -582,6 +611,8 @@ class __$$GitlabDeploymentDeployableImplCopyWithImpl<$Res>
       _$GitlabDeploymentDeployableImpl _value, $Res Function(_$GitlabDeploymentDeployableImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -757,12 +788,14 @@ class _$GitlabDeploymentDeployableImpl extends _GitlabDeploymentDeployable {
             (identical(other.artifactsExpireAt, artifactsExpireAt) || other.artifactsExpireAt == artifactsExpireAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, status, stage, name, ref, tag, coverage, createdAt, startedAt,
       finishedAt, duration, user, commit, pipeline, webUrl, artifactsExpireAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl> get copyWith =>
@@ -830,8 +863,11 @@ abstract class _GitlabDeploymentDeployable extends GitlabDeploymentDeployable {
   String? get webUrl;
   @override
   DateTime? get artifactsExpireAt;
+
+  /// Create a copy of GitlabDeploymentDeployable
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabDeploymentDeployableImplCopyWith<_$GitlabDeploymentDeployableImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

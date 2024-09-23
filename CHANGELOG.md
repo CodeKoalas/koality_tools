@@ -1,3 +1,40 @@
+[0.8.1] - 23/09/2024
+* Adding missing `vue` template files for the `devops` command.
+* Updating package dependencies:
+  * > build_runner 2.4.12 (was 2.4.11)
+  * > build_runner_core 7.3.2 (was 7.3.1)
+  * > cli_completion 0.5.1 (was 0.5.0)
+  * > coverage 1.9.2 (was 1.8.0)
+  * > crypto 3.0.5 (was 3.0.3)
+  * > custom_lint 0.6.7 (was 0.6.4)
+  * > custom_lint_builder 0.6.7 (was 0.6.4)
+  * > custom_lint_core 0.6.5 (was 0.6.3)
+  * > dart_style 2.3.7 (was 2.3.6)
+  * > dcli 6.0.5 (was 4.0.5)
+  * > dcli_common 6.0.3 (was 4.0.3)
+  * > dcli_core 6.0.3 (was 4.0.7)
+  * > dcli_terminal 6.0.3 (was 4.0.3)
+  * > dio 5.7.0 (was 5.5.0+1)
+  * > dio_web_adapter 2.0.0 (was 1.0.1)
+  * > ffi 2.1.3 (was 2.1.2)
+  * > \+ macros 0.1.2-main.4
+  * > mason_logger 0.3.1 (was 0.2.16)
+  * > meta 1.16.0 (was 1.15.0)
+  * > mime 1.0.6 (was 1.0.5)
+  * > \+ native_synchronization_temp 0.6.0
+  * > pub_updater 0.5.0 (was 0.4.0)
+  * > riverpod_analyzer_utils 0.5.4 (was 0.5.3)
+  * > riverpod_generator 2.4.3 (was 2.4.2)
+  * > riverpod_lint 2.3.13 (was 2.3.12)
+  * > rxdart 0.28.0 (was 0.27.7)
+  * > scope 5.1.0 (was 4.1.1)
+  * > settings_yaml 8.2.0 (was 8.1.0)
+  * > shelf_static 1.1.3 (was 1.1.2)
+  * > source_map_stack_trace 2.1.2 (was 2.1.1)
+  * > uuid 4.5.0 (was 4.4.2)
+  * > vm_service 14.2.5 (was 14.2.4)
+  * > win32 5.5.4 (was 5.5.1)
+
 [0.8.0] - 24/04/2024
 * Adding new `apple` command for handling Apple/iOS things.
 * Adding new subcommand `required-apis` for the `apple` command to handle the new Required Reason APIs. It will search through Swift/Obj-C `*.m` files 

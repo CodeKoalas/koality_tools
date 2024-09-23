@@ -20,7 +20,9 @@ mixin _$PackageInstallStruct {
   String get commandName => throw _privateConstructorUsedError;
   PackageTool get tool => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PackageInstallStruct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PackageInstallStructCopyWith<PackageInstallStruct> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -42,6 +44,8 @@ class _$PackageInstallStructCopyWithImpl<$Res, $Val extends PackageInstallStruct
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PackageInstallStruct
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -84,6 +88,8 @@ class __$$PackageInstallStructImplCopyWithImpl<$Res>
       _$PackageInstallStructImpl _value, $Res Function(_$PackageInstallStructImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PackageInstallStruct
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -139,7 +145,9 @@ class _$PackageInstallStructImpl extends _PackageInstallStruct {
   @override
   int get hashCode => Object.hash(runtimeType, packageName, commandName, tool);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PackageInstallStruct
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PackageInstallStructImplCopyWith<_$PackageInstallStructImpl> get copyWith =>
@@ -159,7 +167,10 @@ abstract class _PackageInstallStruct extends PackageInstallStruct {
   String get commandName;
   @override
   PackageTool get tool;
+
+  /// Create a copy of PackageInstallStruct
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PackageInstallStructImplCopyWith<_$PackageInstallStructImpl> get copyWith => throw _privateConstructorUsedError;
 }

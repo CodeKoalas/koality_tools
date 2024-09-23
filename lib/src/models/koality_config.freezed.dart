@@ -26,8 +26,12 @@ mixin _$KoalityConfig {
   String? get gitlabAccessToken => throw _privateConstructorUsedError;
   GitlabConfig get gitlabConfig => throw _privateConstructorUsedError;
 
+  /// Serializes this KoalityConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KoalityConfigCopyWith<KoalityConfig> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -57,6 +61,8 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -90,6 +96,8 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
     ) as $Val);
   }
 
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $KubectlConfigCopyWith<$Res> get kubectlConfig {
@@ -98,6 +106,8 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
     });
   }
 
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $FirebaseConfigCopyWith<$Res> get firebaseConfig {
@@ -106,6 +116,8 @@ class _$KoalityConfigCopyWithImpl<$Res, $Val extends KoalityConfig> implements $
     });
   }
 
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $GitlabConfigCopyWith<$Res> get gitlabConfig {
@@ -142,6 +154,8 @@ class __$$KoalityConfigImplCopyWithImpl<$Res> extends _$KoalityConfigCopyWithImp
   __$$KoalityConfigImplCopyWithImpl(_$KoalityConfigImpl _value, $Res Function(_$KoalityConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -220,12 +234,14 @@ class _$KoalityConfigImpl extends _KoalityConfig {
             (identical(other.gitlabConfig, gitlabConfig) || other.gitlabConfig == gitlabConfig));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, configPath, kubectlConfig, firebaseConfig, gitlabAccessToken, gitlabConfig);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KoalityConfigImplCopyWith<_$KoalityConfigImpl> get copyWith =>
@@ -260,8 +276,11 @@ abstract class _KoalityConfig extends KoalityConfig {
   String? get gitlabAccessToken;
   @override
   GitlabConfig get gitlabConfig;
+
+  /// Create a copy of KoalityConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KoalityConfigImplCopyWith<_$KoalityConfigImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -274,8 +293,12 @@ mixin _$GitlabConfig {
   String get gitlabApiUrl => throw _privateConstructorUsedError;
   String get gitlabAccessToken => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabConfigCopyWith<GitlabConfig> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -296,6 +319,8 @@ class _$GitlabConfigCopyWithImpl<$Res, $Val extends GitlabConfig> implements $Gi
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -330,6 +355,8 @@ class __$$GitlabConfigImplCopyWithImpl<$Res> extends _$GitlabConfigCopyWithImpl<
   __$$GitlabConfigImplCopyWithImpl(_$GitlabConfigImpl _value, $Res Function(_$GitlabConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -377,11 +404,13 @@ class _$GitlabConfigImpl implements _GitlabConfig {
             (identical(other.gitlabAccessToken, gitlabAccessToken) || other.gitlabAccessToken == gitlabAccessToken));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, gitlabApiUrl, gitlabAccessToken);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabConfigImplCopyWith<_$GitlabConfigImpl> get copyWith =>
@@ -404,8 +433,11 @@ abstract class _GitlabConfig implements GitlabConfig {
   String get gitlabApiUrl;
   @override
   String get gitlabAccessToken;
+
+  /// Create a copy of GitlabConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabConfigImplCopyWith<_$GitlabConfigImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -417,8 +449,12 @@ KubectlConfig _$KubectlConfigFromJson(Map<String, dynamic> json) {
 mixin _$KubectlConfig {
   String get defaultNamespace => throw _privateConstructorUsedError;
 
+  /// Serializes this KubectlConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KubectlConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KubectlConfigCopyWith<KubectlConfig> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -439,6 +475,8 @@ class _$KubectlConfigCopyWithImpl<$Res, $Val extends KubectlConfig> implements $
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KubectlConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -468,6 +506,8 @@ class __$$KubectlConfigImplCopyWithImpl<$Res> extends _$KubectlConfigCopyWithImp
   __$$KubectlConfigImplCopyWithImpl(_$KubectlConfigImpl _value, $Res Function(_$KubectlConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KubectlConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -506,11 +546,13 @@ class _$KubectlConfigImpl extends _KubectlConfig {
             (identical(other.defaultNamespace, defaultNamespace) || other.defaultNamespace == defaultNamespace));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, defaultNamespace);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KubectlConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KubectlConfigImplCopyWith<_$KubectlConfigImpl> get copyWith =>
@@ -532,8 +574,11 @@ abstract class _KubectlConfig extends KubectlConfig {
 
   @override
   String get defaultNamespace;
+
+  /// Create a copy of KubectlConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KubectlConfigImplCopyWith<_$KubectlConfigImpl> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -546,8 +591,12 @@ mixin _$FirebaseConfig {
   bool get skipDev => throw _privateConstructorUsedError;
   bool get skipProd => throw _privateConstructorUsedError;
 
+  /// Serializes this FirebaseConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FirebaseConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FirebaseConfigCopyWith<FirebaseConfig> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -568,6 +617,8 @@ class _$FirebaseConfigCopyWithImpl<$Res, $Val extends FirebaseConfig> implements
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FirebaseConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -602,6 +653,8 @@ class __$$FirebaseConfigImplCopyWithImpl<$Res> extends _$FirebaseConfigCopyWithI
   __$$FirebaseConfigImplCopyWithImpl(_$FirebaseConfigImpl _value, $Res Function(_$FirebaseConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FirebaseConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -649,11 +702,13 @@ class _$FirebaseConfigImpl extends _FirebaseConfig {
             (identical(other.skipProd, skipProd) || other.skipProd == skipProd));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, skipDev, skipProd);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FirebaseConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FirebaseConfigImplCopyWith<_$FirebaseConfigImpl> get copyWith =>
@@ -677,7 +732,10 @@ abstract class _FirebaseConfig extends FirebaseConfig {
   bool get skipDev;
   @override
   bool get skipProd;
+
+  /// Create a copy of FirebaseConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FirebaseConfigImplCopyWith<_$FirebaseConfigImpl> get copyWith => throw _privateConstructorUsedError;
 }

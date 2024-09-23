@@ -31,8 +31,12 @@ mixin _$GitlabProjectEnvironment {
   bool? get enableAdvancedLogsQuerying => throw _privateConstructorUsedError;
   String? get logsApiPath => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabProjectEnvironment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabProjectEnvironment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabProjectEnvironmentCopyWith<GitlabProjectEnvironment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,6 +69,8 @@ class _$GitlabProjectEnvironmentCopyWithImpl<$Res, $Val extends GitlabProjectEnv
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabProjectEnvironment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,6 +158,8 @@ class __$$GitlabProjectEnvironmentImplCopyWithImpl<$Res>
       _$GitlabProjectEnvironmentImpl _value, $Res Function(_$GitlabProjectEnvironmentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabProjectEnvironment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -274,12 +282,14 @@ class _$GitlabProjectEnvironmentImpl extends _GitlabProjectEnvironment {
             (identical(other.logsApiPath, logsApiPath) || other.logsApiPath == logsApiPath));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, state, slug, externalUrl, tier, createdAt, updatedAt,
       enableAdvancedLogsQuerying, logsApiPath);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabProjectEnvironment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabProjectEnvironmentImplCopyWith<_$GitlabProjectEnvironmentImpl> get copyWith =>
@@ -329,8 +339,11 @@ abstract class _GitlabProjectEnvironment extends GitlabProjectEnvironment {
   bool? get enableAdvancedLogsQuerying;
   @override
   String? get logsApiPath;
+
+  /// Create a copy of GitlabProjectEnvironment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabProjectEnvironmentImplCopyWith<_$GitlabProjectEnvironmentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
