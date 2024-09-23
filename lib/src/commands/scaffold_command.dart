@@ -57,8 +57,8 @@ class ScaffoldCommand extends Command<int> {
   @override
   Future<int> run() async {
     // @TODO: Sort this command out.
-    _logger.warn('Not fully implemented yet.');
-    return ExitCode.success.code;
+    // _logger.warn('Not fully implemented yet.');
+    // return ExitCode.success.code;
 
     final androidLanguage = argResults?['android-lang'] as String;
     final androidTestLanguage = argResults?['android-test-lang'] as String;

@@ -24,7 +24,7 @@ _$GitlabDeploymentImpl _$$GitlabDeploymentImplFromJson(Map<String, dynamic> json
                       fileFormat: $jsonValue['fileFormat'] as String?,
                       fileType: $jsonValue['fileType'] as String,
                       filename: $jsonValue['filename'] as String,
-                      size: $jsonValue['size'] as int,
+                      size: ($jsonValue['size'] as num).toInt(),
                     ),
                   ))
               .toList() ??
@@ -41,7 +41,7 @@ Map<String, dynamic> _$$GitlabDeploymentImplToJson(_$GitlabDeploymentImpl instan
       'user': instance.user,
       'deployable': instance.deployable,
       'artifacts': instance.artifacts
-          .map((e) => {
+          .map((e) => <String, dynamic>{
                 'fileFormat': e.fileFormat,
                 'fileType': e.fileType,
                 'filename': e.filename,

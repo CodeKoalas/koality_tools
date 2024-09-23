@@ -26,8 +26,12 @@ mixin _$GitlabPipeline {
   String get status => throw _privateConstructorUsedError;
   String get webUrl => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabPipeline to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabPipeline
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabPipelineCopyWith<GitlabPipeline> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -48,6 +52,8 @@ class _$GitlabPipelineCopyWithImpl<$Res, $Val extends GitlabPipeline> implements
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabPipeline
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +103,8 @@ class __$$GitlabPipelineImplCopyWithImpl<$Res> extends _$GitlabPipelineCopyWithI
   __$$GitlabPipelineImplCopyWithImpl(_$GitlabPipelineImpl _value, $Res Function(_$GitlabPipelineImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabPipeline
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,11 +177,13 @@ class _$GitlabPipelineImpl extends _GitlabPipeline {
             (identical(other.webUrl, webUrl) || other.webUrl == webUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, sha, ref, status, webUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabPipeline
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabPipelineImplCopyWith<_$GitlabPipelineImpl> get copyWith =>
@@ -208,7 +218,10 @@ abstract class _GitlabPipeline extends GitlabPipeline {
   String get status;
   @override
   String get webUrl;
+
+  /// Create a copy of GitlabPipeline
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabPipelineImplCopyWith<_$GitlabPipelineImpl> get copyWith => throw _privateConstructorUsedError;
 }

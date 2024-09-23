@@ -29,8 +29,12 @@ mixin _$GitlabProjectVariable {
   GitlabProjectVariableType? get variableType => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabProjectVariable to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabProjectVariable
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabProjectVariableCopyWith<GitlabProjectVariable> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -60,6 +64,8 @@ class _$GitlabProjectVariableCopyWithImpl<$Res, $Val extends GitlabProjectVariab
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabProjectVariable
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,6 +141,8 @@ class __$$GitlabProjectVariableImplCopyWithImpl<$Res>
       _$GitlabProjectVariableImpl _value, $Res Function(_$GitlabProjectVariableImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabProjectVariable
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -241,12 +249,14 @@ class _$GitlabProjectVariableImpl extends _GitlabProjectVariable {
             (identical(other.description, description) || other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, key, value, protected, masked, raw, environmentScope, variableType, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabProjectVariable
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabProjectVariableImplCopyWith<_$GitlabProjectVariableImpl> get copyWith =>
@@ -290,7 +300,10 @@ abstract class _GitlabProjectVariable extends GitlabProjectVariable {
   GitlabProjectVariableType? get variableType;
   @override
   String? get description;
+
+  /// Create a copy of GitlabProjectVariable
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabProjectVariableImplCopyWith<_$GitlabProjectVariableImpl> get copyWith => throw _privateConstructorUsedError;
 }

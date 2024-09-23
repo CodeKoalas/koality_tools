@@ -32,6 +32,9 @@ class _$SearchPodsExecutorCopyWithImpl<$Res, $Val extends SearchPodsExecutor>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SearchPodsExecutor
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -47,6 +50,9 @@ class __$$SearchPodsExecutorImplCopyWithImpl<$Res>
     implements _$$SearchPodsExecutorImplCopyWith<$Res> {
   __$$SearchPodsExecutorImplCopyWithImpl(_$SearchPodsExecutorImpl _value, $Res Function(_$SearchPodsExecutorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SearchPodsExecutor
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -91,6 +97,9 @@ class _$SearchResourceExecutorCopyWithImpl<$Res, $Val extends SearchResourceExec
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SearchResourceExecutor
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -107,6 +116,9 @@ class __$$SearchResourceExecutorImplCopyWithImpl<$Res>
   __$$SearchResourceExecutorImplCopyWithImpl(
       _$SearchResourceExecutorImpl _value, $Res Function(_$SearchResourceExecutorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SearchResourceExecutor
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
