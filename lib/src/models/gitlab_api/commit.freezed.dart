@@ -32,8 +32,12 @@ mixin _$GitlabCommit {
   String get committerEmail => throw _privateConstructorUsedError;
   String get committedDate => throw _privateConstructorUsedError;
 
+  /// Serializes this GitlabCommit to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GitlabCommit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GitlabCommitCopyWith<GitlabCommit> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -65,6 +69,8 @@ class _$GitlabCommitCopyWithImpl<$Res, $Val extends GitlabCommit> implements $Gi
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GitlabCommit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,6 +161,8 @@ class __$$GitlabCommitImplCopyWithImpl<$Res> extends _$GitlabCommitCopyWithImpl<
   __$$GitlabCommitImplCopyWithImpl(_$GitlabCommitImpl _value, $Res Function(_$GitlabCommitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GitlabCommit
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -300,7 +308,7 @@ class _$GitlabCommitImpl extends _GitlabCommit {
             (identical(other.committedDate, committedDate) || other.committedDate == committedDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -316,7 +324,9 @@ class _$GitlabCommitImpl extends _GitlabCommit {
       committerEmail,
       committedDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GitlabCommit
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GitlabCommitImplCopyWith<_$GitlabCommitImpl> get copyWith =>
@@ -369,7 +379,10 @@ abstract class _GitlabCommit extends GitlabCommit {
   String get committerEmail;
   @override
   String get committedDate;
+
+  /// Create a copy of GitlabCommit
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GitlabCommitImplCopyWith<_$GitlabCommitImpl> get copyWith => throw _privateConstructorUsedError;
 }
