@@ -4,6 +4,8 @@ import 'package:koality_tools/src/commands/devops/templates/laravel/review.dart'
 import 'package:koality_tools/src/commands/devops/templates/laravel/staging.dart';
 import 'package:koality_tools/src/commands/devops/templates/magento/review.dart';
 import 'package:koality_tools/src/commands/devops/templates/magento/staging.dart';
+import 'package:koality_tools/src/commands/devops/templates/vue/review.dart';
+import 'package:koality_tools/src/commands/devops/templates/vue/staging.dart';
 import 'package:koality_tools/src/commands/devops/templates/wordpress/review.dart';
 import 'package:koality_tools/src/commands/devops/templates/wordpress/staging.dart';
 
@@ -19,6 +21,10 @@ const templateYamlFiles = <String, Map<String, String>>{
   'magento': {
     'review': magentoReviewYaml,
     'staging': magentoStagingYaml,
+  },
+  'vue': {
+    'review': vueReviewYaml,
+    'staging': vueStagingYaml,
   },
   'wordpress': {
     'review': wordpressReviewYaml,

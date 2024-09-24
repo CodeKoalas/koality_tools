@@ -1,3 +1,6 @@
+[0.8.2] - 24/09/2024
+* Missed adding the new `vue` templates to the `template.dart` mappings.
+
 [0.8.1] - 23/09/2024
 * Adding missing `vue` template files for the `devops` command.
 * Updating package dependencies:
