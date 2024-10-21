@@ -1,3 +1,38 @@
+[0.9.0] - 21/10/2024
+* Updating package dependencies:
+  * > args 2.6.0 (was 2.5.0)
+  * > async 2.12.0 (was 2.11.0)
+  * > build_runner 2.4.13 (was 2.4.12)
+  * > characters 1.3.1 (was 1.3.0)
+  * > circular_buffer 0.12.0 (was 0.11.0)
+  * > collection 1.19.1 (was 1.19.0)
+  * > convert 3.1.2 (was 3.1.1)
+  * > coverage 1.10.0 (was 1.9.2)
+  * > crypto 3.0.6 (was 3.0.5)
+  * > custom_lint 0.6.8 (was 0.6.7) (0.6.10 available)
+  * > custom_lint_builder 0.6.8 (was 0.6.7) (0.6.10 available)
+  * > dcli 6.1.0 (was 6.0.5)
+  * > dcli_common 6.1.0 (was 6.0.3)
+  * > dcli_core 6.1.0 (was 6.0.3)
+  * > dcli_terminal 6.1.0 (was 6.0.3)
+  * > file 7.0.1 (was 7.0.0)
+  * > fixnum 1.1.1 (was 1.1.0)
+  * > http_parser 4.1.1 (was 4.1.0)
+  * > logging 1.3.0 (was 1.2.0)
+  * > mime 2.0.0 (was 1.0.6)
+  * > native_synchronization_temp 0.7.1 (was 0.6.0)
+  * > path 1.9.1 (was 1.9.0)
+  * > platform 3.1.6 (was 3.1.5)
+  * > riverpod 2.6.0 (was 2.5.1)
+  * > riverpod_annotation 2.6.0 (was 2.3.5)
+  * > stack_trace 1.12.0 (was 1.11.1)
+  * > string_scanner 1.4.0 (was 1.3.0)
+  * > typed_data 1.4.0 (was 1.3.2)
+  * > uuid 4.5.1 (was 4.5.0)
+  * > vm_service 14.3.0 (was 14.2.5)
+  * > web 1.1.0 (was 1.0.0)
+  * > win32 5.7.0 (was 5.5.4)
+
 [0.8.2] - 24/09/2024
 * Missed adding the new `vue` templates to the `template.dart` mappings.
 
